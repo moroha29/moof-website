@@ -7,9 +7,9 @@ import { withBase } from "../lib/base.js";
 <section class="seasonal-edit" aria-labelledby="seasonal-edit-title">
   <div class="wrap">
     <div class="seasonal-edit-intro">
-      <span class="eyebrow">The seasonal edit</span>
-      <h2 id="seasonal-edit-title">Three drinks worth pausing for.</h2>
-      <p>A small rotation for the season, composed to look as considered as it tastes.</p>
+      <span class="eyebrow">{site.seasonalEdit.eyebrow}</span>
+      <h2 id="seasonal-edit-title">{site.seasonalEdit.heading}</h2>
+      <p>{site.seasonalEdit.supportingCopy}</p>
     </div>
 
     <div class="seasonal-edit-grid">
@@ -28,9 +28,9 @@ import { withBase } from "../lib/base.js";
     </div>
 
     <div class="seasonal-edit-social">
-      <p>See what is being whisked this week.</p>
+      <p>{site.seasonalEdit.socialPrompt}</p>
       <a href={site.social.instagramUrl} target="_blank" rel="noreferrer">
-        Follow {site.social.instagramHandle} <span aria-hidden="true">↗</span>
+        {site.seasonalEdit.socialCta} {site.social.instagramHandle} <span aria-hidden="true">↗</span>
       </a>
     </div>
   </div>

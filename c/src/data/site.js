@@ -44,6 +44,13 @@ export const site = {
     supportingCopy: "Four drinks on the counter every day, and a small seasonal set that changes with the months.",
     cta: "View full menu"
   },
+  seasonalEdit: {
+    eyebrow: "The seasonal edit",
+    heading: "Three drinks worth pausing for.",
+    supportingCopy: "A small rotation for the season, composed to look as considered as it tastes.",
+    socialPrompt: "See what is being whisked this week.",
+    socialCta: "Follow"
+  },
   testimonials: {
     eyebrow: "In their words",
     heading: "What guests shared",

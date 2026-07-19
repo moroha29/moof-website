@@ -20,6 +20,9 @@ test("the seasonal edit stays data-driven and social", () => {
   assert.match(edit, /seasonal\.map/);
   assert.match(edit, /site\.social\.instagramUrl/);
   assert.match(siteData, /instagram\.com\/moof__bar/);
+  assert.match(siteData, /seasonalEdit:\s*\{/);
+  assert.match(edit, /site\.seasonalEdit\./);
+  assert.doesNotMatch(edit, /The seasonal edit|Three drinks worth pausing for|A small rotation for the season|See what is being whisked this week|Follow/);
 });
 
 test("the editorial header has an accessible phone treatment", () => {
