@@ -113,6 +113,8 @@ Recommended fields:
 
 The AI agent should convert Google Form responses into the relevant content file changes and then run validation.
 
+Routine seasonal updates should be treated as complete batches. The agent should replace the current seasonal content with the submitted batch unless the owner explicitly requests a narrower append, removal, or single-item correction.
+
 ## AI Knowledge Base
 
 Add a repository knowledge base for future AI agents. It must be committed inside this repository, not stored in an external Google Doc, prompt, task description, or private operator notes. A future agent should be able to clone the repo, read the knowledge base, and complete routine content maintenance without needing hidden context.
@@ -162,7 +164,9 @@ Components should receive already-validated content data. They should not hard-c
 4. AI agent updates JSON or YAML content files.
 5. Astro Content Collections validate the content shape.
 6. Agent runs the build.
-7. If validation passes, the static site can be published.
+7. Agent presents a page preview for review.
+8. If the preview is wrong, the owner provides a revised form response or corrected instructions.
+9. If validation passes and the preview is accepted, the static site can be published.
 
 ## Error Handling
 
@@ -170,7 +174,7 @@ The content schema should reject missing required fields, invalid prices, malfor
 
 For optional fields such as images, components should render polished placeholders instead of broken media.
 
-If a seasonal item has an end date in the past, the maintenance playbook should instruct the agent to either mark it inactive or ask the user before keeping it visible.
+The agent should not automatically mark seasonal items inactive just because an end date has passed. Visibility should follow the owner-provided content state and the generated preview. If the preview shows stale seasonal content, the owner should revise the submitted update or give corrected instructions.
 
 ## Testing And Validation
 
