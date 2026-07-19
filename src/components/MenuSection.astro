@@ -1,0 +1,55 @@
+---
+type MenuItem = {
+  id: string;
+  name: string;
+  category: string;
+  price: string;
+  description: string;
+  image: string;
+  temperatureOptions: string[];
+  milkOptions: string[];
+  isSeasonal: boolean;
+  active: boolean;
+};
+
+interface Props {
+  title: string;
+  description: string;
+  items: MenuItem[];
+}
+
+const { title, description, items } = Astro.props;
+const activeItems = items.filter((item) => item.active);
+---
+
+<section class="menu-section" aria-labelledby={`${title.toLowerCase().replaceAll(" ", "-")}-heading`}>
+  <div class="section-heading">
+    <p>Menu</p>
+    <h2 id={`${title.toLowerCase().replaceAll(" ", "-")}-heading`}>{title}</h2>
+    <span>{description}</span>
+  </div>
+
+  <div class="menu-grid">
+    {
+      activeItems.map((item) => (
+        <article class="menu-card">
+          <div class="menu-image">
+            <img src={item.image} alt="" loading="lazy" />
+          </div>
+          <div>
+            <div class="menu-card-title">
+              <h3>{item.name}</h3>
+              <strong>{item.price}</strong>
+            </div>
+            <p>{item.description}</p>
+            <div class="menu-tags" aria-label={`${item.name} options`}>
+              {item.isSeasonal && <span>seasonal</span>}
+              {item.temperatureOptions.map((option) => <span>{option}</span>)}
+              {item.milkOptions.map((option) => <span>{option}</span>)}
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>

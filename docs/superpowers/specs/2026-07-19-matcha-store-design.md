@@ -14,12 +14,13 @@ Avoid Next.js for the first version unless future requirements need app-like beh
 
 ## Site Structure
 
-Create a small static site with two primary routes:
+Create a compact static site with product-led sections:
 
-- `/`: main page focused on Moof's brand, store story, and exclusive matcha ingredients Mori and Shiran from Japan.
-- `/menu`: menu page focused on core drinks and seasonal drinks.
+- first segment: a CHAGEE-inspired product hero for Moof, with oversized matcha-focused display type, all visible drinks, and a horizontal carousel so phone users can swipe through matcha options.
+- menu segment: core and seasonal drinks driven by editable content.
+- about us segment: Moof story and the exclusive matcha ingredients Mori and Shiran from Japan.
 
-The site should still feel compact and phone-first. Navigation should make it obvious how to move between the ingredient story and the menu without creating a large multi-page marketing site.
+The site should feel like one phone-first experience. If implemented with multiple routes, `/menu` can exist as a focused menu route, but the primary experience should keep menu and about content close together and easy to scan.
 
 ## Visual Direction
 
@@ -31,6 +32,9 @@ Use the supplied menu photo as brand context:
 - rounded, friendly typography
 - drink imagery or image placeholders that are easy to replace
 - mobile-first layout with large tap targets and scannable menu sections
+- logo text should read `Moof` and feel rounded, soft, and playful, matching the supplied menu image's vibe rather than a formal wordmark
+- background should reuse the original menu image's warm orange/peach color scheme or a soft pattern derived from it
+- layout may reference the linked CHAGEE page's product-first structure, but must remain Moof-branded and not copy CHAGEE's brand assets
 
 The page should avoid a generic luxury-tea look. It should feel like a modern specialty cafe with a memorable matcha identity.
 

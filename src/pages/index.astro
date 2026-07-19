@@ -1,0 +1,46 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import AboutSection from "../components/AboutSection.astro";
+import DrinkCarousel from "../components/DrinkCarousel.astro";
+import MenuSection from "../components/MenuSection.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const homepage = await getEntry("site", "homepage");
+const menuEntries = await getCollection("menu");
+
+if (!homepage) {
+  throw new Error("Missing homepage content");
+}
+
+const menus = menuEntries.map((entry) => entry.data);
+const allDrinks = menus.flatMap((menu) => menu.items).filter((item) => item.active);
+---
+
+<BaseLayout title="Moof Matcha" description="Moof specialty matcha, seasonal drinks, and Japanese ingredients Mori and Shiran.">
+  <main class="site-shell">
+    <header class="site-header" aria-label="Primary navigation">
+      <a class="logo" href="/" aria-label="Moof home">{homepage.data.logoText}</a>
+      <nav>
+        {homepage.data.nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+    </header>
+
+    <DrinkCarousel drinks={allDrinks} featuredDrinkId={homepage.data.hero.featuredDrinkId} />
+
+    <section class="announcement" aria-label="Moof announcement">
+      <p>{homepage.data.hero.announcement}</p>
+      <span>{homepage.data.hero.note}</span>
+    </section>
+
+    <div id="menu" class="menu-stack">
+      {menus.map((menu) => <MenuSection title={menu.title} description={menu.description} items={menu.items} />)}
+    </div>
+
+    <AboutSection
+      heading={homepage.data.about.heading}
+      body={homepage.data.about.body}
+      storeNote={homepage.data.about.storeNote}
+      ingredients={homepage.data.ingredients}
+    />
+  </main>
+</BaseLayout>

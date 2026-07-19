@@ -1,0 +1,38 @@
+---
+type Ingredient = {
+  name: string;
+  origin: string;
+  description: string;
+};
+
+interface Props {
+  heading: string;
+  body: string;
+  storeNote: string;
+  ingredients: Ingredient[];
+}
+
+const { heading, body, storeNote, ingredients } = Astro.props;
+---
+
+<section class="about-section" id="about" aria-labelledby="about-heading">
+  <div class="section-heading">
+    <p>About us</p>
+    <h2 id="about-heading">{heading}</h2>
+    <span>{storeNote}</span>
+  </div>
+  <div class="about-grid">
+    <p class="about-body">{body}</p>
+    <div class="ingredient-list">
+      {
+        ingredients.map((ingredient) => (
+          <article>
+            <span>{ingredient.origin}</span>
+            <h3>{ingredient.name}</h3>
+            <p>{ingredient.description}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

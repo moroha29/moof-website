@@ -1,0 +1,43 @@
+{
+  "title": "Seasonal Drinks",
+  "description": "Limited-time flavors from the current Moof menu.",
+  "seasonName": "Current seasonal menu",
+  "items": [
+    {
+      "id": "strawberry-royal",
+      "name": "Strawberry Royal Milk Pudding Matcha / Hojicha",
+      "category": "Seasonal Drinks",
+      "price": "$9",
+      "description": "Strawberry puree and milk pudding layered with matcha or hojicha.",
+      "image": "/images/strawberry-royal-matcha-cutout.png",
+      "temperatureOptions": ["cold"],
+      "milkOptions": ["fresh milk", "oat milk"],
+      "isSeasonal": true,
+      "active": true
+    },
+    {
+      "id": "black-sesame",
+      "name": "Black Sesame Matcha / Hojicha",
+      "category": "Seasonal Drinks",
+      "price": "$8.50",
+      "description": "Black sesame paste and syrup with matcha or hojicha.",
+      "image": "/images/black-sesame-matcha-cutout.png",
+      "temperatureOptions": ["cold"],
+      "milkOptions": ["fresh milk", "oat milk"],
+      "isSeasonal": true,
+      "active": true
+    },
+    {
+      "id": "pickled-ume-plum",
+      "name": "Pickled Ume & Plum Iced Tea",
+      "category": "Seasonal Drinks",
+      "price": "$7",
+      "description": "Bright ume and plum iced tea with a tart finish.",
+      "image": "/images/menu-drink-group-cutout.png",
+      "temperatureOptions": ["cold"],
+      "milkOptions": ["no milk"],
+      "isSeasonal": true,
+      "active": true
+    }
+  ]
+}

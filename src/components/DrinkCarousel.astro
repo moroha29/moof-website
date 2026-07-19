@@ -1,0 +1,45 @@
+---
+type Drink = {
+  id: string;
+  name: string;
+  price: string;
+  description: string;
+  image: string;
+  isSeasonal: boolean;
+};
+
+interface Props {
+  drinks: Drink[];
+  featuredDrinkId: string;
+}
+
+const { drinks, featuredDrinkId } = Astro.props;
+const featuredDrink = drinks.find((drink) => drink.id === featuredDrinkId) ?? drinks[0];
+---
+
+<section class="hero-products" aria-label="Featured Moof matcha drinks">
+  <div class="hero-copy">
+    <p class="hero-eyebrow">Choose your</p>
+    <h1>Matcha</h1>
+    <div class="hero-meta">
+      <span>Mori & Shiran</span>
+      <span>Japan</span>
+    </div>
+  </div>
+
+  <div class="hero-stage" aria-hidden="true">
+    <img src={featuredDrink.image} alt="" class="featured-drink" />
+  </div>
+
+  <div class="drink-rail" aria-label="Swipe through Moof drinks">
+    {
+      drinks.map((drink) => (
+        <a class={`drink-tab ${drink.id === featuredDrink.id ? "is-active" : ""}`} href="#menu">
+          <img src={drink.image} alt="" loading="lazy" />
+          <span>{drink.name}</span>
+          <small>{drink.price}</small>
+        </a>
+      ))
+    }
+  </div>
+</section>

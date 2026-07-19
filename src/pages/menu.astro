@@ -1,0 +1,28 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import MenuSection from "../components/MenuSection.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const homepage = await getEntry("site", "homepage");
+const menus = (await getCollection("menu")).map((entry) => entry.data);
+---
+
+<BaseLayout title="Moof Menu" description="Moof specialty matcha, hojicha, and seasonal drinks menu.">
+  <main class="site-shell menu-page">
+    <header class="site-header" aria-label="Primary navigation">
+      <a class="logo" href="/" aria-label="Moof home">{homepage?.data.logoText ?? "Moof"}</a>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/#about">About</a>
+      </nav>
+    </header>
+    <div class="section-heading page-heading">
+      <p>Moof</p>
+      <h1>Menu</h1>
+      <span>Specialty matcha, hojicha, and seasonal drinks.</span>
+    </div>
+    <div class="menu-stack">
+      {menus.map((menu) => <MenuSection title={menu.title} description={menu.description} items={menu.items} />)}
+    </div>
+  </main>
+</BaseLayout>
