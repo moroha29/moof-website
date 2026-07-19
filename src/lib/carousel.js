@@ -35,6 +35,18 @@ export function getAdjacentDrinkId(drinks, selectedDrinkId, direction) {
   return drinks[nextIndex].id;
 }
 
+export function getNearestCarouselIndex(cards, railCenter) {
+  if (cards.length === 0) {
+    return -1;
+  }
+
+  return cards.reduce((nearestIndex, card, index) => {
+    const currentDistance = Math.abs(card.center - railCenter);
+    const nearestDistance = Math.abs(cards[nearestIndex].center - railCenter);
+    return currentDistance < nearestDistance ? index : nearestIndex;
+  }, 0);
+}
+
 export function sortMenusForDisplay(menus) {
   return [...menus].sort((a, b) => Number(isSeasonalMenu(b)) - Number(isSeasonalMenu(a)));
 }

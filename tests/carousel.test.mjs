@@ -3,6 +3,7 @@ import test from "node:test";
 import {
   getAdjacentDrinkId,
   getCarouselDrinks,
+  getNearestCarouselIndex,
   getSelectedDrink,
   sortMenusForDisplay
 } from "../src/lib/carousel.js";
@@ -70,4 +71,15 @@ test("getAdjacentDrinkId wraps carousel arrows around the drink list", () => {
   assert.equal(getAdjacentDrinkId(drinks, "strawberry-royal", "previous"), "classic-matcha");
   assert.equal(getAdjacentDrinkId(drinks, "classic-matcha", "next"), "strawberry-royal");
   assert.equal(getAdjacentDrinkId(drinks, "black-sesame", "next"), "classic-matcha");
+});
+
+test("getNearestCarouselIndex chooses the card closest to the rail center", () => {
+  const cards = [
+    { center: 120 },
+    { center: 260 },
+    { center: 420 }
+  ];
+
+  assert.equal(getNearestCarouselIndex(cards, 300), 1);
+  assert.equal(getNearestCarouselIndex(cards, 390), 2);
 });

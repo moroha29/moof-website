@@ -9,8 +9,8 @@
   "hero": {
     "eyebrow": "Specialty Matcha",
     "headline": "Matcha",
-    "since": "Mori and Shiran, Japan",
-    "note": "Exclusive matcha ingredients, layered fresh with milk, oat milk, fruit, sesame, and hojicha.",
+    "since": "mori and shiran, japan",
+    "note": "exclusive matcha ingredients, layered fresh with milk, oat milk, fruit, sesame, and hojicha.",
     "featuredDrinkId": "strawberry-royal",
     "carouselDrinkIds": [
       "strawberry-royal",
@@ -21,31 +21,31 @@
       "specialty-usucha",
       "classic-hojicha-latte"
     ],
-    "announcement": "Seasonal drinks are pouring now."
+    "announcement": "seasonal drinks are pouring now."
   },
   "ingredients": [
     {
       "name": "Mori",
-      "origin": "Japan",
-      "description": "A deep green matcha with a rounded finish, used when Moof wants richness and body."
+      "origin": "japan",
+      "description": "a deep green matcha with a rounded finish, used when moof wants richness and body."
     },
     {
       "name": "Shiran",
-      "origin": "Japan",
-      "description": "A smoother matcha profile for clean, bright drinks and layered milk tea."
+      "origin": "japan",
+      "description": "a smoother matcha profile for clean, bright drinks and layered milk tea."
     }
   ],
   "about": {
-    "heading": "About Moof",
-    "body": "Moof is a specialty matcha and hojicha bar built around hand-whisked ceremonial-grade drinks, soft textures, and exclusive Japanese matcha ingredients. The menu keeps things simple: strong tea, fresh milk or oat milk, seasonal flavors, and daily small-batch bakes for takeaway.",
-    "storeNote": "Fresh milk / oat milk. Hot / cold options available on selected drinks."
+    "heading": "about moof",
+    "body": "moof is a specialty matcha and hojicha bar built around hand-whisked ceremonial-grade drinks, soft textures, and exclusive japanese matcha ingredients. the menu keeps things simple: strong tea, fresh milk or oat milk, seasonal flavors, and daily small-batch bakes for takeaway.",
+    "storeNote": "fresh milk / oat milk. hot / cold options available on selected drinks."
   },
   "findUs": {
-    "heading": "Where To Find Us",
-    "body": "Find Moof at Eon Shenton in the CBD, just a 5-minute walk from Tanjong Pagar MRT Station.",
+    "heading": "where to find us",
+    "body": "find moof at eon shenton in the cbd, just a 5-minute walk from tanjong pagar mrt station.",
     "address": "70 Shenton Way",
     "unit": "#01-15, Eon Shenton",
-    "mrtNote": "5-minute walk from Tanjong Pagar MRT Station",
+    "mrtNote": "5-minute walk from tanjong pagar mrt station",
     "instagramLabel": "@moof__bar",
     "instagramUrl": "https://www.instagram.com/moof__bar/"
   }

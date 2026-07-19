@@ -35,7 +35,7 @@ const featuredDrink = drinks.find((drink) => drink.id === featuredDrinkId) ?? dr
     <button class="carousel-arrow carousel-arrow-left" type="button" aria-label="Previous drink" data-carousel-arrow="previous">
       <span aria-hidden="true">‹</span>
     </button>
-    <figure class="featured-drink-panel" aria-live="polite">
+    <figure class="featured-drink-panel" aria-live="polite" data-featured-panel>
       <img src={featuredDrink.image} alt={featuredDrink.name} class="featured-drink" data-featured-image />
       <figcaption>
         <span data-featured-price>{featuredDrink.price}</span>
@@ -50,7 +50,7 @@ const featuredDrink = drinks.find((drink) => drink.id === featuredDrinkId) ?? dr
 
   <p class="hero-note">{note}</p>
 
-  <div class="drink-rail" aria-label="Swipe through Moof drinks" role="tablist">
+  <div class="drink-rail" aria-label="Swipe through Moof drinks" role="tablist" data-carousel-rail>
     {
       drinks.map((drink) => (
         <button
@@ -81,18 +81,13 @@ const featuredDrink = drinks.find((drink) => drink.id === featuredDrinkId) ?? dr
       const featuredName = carousel.querySelector("[data-featured-name]");
       const featuredPrice = carousel.querySelector("[data-featured-price]");
       const featuredDescription = carousel.querySelector("[data-featured-description]");
+      const featuredPanel = carousel.querySelector("[data-featured-panel]");
+      const rail = carousel.querySelector("[data-carousel-rail]");
       const cards = Array.from(carousel.querySelectorAll("[data-carousel-card]"));
       const arrows = carousel.querySelectorAll("[data-carousel-arrow]");
+      let scrollTimer = 0;
 
-      const selectCard = (card) => {
-        if (!(card instanceof HTMLElement)) return;
-
-        cards.forEach((candidate) => {
-          const isActive = candidate === card;
-          candidate.classList.toggle("is-active", isActive);
-          candidate.setAttribute("aria-selected", isActive ? "true" : "false");
-        });
-
+      const updateFeaturedContent = (card) => {
         if (featuredImage instanceof HTMLImageElement) {
           featuredImage.src = card.dataset.drinkImage ?? "";
           featuredImage.alt = card.dataset.drinkName ?? "";
@@ -100,12 +95,38 @@ const featuredDrink = drinks.find((drink) => drink.id === featuredDrinkId) ?? dr
         if (featuredName) featuredName.textContent = card.dataset.drinkName ?? "";
         if (featuredPrice) featuredPrice.textContent = card.dataset.drinkPrice ?? "";
         if (featuredDescription) featuredDescription.textContent = card.dataset.drinkDescription ?? "";
+      };
 
-        card.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      const selectCard = (card, shouldScroll = true) => {
+        if (!(card instanceof HTMLElement)) return;
+        const currentCard = cards.find((candidate) => candidate.classList.contains("is-active"));
+        if (currentCard === card) return;
+
+        cards.forEach((candidate) => {
+          const isActive = candidate === card;
+          candidate.classList.toggle("is-active", isActive);
+          candidate.setAttribute("aria-selected", isActive ? "true" : "false");
+        });
+
+        if (featuredPanel instanceof HTMLElement) {
+          featuredPanel.classList.add("is-changing");
+          window.setTimeout(() => {
+            updateFeaturedContent(card);
+            featuredPanel.classList.remove("is-changing");
+            featuredPanel.classList.add("has-returned");
+            window.setTimeout(() => featuredPanel.classList.remove("has-returned"), 260);
+          }, 130);
+        } else {
+          updateFeaturedContent(card);
+        }
+
+        if (shouldScroll) {
+          card.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+        }
       };
 
       cards.forEach((card) => {
-        card.addEventListener("click", () => selectCard(card));
+        card.addEventListener("click", () => selectCard(card, true));
       });
 
       arrows.forEach((arrow) => {
@@ -114,9 +135,31 @@ const featuredDrink = drinks.find((drink) => drink.id === featuredDrinkId) ?? dr
           const direction = arrow.getAttribute("data-carousel-arrow");
           const offset = direction === "previous" ? -1 : 1;
           const nextCard = cards[(activeIndex + offset + cards.length) % cards.length];
-          selectCard(nextCard);
+          selectCard(nextCard, true);
         });
       });
+
+      if (rail instanceof HTMLElement) {
+        rail.addEventListener(
+          "scroll",
+          () => {
+            window.clearTimeout(scrollTimer);
+            scrollTimer = window.setTimeout(() => {
+              const railBounds = rail.getBoundingClientRect();
+              const railCenter = railBounds.left + railBounds.width / 2;
+              const nearestCard = cards.reduce((nearest, card) => {
+                const cardBounds = card.getBoundingClientRect();
+                const cardCenter = cardBounds.left + cardBounds.width / 2;
+                const nearestBounds = nearest.getBoundingClientRect();
+                const nearestCenter = nearestBounds.left + nearestBounds.width / 2;
+                return Math.abs(cardCenter - railCenter) < Math.abs(nearestCenter - railCenter) ? card : nearest;
+              }, cards[0]);
+              selectCard(nearestCard, false);
+            }, 90);
+          },
+          { passive: true }
+        );
+      }
     });
   </script>
 </section>
