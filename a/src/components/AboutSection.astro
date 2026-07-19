@@ -24,22 +24,21 @@ const { heading, body, storeNote, image, ingredients } = Astro.props;
     <h2 id="about-heading">{heading}</h2>
     <span>{storeNote}</span>
   </div>
-  <div class="about-card-row">
-    <article class="about-story-card">
-      <span>story</span>
+  <div class="about-layout">
+    <div class="about-copy">
       <p class="about-body">{body}</p>
-    </article>
-    <article class="about-image-card">
-      <img class="about-image" src={withBase(image)} alt="matcha powder in a bowl with a bamboo whisk" loading="lazy" />
-    </article>
-    {
-      ingredients.map((ingredient) => (
-        <article class="ingredient-card">
-          <span>{ingredient.origin}</span>
-          <h3>{ingredient.name}</h3>
-          <p>{ingredient.description}</p>
-        </article>
-      ))
-    }
+      <div class="ingredient-strip">
+        {
+          ingredients.map((ingredient) => (
+            <article>
+              <span>{ingredient.origin}</span>
+              <h3>{ingredient.name}</h3>
+              <p>{ingredient.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+    <img class="about-image" src={withBase(image)} alt="matcha powder in a bowl with a bamboo whisk" loading="lazy" />
   </div>
 </section>

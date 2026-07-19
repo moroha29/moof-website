@@ -1,0 +1,24 @@
+---
+import { withBase } from "../lib/base.js";
+
+interface Props {
+  eyebrow: string;
+  heading: string;
+  body: string;
+  image: string;
+  imageAlt: string;
+}
+
+const { eyebrow, heading, body, image, imageAlt } = Astro.props;
+---
+
+<section class="custom-announcement" aria-labelledby="custom-announcement-heading">
+  <div class="custom-announcement-copy">
+    <p>{eyebrow}</p>
+    <h2 id="custom-announcement-heading">{heading}</h2>
+    <span>{body}</span>
+  </div>
+  <div class="custom-announcement-media">
+    <img src={withBase(image)} alt={imageAlt} loading="lazy" />
+  </div>
+</section>

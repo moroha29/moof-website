@@ -1,13 +1,12 @@
 ---
 import { getCollection, getEntry } from "astro:content";
 import AboutSection from "../components/AboutSection.astro";
+import AnnouncementSection from "../components/AnnouncementSection.astro";
 import DrinkCarousel from "../components/DrinkCarousel.astro";
 import FindUsSection from "../components/FindUsSection.astro";
-import InstagramEmbed from "../components/InstagramEmbed.astro";
 import MenuSection from "../components/MenuSection.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCarouselDrinks, sortMenusForDisplay } from "../lib/carousel.js";
-import { getInstagramPreviewPosts } from "../lib/instagram.js";
 
 const homepage = await getEntry("site", "homepage");
 const menuEntries = await getCollection("menu");
@@ -18,7 +17,6 @@ if (!homepage) {
 
 const menus = sortMenusForDisplay(menuEntries.map((entry) => entry.data));
 const carouselDrinks = getCarouselDrinks(menus, homepage.data.hero.carouselDrinkIds);
-const instagramPosts = getInstagramPreviewPosts(homepage.data.instagramEmbed.posts);
 const navHref = (href: string, isExternal = false) => {
   if (isExternal || href.startsWith("#")) {
     return href;
@@ -66,13 +64,12 @@ const navHref = (href: string, isExternal = false) => {
       note={homepage.data.hero.note}
     />
 
-    <InstagramEmbed
-      eyebrow={homepage.data.instagramEmbed.eyebrow}
-      heading={homepage.data.instagramEmbed.heading}
-      body={homepage.data.instagramEmbed.body}
-      label={homepage.data.instagramEmbed.label}
-      url={homepage.data.instagramEmbed.url}
-      posts={instagramPosts}
+    <AnnouncementSection
+      eyebrow={homepage.data.customAnnouncement.eyebrow}
+      heading={homepage.data.customAnnouncement.heading}
+      body={homepage.data.customAnnouncement.body}
+      image={homepage.data.customAnnouncement.image}
+      imageAlt={homepage.data.customAnnouncement.imageAlt}
     />
 
     <section class="announcement" aria-label="Moof announcement">

@@ -35,21 +35,12 @@ const site = defineCollection({
       storeNote: z.string(),
       image: z.string()
     }),
-    instagramEmbed: z.object({
+    customAnnouncement: z.object({
       eyebrow: z.string(),
       heading: z.string(),
       body: z.string(),
-      label: z.string(),
-      url: z.string().url(),
-      posts: z.array(
-        z.object({
-          image: z.string(),
-          alt: z.string(),
-          caption: z.string(),
-          url: z.string().url(),
-          active: z.boolean()
-        })
-      ).default([])
+      image: z.string(),
+      imageAlt: z.string()
     }),
     findUs: z.object({
       heading: z.string(),

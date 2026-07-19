@@ -41,35 +41,12 @@
     "storeNote": "fresh milk / oat milk. hot / cold options available on selected drinks.",
     "image": "/images/matcha-powder-about.png"
   },
-  "instagramEmbed": {
-    "eyebrow": "instagram",
-    "heading": "@moof__bar",
-    "body": "follow moof for seasonal drinks, small-batch bakes, and cafe updates.",
-    "label": "open instagram",
-    "url": "https://www.instagram.com/moof__bar/",
-    "posts": [
-      {
-        "image": "/images/strawberry-royal-matcha-cutout.png",
-        "alt": "strawberry royal milk pudding matcha drink",
-        "caption": "strawberry royal is on the seasonal board",
-        "url": "https://www.instagram.com/moof__bar/",
-        "active": true
-      },
-      {
-        "image": "/images/black-sesame-matcha-cutout.png",
-        "alt": "black sesame matcha drink",
-        "caption": "black sesame matcha / hojicha, layered fresh",
-        "url": "https://www.instagram.com/moof__bar/",
-        "active": true
-      },
-      {
-        "image": "/images/matcha-powder-about.png",
-        "alt": "matcha powder with bamboo whisk",
-        "caption": "hand-whisked matcha with mori and shiran from japan",
-        "url": "https://www.instagram.com/moof__bar/",
-        "active": true
-      }
-    ]
+  "customAnnouncement": {
+    "eyebrow": "announcement",
+    "heading": "custom announcement here",
+    "body": "drop a seasonal launch, opening-hour update, preorder note, or bake pairing here.",
+    "image": "/images/matcha-powder-about.png",
+    "imageAlt": "placeholder matcha powder image"
   },
   "findUs": {
     "heading": "where to find us",

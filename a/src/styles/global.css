@@ -428,10 +428,10 @@ img {
 }
 
 .announcement,
+.custom-announcement,
 .menu-section,
 .about-section,
-.find-us-section,
-.instagram-embed {
+.find-us-section {
   margin: 22px 0;
   border: 1px solid rgba(255, 250, 242, 0.24);
   border-radius: 8px;
@@ -440,106 +440,54 @@ img {
   box-shadow: var(--shadow);
 }
 
-.instagram-embed {
+.custom-announcement {
   display: grid;
   gap: 18px;
+  overflow: hidden;
 }
 
-.instagram-copy {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
+.custom-announcement-copy {
+  display: grid;
+  align-content: center;
+  gap: 6px;
 }
 
-.instagram-embed p,
-.instagram-embed h2,
-.instagram-embed span {
+.custom-announcement p,
+.custom-announcement h2,
+.custom-announcement span {
   margin: 0;
 }
 
-.instagram-embed p {
+.custom-announcement p {
   font-weight: 950;
   text-transform: lowercase;
 }
 
-.instagram-embed h2 {
+.custom-announcement h2 {
   font-size: clamp(2rem, 9vw, 4.5rem);
   line-height: 0.9;
-}
-
-.instagram-embed span {
-  color: rgba(255, 250, 242, 0.82);
-  font-weight: 750;
   text-transform: lowercase;
 }
 
-.instagram-copy a {
-  min-height: 50px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  border-radius: 999px;
-  padding: 0 18px;
-  color: var(--deep);
-  background: var(--card);
-  font-weight: 950;
-  white-space: nowrap;
+.custom-announcement span {
+  color: rgba(255, 250, 242, 0.82);
+  font-weight: 750;
+  line-height: 1.35;
+  text-transform: lowercase;
 }
 
-.instagram-copy svg {
-  width: 23px;
-  height: 23px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-}
-
-.instagram-preview {
+.custom-announcement-media {
   display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(190px, 1fr);
-  gap: 12px;
-  overflow-x: auto;
-  padding-bottom: 2px;
-  scrollbar-width: none;
-}
-
-.instagram-preview::-webkit-scrollbar {
-  display: none;
-}
-
-.instagram-preview-card {
-  min-height: 100%;
-  display: grid;
-  align-content: start;
-  gap: 10px;
   border-radius: 8px;
-  padding: 10px;
-  color: var(--deep);
-  background: var(--card);
-  white-space: normal;
-}
-
-.instagram-preview-card div {
-  display: grid;
-  place-items: center;
-  aspect-ratio: 1;
   overflow: hidden;
-  border-radius: 8px;
   background: linear-gradient(145deg, rgba(239, 140, 45, 0.2), rgba(126, 161, 45, 0.18));
 }
 
-.instagram-preview-card img {
+.custom-announcement-media img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-}
-
-.instagram-preview-card span {
-  color: rgba(45, 36, 40, 0.78);
-  font-size: 0.86rem;
-  line-height: 1.2;
+  min-height: 220px;
+  object-fit: cover;
 }
 
 .announcement p {
@@ -653,22 +601,32 @@ img {
 
 .about-body {
   margin: 0;
-  font-size: clamp(1rem, 2vw, 1.18rem);
-  line-height: 1.38;
+  font-size: clamp(1.05rem, 2vw, 1.28rem);
+  line-height: 1.45;
   font-weight: 650;
   text-transform: lowercase;
 }
 
-.about-image {
-  width: 100%;
-  height: 100%;
-  min-height: 210px;
-  aspect-ratio: 0.9;
-  border-radius: 8px;
-  object-fit: cover;
+.about-layout {
+  display: grid;
+  gap: 18px;
 }
 
-.about-card-row,
+.about-copy {
+  display: grid;
+  align-content: start;
+  gap: 20px;
+}
+
+.about-image {
+  width: 100%;
+  min-height: 260px;
+  aspect-ratio: 1.04;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 18px 50px rgba(45, 36, 40, 0.18);
+}
+
 .find-us-grid {
   display: flex;
   gap: 12px;
@@ -677,14 +635,10 @@ img {
   scrollbar-width: none;
 }
 
-.about-card-row::-webkit-scrollbar,
 .find-us-grid::-webkit-scrollbar {
   display: none;
 }
 
-.about-story-card,
-.about-image-card,
-.ingredient-card,
 .find-us-grid article,
 .instagram-card {
   flex: 1 0 min(245px, 82vw);
@@ -698,29 +652,46 @@ img {
   background: var(--card);
 }
 
-.about-image-card {
-  padding: 0;
-  overflow: hidden;
+.ingredient-strip {
+  display: grid;
+  gap: 12px;
 }
 
-.about-story-card span,
-.ingredient-card span,
+.ingredient-strip article {
+  border-top: 1px solid rgba(255, 250, 242, 0.28);
+  padding-top: 14px;
+}
+
+.ingredient-strip span,
 .find-us-grid span {
-  color: var(--rose);
+  color: var(--cream);
   font-size: 0.78rem;
   font-weight: 950;
   text-transform: lowercase;
 }
 
-.ingredient-card h3 {
+.ingredient-strip h3 {
   margin: 4px 0;
-  font-size: 2rem;
+  font-size: clamp(1.8rem, 5vw, 2.7rem);
+  line-height: 0.95;
 }
 
-.ingredient-card p {
+.ingredient-strip p {
   margin: 0;
-  color: rgba(45, 36, 40, 0.74);
+  color: rgba(255, 250, 242, 0.78);
   text-transform: lowercase;
+}
+
+.find-us-grid svg {
+  width: 34px;
+  height: 34px;
+  margin-bottom: 12px;
+  color: var(--rose);
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.9;
 }
 
 .find-us-grid h3 {
@@ -788,19 +759,20 @@ img {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .instagram-preview {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-auto-flow: row;
+  .custom-announcement {
+    grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+    align-items: stretch;
   }
 
-  .about-card-row,
+  .about-layout {
+    grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+    align-items: center;
+  }
+
   .find-us-grid {
     overflow: visible;
   }
 
-  .about-story-card,
-  .about-image-card,
-  .ingredient-card,
   .find-us-grid article,
   .instagram-card {
     flex-basis: 0;
@@ -847,14 +819,6 @@ img {
   .carousel-arrow {
     width: 42px;
     height: 42px;
-  }
-
-  .instagram-copy {
-    display: grid;
-  }
-
-  .instagram-copy a {
-    justify-content: center;
   }
 
   .hero-stage {
