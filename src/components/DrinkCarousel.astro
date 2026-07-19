@@ -11,35 +11,112 @@ type Drink = {
 interface Props {
   drinks: Drink[];
   featuredDrinkId: string;
+  eyebrow: string;
+  headline: string;
+  since: string;
+  note: string;
 }
 
-const { drinks, featuredDrinkId } = Astro.props;
+const { drinks, featuredDrinkId, eyebrow, headline, since, note } = Astro.props;
 const featuredDrink = drinks.find((drink) => drink.id === featuredDrinkId) ?? drinks[0];
 ---
 
-<section class="hero-products" aria-label="Featured Moof matcha drinks">
+<section class="hero-products" aria-label="Featured Moof matcha drinks" data-carousel>
   <div class="hero-copy">
-    <p class="hero-eyebrow">Choose your</p>
-    <h1>Matcha</h1>
+    <p class="hero-eyebrow">{eyebrow}</p>
+    <h1>{headline}</h1>
     <div class="hero-meta">
-      <span>Mori & Shiran</span>
-      <span>Japan</span>
+      <span>{since.split(",")[0]}</span>
+      <span>{since.split(",")[1]?.trim() ?? "Japan"}</span>
     </div>
   </div>
 
-  <div class="hero-stage" aria-hidden="true">
-    <img src={featuredDrink.image} alt="" class="featured-drink" />
+  <div class="hero-stage">
+    <button class="carousel-arrow carousel-arrow-left" type="button" aria-label="Previous drink" data-carousel-arrow="previous">
+      <span aria-hidden="true">‹</span>
+    </button>
+    <figure class="featured-drink-panel" aria-live="polite">
+      <img src={featuredDrink.image} alt={featuredDrink.name} class="featured-drink" data-featured-image />
+      <figcaption>
+        <span data-featured-price>{featuredDrink.price}</span>
+        <h2 data-featured-name>{featuredDrink.name}</h2>
+        <p data-featured-description>{featuredDrink.description}</p>
+      </figcaption>
+    </figure>
+    <button class="carousel-arrow carousel-arrow-right" type="button" aria-label="Next drink" data-carousel-arrow="next">
+      <span aria-hidden="true">›</span>
+    </button>
   </div>
 
-  <div class="drink-rail" aria-label="Swipe through Moof drinks">
+  <p class="hero-note">{note}</p>
+
+  <div class="drink-rail" aria-label="Swipe through Moof drinks" role="tablist">
     {
       drinks.map((drink) => (
-        <a class={`drink-tab ${drink.id === featuredDrink.id ? "is-active" : ""}`} href="#menu">
+        <button
+          class={`drink-tab ${drink.id === featuredDrink.id ? "is-active" : ""}`}
+          type="button"
+          role="tab"
+          aria-selected={drink.id === featuredDrink.id ? "true" : "false"}
+          data-carousel-card
+          data-drink-id={drink.id}
+          data-drink-name={drink.name}
+          data-drink-price={drink.price}
+          data-drink-description={drink.description}
+          data-drink-image={drink.image}
+        >
           <img src={drink.image} alt="" loading="lazy" />
           <span>{drink.name}</span>
           <small>{drink.price}</small>
-        </a>
+        </button>
       ))
     }
   </div>
+
+  <script>
+    const carousels = document.querySelectorAll("[data-carousel]");
+
+    carousels.forEach((carousel) => {
+      const featuredImage = carousel.querySelector("[data-featured-image]");
+      const featuredName = carousel.querySelector("[data-featured-name]");
+      const featuredPrice = carousel.querySelector("[data-featured-price]");
+      const featuredDescription = carousel.querySelector("[data-featured-description]");
+      const cards = Array.from(carousel.querySelectorAll("[data-carousel-card]"));
+      const arrows = carousel.querySelectorAll("[data-carousel-arrow]");
+
+      const selectCard = (card) => {
+        if (!(card instanceof HTMLElement)) return;
+
+        cards.forEach((candidate) => {
+          const isActive = candidate === card;
+          candidate.classList.toggle("is-active", isActive);
+          candidate.setAttribute("aria-selected", isActive ? "true" : "false");
+        });
+
+        if (featuredImage instanceof HTMLImageElement) {
+          featuredImage.src = card.dataset.drinkImage ?? "";
+          featuredImage.alt = card.dataset.drinkName ?? "";
+        }
+        if (featuredName) featuredName.textContent = card.dataset.drinkName ?? "";
+        if (featuredPrice) featuredPrice.textContent = card.dataset.drinkPrice ?? "";
+        if (featuredDescription) featuredDescription.textContent = card.dataset.drinkDescription ?? "";
+
+        card.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      };
+
+      cards.forEach((card) => {
+        card.addEventListener("click", () => selectCard(card));
+      });
+
+      arrows.forEach((arrow) => {
+        arrow.addEventListener("click", () => {
+          const activeIndex = Math.max(0, cards.findIndex((card) => card.classList.contains("is-active")));
+          const direction = arrow.getAttribute("data-carousel-arrow");
+          const offset = direction === "previous" ? -1 : 1;
+          const nextCard = cards[(activeIndex + offset + cards.length) % cards.length];
+          selectCard(nextCard);
+        });
+      });
+    });
+  </script>
 </section>

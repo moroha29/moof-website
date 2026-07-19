@@ -9,7 +9,8 @@ const site = defineCollection({
     nav: z.array(
       z.object({
         label: z.string(),
-        href: z.string()
+        href: z.string(),
+        external: z.boolean().optional()
       })
     ),
     hero: z.object({
@@ -32,6 +33,15 @@ const site = defineCollection({
       heading: z.string(),
       body: z.string(),
       storeNote: z.string()
+    }),
+    findUs: z.object({
+      heading: z.string(),
+      body: z.string(),
+      address: z.string(),
+      unit: z.string(),
+      mrtNote: z.string(),
+      instagramLabel: z.string(),
+      instagramUrl: z.string().url()
     })
   })
 });

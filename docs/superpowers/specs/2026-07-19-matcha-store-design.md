@@ -75,6 +75,7 @@ Store info should include:
 - social links
 - pickup or ordering notes
 - temporary closure or holiday message
+- where-to-find-us details, including Eon Shenton address and Instagram link
 
 ### Menu Item Content
 

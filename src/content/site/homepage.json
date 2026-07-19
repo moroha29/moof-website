@@ -3,10 +3,11 @@
   "logoText": "Moof",
   "nav": [
     { "label": "Menu", "href": "#menu" },
-    { "label": "About", "href": "#about" }
+    { "label": "About", "href": "#about" },
+    { "label": "IG", "href": "https://www.instagram.com/moof__bar/", "external": true }
   ],
   "hero": {
-    "eyebrow": "Choose your",
+    "eyebrow": "Specialty Matcha",
     "headline": "Matcha",
     "since": "Mori and Shiran, Japan",
     "note": "Exclusive matcha ingredients, layered fresh with milk, oat milk, fruit, sesame, and hojicha.",
@@ -36,7 +37,16 @@
   ],
   "about": {
     "heading": "About Moof",
-    "body": "Moof is a playful specialty matcha bar built around layered drinks, soft textures, and exclusive Japanese matcha ingredients. The menu keeps things simple: strong tea, fresh milk or oat milk, and seasonal flavors that look as good as they taste.",
+    "body": "Moof is a specialty matcha and hojicha bar built around hand-whisked ceremonial-grade drinks, soft textures, and exclusive Japanese matcha ingredients. The menu keeps things simple: strong tea, fresh milk or oat milk, seasonal flavors, and daily small-batch bakes for takeaway.",
     "storeNote": "Fresh milk / oat milk. Hot / cold options available on selected drinks."
+  },
+  "findUs": {
+    "heading": "Where To Find Us",
+    "body": "Find Moof at Eon Shenton in the CBD, just a 5-minute walk from Tanjong Pagar MRT Station.",
+    "address": "70 Shenton Way",
+    "unit": "#01-15, Eon Shenton",
+    "mrtNote": "5-minute walk from Tanjong Pagar MRT Station",
+    "instagramLabel": "@moof__bar",
+    "instagramUrl": "https://www.instagram.com/moof__bar/"
   }
 }

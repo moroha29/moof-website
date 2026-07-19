@@ -1,6 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { getCarouselDrinks, sortMenusForDisplay } from "../src/lib/carousel.js";
+import {
+  getAdjacentDrinkId,
+  getCarouselDrinks,
+  getSelectedDrink,
+  sortMenusForDisplay
+} from "../src/lib/carousel.js";
 
 const coreMenu = {
   title: "Specialty Matcha / Hojicha",
@@ -50,4 +55,19 @@ test("sortMenusForDisplay keeps seasonal menu sections above core menu sections"
     ordered.map((menu) => menu.title),
     ["Seasonal Drinks", "Specialty Matcha / Hojicha"]
   );
+});
+
+test("getSelectedDrink returns the requested active drink or falls back to the first carousel drink", () => {
+  const drinks = getCarouselDrinks([coreMenu, seasonalMenu]);
+
+  assert.equal(getSelectedDrink(drinks, "black-sesame").id, "black-sesame");
+  assert.equal(getSelectedDrink(drinks, "missing-id").id, "strawberry-royal");
+});
+
+test("getAdjacentDrinkId wraps carousel arrows around the drink list", () => {
+  const drinks = getCarouselDrinks([coreMenu, seasonalMenu]);
+
+  assert.equal(getAdjacentDrinkId(drinks, "strawberry-royal", "previous"), "classic-matcha");
+  assert.equal(getAdjacentDrinkId(drinks, "classic-matcha", "next"), "strawberry-royal");
+  assert.equal(getAdjacentDrinkId(drinks, "black-sesame", "next"), "classic-matcha");
 });

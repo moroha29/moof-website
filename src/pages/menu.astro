@@ -15,6 +15,7 @@ const menus = sortMenusForDisplay((await getCollection("menu")).map((entry) => e
       <nav>
         <a href="/">Home</a>
         <a href="/#about">About</a>
+        <a href={homepage?.data.findUs.instagramUrl ?? "https://www.instagram.com/moof__bar/"} target="_blank" rel="noreferrer">IG</a>
       </nav>
     </header>
     <div class="section-heading page-heading">

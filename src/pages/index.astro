@@ -2,6 +2,7 @@
 import { getCollection, getEntry } from "astro:content";
 import AboutSection from "../components/AboutSection.astro";
 import DrinkCarousel from "../components/DrinkCarousel.astro";
+import FindUsSection from "../components/FindUsSection.astro";
 import MenuSection from "../components/MenuSection.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCarouselDrinks, sortMenusForDisplay } from "../lib/carousel.js";
@@ -22,11 +23,18 @@ const carouselDrinks = getCarouselDrinks(menus, homepage.data.hero.carouselDrink
     <header class="site-header" aria-label="Primary navigation">
       <a class="logo" href="/" aria-label="Moof home">{homepage.data.logoText}</a>
       <nav>
-        {homepage.data.nav.map((item) => <a href={item.href}>{item.label}</a>)}
+        {homepage.data.nav.map((item) => <a href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noreferrer" : undefined}>{item.label}</a>)}
       </nav>
     </header>
 
-    <DrinkCarousel drinks={carouselDrinks} featuredDrinkId={homepage.data.hero.featuredDrinkId} />
+    <DrinkCarousel
+      drinks={carouselDrinks}
+      featuredDrinkId={homepage.data.hero.featuredDrinkId}
+      eyebrow={homepage.data.hero.eyebrow}
+      headline={homepage.data.hero.headline}
+      since={homepage.data.hero.since}
+      note={homepage.data.hero.note}
+    />
 
     <section class="announcement" aria-label="Moof announcement">
       <p>{homepage.data.hero.announcement}</p>
@@ -42,6 +50,16 @@ const carouselDrinks = getCarouselDrinks(menus, homepage.data.hero.carouselDrink
       body={homepage.data.about.body}
       storeNote={homepage.data.about.storeNote}
       ingredients={homepage.data.ingredients}
+    />
+
+    <FindUsSection
+      heading={homepage.data.findUs.heading}
+      body={homepage.data.findUs.body}
+      address={homepage.data.findUs.address}
+      unit={homepage.data.findUs.unit}
+      mrtNote={homepage.data.findUs.mrtNote}
+      instagramLabel={homepage.data.findUs.instagramLabel}
+      instagramUrl={homepage.data.findUs.instagramUrl}
     />
   </main>
 </BaseLayout>

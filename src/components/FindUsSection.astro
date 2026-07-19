@@ -1,0 +1,38 @@
+---
+interface Props {
+  heading: string;
+  body: string;
+  address: string;
+  unit: string;
+  mrtNote: string;
+  instagramLabel: string;
+  instagramUrl: string;
+}
+
+const { heading, body, address, unit, mrtNote, instagramLabel, instagramUrl } = Astro.props;
+---
+
+<section class="find-us-section" id="find-us" aria-labelledby="find-us-heading">
+  <div class="section-heading">
+    <p>Find us</p>
+    <h2 id="find-us-heading">{heading}</h2>
+    <span>{body}</span>
+  </div>
+  <div class="find-us-grid">
+    <article>
+      <span>Address</span>
+      <h3>{address}</h3>
+      <p>{unit}</p>
+    </article>
+    <article>
+      <span>Nearest MRT</span>
+      <h3>Tanjong Pagar</h3>
+      <p>{mrtNote}</p>
+    </article>
+    <a class="instagram-card" href={instagramUrl} target="_blank" rel="noreferrer">
+      <span>Instagram</span>
+      <h3>{instagramLabel}</h3>
+      <p>Follow Moof for seasonal drinks, bakes, and menu drops.</p>
+    </a>
+  </div>
+</section>

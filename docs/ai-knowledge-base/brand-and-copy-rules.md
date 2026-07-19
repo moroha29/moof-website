@@ -16,6 +16,8 @@ Moof should sound like a modern specialty cafe: direct, sensory, and a little pl
 
 The first screen should feel product-led: oversized matcha type, a large drink image, and a horizontal drink carousel. Keep the menu and about sections close to the first screen so phone users can move through the page quickly.
 
+The carousel should feel active: the selected drink appears large in the hero, while the other carousel cards are smaller and visually muted. Keep arrow buttons visible on the left and right of the hero.
+
 ## Copy Examples
 
 Good:
