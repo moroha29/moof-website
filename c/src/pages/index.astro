@@ -1,0 +1,153 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import MenuList from "../components/MenuList.astro";
+import SeasonalSocialEdit from "../components/SeasonalSocialEdit.astro";
+import { withBase } from "../lib/base.js";
+import { core, seasonal, testimonials } from "../data/menu.js";
+
+const menuPage = withBase("/menu/");
+---
+
+<BaseLayout
+  title="Moof — Matcha & Hojicha, Tanjong Pagar"
+  description="Moof is a specialty matcha and hojicha bar in Singapore's CBD. Hand-whisked, ceremonial-grade drinks made slowly with Mori and Shiran matcha from Japan."
+>
+  <Header active="home" />
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <span class="eyebrow">Tanjong Pagar, Singapore</span>
+        <h1>Matcha and hojicha, made slowly.</h1>
+        <p class="lede">
+          Moof is a small specialty bar for hand-whisked, ceremonial-grade matcha and hojicha — a quiet pause
+          built into the middle of a CBD day.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-solid" href={menuPage}>See the menu</a>
+          <a class="btn btn-outline" href="#visit">Visit the café</a>
+        </div>
+        <div class="hero-image">
+          <img src={withBase("images/specialty-matcha-latte-cutout.png")} alt="Moof specialty matcha latte" />
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section id="story" class="ritual">
+      <div class="wrap">
+        <div class="ritual-image">
+          <img src={withBase("images/matcha-powder-about.png")} alt="Matcha powder, whisked by hand" />
+        </div>
+        <div class="ritual-copy">
+          <span class="eyebrow">The ritual</span>
+          <h2>Two leaves, one process.</h2>
+          <p>
+            Every drink at Moof begins the same unhurried way: matcha, sifted and hand-whisked to order, no
+            shortcuts taken in the name of speed. We keep the menu narrow on purpose — strong tea, fresh milk
+            or oat milk, and a small rotating set of seasonal flavours — so that what we do serve, we can do
+            properly.
+          </p>
+          <p>
+            We work with two matchas from Japan, chosen for what they bring to a cup rather than for
+            novelty. Mori and Shiran sit at the centre of almost everything on the menu.
+          </p>
+
+          <div class="ingredient-pair">
+            <div class="ingredient-card">
+              <h3>Mori</h3>
+              <span class="origin">Japan</span>
+              <p>A deep green matcha with a rounded finish — the one we reach for when a drink needs richness and body.</p>
+            </div>
+            <div class="ingredient-card">
+              <h3>Shiran</h3>
+              <span class="origin">Japan</span>
+              <p>A smoother, cleaner profile, better suited to bright drinks and layered milk tea.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section id="menu">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">On the menu</span>
+          <h2>A short list, kept honest.</h2>
+          <p class="sub">Four drinks on the counter every day, and a small seasonal set that changes with the months.</p>
+        </div>
+
+        <MenuList title="Core" note="Available daily" items={core} />
+        <MenuList title="Seasonal" note="Current batch" items={seasonal} />
+
+        <div class="menu-cta">
+          <a class="btn btn-outline" href={menuPage}>View full menu</a>
+        </div>
+      </div>
+    </section>
+
+    <SeasonalSocialEdit />
+
+    <section class="testimonials">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">In their words</span>
+          <h2>What regulars tell us</h2>
+          <p class="sub">A handful of honest notes, left by the people who keep coming back.</p>
+        </div>
+        <div class="testimonial-grid">
+          {
+            testimonials.map((t) => (
+              <div class="testimonial">
+                <p class="quote">{t.quote}</p>
+                <span class="attribution">{t.name}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="visit" class="visit">
+      <div class="wrap">
+        <div class="visit-copy">
+          <span class="eyebrow">Visit</span>
+          <h2>Come sit with us.</h2>
+          <p>
+            Moof is tucked into Eon Shenton, a short walk from the office towers along Shenton Way — an easy
+            stop before work, between meetings, or on the way home.
+          </p>
+          <p>A five-minute walk from Tanjong Pagar MRT station, if you're coming from further out.</p>
+        </div>
+        <div class="visit-details">
+          <div class="visit-row">
+            <span class="label">Address</span>
+            <span class="value">70 Shenton Way<br />#01-15, Eon Shenton<br />Singapore</span>
+          </div>
+          <div class="visit-row">
+            <span class="label">Hours</span>
+            <span class="value">Mon–Fri<br />9am – 6pm</span>
+          </div>
+          <div class="visit-row">
+            <span class="label">MRT</span>
+            <span class="value">5-minute walk from<br />Tanjong Pagar</span>
+          </div>
+          <div class="visit-row">
+            <span class="label">Instagram</span>
+            <span class="value">
+              <a href="https://www.instagram.com/moof__bar/" target="_blank" rel="noreferrer">@moof__bar</a>
+            </span>
+          </div>
+          <p class="visit-note">We're closed weekends — see you Monday.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

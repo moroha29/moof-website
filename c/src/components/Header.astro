@@ -1,0 +1,30 @@
+---
+import { withBase } from "../lib/base.js";
+
+interface Props {
+  active?: "home" | "menu";
+}
+
+const { active = "home" } = Astro.props;
+const home = withBase("/");
+const menuPage = withBase("/menu/");
+---
+
+<header class="site-header" aria-label="Primary navigation">
+  <a class="wordmark" href={home} aria-label="Moof home">moof</a>
+  <nav class="desktop-nav">
+    <a href={active === "home" ? "#story" : `${home}#story`}>Story</a>
+    <a href={menuPage}>Menu</a>
+    <a href={active === "home" ? "#visit" : `${home}#visit`}>Visit</a>
+    <a href="https://www.instagram.com/moof__bar/" target="_blank" rel="noreferrer">Instagram</a>
+  </nav>
+  <details class="mobile-nav">
+    <summary aria-label="Open navigation">Menu</summary>
+    <nav aria-label="Mobile navigation">
+      <a href={active === "home" ? "#story" : `${home}#story`}>Story</a>
+      <a href={menuPage}>Menu</a>
+      <a href={active === "home" ? "#visit" : `${home}#visit`}>Visit</a>
+      <a href="https://www.instagram.com/moof__bar/" target="_blank" rel="noreferrer">Instagram</a>
+    </nav>
+  </details>
+</header>

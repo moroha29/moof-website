@@ -1,0 +1,18 @@
+---
+import { withBase } from "../lib/base.js";
+
+const home = withBase("/");
+const menuPage = withBase("/menu/");
+---
+
+<footer>
+  <div class="wrap">
+    <a class="wordmark" href={home}>moof</a>
+    <div class="foot-links">
+      <a href={menuPage}>Menu</a>
+      <a href="https://www.instagram.com/moof__bar/" target="_blank" rel="noreferrer">@moof__bar</a>
+      <a href={`${home}#visit`}>Visit</a>
+    </div>
+    <p class="foot-note">70 Shenton Way, #01-15, Eon Shenton, Singapore · Mon–Fri, 9am–6pm</p>
+  </div>
+</footer>

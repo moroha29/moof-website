@@ -1,0 +1,36 @@
+---
+import { seasonal } from "../data/menu.js";
+import { withBase } from "../lib/base.js";
+---
+
+<section class="seasonal-edit" aria-labelledby="seasonal-edit-title">
+  <div class="wrap">
+    <div class="seasonal-edit-intro">
+      <span class="eyebrow">The seasonal edit</span>
+      <h2 id="seasonal-edit-title">Three drinks worth pausing for.</h2>
+      <p>A small rotation for the season, composed to look as considered as it tastes.</p>
+    </div>
+
+    <div class="seasonal-edit-grid">
+      {
+        seasonal.map((item, index) => (
+          <article class="seasonal-edit-card">
+            <span class="seasonal-edit-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+            <div class="seasonal-edit-image">
+              <img src={withBase(item.image)} alt={item.name} loading="lazy" />
+            </div>
+            <h3>{item.name}</h3>
+            <p>{item.description}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="seasonal-edit-social">
+      <p>See what is being whisked this week.</p>
+      <a href="https://www.instagram.com/moof__bar/" target="_blank" rel="noreferrer">
+        Follow @moof__bar <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</section>

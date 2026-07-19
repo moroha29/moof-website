@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import MenuList from "../components/MenuList.astro";
+import { core, seasonal } from "../data/menu.js";
+---
+
+<BaseLayout
+  title="Menu — Moof"
+  description="The full Moof menu: core matcha and hojicha lattes, and the current seasonal drinks, with prices."
+>
+  <Header active="menu" />
+
+  <main>
+    <section class="page-hero">
+      <div class="wrap">
+        <span class="eyebrow">Moof</span>
+        <h1>The menu</h1>
+        <p class="sub">Seven drinks, made the same unhurried way every time — four on the counter daily, three for the season.</p>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section>
+      <div class="wrap">
+        <MenuList title="Core" note="Available daily" items={core} />
+        <MenuList title="Seasonal" note="Current batch" items={seasonal} />
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

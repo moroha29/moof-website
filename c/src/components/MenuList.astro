@@ -1,0 +1,44 @@
+---
+import { withBase } from "../lib/base.js";
+
+interface MenuItem {
+  id: string;
+  name: string;
+  price: string;
+  description: string;
+  notes: string;
+  image: string;
+}
+
+interface Props {
+  title: string;
+  note: string;
+  items: MenuItem[];
+}
+
+const { title, note, items } = Astro.props;
+---
+
+<div class="menu-group">
+  <div class="menu-group-head">
+    <h3>{title}</h3>
+    <span>{note}</span>
+  </div>
+  {
+    items.map((item) => (
+      <div class="menu-item">
+        <div class="menu-item-thumb">
+          <img src={withBase(item.image)} alt={item.name} loading="lazy" />
+        </div>
+        <div class="menu-item-body">
+          <div class="menu-item-title-row">
+            <h4>{item.name}</h4>
+            <span class="price">{item.price}</span>
+          </div>
+          <p>{item.description}</p>
+          <span class="menu-item-notes">{item.notes}</span>
+        </div>
+      </div>
+    ))
+  }
+</div>
