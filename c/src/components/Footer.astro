@@ -1,5 +1,6 @@
 ---
 import { withBase } from "../lib/base.js";
+import { site } from "../data/site.js";
 
 const home = withBase("/");
 const menuPage = withBase("/menu/");
@@ -7,12 +8,12 @@ const menuPage = withBase("/menu/");
 
 <footer>
   <div class="wrap">
-    <a class="wordmark" href={home}>moof</a>
+    <a class="wordmark" href={home}>{site.storeName}</a>
     <div class="foot-links">
       <a href={menuPage}>Menu</a>
-      <a href="https://www.instagram.com/moof__bar/" target="_blank" rel="noreferrer">@moof__bar</a>
+      <a href={site.social.instagramUrl} target="_blank" rel="noreferrer">{site.social.instagramHandle}</a>
       <a href={`${home}#visit`}>Visit</a>
     </div>
-    <p class="foot-note">70 Shenton Way, #01-15, Eon Shenton, Singapore · Mon–Fri, 9am–6pm</p>
+    <p class="foot-note">{site.visit.footerNote}</p>
   </div>
 </footer>

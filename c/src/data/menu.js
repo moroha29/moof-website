@@ -67,22 +67,22 @@ export const testimonials = [
   },
   {
     quote: "Stronger aroma, and worth the upgrade.",
-    name: "a regular, on the Specialty pour"
+    name: "Anonymous customer"
   },
   {
     quote: "Bold, grassy, and very pure.",
-    name: "a guest, on the Usucha"
+    name: "Anonymous customer"
   },
   {
     quote: "Roasty and mellow — very comforting.",
-    name: "a guest, on the Hojicha Latte"
+    name: "Anonymous customer"
   },
   {
     quote: "Nutty, smooth, and not too sweet.",
-    name: "a guest, on the Black Sesame"
+    name: "Anonymous customer"
   },
   {
     quote: "Super refreshing after lunch.",
-    name: "a guest, on the Ume & Plum Iced Tea"
+    name: "Anonymous customer"
   }
 ];

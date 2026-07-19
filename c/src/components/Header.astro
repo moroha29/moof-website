@@ -1,5 +1,6 @@
 ---
 import { withBase } from "../lib/base.js";
+import { site } from "../data/site.js";
 
 interface Props {
   active?: "home" | "menu";
@@ -16,7 +17,7 @@ const menuPage = withBase("/menu/");
     <a href={active === "home" ? "#story" : `${home}#story`}>Story</a>
     <a href={menuPage}>Menu</a>
     <a href={active === "home" ? "#visit" : `${home}#visit`}>Visit</a>
-    <a href="https://www.instagram.com/moof__bar/" target="_blank" rel="noreferrer">Instagram</a>
+    <a href={site.social.instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
   </nav>
   <details class="mobile-nav">
     <summary aria-label="Open navigation">Menu</summary>
@@ -24,7 +25,7 @@ const menuPage = withBase("/menu/");
       <a href={active === "home" ? "#story" : `${home}#story`}>Story</a>
       <a href={menuPage}>Menu</a>
       <a href={active === "home" ? "#visit" : `${home}#visit`}>Visit</a>
-      <a href="https://www.instagram.com/moof__bar/" target="_blank" rel="noreferrer">Instagram</a>
+      <a href={site.social.instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
     </nav>
   </details>
 </header>

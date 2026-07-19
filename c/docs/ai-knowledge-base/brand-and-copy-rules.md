@@ -13,6 +13,10 @@
 
 Update drink facts only in `src/data/menu.js`. `SeasonalSocialEdit.astro` consumes the existing `seasonal` array and must not gain duplicated drink names, descriptions, prices, or image paths. Keep the Instagram link explicit and use the established `@moof__bar` account.
 
+## Homepage And Store Maintenance
+
+Update hero, ritual, ingredient, menu-introduction, testimonial-introduction, visit, address, hours, MRT, footer, and Instagram facts in `src/data/site.js`. Pages and shared components consume that module; do not duplicate these values in Astro layout files.
+
 ## Copy Guidance
 
 Prefer short, sensory, unhurried phrases. Sound welcoming and observant, not exclusive or promotional. Do not invent awards, sourcing claims, customer identities, urgency, availability, or business facts.

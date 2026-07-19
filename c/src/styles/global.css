@@ -153,8 +153,9 @@ p {
     position: absolute;
     z-index: 10;
     top: calc(100% - 0.4rem);
+    left: 1.5rem;
     right: 1.5rem;
-    width: min(15rem, calc(100vw - 3rem));
+    width: auto;
     display: flex;
     flex-direction: column;
     padding: 0.7rem 1.1rem;
@@ -175,6 +176,16 @@ p {
 
   .mobile-nav nav a:last-child {
     border-bottom: 0;
+  }
+}
+
+@media (min-width: 641px) {
+  .desktop-nav {
+    display: flex;
+  }
+
+  .mobile-nav {
+    display: none;
   }
 }
 

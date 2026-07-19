@@ -31,4 +31,4 @@ Desktop keeps the restrained letter-spaced navigation. At 640px and below, it be
 
 ## Content Contract
 
-For this bake-off release, C retains its independent plain-JavaScript data module as permitted by ADR 0002. The Seasonal Edit imports and maps the existing `seasonal` array; it must never duplicate seasonal names, descriptions, or image paths in the component. Migration to the canonical Content Collection schema is deferred until client selection.
+For this bake-off release, C retains independent plain-JavaScript data modules as permitted by ADR 0002. `src/data/menu.js` owns drinks and testimonials, while `src/data/site.js` owns homepage, store, visit, and social copy. The Seasonal Edit imports and maps the existing `seasonal` array; it must never duplicate seasonal names, descriptions, or image paths in the component. Migration to the canonical Content Collection schema is deferred until client selection.

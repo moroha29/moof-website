@@ -1,5 +1,6 @@
 ---
 import { seasonal } from "../data/menu.js";
+import { site } from "../data/site.js";
 import { withBase } from "../lib/base.js";
 ---
 
@@ -28,8 +29,8 @@ import { withBase } from "../lib/base.js";
 
     <div class="seasonal-edit-social">
       <p>See what is being whisked this week.</p>
-      <a href="https://www.instagram.com/moof__bar/" target="_blank" rel="noreferrer">
-        Follow @moof__bar <span aria-hidden="true">↗</span>
+      <a href={site.social.instagramUrl} target="_blank" rel="noreferrer">
+        Follow {site.social.instagramHandle} <span aria-hidden="true">↗</span>
       </a>
     </div>
   </div>
