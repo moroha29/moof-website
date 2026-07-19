@@ -1,27 +1,54 @@
 ---
+import { withBase } from "../lib/base.js";
+
+type Post = {
+  image: string;
+  alt: string;
+  caption: string;
+  url: string;
+  active: boolean;
+};
+
 interface Props {
   eyebrow: string;
   heading: string;
   body: string;
   label: string;
   url: string;
+  posts: Post[];
 }
 
-const { eyebrow, heading, body, label, url } = Astro.props;
+const { eyebrow, heading, body, label, url, posts } = Astro.props;
 ---
 
 <section class="instagram-embed" aria-labelledby="instagram-heading">
-  <div>
-    <p>{eyebrow}</p>
-    <h2 id="instagram-heading">{heading}</h2>
-    <span>{body}</span>
+  <div class="instagram-copy">
+    <div>
+      <p>{eyebrow}</p>
+      <h2 id="instagram-heading">{heading}</h2>
+      <span>{body}</span>
+    </div>
+    <a href={url} target="_blank" rel="noreferrer">
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+        <circle cx="12" cy="12" r="4"></circle>
+        <circle cx="17.2" cy="6.8" r="1"></circle>
+      </svg>
+      <span>{label}</span>
+    </a>
   </div>
-  <a href={url} target="_blank" rel="noreferrer">
-    <svg aria-hidden="true" viewBox="0 0 24 24">
-      <rect x="3" y="3" width="18" height="18" rx="5"></rect>
-      <circle cx="12" cy="12" r="4"></circle>
-      <circle cx="17.2" cy="6.8" r="1"></circle>
-    </svg>
-    <span>{label}</span>
-  </a>
+  {posts.length > 0 && (
+    <div class="instagram-preview" aria-label="Instagram post previews">
+      {
+        posts.map((post) => (
+          <a class="instagram-preview-card" href={post.url} target="_blank" rel="noreferrer">
+            <div>
+              <img src={withBase(post.image)} alt={post.alt} loading="lazy" />
+            </div>
+            <span>{post.caption}</span>
+          </a>
+        ))
+      }
+    </div>
+  )}
 </section>

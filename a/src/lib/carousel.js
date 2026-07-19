@@ -35,18 +35,6 @@ export function getAdjacentDrinkId(drinks, selectedDrinkId, direction) {
   return drinks[nextIndex].id;
 }
 
-export function getNearestCarouselIndex(cards, railCenter) {
-  if (cards.length === 0) {
-    return -1;
-  }
-
-  return cards.reduce((nearestIndex, card, index) => {
-    const currentDistance = Math.abs(card.center - railCenter);
-    const nearestDistance = Math.abs(cards[nearestIndex].center - railCenter);
-    return currentDistance < nearestDistance ? index : nearestIndex;
-  }, 0);
-}
-
 export function getRatingStars(rating, max = 5) {
   const filledCount = Math.min(Math.max(Number(rating) || 0, 0), max);
   return Array.from({ length: max }, (_, index) => index < filledCount);

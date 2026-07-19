@@ -18,11 +18,15 @@ The first screen should feel product-led: oversized matcha type, a large drink i
 
 The carousel should feel active: the selected drink appears large in the hero, while the other carousel cards are smaller and visually muted. Keep arrow buttons visible on the left and right of the hero.
 
+Users should change the selected hero drink by clicking a card or arrow. Do not make horizontal rail scrolling change the hero selection.
+
 On wide screens, the selected drink may have compact supporting panels: review on the left and tasting ratings on the right. On phones, stack these panels so the product image stays clear and nothing overlaps.
 
 Do not put a green decorative blob behind the featured drink. Let the transparent drink asset sit directly on the warm Moof background with a subtle drop shadow.
 
 Keep supporting copy visually lowercase. Hero display words may stay title case or uppercase when they are intentional headline treatment, but descriptions, location notes, tags, and small support text should read lowercase.
+
+About, find-us, and Instagram preview sections should use flat rows of compact cards. Avoid tall two-column layouts for these sections.
 
 ## Copy Examples
 

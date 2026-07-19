@@ -46,7 +46,30 @@
     "heading": "@moof__bar",
     "body": "follow moof for seasonal drinks, small-batch bakes, and cafe updates.",
     "label": "open instagram",
-    "url": "https://www.instagram.com/moof__bar/"
+    "url": "https://www.instagram.com/moof__bar/",
+    "posts": [
+      {
+        "image": "/images/strawberry-royal-matcha-cutout.png",
+        "alt": "strawberry royal milk pudding matcha drink",
+        "caption": "strawberry royal is on the seasonal board",
+        "url": "https://www.instagram.com/moof__bar/",
+        "active": true
+      },
+      {
+        "image": "/images/black-sesame-matcha-cutout.png",
+        "alt": "black sesame matcha drink",
+        "caption": "black sesame matcha / hojicha, layered fresh",
+        "url": "https://www.instagram.com/moof__bar/",
+        "active": true
+      },
+      {
+        "image": "/images/matcha-powder-about.png",
+        "alt": "matcha powder with bamboo whisk",
+        "caption": "hand-whisked matcha with mori and shiran from japan",
+        "url": "https://www.instagram.com/moof__bar/",
+        "active": true
+      }
+    ]
   },
   "findUs": {
     "heading": "where to find us",
@@ -54,6 +77,7 @@
     "address": "70 Shenton Way",
     "unit": "#01-15, Eon Shenton",
     "mrtNote": "5-minute walk from tanjong pagar mrt station",
+    "operatingHours": "mon-fri, 9am-6pm",
     "instagramLabel": "@moof__bar",
     "instagramUrl": "https://www.instagram.com/moof__bar/"
   }

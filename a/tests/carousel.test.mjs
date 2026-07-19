@@ -1,10 +1,10 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 import { prefixBase } from "../src/lib/base.js";
 import {
   getAdjacentDrinkId,
   getCarouselDrinks,
-  getNearestCarouselIndex,
   getRatingStars,
   getSelectedDrink,
   sortMenusForDisplay
@@ -75,21 +75,16 @@ test("getAdjacentDrinkId wraps carousel arrows around the drink list", () => {
   assert.equal(getAdjacentDrinkId(drinks, "black-sesame", "next"), "classic-matcha");
 });
 
-test("getNearestCarouselIndex chooses the card closest to the rail center", () => {
-  const cards = [
-    { center: 120 },
-    { center: 260 },
-    { center: 420 }
-  ];
-
-  assert.equal(getNearestCarouselIndex(cards, 300), 1);
-  assert.equal(getNearestCarouselIndex(cards, 390), 2);
-});
-
 test("getRatingStars converts drink tasting scores into five-star display state", () => {
   assert.deepEqual(getRatingStars(3), [true, true, true, false, false]);
   assert.deepEqual(getRatingStars(9), [true, true, true, true, true]);
   assert.deepEqual(getRatingStars(0), [false, false, false, false, false]);
+});
+
+test("DrinkCarousel does not change featured drink from rail scroll", () => {
+  const source = readFileSync(new URL("../src/components/DrinkCarousel.astro", import.meta.url), "utf8");
+
+  assert.equal(source.includes('addEventListener(\n          "scroll"'), false);
 });
 
 test("prefixBase prefixes public image paths for GitHub Pages project hosting", () => {

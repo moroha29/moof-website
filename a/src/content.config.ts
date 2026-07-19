@@ -40,7 +40,16 @@ const site = defineCollection({
       heading: z.string(),
       body: z.string(),
       label: z.string(),
-      url: z.string().url()
+      url: z.string().url(),
+      posts: z.array(
+        z.object({
+          image: z.string(),
+          alt: z.string(),
+          caption: z.string(),
+          url: z.string().url(),
+          active: z.boolean()
+        })
+      ).default([])
     }),
     findUs: z.object({
       heading: z.string(),
@@ -48,6 +57,7 @@ const site = defineCollection({
       address: z.string(),
       unit: z.string(),
       mrtNote: z.string(),
+      operatingHours: z.string(),
       instagramLabel: z.string(),
       instagramUrl: z.string().url()
     })

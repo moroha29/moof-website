@@ -7,6 +7,7 @@ import InstagramEmbed from "../components/InstagramEmbed.astro";
 import MenuSection from "../components/MenuSection.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCarouselDrinks, sortMenusForDisplay } from "../lib/carousel.js";
+import { getInstagramPreviewPosts } from "../lib/instagram.js";
 
 const homepage = await getEntry("site", "homepage");
 const menuEntries = await getCollection("menu");
@@ -17,6 +18,7 @@ if (!homepage) {
 
 const menus = sortMenusForDisplay(menuEntries.map((entry) => entry.data));
 const carouselDrinks = getCarouselDrinks(menus, homepage.data.hero.carouselDrinkIds);
+const instagramPosts = getInstagramPreviewPosts(homepage.data.instagramEmbed.posts);
 const navHref = (href: string, isExternal = false) => {
   if (isExternal || href.startsWith("#")) {
     return href;
@@ -70,6 +72,7 @@ const navHref = (href: string, isExternal = false) => {
       body={homepage.data.instagramEmbed.body}
       label={homepage.data.instagramEmbed.label}
       url={homepage.data.instagramEmbed.url}
+      posts={instagramPosts}
     />
 
     <section class="announcement" aria-label="Moof announcement">
@@ -95,6 +98,7 @@ const navHref = (href: string, isExternal = false) => {
       address={homepage.data.findUs.address}
       unit={homepage.data.findUs.unit}
       mrtNote={homepage.data.findUs.mrtNote}
+      operatingHours={homepage.data.findUs.operatingHours}
       instagramLabel={homepage.data.findUs.instagramLabel}
       instagramUrl={homepage.data.findUs.instagramUrl}
     />

@@ -94,7 +94,7 @@ const tastingLabels = ["bitterness", "aroma", "nuttiness", "sweetness"] as const
 
   <p class="hero-note">{note}</p>
 
-  <div class="drink-rail" aria-label="Swipe through Moof drinks" role="tablist" data-carousel-rail>
+  <div class="drink-rail" aria-label="Choose a Moof drink" role="tablist" data-carousel-rail>
     {
       drinks.map((drink) => (
         <button
@@ -137,10 +137,8 @@ const tastingLabels = ["bitterness", "aroma", "nuttiness", "sweetness"] as const
       const reviewerName = carousel.querySelector("[data-reviewer-name]");
       const reviewerImage = carousel.querySelector("[data-reviewer-image]");
       const tastingRows = carousel.querySelectorAll("[data-tasting-row]");
-      const rail = carousel.querySelector("[data-carousel-rail]");
       const cards = Array.from(carousel.querySelectorAll("[data-carousel-card]"));
       const arrows = carousel.querySelectorAll("[data-carousel-arrow]");
-      let scrollTimer = 0;
 
       const updateFeaturedContent = (card) => {
         if (featuredImage instanceof HTMLImageElement) {
@@ -210,27 +208,6 @@ const tastingLabels = ["bitterness", "aroma", "nuttiness", "sweetness"] as const
         });
       });
 
-      if (rail instanceof HTMLElement) {
-        rail.addEventListener(
-          "scroll",
-          () => {
-            window.clearTimeout(scrollTimer);
-            scrollTimer = window.setTimeout(() => {
-              const railBounds = rail.getBoundingClientRect();
-              const railCenter = railBounds.left + railBounds.width / 2;
-              const nearestCard = cards.reduce((nearest, card) => {
-                const cardBounds = card.getBoundingClientRect();
-                const cardCenter = cardBounds.left + cardBounds.width / 2;
-                const nearestBounds = nearest.getBoundingClientRect();
-                const nearestCenter = nearestBounds.left + nearestBounds.width / 2;
-                return Math.abs(cardCenter - railCenter) < Math.abs(nearestCenter - railCenter) ? card : nearest;
-              }, cards[0]);
-              selectCard(nearestCard, false);
-            }, 90);
-          },
-          { passive: true }
-        );
-      }
     });
   </script>
 </section>

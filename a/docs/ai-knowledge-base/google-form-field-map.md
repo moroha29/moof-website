@@ -12,8 +12,13 @@ Use this map when converting owner responses into repo content files.
 | ingredient update notes | `ingredients[]` | `src/content/site/homepage.json` |
 | about image | `about.image` | `src/content/site/homepage.json` |
 | Instagram embed copy | `instagramEmbed.*` | `src/content/site/homepage.json` |
+| Instagram preview image | `instagramEmbed.posts[].image` | `src/content/site/homepage.json` |
+| Instagram preview caption | `instagramEmbed.posts[].caption` | `src/content/site/homepage.json` |
+| Instagram preview URL | `instagramEmbed.posts[].url` | `src/content/site/homepage.json` |
+| Instagram preview active status | `instagramEmbed.posts[].active` | `src/content/site/homepage.json` |
 | store address | `findUs.address` and `findUs.unit` | `src/content/site/homepage.json` |
 | MRT / directions note | `findUs.mrtNote` | `src/content/site/homepage.json` |
+| operating hours | `findUs.operatingHours` | `src/content/site/homepage.json` |
 | Instagram URL | `findUs.instagramUrl` | `src/content/site/homepage.json` |
 | drink name | `items[].name` | `src/content/menu/*.json` |
 | drink category | `items[].category` | `src/content/menu/*.json` |

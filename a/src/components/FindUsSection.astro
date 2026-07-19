@@ -5,11 +5,12 @@ interface Props {
   address: string;
   unit: string;
   mrtNote: string;
+  operatingHours: string;
   instagramLabel: string;
   instagramUrl: string;
 }
 
-const { heading, body, address, unit, mrtNote, instagramLabel, instagramUrl } = Astro.props;
+const { heading, body, address, unit, mrtNote, operatingHours, instagramLabel, instagramUrl } = Astro.props;
 ---
 
 <section class="find-us-section" id="find-us" aria-labelledby="find-us-heading">
@@ -20,17 +21,22 @@ const { heading, body, address, unit, mrtNote, instagramLabel, instagramUrl } = 
   </div>
   <div class="find-us-grid">
     <article>
-      <span>Address</span>
+      <span>address</span>
       <h3>{address}</h3>
       <p>{unit}</p>
     </article>
     <article>
-      <span>Nearest MRT</span>
+      <span>nearest mrt</span>
       <h3>Tanjong Pagar</h3>
       <p>{mrtNote}</p>
     </article>
+    <article>
+      <span>hours</span>
+      <h3>operating hours</h3>
+      <p>{operatingHours}</p>
+    </article>
     <a class="instagram-card" href={instagramUrl} target="_blank" rel="noreferrer">
-      <span>Instagram</span>
+      <span>instagram</span>
       <h3>{instagramLabel}</h3>
       <p>Follow Moof for seasonal drinks, bakes, and menu drops.</p>
     </a>

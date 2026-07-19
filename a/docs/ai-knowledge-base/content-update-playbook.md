@@ -35,4 +35,10 @@ Use individual drink cutouts for individual menu cards and carousel cards. `menu
 
 ## Instagram
 
-The site uses a static Instagram profile block under the hero, plus an Instagram icon in the top navigation. Updating the profile URL or text is a content-only change in `src/content/site/homepage.json`. A live Instagram feed would require a widget, API, or third-party service and is outside routine static maintenance.
+The site uses a static Instagram profile block under the hero, a curated Instagram preview row, plus an Instagram icon in the top navigation. Updating the profile URL, text, or preview cards is a content-only change in `src/content/site/homepage.json`.
+
+The preview row uses `instagramEmbed.posts`. Keep up to three active cards. Each card needs an image path, alt text, caption, URL, and active status. Use real post screenshots or existing product images from `public/images/`; a live Instagram feed would require a widget, API, or third-party service and is outside routine static maintenance.
+
+## Location And Hours
+
+Keep address, MRT guidance, operating hours, and Instagram link in `findUs` inside `src/content/site/homepage.json`. The website displays these as a row of cards, so keep each field short enough to scan on a phone.
