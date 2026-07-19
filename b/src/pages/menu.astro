@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import DrinkCard from "../components/DrinkCard.astro";
+import { coreMenu, seasonalMenu } from "../data/menu.js";
+---
+
+<BaseLayout
+  title="Menu — Moof"
+  description="The full Moof menu: core matcha and hojicha lattes plus seasonal drops, with prices."
+>
+  <main>
+    <section class="page-hero">
+      <div class="wrap">
+        <h1>The whole menu</h1>
+        <p>Seven drinks. Zero fillers. All hand-whisked to order.</p>
+      </div>
+    </section>
+
+    <section class="menu-page-section">
+      <div class="wrap">
+        <span class="section-tag">The regulars</span>
+        <div class="section-heading">
+          <h2>Core lineup</h2>
+          <p>On the board every day we're open, Monday to Friday, 9am&ndash;6pm.</p>
+        </div>
+        <div class="menu-grid">
+          {coreMenu.map((item) => <DrinkCard {...item} />)}
+        </div>
+      </div>
+    </section>
+
+    <section class="menu-page-section">
+      <div class="wrap">
+        <span class="section-tag">Limited run</span>
+        <div class="section-heading">
+          <h2>Seasonal drops</h2>
+          <p>The current rotation &mdash; here for a good time, not a long time.</p>
+        </div>
+        <div class="menu-grid">
+          {seasonalMenu.map((item) => <DrinkCard {...item} />)}
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

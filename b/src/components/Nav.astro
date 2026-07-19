@@ -1,0 +1,51 @@
+---
+import { withBase } from "../lib/base.js";
+
+const links = [
+  { label: "Home", href: withBase("/") },
+  { label: "The Menu", href: withBase("menu") },
+  { label: "Meet the Matcha", href: `${withBase("/")}#origin` },
+  { label: "Find Us", href: `${withBase("/")}#find-us` }
+];
+---
+
+<header class="site-header" aria-label="Primary navigation">
+  <a class="logo" href={withBase("")} aria-label="Moof home">
+    <span class="dot" aria-hidden="true"></span>
+    Moof
+  </a>
+  <nav class="site-nav">
+    {
+      links.map((link) => (
+        <a href={link.href}>
+          <span class="nav-label">{link.label}</span>
+        </a>
+      ))
+    }
+    <a
+      class="nav-icon-link"
+      href="https://www.instagram.com/moof__bar/"
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Stalk Moof on Instagram"
+    >
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+        <circle cx="12" cy="12" r="4"></circle>
+        <circle cx="17.2" cy="6.8" r="1"></circle>
+      </svg>
+    </a>
+  </nav>
+  <details class="mobile-nav">
+    <summary aria-label="Open navigation">
+      <span>Menu</span>
+      <span aria-hidden="true">☰</span>
+    </summary>
+    <nav aria-label="Mobile navigation">
+      {links.map((link) => <a href={link.href}>{link.label}</a>)}
+      <a href="https://www.instagram.com/moof__bar/" target="_blank" rel="noreferrer">
+        Instagram
+      </a>
+    </nav>
+  </details>
+</header>

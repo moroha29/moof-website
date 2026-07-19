@@ -1,0 +1,31 @@
+---
+import { withBase } from "../lib/base.js";
+
+interface Props {
+  name: string;
+  price: string;
+  tag: string;
+  blurb: string;
+  temp: string;
+  milk: string;
+  image: string;
+}
+
+const { name, price, tag, blurb, temp, milk, image } = Astro.props;
+---
+
+<article class="drink-card">
+  <span class="badge drink-tag">{tag}</span>
+  <div class="drink-media">
+    <img src={withBase(image)} alt={name} loading="lazy" />
+  </div>
+  <div class="drink-top">
+    <h3>{name}</h3>
+    <span class="drink-price">{price}</span>
+  </div>
+  <p class="drink-blurb">{blurb}</p>
+  <div class="drink-meta">
+    <span class="chip">{temp}</span>
+    <span class="chip">{milk}</span>
+  </div>
+</article>
