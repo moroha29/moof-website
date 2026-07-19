@@ -1,0 +1,35 @@
+---
+import { withBase } from "../lib/base.js";
+import { seasonalItems } from "../data/menu.js";
+import { site } from "../data/site.js";
+---
+
+<section class="seasonal" id="seasonal" aria-label="Seasonal menu">
+  <div class="seasonal-heading">
+    <p class="eyebrow eyebrow-light">Limited batch</p>
+    <h2>Seasonal drinks are pouring now.</h2>
+    <p class="seasonal-sub">Cold, bright, and made in small batches — once this batch is gone, it's gone.</p>
+  </div>
+
+  <div class="seasonal-grid">
+    {
+      seasonalItems.map((item) => (
+        <article class="seasonal-card">
+          <img src={withBase(item.image)} alt={item.name} loading="lazy" width="240" height="240" />
+          <div class="seasonal-card-body">
+            <h3>{item.name}</h3>
+            <p>{item.description}</p>
+            <div class="seasonal-card-foot">
+              <span class="price">{item.price}</span>
+              <span class="tags">{item.tags.join(" · ")}</span>
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+
+  <a class="btn btn-primary" href={site.directionsUrl} target="_blank" rel="noreferrer">
+    Get Directions — Come Try It
+  </a>
+</section>

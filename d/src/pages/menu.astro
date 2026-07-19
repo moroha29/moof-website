@@ -1,0 +1,75 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../lib/base.js";
+import { coreItems, seasonalItems } from "../data/menu.js";
+import { site } from "../data/site.js";
+---
+
+<BaseLayout
+  title="Menu — Moof Matcha & Hojicha, Tanjong Pagar"
+  description="Full Moof menu: classic and specialty matcha lattes, hojicha latte, and the current seasonal drinks. Prices and details for the Eon Shenton cafe near Tanjong Pagar MRT."
+>
+  <main class="page-menu">
+    <div class="menu-page-heading">
+      <p class="eyebrow">Full menu</p>
+      <h1>Every drink, every price.</h1>
+      <p class="menu-page-sub">
+        Fresh or oat milk on request. Hours: {site.hours} · {site.mrtNote}.
+      </p>
+      <a class="btn btn-primary" href={site.directionsUrl} target="_blank" rel="noreferrer">Get Directions</a>
+    </div>
+
+    <section aria-label="Seasonal drinks" class="menu-list-section seasonal-block">
+      <div class="menu-list-heading">
+        <h2>Seasonal — pouring now</h2>
+        <p>Small-batch, limited-time. Come try it before it rotates out.</p>
+      </div>
+      <ul class="menu-list">
+        {
+          seasonalItems.map((item) => (
+            <li class="menu-list-item">
+              <img src={withBase(item.image)} alt={item.name} loading="lazy" width="88" height="88" />
+              <div class="menu-list-item-body">
+                <div class="menu-list-item-top">
+                  <h3>{item.name}</h3>
+                  <span class="price">{item.price}</span>
+                </div>
+                <p>{item.description}</p>
+                <span class="tags">{item.tags.join(" · ")}</span>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section aria-label="Core menu" class="menu-list-section">
+      <div class="menu-list-heading">
+        <h2>Core — every day</h2>
+        <p>Available hot or cold on selected drinks, Mon–Fri 9am–6pm.</p>
+      </div>
+      <ul class="menu-list">
+        {
+          coreItems.map((item) => (
+            <li class="menu-list-item">
+              <img src={withBase(item.image)} alt={item.name} loading="lazy" width="88" height="88" />
+              <div class="menu-list-item-body">
+                <div class="menu-list-item-top">
+                  <h3>{item.name}</h3>
+                  <span class="price">{item.price}</span>
+                </div>
+                <p>{item.description}</p>
+                <span class="tags">{item.tags.join(" · ")}</span>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <div class="menu-page-footer-cta">
+      <p>{site.addressLine1}, {site.addressLine2} — {site.mrtNote}.</p>
+      <a class="btn btn-primary" href={site.directionsUrl} target="_blank" rel="noreferrer">Get Directions</a>
+    </div>
+  </main>
+</BaseLayout>

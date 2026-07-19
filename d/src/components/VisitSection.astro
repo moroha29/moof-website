@@ -1,0 +1,47 @@
+---
+import { site } from "../data/site.js";
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<section class="visit" id="visit" aria-label="Visit Moof">
+  <div class="visit-info">
+    <p class="eyebrow eyebrow-light">Walk in today</p>
+    <h2>Find us at Eon Shenton</h2>
+    <dl>
+      <div>
+        <dt>Address</dt>
+        <dd>{site.addressLine1}<br />{site.addressLine2}</dd>
+      </div>
+      <div>
+        <dt>Getting there</dt>
+        <dd>{site.mrtNote}</dd>
+      </div>
+      <div>
+        <dt>Hours</dt>
+        <dd>{site.hours}</dd>
+      </div>
+    </dl>
+    <div class="visit-actions">
+      <a class="btn btn-primary" href={site.directionsUrl} target="_blank" rel="noreferrer">Get Directions</a>
+      <a class="btn btn-ghost" href={site.instagramUrl} target="_blank" rel="noreferrer">{site.instagramHandle}</a>
+    </div>
+  </div>
+
+  {
+    !compact && (
+      <div class="visit-map">
+        <iframe
+          title="Map to Moof, 70 Shenton Way #01-15 Eon Shenton, Singapore"
+          src={site.mapEmbedUrl}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        />
+      </div>
+    )
+  }
+</section>

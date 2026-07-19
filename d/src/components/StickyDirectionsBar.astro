@@ -1,0 +1,16 @@
+---
+import { site } from "../data/site.js";
+
+interface Props {
+  label?: string;
+}
+
+const { label = "Get Directions" } = Astro.props;
+---
+
+<div class="sticky-cta" role="complementary" aria-label="Get directions to Moof">
+  <a href={site.directionsUrl} target="_blank" rel="noreferrer">
+    <span class="sticky-cta-pin" aria-hidden="true">📍</span>
+    {label}
+  </a>
+</div>

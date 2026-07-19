@@ -1,0 +1,40 @@
+---
+import { withBase } from "../lib/base.js";
+import { coreItems } from "../data/menu.js";
+import { ingredients } from "../data/site.js";
+---
+
+<section class="menu-highlight" aria-label="Core menu">
+  <div class="menu-highlight-heading">
+    <p class="eyebrow">Every day</p>
+    <h2>The core lineup</h2>
+    <p>
+      Made with exclusive Japanese matcha —
+      {ingredients.map((ing, i) => (
+        <>
+          <strong>{ing.name}</strong>{i < ingredients.length - 1 ? ", " : "."}
+        </>
+      ))}
+    </p>
+  </div>
+
+  <ul class="core-list">
+    {
+      coreItems.map((item) => (
+        <li class="core-item">
+          <img src={withBase(item.image)} alt={item.name} loading="lazy" width="80" height="80" />
+          <div class="core-item-body">
+            <div class="core-item-top">
+              <h3>{item.name}</h3>
+              <span class="price">{item.price}</span>
+            </div>
+            <p>{item.description}</p>
+            <span class="tags">{item.tags.join(" · ")}</span>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+
+  <a class="text-link" href={withBase("/menu/")}>View full menu with seasonal drinks →</a>
+</section>

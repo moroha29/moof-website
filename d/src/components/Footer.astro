@@ -1,0 +1,20 @@
+---
+import { withBase } from "../lib/base.js";
+import { site } from "../data/site.js";
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="logo" href={withBase("/")}>Moof</a>
+      <p>Specialty matcha &amp; hojicha bar, Tanjong Pagar.</p>
+    </div>
+    <div class="footer-info">
+      <p>{site.addressLine1}, {site.addressLine2}</p>
+      <p>{site.hours} &middot; {site.mrtNote}</p>
+      <a href={site.instagramUrl} target="_blank" rel="noreferrer">{site.instagramHandle}</a>
+    </div>
+    <a class="footer-cta" href={site.directionsUrl} target="_blank" rel="noreferrer">Get Directions →</a>
+  </div>
+  <p class="footer-copy">© {new Date().getFullYear()} Moof. All rights reserved.</p>
+</footer>
