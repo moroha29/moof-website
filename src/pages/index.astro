@@ -21,7 +21,7 @@ const carouselDrinks = getCarouselDrinks(menus, homepage.data.hero.carouselDrink
 <BaseLayout title="Moof Matcha" description="Moof specialty matcha, seasonal drinks, and Japanese ingredients Mori and Shiran.">
   <main class="site-shell">
     <header class="site-header" aria-label="Primary navigation">
-      <a class="logo" href="/" aria-label="Moof home">{homepage.data.logoText}</a>
+      <a class="logo" href={import.meta.env.BASE_URL} aria-label="Moof home">{homepage.data.logoText}</a>
       <nav>
         {homepage.data.nav.map((item) => <a href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noreferrer" : undefined}>{item.label}</a>)}
       </nav>

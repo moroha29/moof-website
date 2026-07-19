@@ -1,4 +1,6 @@
 ---
+import { withBase } from "../lib/base.js";
+
 type Drink = {
   id: string;
   name: string;
@@ -36,7 +38,7 @@ const featuredDrink = drinks.find((drink) => drink.id === featuredDrinkId) ?? dr
       <span aria-hidden="true">‹</span>
     </button>
     <figure class="featured-drink-panel" aria-live="polite" data-featured-panel>
-      <img src={featuredDrink.image} alt={featuredDrink.name} class="featured-drink" data-featured-image />
+      <img src={withBase(featuredDrink.image)} alt={featuredDrink.name} class="featured-drink" data-featured-image />
       <figcaption>
         <span data-featured-price>{featuredDrink.price}</span>
         <h2 data-featured-name>{featuredDrink.name}</h2>
@@ -63,9 +65,9 @@ const featuredDrink = drinks.find((drink) => drink.id === featuredDrinkId) ?? dr
           data-drink-name={drink.name}
           data-drink-price={drink.price}
           data-drink-description={drink.description}
-          data-drink-image={drink.image}
+          data-drink-image={withBase(drink.image)}
         >
-          <img src={drink.image} alt="" loading="lazy" />
+          <img src={withBase(drink.image)} alt="" loading="lazy" />
           <span>{drink.name}</span>
           <small>{drink.price}</small>
         </button>
