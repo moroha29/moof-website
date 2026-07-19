@@ -1,6 +1,6 @@
 # Google Form Field Map
 
-Use this map when converting owner responses into repo content files.
+This is the canonical, shared target schema for every design variant (see `docs/adr/0002-shared-schema-independent-variant-data.md`). Use this map when converting owner responses into a variant's content files — file paths are relative to the target variant's folder, e.g. `a/src/content/menu/core.json`. Rows marked *(variant-specific)* only apply to variants whose design actually has that feature (e.g. a hero carousel, a custom announcement block) — check the target variant's own `docs/ai-knowledge-base/` first.
 
 | Google Form Field | Content Field | File |
 | --- | --- | --- |
@@ -8,14 +8,13 @@ Use this map when converting owner responses into repo content files.
 | season name | `seasonName` | `src/content/menu/seasonal.json` |
 | homepage announcement | `hero.announcement` | `src/content/site/homepage.json` |
 | featured drink name/id | `hero.featuredDrinkId` | `src/content/site/homepage.json` |
-| top carousel drink order | `hero.carouselDrinkIds` | `src/content/site/homepage.json` |
+| top carousel drink order *(variant-specific)* | `hero.carouselDrinkIds` | `src/content/site/homepage.json` |
 | ingredient update notes | `ingredients[]` | `src/content/site/homepage.json` |
 | about image | `about.image` | `src/content/site/homepage.json` |
-| Instagram embed copy | `instagramEmbed.*` | `src/content/site/homepage.json` |
-| Instagram preview image | `instagramEmbed.posts[].image` | `src/content/site/homepage.json` |
-| Instagram preview caption | `instagramEmbed.posts[].caption` | `src/content/site/homepage.json` |
-| Instagram preview URL | `instagramEmbed.posts[].url` | `src/content/site/homepage.json` |
-| Instagram preview active status | `instagramEmbed.posts[].active` | `src/content/site/homepage.json` |
+| custom announcement eyebrow *(variant-specific)* | `customAnnouncement.eyebrow` | `src/content/site/homepage.json` |
+| custom announcement heading *(variant-specific)* | `customAnnouncement.heading` | `src/content/site/homepage.json` |
+| custom announcement body *(variant-specific)* | `customAnnouncement.body` | `src/content/site/homepage.json` |
+| custom announcement image *(variant-specific)* | `customAnnouncement.image` | `src/content/site/homepage.json` |
 | store address | `findUs.address` and `findUs.unit` | `src/content/site/homepage.json` |
 | MRT / directions note | `findUs.mrtNote` | `src/content/site/homepage.json` |
 | operating hours | `findUs.operatingHours` | `src/content/site/homepage.json` |
@@ -37,4 +36,4 @@ Use this map when converting owner responses into repo content files.
 | active status | `items[].active` | `src/content/menu/*.json` |
 | owner notes for AI agent | use as instructions, do not store unless useful | n/a |
 
-Prices are display strings such as `$8.50`. Image paths should start with `/images/`. Tasting ratings must be whole numbers from 1 to 5.
+Prices are display strings such as `$8.50`. Image paths should start with `/images/` (resolved within the variant, e.g. Astro's `public/images/`). Tasting ratings must be whole numbers from 1 to 5.

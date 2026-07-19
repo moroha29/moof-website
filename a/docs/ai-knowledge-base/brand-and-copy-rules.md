@@ -26,7 +26,7 @@ Do not put a green decorative blob behind the featured drink. Let the transparen
 
 Keep supporting copy visually lowercase. Hero display words may stay title case or uppercase when they are intentional headline treatment, but descriptions, location notes, tags, and small support text should read lowercase.
 
-About, find-us, and Instagram preview sections should use flat rows of compact cards. Avoid tall two-column layouts for these sections.
+The custom announcement should feel like a compact promo band with image support. The about section should be an open two-column layout on desktop: story and ingredient copy on the left, matcha image on the right, without cards around the story. The find-us section may use compact cards with simple line icons.
 
 ## Copy Examples
 
