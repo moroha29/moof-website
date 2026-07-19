@@ -115,7 +115,9 @@ The AI agent should convert Google Form responses into the relevant content file
 
 ## AI Knowledge Base
 
-Add a repository knowledge base for future AI agents. It should live in `docs/ai-knowledge-base/` and explain:
+Add a repository knowledge base for future AI agents. It must be committed inside this repository, not stored in an external Google Doc, prompt, task description, or private operator notes. A future agent should be able to clone the repo, read the knowledge base, and complete routine content maintenance without needing hidden context.
+
+The knowledge base should live in `docs/ai-knowledge-base/` and explain:
 
 - what Moof is
 - the purpose of each page
@@ -128,6 +130,8 @@ Add a repository knowledge base for future AI agents. It should live in `docs/ai
 - tone, copy, and brand rules
 
 The knowledge base should be written for AI agents first and humans second. It should be explicit, structured, and example-heavy so a future agent can complete updates without broad repository exploration.
+
+The knowledge base is part of the product deliverable. Content-only maintenance is not complete unless these docs stay accurate with the current content schema and site structure.
 
 Recommended knowledge base files:
 
