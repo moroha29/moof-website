@@ -15,6 +15,8 @@ Treat one Google Form response as a complete seasonal update batch. Replace the 
 
 Do not mark seasonal items inactive just because a date has passed. Visibility follows the owner-provided `active` state and the preview review.
 
+After changing seasonal items, update `hero.carouselDrinkIds` in `src/content/site/homepage.json` so seasonal drinks appear first in the top carousel. The carousel accepts menu item IDs and displays active matching drinks in that exact order. If `hero.carouselDrinkIds` is empty, the site falls back to active seasonal drinks first, followed by active core drinks.
+
 ## Missing Or Ambiguous Fields
 
 If a required schema field is missing, ask the user before changing content. If the build passes but the business meaning is unclear, show the preview and let the owner correct the submitted update.

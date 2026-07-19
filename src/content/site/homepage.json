@@ -11,6 +11,15 @@
     "since": "Mori and Shiran, Japan",
     "note": "Exclusive matcha ingredients, layered fresh with milk, oat milk, fruit, sesame, and hojicha.",
     "featuredDrinkId": "strawberry-royal",
+    "carouselDrinkIds": [
+      "strawberry-royal",
+      "black-sesame",
+      "pickled-ume-plum",
+      "classic-matcha-latte",
+      "specialty-matcha-latte",
+      "specialty-usucha",
+      "classic-hojicha-latte"
+    ],
     "announcement": "Seasonal drinks are pouring now."
   },
   "ingredients": [

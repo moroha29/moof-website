@@ -2,9 +2,10 @@
 import { getCollection, getEntry } from "astro:content";
 import MenuSection from "../components/MenuSection.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { sortMenusForDisplay } from "../lib/carousel.js";
 
 const homepage = await getEntry("site", "homepage");
-const menus = (await getCollection("menu")).map((entry) => entry.data);
+const menus = sortMenusForDisplay((await getCollection("menu")).map((entry) => entry.data));
 ---
 
 <BaseLayout title="Moof Menu" description="Moof specialty matcha, hojicha, and seasonal drinks menu.">

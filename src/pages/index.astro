@@ -4,6 +4,7 @@ import AboutSection from "../components/AboutSection.astro";
 import DrinkCarousel from "../components/DrinkCarousel.astro";
 import MenuSection from "../components/MenuSection.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCarouselDrinks, sortMenusForDisplay } from "../lib/carousel.js";
 
 const homepage = await getEntry("site", "homepage");
 const menuEntries = await getCollection("menu");
@@ -12,8 +13,8 @@ if (!homepage) {
   throw new Error("Missing homepage content");
 }
 
-const menus = menuEntries.map((entry) => entry.data);
-const allDrinks = menus.flatMap((menu) => menu.items).filter((item) => item.active);
+const menus = sortMenusForDisplay(menuEntries.map((entry) => entry.data));
+const carouselDrinks = getCarouselDrinks(menus, homepage.data.hero.carouselDrinkIds);
 ---
 
 <BaseLayout title="Moof Matcha" description="Moof specialty matcha, seasonal drinks, and Japanese ingredients Mori and Shiran.">
@@ -25,7 +26,7 @@ const allDrinks = menus.flatMap((menu) => menu.items).filter((item) => item.acti
       </nav>
     </header>
 
-    <DrinkCarousel drinks={allDrinks} featuredDrinkId={homepage.data.hero.featuredDrinkId} />
+    <DrinkCarousel drinks={carouselDrinks} featuredDrinkId={homepage.data.hero.featuredDrinkId} />
 
     <section class="announcement" aria-label="Moof announcement">
       <p>{homepage.data.hero.announcement}</p>

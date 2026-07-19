@@ -18,6 +18,7 @@ const site = defineCollection({
       since: z.string(),
       note: z.string(),
       featuredDrinkId: z.string(),
+      carouselDrinkIds: z.array(z.string()).default([]),
       announcement: z.string()
     }),
     ingredients: z.array(

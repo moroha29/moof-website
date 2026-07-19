@@ -10,6 +10,8 @@ Moof is a playful specialty matcha store. The website should feel product-led, p
 
 Routine maintenance means content-only updates from the store owner's Google Form response. Safe routine updates include seasonal drinks, prices, active status, homepage announcement, featured drink, store copy, and ingredient descriptions.
 
+The hero carousel is also content-maintained. To change the top carousel drinks or their order, edit `hero.carouselDrinkIds` in `src/content/site/homepage.json`. Keep seasonal drink IDs first unless the owner explicitly asks for another order.
+
 Routine maintenance does not include redesigns, new page types, checkout, ordering, CMS login, live Google integration, or custom feature work.
 
 ## Safe Files

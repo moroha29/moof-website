@@ -64,6 +64,7 @@ The homepage content should include:
 - homepage announcement
 - featured seasonal drink
 - primary call to action
+- top carousel drink IDs, ordered with seasonal drinks first unless the owner requests a different order
 
 ### Store Info Content
 
@@ -118,6 +119,8 @@ Recommended fields:
 The AI agent should convert Google Form responses into the relevant content file changes and then run validation.
 
 Routine seasonal updates should be treated as complete batches. The agent should replace the current seasonal content with the submitted batch unless the owner explicitly requests a narrower append, removal, or single-item correction.
+
+Top carousel drinks should be interchangeable through content. The agent should update the homepage carousel ID list when seasonal items change, keeping seasonal drinks first by default.
 
 ## AI Knowledge Base
 

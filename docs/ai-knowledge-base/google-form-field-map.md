@@ -8,6 +8,7 @@ Use this map when converting owner responses into repo content files.
 | season name | `seasonName` | `src/content/menu/seasonal.json` |
 | homepage announcement | `hero.announcement` | `src/content/site/homepage.json` |
 | featured drink name/id | `hero.featuredDrinkId` | `src/content/site/homepage.json` |
+| top carousel drink order | `hero.carouselDrinkIds` | `src/content/site/homepage.json` |
 | ingredient update notes | `ingredients[]` | `src/content/site/homepage.json` |
 | drink name | `items[].name` | `src/content/menu/*.json` |
 | drink category | `items[].category` | `src/content/menu/*.json` |
