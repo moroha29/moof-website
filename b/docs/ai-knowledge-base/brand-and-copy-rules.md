@@ -25,4 +25,4 @@ Write like an enthusiastic, informed friend: confident, playful, and concise. A 
 
 ## Maintenance Notes
 
-The Social Mosaic is a curated local-image composition, not a live Instagram embed. Keep its image paths local and retain the explicit `@moof__bar` link. During the bake-off, menu facts live in `src/data/menu.js`; treat the seasonal array as one Seasonal Drop batch unless the owner explicitly requests a narrower edit.
+The Social Mosaic is a curated local-image composition, not a live Instagram embed. Keep its image paths local and retain the explicit `@moof__bar` link. Homepage copy, ingredient stories, store details, and social content live in `src/data/site.js`; menu facts live in `src/data/menu.js`. Treat the seasonal array as one Seasonal Drop batch unless the owner explicitly requests a narrower edit.

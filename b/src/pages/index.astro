@@ -5,11 +5,12 @@ import IngredientStory from "../components/IngredientStory.astro";
 import MenuShowcase from "../components/MenuShowcase.astro";
 import FindUs from "../components/FindUs.astro";
 import InstaFollow from "../components/InstaFollow.astro";
+import { site } from "../data/site.js";
 ---
 
 <BaseLayout
-  title="Moof — Specialty Matcha & Hojicha Bar, Tanjong Pagar"
-  description="Moof is a specialty matcha and hojicha bar in Singapore's CBD, hand-whisking ceremonial-grade drinks with exclusive Japanese matcha Mori and Shiran."
+  title={site.seo.homeTitle}
+  description={site.seo.homeDescription}
 >
   <main>
     <Hero />

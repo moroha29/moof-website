@@ -129,7 +129,7 @@ p {
   transform: rotate(-3deg);
 }
 
-.badge-pink { background: var(--pink-dark); }
+.badge-pink { background: var(--pink-dark); color: var(--ink); }
 .badge-yellow { background: var(--yellow); color: var(--ink); }
 .badge-sky { background: var(--sky); color: var(--ink); }
 
@@ -241,7 +241,7 @@ p {
 
 .mobile-nav summary:focus-visible,
 .mobile-nav a:focus-visible {
-  outline: 3px solid var(--pink);
+  outline: 3px solid var(--ink);
   outline-offset: 3px;
 }
 

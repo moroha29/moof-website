@@ -4,8 +4,8 @@ export const coreMenu = [
     id: "classic-matcha-latte",
     name: "Classic Matcha Latte",
     price: "$7",
-    tag: "FAN FAVE",
-    blurb: "Layered matcha + milk, soft clean finish. The gateway drink and we don't gatekeep.",
+    tag: "CLASSIC",
+    blurb: "Layered matcha and milk with a soft, clean finish.",
     temp: "Hot or Cold",
     milk: "Fresh or Oat",
     image: "images/classic-matcha-latte-cutout.png"
@@ -14,8 +14,8 @@ export const coreMenu = [
     id: "specialty-matcha-latte",
     name: "Specialty Matcha Latte",
     price: "$9",
-    tag: "THE UPGRADE",
-    blurb: "A richer pour using Moof's exclusive matcha profile. For when Classic just isn't hitting today.",
+    tag: "RICHER POUR",
+    blurb: "A richer pour using Moof's exclusive matcha profile.",
     temp: "Hot or Cold",
     milk: "Fresh or Oat",
     image: "images/specialty-matcha-latte-cutout.png"
@@ -59,7 +59,7 @@ export const seasonalMenu = [
     name: "Black Sesame",
     price: "$8.50",
     tag: "SEASONAL",
-    blurb: "Black sesame paste + syrup, with matcha or hojicha. Nutty, toasty, criminally underrated flavor combo.",
+    blurb: "Black sesame paste and syrup with matcha or hojicha for a nutty, toasty flavor.",
     temp: "Cold Only",
     milk: "Matcha or Hojicha",
     image: "images/black-sesame-matcha-cutout.png"
@@ -69,11 +69,9 @@ export const seasonalMenu = [
     name: "Pickled Ume & Plum Iced Tea",
     price: "$7",
     tag: "NO MILK GANG",
-    blurb: "Bright, tart, ice-cold. The plot twist on our menu for people who like their drinks with attitude.",
+    blurb: "Bright, tart, and ice-cold. A no-milk option with a little attitude.",
     temp: "Cold Only",
     milk: "No Milk",
     image: "images/pickled-ume-plum-iced-tea-cutout.png"
   }
 ];
-
-export const allMenu = [...coreMenu, ...seasonalMenu];

@@ -1,15 +1,16 @@
 ---
 import { coreMenu, seasonalMenu } from "../data/menu.js";
+import { site } from "../data/site.js";
 import { withBase } from "../lib/base.js";
 import DrinkCard from "./DrinkCard.astro";
 ---
 
 <section id="menu" class="section menu-block">
   <div class="wrap">
-    <span class="section-tag">The regulars</span>
+    <span class="section-tag">{site.menuShowcase.coreEyebrow}</span>
     <div class="section-heading">
-      <h2>The core lineup</h2>
-      <p>Always on the board, every single day we're open. These are the ones people build routines around.</p>
+      <h2>{site.menuShowcase.coreHeading}</h2>
+      <p>{site.menuShowcase.coreIntro}</p>
     </div>
     <div class="menu-grid">
       {coreMenu.map((item) => <DrinkCard {...item} />)}
@@ -19,16 +20,16 @@ import DrinkCard from "./DrinkCard.astro";
 
 <section class="section menu-block alt">
   <div class="wrap">
-    <span class="section-tag">Limited run</span>
+    <span class="section-tag">{site.menuShowcase.seasonalEyebrow}</span>
     <div class="section-heading">
-      <h2>Seasonal drops</h2>
-      <p>The current rotation. Come back often &mdash; these don't stick around forever.</p>
+      <h2>{site.menuShowcase.seasonalHeading}</h2>
+      <p>{site.menuShowcase.seasonalIntro}</p>
     </div>
     <div class="menu-grid">
       {seasonalMenu.map((item) => <DrinkCard {...item} />)}
     </div>
     <div class="menu-cta">
-      <a class="btn btn-matcha" href={withBase("menu")}>View full menu &amp; prices &rarr;</a>
+      <a class="btn btn-matcha" href={withBase("menu")}>{site.menuShowcase.menuCta}</a>
     </div>
   </div>
 </section>

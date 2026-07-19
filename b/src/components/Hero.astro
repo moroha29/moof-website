@@ -1,32 +1,29 @@
 ---
 import { withBase } from "../lib/base.js";
+import { site } from "../data/site.js";
 ---
 
 <section class="hero">
   <div class="wrap">
     <div class="hero-copy">
-      <span class="hero-eyebrow">CBD's chunkiest matcha bar</span>
-      <h1>Whisked fresh.<br />Never <span class="accent">basic.</span></h1>
-      <p class="hero-sub">
-        Moof is a specialty matcha &amp; hojicha bar in the middle of the CBD, hand-whisking
-        ceremonial-grade drinks with two exclusive Japanese matchas &mdash; Mori and Shiran.
-        No syrups pretending to be matcha here.
-      </p>
+      <span class="hero-eyebrow">{site.hero.eyebrow}</span>
+      <h1>{site.hero.headline}<br /><span class="accent">{site.hero.accent}</span></h1>
+      <p class="hero-sub">{site.hero.body}</p>
       <div class="hero-actions">
-        <a class="btn btn-pink" href={withBase("menu")}>See the menu &rarr;</a>
-        <a class="btn" href="#find-us">Find us in Tanjong Pagar</a>
+        <a class="btn btn-pink" href={withBase("menu")}>{site.hero.menuCta}</a>
+        <a class="btn" href={`${withBase("/")}#find-us`}>{site.hero.findUsCta}</a>
       </div>
       <div class="hero-meta">
-        <span>📍 70 Shenton Way, Eon Shenton</span>
-        <span>🕘 Mon&ndash;Fri, 9am&ndash;6pm</span>
+        <span>📍 {site.findUs.addressLines.join(", ")}</span>
+        <span>🕘 {site.findUs.operatingDays}, {site.findUs.operatingHours}</span>
       </div>
     </div>
     <div class="hero-art">
       <div class="sticker-frame">
-        <img src={withBase("images/specialty-matcha-latte-cutout.png")} alt="Moof specialty matcha latte" />
+        <img src={withBase(site.hero.image)} alt={site.hero.imageAlt} />
       </div>
-      <span class="float-badge b1">100%<br />Japanese<br />matcha</span>
-      <span class="float-badge b2">Hand<br />whisked</span>
+      <span class="float-badge b1">{site.hero.badges[0]}</span>
+      <span class="float-badge b2">{site.hero.badges[1]}</span>
     </div>
   </div>
 </section>

@@ -1,28 +1,21 @@
 ---
 import { withBase } from "../lib/base.js";
-
-const tiles = [
-  "images/matcha-powder-about.png",
-  "images/menu-drink-group-cutout.png",
-  "images/strawberry-royal-matcha-cutout.png",
-  "images/black-sesame-matcha-cutout.png",
-  "images/pickled-ume-plum-iced-tea-cutout.png"
-];
+import { site } from "../data/site.js";
 ---
 
 <section class="section insta">
   <div class="wrap">
-    <span class="section-tag">Follow along</span>
+    <span class="section-tag">{site.instagram.eyebrow}</span>
     <div class="section-heading">
-      <h2>Stalk us (respectfully)</h2>
-      <p>New drops, behind-the-scenes whisking, and the occasional meme land here first.</p>
+      <h2>{site.instagram.heading}</h2>
+      <p>{site.instagram.body}</p>
     </div>
-    <a class="insta-handle" href="https://www.instagram.com/moof__bar/" target="_blank" rel="noreferrer">
-      📸 @moof__bar
+    <a class="insta-handle" href={site.instagram.url} target="_blank" rel="noreferrer">
+      📸 {site.instagram.handle}
     </a>
     <div class="insta-tiles">
       {
-        tiles.map((src) => (
+        site.instagram.tiles.map((src) => (
           <div class="insta-tile">
             <img src={withBase(src)} alt="Moof drink" loading="lazy" />
           </div>

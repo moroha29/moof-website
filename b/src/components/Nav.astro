@@ -1,18 +1,20 @@
 ---
 import { withBase } from "../lib/base.js";
+import { site } from "../data/site.js";
 
-const links = [
-  { label: "Home", href: withBase("/") },
-  { label: "The Menu", href: withBase("menu") },
-  { label: "Meet the Matcha", href: `${withBase("/")}#origin` },
-  { label: "Find Us", href: `${withBase("/")}#find-us` }
-];
+const targetUrls = {
+  home: withBase("/"),
+  menu: withBase("menu"),
+  origin: `${withBase("/")}#origin`,
+  "find-us": `${withBase("/")}#find-us`
+};
+const links = site.navigation.map((link) => ({ ...link, href: targetUrls[link.target] }));
 ---
 
 <header class="site-header" aria-label="Primary navigation">
   <a class="logo" href={withBase("")} aria-label="Moof home">
     <span class="dot" aria-hidden="true"></span>
-    Moof
+    {site.storeName}
   </a>
   <nav class="site-nav">
     {
@@ -24,7 +26,7 @@ const links = [
     }
     <a
       class="nav-icon-link"
-      href="https://www.instagram.com/moof__bar/"
+      href={site.instagram.url}
       target="_blank"
       rel="noreferrer"
       aria-label="Stalk Moof on Instagram"
@@ -43,7 +45,7 @@ const links = [
     </summary>
     <nav aria-label="Mobile navigation">
       {links.map((link) => <a href={link.href}>{link.label}</a>)}
-      <a href="https://www.instagram.com/moof__bar/" target="_blank" rel="noreferrer">
+      <a href={site.instagram.url} target="_blank" rel="noreferrer">
         Instagram
       </a>
     </nav>

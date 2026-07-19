@@ -33,4 +33,4 @@ The menu route presents the complete core and seasonal grids. Header links to th
 
 ## Data Trade-off
 
-For this comparison release, menu content remains in the local plain-JavaScript data module as permitted by root ADR 0002. If the client selects Design B or one of its sections, migrate the surviving implementation to the canonical Content Collection schema before routine AI maintenance begins.
+For this comparison release, homepage/store content and menu content remain in local plain-JavaScript data modules as permitted by root ADR 0002. If the client selects Design B or one of its sections, migrate the surviving implementation to the canonical Content Collection schema before routine AI maintenance begins.

@@ -1,13 +1,16 @@
 ---
 import { withBase } from "../lib/base.js";
+import { site } from "../data/site.js";
 ---
 
 <footer class="site-footer">
   <div class="wrap">
-    <p class="foot-logo">Moof</p>
-    <p>70 Shenton Way, #01-15, Eon Shenton, Singapore CBD &middot; Mon&ndash;Fri, 9am&ndash;6pm</p>
+    <p class="foot-logo">{site.storeName}</p>
     <p>
-      <a href="https://www.instagram.com/moof__bar/" target="_blank" rel="noreferrer">@moof__bar</a>
+      {site.findUs.addressLines.join(", ")} &middot; {site.findUs.operatingDays}, {site.findUs.operatingHours}
+    </p>
+    <p>
+      <a href={site.instagram.url} target="_blank" rel="noreferrer">{site.instagram.handle}</a>
       &middot;
       <a href={withBase("menu")}>Menu</a>
     </p>
