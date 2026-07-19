@@ -33,7 +33,7 @@
       "category": "Seasonal Drinks",
       "price": "$7",
       "description": "Bright ume and plum iced tea with a tart finish.",
-      "image": "/images/menu-drink-group-cutout.png",
+      "image": "/images/pickled-ume-plum-iced-tea-cutout.png",
       "temperatureOptions": ["cold"],
       "milkOptions": ["no milk"],
       "isSeasonal": true,

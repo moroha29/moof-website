@@ -3,6 +3,7 @@ import { getCollection, getEntry } from "astro:content";
 import AboutSection from "../components/AboutSection.astro";
 import DrinkCarousel from "../components/DrinkCarousel.astro";
 import FindUsSection from "../components/FindUsSection.astro";
+import InstagramEmbed from "../components/InstagramEmbed.astro";
 import MenuSection from "../components/MenuSection.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCarouselDrinks, sortMenusForDisplay } from "../lib/carousel.js";
@@ -30,7 +31,27 @@ const navHref = (href: string, isExternal = false) => {
     <header class="site-header" aria-label="Primary navigation">
       <a class="logo" href={import.meta.env.BASE_URL} aria-label="Moof home">{homepage.data.logoText}</a>
       <nav>
-        {homepage.data.nav.map((item) => <a href={navHref(item.href, item.external)} target={item.external ? "_blank" : undefined} rel={item.external ? "noreferrer" : undefined}>{item.label}</a>)}
+        {
+          homepage.data.nav.map((item) => (
+            <a
+              class={item.external ? "nav-icon-link" : undefined}
+              href={navHref(item.href, item.external)}
+              target={item.external ? "_blank" : undefined}
+              rel={item.external ? "noreferrer" : undefined}
+              aria-label={item.external ? "Open Moof Instagram" : undefined}
+            >
+              {item.external ? (
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <circle cx="17.2" cy="6.8" r="1"></circle>
+                </svg>
+              ) : (
+                item.label
+              )}
+            </a>
+          ))
+        }
       </nav>
     </header>
 
@@ -41,6 +62,14 @@ const navHref = (href: string, isExternal = false) => {
       headline={homepage.data.hero.headline}
       since={homepage.data.hero.since}
       note={homepage.data.hero.note}
+    />
+
+    <InstagramEmbed
+      eyebrow={homepage.data.instagramEmbed.eyebrow}
+      heading={homepage.data.instagramEmbed.heading}
+      body={homepage.data.instagramEmbed.body}
+      label={homepage.data.instagramEmbed.label}
+      url={homepage.data.instagramEmbed.url}
     />
 
     <section class="announcement" aria-label="Moof announcement">
@@ -56,6 +85,7 @@ const navHref = (href: string, isExternal = false) => {
       heading={homepage.data.about.heading}
       body={homepage.data.about.body}
       storeNote={homepage.data.about.storeNote}
+      image={homepage.data.about.image}
       ingredients={homepage.data.ingredients}
     />
 

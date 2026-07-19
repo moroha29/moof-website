@@ -32,7 +32,15 @@ const site = defineCollection({
     about: z.object({
       heading: z.string(),
       body: z.string(),
-      storeNote: z.string()
+      storeNote: z.string(),
+      image: z.string()
+    }),
+    instagramEmbed: z.object({
+      eyebrow: z.string(),
+      heading: z.string(),
+      body: z.string(),
+      label: z.string(),
+      url: z.string().url()
     }),
     findUs: z.object({
       heading: z.string(),

@@ -7,8 +7,8 @@
   --orange: #ef8c2d;
   --rose: #9d3757;
   --cream: #fff3dd;
-  --card: rgba(255, 250, 242, 0.92);
-  --shadow: 0 20px 60px rgba(45, 36, 40, 0.3);
+  --card: rgba(255, 250, 242, 0.94);
+  --shadow: 0 20px 60px rgba(45, 36, 40, 0.2);
 }
 
 * {
@@ -25,10 +25,10 @@ body {
   color: var(--ink);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background:
-    radial-gradient(circle at 12% 44%, rgba(255, 118, 47, 0.86), transparent 25rem),
-    radial-gradient(circle at 78% 28%, rgba(237, 147, 21, 0.8), transparent 22rem),
-    radial-gradient(circle at 58% 76%, rgba(158, 53, 87, 0.82), transparent 28rem),
-    linear-gradient(135deg, #4a3035 0%, #b95533 52%, #ee962d 100%);
+    radial-gradient(circle at 8% 38%, rgba(239, 140, 45, 0.5), transparent 25rem),
+    radial-gradient(circle at 82% 25%, rgba(255, 190, 91, 0.62), transparent 22rem),
+    radial-gradient(circle at 58% 78%, rgba(198, 95, 66, 0.46), transparent 29rem),
+    linear-gradient(135deg, #8b4f3e 0%, #c96d43 48%, #f3a63f 100%);
 }
 
 body::before {
@@ -95,6 +95,20 @@ img {
   padding: 0 16px;
   background: rgba(255, 250, 242, 0.14);
   font-weight: 700;
+}
+
+.site-header nav a svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.site-header nav a.nav-icon-link {
+  width: 46px;
+  justify-content: center;
+  padding: 0;
 }
 
 .hero-products {
@@ -317,13 +331,64 @@ img {
 .announcement,
 .menu-section,
 .about-section,
-.find-us-section {
+.find-us-section,
+.instagram-embed {
   margin: 22px 0;
   border: 1px solid rgba(255, 250, 242, 0.24);
   border-radius: 8px;
   padding: 22px;
-  background: rgba(45, 36, 40, 0.28);
+  background: rgba(74, 48, 53, 0.2);
   box-shadow: var(--shadow);
+}
+
+.instagram-embed {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.instagram-embed p,
+.instagram-embed h2,
+.instagram-embed span {
+  margin: 0;
+}
+
+.instagram-embed p {
+  font-weight: 950;
+  text-transform: lowercase;
+}
+
+.instagram-embed h2 {
+  font-size: clamp(2rem, 9vw, 4.5rem);
+  line-height: 0.9;
+}
+
+.instagram-embed span {
+  color: rgba(255, 250, 242, 0.82);
+  font-weight: 750;
+  text-transform: lowercase;
+}
+
+.instagram-embed a {
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 0 18px;
+  color: var(--deep);
+  background: var(--card);
+  font-weight: 950;
+  white-space: nowrap;
+}
+
+.instagram-embed svg {
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
 }
 
 .announcement p {
@@ -440,12 +505,25 @@ img {
   gap: 16px;
 }
 
+.about-copy {
+  display: grid;
+  gap: 16px;
+}
+
 .about-body {
   margin: 0;
   max-width: 68ch;
   font-size: clamp(1.05rem, 3vw, 1.35rem);
   line-height: 1.45;
   font-weight: 650;
+}
+
+.about-image {
+  width: 100%;
+  aspect-ratio: 1.14;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 18px 50px rgba(45, 36, 40, 0.22);
 }
 
 .ingredient-list {
@@ -572,5 +650,13 @@ img {
   .carousel-arrow {
     width: 42px;
     height: 42px;
+  }
+
+  .instagram-embed {
+    display: grid;
+  }
+
+  .instagram-embed a {
+    justify-content: center;
   }
 }

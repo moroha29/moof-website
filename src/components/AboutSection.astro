@@ -1,4 +1,6 @@
 ---
+import { withBase } from "../lib/base.js";
+
 type Ingredient = {
   name: string;
   origin: string;
@@ -9,10 +11,11 @@ interface Props {
   heading: string;
   body: string;
   storeNote: string;
+  image: string;
   ingredients: Ingredient[];
 }
 
-const { heading, body, storeNote, ingredients } = Astro.props;
+const { heading, body, storeNote, image, ingredients } = Astro.props;
 ---
 
 <section class="about-section" id="about" aria-labelledby="about-heading">
@@ -22,7 +25,10 @@ const { heading, body, storeNote, ingredients } = Astro.props;
     <span>{storeNote}</span>
   </div>
   <div class="about-grid">
-    <p class="about-body">{body}</p>
+    <div class="about-copy">
+      <p class="about-body">{body}</p>
+      <img class="about-image" src={withBase(image)} alt="matcha powder in a bowl with a bamboo whisk" loading="lazy" />
+    </div>
     <div class="ingredient-list">
       {
         ingredients.map((ingredient) => (

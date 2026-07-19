@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { prefixBase } from "../src/lib/base.js";
 import {
   getAdjacentDrinkId,
   getCarouselDrinks,
@@ -82,4 +83,11 @@ test("getNearestCarouselIndex chooses the card closest to the rail center", () =
 
   assert.equal(getNearestCarouselIndex(cards, 300), 1);
   assert.equal(getNearestCarouselIndex(cards, 390), 2);
+});
+
+test("prefixBase prefixes public image paths for GitHub Pages project hosting", () => {
+  assert.equal(
+    prefixBase("/images/classic-matcha-latte-cutout.png", "/moof-website/"),
+    "/moof-website/images/classic-matcha-latte-cutout.png"
+  );
 });

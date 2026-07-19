@@ -10,6 +10,8 @@ Use this map when converting owner responses into repo content files.
 | featured drink name/id | `hero.featuredDrinkId` | `src/content/site/homepage.json` |
 | top carousel drink order | `hero.carouselDrinkIds` | `src/content/site/homepage.json` |
 | ingredient update notes | `ingredients[]` | `src/content/site/homepage.json` |
+| about image | `about.image` | `src/content/site/homepage.json` |
+| Instagram embed copy | `instagramEmbed.*` | `src/content/site/homepage.json` |
 | store address | `findUs.address` and `findUs.unit` | `src/content/site/homepage.json` |
 | MRT / directions note | `findUs.mrtNote` | `src/content/site/homepage.json` |
 | Instagram URL | `findUs.instagramUrl` | `src/content/site/homepage.json` |

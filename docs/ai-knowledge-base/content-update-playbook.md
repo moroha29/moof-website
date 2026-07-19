@@ -24,3 +24,9 @@ If a required schema field is missing, ask the user before changing content. If 
 ## Images
 
 Use existing images from `public/images/` when possible. If the owner provides a new image, add it to `public/images/` with a descriptive lowercase filename and update the matching content item.
+
+Use individual drink cutouts for individual menu cards and carousel cards. `menu-drink-group-cutout.png` is a fallback/overview asset, not the normal image for a single drink.
+
+## Instagram
+
+The site uses a static Instagram profile block under the hero, plus an Instagram icon in the top navigation. Updating the profile URL or text is a content-only change in `src/content/site/homepage.json`. A live Instagram feed would require a widget, API, or third-party service and is outside routine static maintenance.

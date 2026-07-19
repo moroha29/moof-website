@@ -1,4 +1,8 @@
+export function prefixBase(path, base) {
+  const normalizedBase = base.replace(/\/$/, "");
+  return `${normalizedBase}/${path.replace(/^\//, "")}`;
+}
+
 export function withBase(path) {
-  const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-  return `${base}/${path.replace(/^\//, "")}`;
+  return prefixBase(path, import.meta.env.BASE_URL);
 }
