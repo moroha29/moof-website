@@ -1,10 +1,11 @@
 ---
 import { withBase } from "../lib/base.js";
 import { reviews } from "../data/menu.js";
+import { homepage } from "../data/site.js";
 ---
 
 <section class="social-proof" aria-label="Customer reviews">
-  <p class="social-proof-label">What regulars say</p>
+  <p class="social-proof-label">{homepage.socialProofLabel}</p>
   <div class="review-row">
     {
       reviews.map((review) => (

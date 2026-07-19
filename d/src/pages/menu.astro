@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { withBase } from "../lib/base.js";
+import MenuRow from "../components/MenuRow.astro";
 import { coreItems, seasonalItems } from "../data/menu.js";
 import { site } from "../data/site.js";
 ---
@@ -22,23 +22,11 @@ import { site } from "../data/site.js";
     <section aria-label="Seasonal drinks" class="menu-list-section seasonal-block">
       <div class="menu-list-heading">
         <h2>Seasonal — pouring now</h2>
-        <p>Small-batch, limited-time. Come try it before it rotates out.</p>
+        <p>Explore the current seasonal drinks available at Moof.</p>
       </div>
       <ul class="menu-list">
         {
-          seasonalItems.map((item) => (
-            <li class="menu-list-item">
-              <img src={withBase(item.image)} alt={item.name} loading="lazy" width="88" height="88" />
-              <div class="menu-list-item-body">
-                <div class="menu-list-item-top">
-                  <h3>{item.name}</h3>
-                  <span class="price">{item.price}</span>
-                </div>
-                <p>{item.description}</p>
-                <span class="tags">{item.tags.join(" · ")}</span>
-              </div>
-            </li>
-          ))
+          seasonalItems.map((item) => <MenuRow item={item} />)
         }
       </ul>
     </section>
@@ -46,23 +34,11 @@ import { site } from "../data/site.js";
     <section aria-label="Core menu" class="menu-list-section">
       <div class="menu-list-heading">
         <h2>Core — every day</h2>
-        <p>Available hot or cold on selected drinks, Mon–Fri 9am–6pm.</p>
+        <p>Available hot or cold on selected drinks during {site.hours}.</p>
       </div>
       <ul class="menu-list">
         {
-          coreItems.map((item) => (
-            <li class="menu-list-item">
-              <img src={withBase(item.image)} alt={item.name} loading="lazy" width="88" height="88" />
-              <div class="menu-list-item-body">
-                <div class="menu-list-item-top">
-                  <h3>{item.name}</h3>
-                  <span class="price">{item.price}</span>
-                </div>
-                <p>{item.description}</p>
-                <span class="tags">{item.tags.join(" · ")}</span>
-              </div>
-            </li>
-          ))
+          coreItems.map((item) => <MenuRow item={item} />)
         }
       </ul>
     </section>

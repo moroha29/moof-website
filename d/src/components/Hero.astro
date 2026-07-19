@@ -1,22 +1,19 @@
 ---
 import { withBase } from "../lib/base.js";
-import { site } from "../data/site.js";
+import { homepage, site } from "../data/site.js";
 ---
 
 <section class="hero">
   <div class="hero-copy">
-    <p class="eyebrow">Specialty Matcha &amp; Hojicha Bar · Tanjong Pagar</p>
-    <h1>Real ceremonial-grade matcha, 5 minutes from your desk.</h1>
-    <p class="hero-sub">
-      Hand-whisked with exclusive Japanese matcha — Mori and Shiran — plus a rotating seasonal menu.
-      No sign-up, no queue app. Just walk in.
-    </p>
+    <p class="eyebrow">{homepage.hero.eyebrow}</p>
+    <h1>{homepage.hero.headline}</h1>
+    <p class="hero-sub">{homepage.hero.supportingCopy}</p>
 
     <div class="hero-actions">
       <a class="btn btn-primary" href={site.directionsUrl} target="_blank" rel="noreferrer">
-        Get Directions
+        {homepage.hero.primaryCta}
       </a>
-      <a class="btn btn-ghost" href={withBase("/menu/")}>See Today's Menu</a>
+      <a class="btn btn-ghost" href={withBase("/menu/")}>{homepage.hero.secondaryCta}</a>
     </div>
 
     <ul class="hero-facts" aria-label="Visit details">
@@ -45,6 +42,6 @@ import { site } from "../data/site.js";
       width="220"
       height="220"
     />
-    <span class="hero-badge">Seasonal drinks pouring now</span>
+    <span class="hero-badge">{homepage.hero.seasonalBadge}</span>
   </div>
 </section>

@@ -12,12 +12,38 @@ export const site = {
   // Google Maps "get directions" link (opens turn-by-turn directions to Moof).
   directionsUrl:
     "https://www.google.com/maps/dir/?api=1&destination=70+Shenton+Way+%2301-15+Eon+Shenton+Singapore",
-  // Plain search link (opens the pin, useful as a secondary "view on map" action).
-  mapSearchUrl:
-    "https://www.google.com/maps/search/?api=1&query=70+Shenton+Way+%2301-15+Eon+Shenton+Singapore",
   // No-API-key embeddable map for the Visit section.
   mapEmbedUrl:
     "https://www.google.com/maps?q=70+Shenton+Way+%2301-15+Eon+Shenton+Singapore&output=embed"
+};
+
+export const homepage = {
+  hero: {
+    eyebrow: "Specialty Matcha & Hojicha Bar · Tanjong Pagar",
+    headline: "Real ceremonial-grade matcha, 5 minutes from your desk.",
+    supportingCopy:
+      "Hand-whisked with exclusive Japanese matcha — Mori and Shiran — plus a rotating seasonal menu.",
+    primaryCta: "Get Directions",
+    secondaryCta: "See Today's Menu",
+    seasonalBadge: "Seasonal drinks pouring now"
+  },
+  socialProofLabel: "What regulars say",
+  seasonal: {
+    eyebrow: "Current seasonal menu",
+    headline: "Seasonal drinks are pouring now.",
+    supportingCopy: "Explore the current seasonal drinks, then get directions to Moof.",
+    cta: "Get Directions — Come Try It"
+  },
+  menuHighlight: {
+    eyebrow: "Every day",
+    headline: "The core lineup",
+    supportingLead: "Made with exclusive Japanese matcha",
+    cta: "View full menu with seasonal drinks →"
+  },
+  visit: {
+    eyebrow: "Walk in today",
+    headline: "Find us at Eon Shenton"
+  }
 };
 
 export const ingredients = [

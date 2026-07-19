@@ -1,0 +1,39 @@
+---
+import { withBase } from "../lib/base.js";
+
+interface Props {
+  item: {
+    name: string;
+    price: string;
+    description: string;
+    image: string;
+    tags: string[];
+  };
+  variant?: "core" | "menu";
+}
+
+const { item, variant = "menu" } = Astro.props;
+const isCore = variant === "core";
+const classes = isCore
+  ? { item: "core-item", body: "core-item-body", top: "core-item-top" }
+  : { item: "menu-list-item", body: "menu-list-item-body", top: "menu-list-item-top" };
+const imageSize = isCore ? 80 : 88;
+---
+
+<li class={classes.item}>
+  <img
+    src={withBase(item.image)}
+    alt={item.name}
+    loading="lazy"
+    width={imageSize}
+    height={imageSize}
+  />
+  <div class={classes.body}>
+    <div class={classes.top}>
+      <h3>{item.name}</h3>
+      <span class="price">{item.price}</span>
+    </div>
+    <p>{item.description}</p>
+    <span class="tags">{item.tags.join(" · ")}</span>
+  </div>
+</li>

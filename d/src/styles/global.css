@@ -727,7 +727,8 @@ dd {
   right: 0;
   bottom: 0;
   z-index: 50;
-  min-height: var(--sticky-cta-height);
+  box-sizing: border-box;
+  height: calc(var(--sticky-cta-height) + env(safe-area-inset-bottom));
   padding: 0.6rem 0.9rem calc(0.6rem + env(safe-area-inset-bottom));
   background: var(--forest);
   border-top: 1px solid var(--line-light);
@@ -735,6 +736,7 @@ dd {
 
 .sticky-cta a {
   display: flex;
+  height: 100%;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
@@ -742,7 +744,7 @@ dd {
   color: #fff;
   font-weight: 700;
   font-size: 1rem;
-  padding: 0.85rem 1rem;
+  padding: 0 1rem;
   border-radius: 999px;
 }
 
