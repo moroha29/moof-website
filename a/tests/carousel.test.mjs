@@ -5,6 +5,7 @@ import {
   getAdjacentDrinkId,
   getCarouselDrinks,
   getNearestCarouselIndex,
+  getRatingStars,
   getSelectedDrink,
   sortMenusForDisplay
 } from "../src/lib/carousel.js";
@@ -83,6 +84,12 @@ test("getNearestCarouselIndex chooses the card closest to the rail center", () =
 
   assert.equal(getNearestCarouselIndex(cards, 300), 1);
   assert.equal(getNearestCarouselIndex(cards, 390), 2);
+});
+
+test("getRatingStars converts drink tasting scores into five-star display state", () => {
+  assert.deepEqual(getRatingStars(3), [true, true, true, false, false]);
+  assert.deepEqual(getRatingStars(9), [true, true, true, true, true]);
+  assert.deepEqual(getRatingStars(0), [false, false, false, false, false]);
 });
 
 test("prefixBase prefixes public image paths for GitHub Pages project hosting", () => {

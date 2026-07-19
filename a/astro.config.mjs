@@ -2,6 +2,6 @@ import { defineConfig } from "astro/config";
 
 export default defineConfig({
   output: "static",
-  site: "https://kingsmil.github.io",
-  base: "/moof-website"
+  site: "https://moethu.com",
+  base: "/moof-website/a"
 });

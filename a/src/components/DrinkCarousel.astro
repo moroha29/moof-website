@@ -1,5 +1,6 @@
 ---
 import { withBase } from "../lib/base.js";
+import { getRatingStars } from "../lib/carousel.js";
 
 type Drink = {
   id: string;
@@ -7,6 +8,17 @@ type Drink = {
   price: string;
   description: string;
   image: string;
+  review: {
+    quote: string;
+    reviewerName: string;
+    reviewerImage: string;
+  };
+  tasting: {
+    bitterness: number;
+    aroma: number;
+    nuttiness: number;
+    sweetness: number;
+  };
   isSeasonal: boolean;
 };
 
@@ -21,6 +33,7 @@ interface Props {
 
 const { drinks, featuredDrinkId, eyebrow, headline, since, note } = Astro.props;
 const featuredDrink = drinks.find((drink) => drink.id === featuredDrinkId) ?? drinks[0];
+const tastingLabels = ["bitterness", "aroma", "nuttiness", "sweetness"] as const;
 ---
 
 <section class="hero-products" aria-label="Featured Moof matcha drinks" data-carousel>
@@ -37,6 +50,14 @@ const featuredDrink = drinks.find((drink) => drink.id === featuredDrinkId) ?? dr
     <button class="carousel-arrow carousel-arrow-left" type="button" aria-label="Previous drink" data-carousel-arrow="previous">
       <span aria-hidden="true">‹</span>
     </button>
+    <aside class="hero-insight hero-review" aria-label="Selected drink review" data-featured-panel>
+      <span class="hero-insight-kicker">review</span>
+      <p data-review-quote>{featuredDrink.review.quote}</p>
+      <div class="reviewer">
+        <img src={withBase(featuredDrink.review.reviewerImage)} alt="" loading="lazy" data-reviewer-image />
+        <span data-reviewer-name>{featuredDrink.review.reviewerName}</span>
+      </div>
+    </aside>
     <figure class="featured-drink-panel" aria-live="polite" data-featured-panel>
       <img src={withBase(featuredDrink.image)} alt={featuredDrink.name} class="featured-drink" data-featured-image />
       <figcaption>
@@ -45,6 +66,27 @@ const featuredDrink = drinks.find((drink) => drink.id === featuredDrinkId) ?? dr
         <p data-featured-description>{featuredDrink.description}</p>
       </figcaption>
     </figure>
+    <aside class="hero-insight hero-tasting" aria-label="Selected drink tasting profile" data-featured-panel>
+      <span class="hero-insight-kicker">tasting</span>
+      <div class="tasting-list">
+        {
+          tastingLabels.map((label) => (
+            <div
+              class="tasting-row"
+              data-tasting-row={label}
+              aria-label={`${label}: ${featuredDrink.tasting[label]} out of 5`}
+            >
+              <span>{label}</span>
+              <div class="stars" aria-hidden="true">
+                {getRatingStars(featuredDrink.tasting[label]).map((isFilled) => (
+                  <span class={isFilled ? "is-filled" : ""}>★</span>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </aside>
     <button class="carousel-arrow carousel-arrow-right" type="button" aria-label="Next drink" data-carousel-arrow="next">
       <span aria-hidden="true">›</span>
     </button>
@@ -66,6 +108,13 @@ const featuredDrink = drinks.find((drink) => drink.id === featuredDrinkId) ?? dr
           data-drink-price={drink.price}
           data-drink-description={drink.description}
           data-drink-image={withBase(drink.image)}
+          data-review-quote={drink.review.quote}
+          data-reviewer-name={drink.review.reviewerName}
+          data-reviewer-image={withBase(drink.review.reviewerImage)}
+          data-tasting-bitterness={drink.tasting.bitterness}
+          data-tasting-aroma={drink.tasting.aroma}
+          data-tasting-nuttiness={drink.tasting.nuttiness}
+          data-tasting-sweetness={drink.tasting.sweetness}
         >
           <img src={withBase(drink.image)} alt="" loading="lazy" />
           <span>{drink.name}</span>
@@ -83,7 +132,11 @@ const featuredDrink = drinks.find((drink) => drink.id === featuredDrinkId) ?? dr
       const featuredName = carousel.querySelector("[data-featured-name]");
       const featuredPrice = carousel.querySelector("[data-featured-price]");
       const featuredDescription = carousel.querySelector("[data-featured-description]");
-      const featuredPanel = carousel.querySelector("[data-featured-panel]");
+      const featuredPanels = carousel.querySelectorAll("[data-featured-panel]");
+      const reviewQuote = carousel.querySelector("[data-review-quote]");
+      const reviewerName = carousel.querySelector("[data-reviewer-name]");
+      const reviewerImage = carousel.querySelector("[data-reviewer-image]");
+      const tastingRows = carousel.querySelectorAll("[data-tasting-row]");
       const rail = carousel.querySelector("[data-carousel-rail]");
       const cards = Array.from(carousel.querySelectorAll("[data-carousel-card]"));
       const arrows = carousel.querySelectorAll("[data-carousel-arrow]");
@@ -97,6 +150,20 @@ const featuredDrink = drinks.find((drink) => drink.id === featuredDrinkId) ?? dr
         if (featuredName) featuredName.textContent = card.dataset.drinkName ?? "";
         if (featuredPrice) featuredPrice.textContent = card.dataset.drinkPrice ?? "";
         if (featuredDescription) featuredDescription.textContent = card.dataset.drinkDescription ?? "";
+        if (reviewQuote) reviewQuote.textContent = card.dataset.reviewQuote ?? "";
+        if (reviewerName) reviewerName.textContent = card.dataset.reviewerName ?? "";
+        if (reviewerImage instanceof HTMLImageElement) {
+          reviewerImage.src = card.dataset.reviewerImage ?? "";
+        }
+        tastingRows.forEach((row) => {
+          if (!(row instanceof HTMLElement)) return;
+          const ratingKey = row.dataset.tastingRow;
+          const rating = Number(card.dataset[`tasting${ratingKey ? ratingKey[0].toUpperCase() + ratingKey.slice(1) : ""}`] ?? 0);
+          row.setAttribute("aria-label", `${ratingKey}: ${rating} out of 5`);
+          row.querySelectorAll(".stars span").forEach((star, index) => {
+            star.classList.toggle("is-filled", index < rating);
+          });
+        });
       };
 
       const selectCard = (card, shouldScroll = true) => {
@@ -110,13 +177,15 @@ const featuredDrink = drinks.find((drink) => drink.id === featuredDrinkId) ?? dr
           candidate.setAttribute("aria-selected", isActive ? "true" : "false");
         });
 
-        if (featuredPanel instanceof HTMLElement) {
-          featuredPanel.classList.add("is-changing");
+        if (featuredPanels.length > 0) {
+          featuredPanels.forEach((panel) => panel.classList.add("is-changing"));
           window.setTimeout(() => {
             updateFeaturedContent(card);
-            featuredPanel.classList.remove("is-changing");
-            featuredPanel.classList.add("has-returned");
-            window.setTimeout(() => featuredPanel.classList.remove("has-returned"), 260);
+            featuredPanels.forEach((panel) => {
+              panel.classList.remove("is-changing");
+              panel.classList.add("has-returned");
+              window.setTimeout(() => panel.classList.remove("has-returned"), 260);
+            });
           }, 130);
         } else {
           updateFeaturedContent(card);

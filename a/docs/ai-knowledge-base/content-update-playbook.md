@@ -17,6 +17,12 @@ Do not mark seasonal items inactive just because a date has passed. Visibility f
 
 After changing seasonal items, update `hero.carouselDrinkIds` in `src/content/site/homepage.json` so seasonal drinks appear first in the top carousel. The carousel accepts menu item IDs and displays active matching drinks in that exact order. If `hero.carouselDrinkIds` is empty, the site falls back to active seasonal drinks first, followed by active core drinks.
 
+## Hero Review And Tasting Panels
+
+Every drink needs a `review` object and a `tasting` object. These fields appear beside the selected drink in the hero carousel, so they must be filled for both seasonal and core menu items.
+
+Use short, casual review quotes that look good in a compact phone layout. Use `reviewerImage` paths from `public/images/`, and do not imply that generated reviewer photos are verified real customers. Set bitterness, aroma, nuttiness, and sweetness as whole-number scores from 1 to 5.
+
 ## Missing Or Ambiguous Fields
 
 If a required schema field is missing, ask the user before changing content. If the build passes but the business meaning is unclear, show the preview and let the owner correct the submitted update.

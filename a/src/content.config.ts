@@ -68,6 +68,17 @@ const menu = defineCollection({
         price: z.string().regex(/^\$\d+(\.\d{2})?$/),
         description: z.string(),
         image: z.string(),
+        review: z.object({
+          quote: z.string(),
+          reviewerName: z.string(),
+          reviewerImage: z.string()
+        }),
+        tasting: z.object({
+          bitterness: z.number().int().min(1).max(5),
+          aroma: z.number().int().min(1).max(5),
+          nuttiness: z.number().int().min(1).max(5),
+          sweetness: z.number().int().min(1).max(5)
+        }),
         temperatureOptions: z.array(z.enum(["hot", "cold"])),
         milkOptions: z.array(z.string()),
         isSeasonal: z.boolean(),

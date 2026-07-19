@@ -10,6 +10,17 @@
       "price": "$9",
       "description": "Strawberry puree and milk pudding layered with matcha or hojicha.",
       "image": "/images/strawberry-royal-matcha-cutout.png",
+      "review": {
+        "quote": "this matcha v good",
+        "reviewerName": "tan jun jie",
+        "reviewerImage": "/images/reviewer-tan-jun-jie.png"
+      },
+      "tasting": {
+        "bitterness": 2,
+        "aroma": 4,
+        "nuttiness": 2,
+        "sweetness": 5
+      },
       "temperatureOptions": ["cold"],
       "milkOptions": ["fresh milk", "oat milk"],
       "isSeasonal": true,
@@ -22,6 +33,17 @@
       "price": "$8.50",
       "description": "Black sesame paste and syrup with matcha or hojicha.",
       "image": "/images/black-sesame-matcha-cutout.png",
+      "review": {
+        "quote": "nutty, smooth, and not too sweet",
+        "reviewerName": "tan jun jie",
+        "reviewerImage": "/images/reviewer-tan-jun-jie.png"
+      },
+      "tasting": {
+        "bitterness": 3,
+        "aroma": 4,
+        "nuttiness": 5,
+        "sweetness": 3
+      },
       "temperatureOptions": ["cold"],
       "milkOptions": ["fresh milk", "oat milk"],
       "isSeasonal": true,
@@ -34,6 +56,17 @@
       "price": "$7",
       "description": "Bright ume and plum iced tea with a tart finish.",
       "image": "/images/pickled-ume-plum-iced-tea-cutout.png",
+      "review": {
+        "quote": "super refreshing after lunch",
+        "reviewerName": "tan jun jie",
+        "reviewerImage": "/images/reviewer-tan-jun-jie.png"
+      },
+      "tasting": {
+        "bitterness": 1,
+        "aroma": 3,
+        "nuttiness": 1,
+        "sweetness": 3
+      },
       "temperatureOptions": ["cold"],
       "milkOptions": ["no milk"],
       "isSeasonal": true,

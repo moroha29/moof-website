@@ -20,8 +20,29 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install, build, and upload your site
-        uses: withastro/action@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build each design variant
+        run: |
+          mkdir -p site
+          for dir in a b c d; do
+            if [ -f "$dir/package.json" ]; then
+              echo "Building design $dir"
+              npm --prefix "$dir" ci
+              npm --prefix "$dir" run build
+              mkdir -p "site/$dir"
+              cp -r "$dir/dist/." "site/$dir/"
+            fi
+          done
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
 
   deploy:
     needs: build

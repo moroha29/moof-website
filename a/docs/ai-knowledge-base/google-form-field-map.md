@@ -19,10 +19,17 @@ Use this map when converting owner responses into repo content files.
 | drink category | `items[].category` | `src/content/menu/*.json` |
 | price | `items[].price` | `src/content/menu/*.json` |
 | short description | `items[].description` | `src/content/menu/*.json` |
+| review quote | `items[].review.quote` | `src/content/menu/*.json` |
+| reviewer name | `items[].review.reviewerName` | `src/content/menu/*.json` |
+| reviewer image filename | `items[].review.reviewerImage` | `src/content/menu/*.json` |
+| bitterness rating | `items[].tasting.bitterness` | `src/content/menu/*.json` |
+| aroma rating | `items[].tasting.aroma` | `src/content/menu/*.json` |
+| nuttiness rating | `items[].tasting.nuttiness` | `src/content/menu/*.json` |
+| sweetness rating | `items[].tasting.sweetness` | `src/content/menu/*.json` |
 | temperature options | `items[].temperatureOptions` | `src/content/menu/*.json` |
 | milk options | `items[].milkOptions` | `src/content/menu/*.json` |
 | image filename | `items[].image` | `src/content/menu/*.json` |
 | active status | `items[].active` | `src/content/menu/*.json` |
 | owner notes for AI agent | use as instructions, do not store unless useful | n/a |
 
-Prices are display strings such as `$8.50`. Image paths should start with `/images/`.
+Prices are display strings such as `$8.50`. Image paths should start with `/images/`. Tasting ratings must be whole numbers from 1 to 5.
