@@ -17,7 +17,7 @@ export const site = {
     eyebrow: "Specialty matcha & hojicha",
     headline: "The ingredient comes first.",
     body:
-      "At Moof, each drink begins with a chosen Japanese matcha, then is hand-whisked and poured to order in the CBD.",
+      "At Moof, drinks are made to order. Matcha drinks are prepared with one of two Japanese matchas and hand-whisked in the CBD.",
     menuCta: "Explore the menu",
     findUsCta: "Plan a visit",
     image: "images/specialty-matcha-latte-cutout.png",

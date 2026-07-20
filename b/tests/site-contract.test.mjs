@@ -116,6 +116,11 @@ test("ingredient-led copy avoids medical and wellbeing promises", () => {
   );
 });
 
+test("hero ingredient story does not misclassify every drink as matcha", () => {
+  assert.doesNotMatch(siteData, /each drink begins with a chosen Japanese matcha/i);
+  assert.match(siteData, /Matcha drinks are prepared with one of two Japanese matchas/i);
+});
+
 test("calm mineral-and-sage visual system has a single-column phone layout", () => {
   assert.match(css, /--mineral:\s*#/);
   assert.match(css, /--sage:\s*#/);
