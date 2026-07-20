@@ -114,8 +114,10 @@ img {
 .hero-products {
   min-height: calc(100svh - 90px);
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   grid-template-rows: auto 1fr auto;
   align-items: center;
+  overflow-x: clip;
   padding: 24px 0 18px;
 }
 

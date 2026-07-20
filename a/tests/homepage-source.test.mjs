@@ -33,3 +33,11 @@ test("desktop carousel keeps the remaining featured drink centered", () => {
 
   assert.match(desktopRules, /\.hero-stage\s*\{[\s\S]*?grid-template-columns:\s*minmax\(300px,\s*1fr\);/);
 });
+
+test("hero layout can shrink to the mobile viewport width", () => {
+  const source = readFileSync(new URL("../src/styles/global.css", import.meta.url), "utf8");
+  const heroRules = source.match(/\.hero-products\s*\{([^}]*)\}/)?.[1] ?? "";
+
+  assert.match(heroRules, /grid-template-columns:\s*minmax\(0,\s*1fr\);/);
+  assert.match(heroRules, /overflow-x:\s*clip;/);
+});
