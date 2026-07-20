@@ -91,10 +91,11 @@ test("menu is one readable, complete product list", () => {
 });
 
 test("presentation copy stays grounded in supplied facts", () => {
-  assert.match(menuPage, /Fresh or oat milk\. \{site\.hours\}/);
+  assert.match(menuPage, /Fresh or oat milk where listed\. \{site\.hours\}/);
   assert.doesNotMatch(menuPage, /on request/i);
   assert.match(siteData, /headline: "Matcha at Eon Shenton\."/);
   assert.doesNotMatch(siteData, /quiet matcha bar/i);
+  assert.doesNotMatch(siteData, /favourites/i);
 });
 
 test("minimal responsive styles fit narrow screens without document overflow", () => {

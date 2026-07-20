@@ -22,6 +22,7 @@ const contentSources = await Promise.all(
     "../src/pages/menu.astro"
   ].map(async (path) => ({ path, source: await readFile(new URL(path, import.meta.url), "utf8") }))
 );
+const drinkCard = await readFile(new URL("../src/components/DrinkCard.astro", import.meta.url), "utf8");
 
 test("menu-route navigation qualifies homepage fragments", () => {
   assert.match(nav, /withBase\("\/"\)/);
@@ -95,8 +96,17 @@ test("Design B uses its GitHub Pages base path", () => {
 });
 
 test("ingredient-led home is built around source, ritual, flavour, and choice", () => {
-  const homeCopy = [siteData, ...contentSources.map(({ source }) => source)].join("\n");
+  const homePage = contentSources.find(({ path }) => path.endsWith("pages/index.astro"))?.source ?? "";
+  const menuPage = contentSources.find(({ path }) => path.endsWith("pages/menu.astro"))?.source ?? "";
+  const hero = contentSources.find(({ path }) => path.endsWith("components/Hero.astro"))?.source ?? "";
+  const ingredients = contentSources.find(({ path }) => path.endsWith("components/IngredientStory.astro"))?.source ?? "";
+  const menuShowcase = contentSources.find(({ path }) => path.endsWith("components/MenuShowcase.astro"))?.source ?? "";
+  const findUs = contentSources.find(({ path }) => path.endsWith("components/FindUs.astro"))?.source ?? "";
+  const homeCopy = [siteData, hero, ingredients, menuShowcase, findUs].join("\n");
 
+  assert.match(homePage, /<Hero\s*\/>[\s\S]*<IngredientStory\s*\/>[\s\S]*<MenuShowcase\s*\/>[\s\S]*<FindUs\s*\/>/);
+  assert.match(menuPage, /<DrinkCard\s+\{\.\.\.item\}\s*\/>/);
+  assert.match(drinkCard, /\{blurb\}/);
   assert.match(homeCopy, /source/i);
   assert.match(homeCopy, /ritual/i);
   assert.match(homeCopy, /flavou?r/i);

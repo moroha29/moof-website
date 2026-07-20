@@ -25,7 +25,7 @@ export const homepage = {
       "Hand-whisked with exclusive Japanese matcha at Eon Shenton, a five-minute walk from Tanjong Pagar MRT."
   },
   featured: {
-    eyebrow: "A few favourites",
+    eyebrow: "Featured drinks",
     headline: "The everyday pour."
   },
   menuPreview: {
