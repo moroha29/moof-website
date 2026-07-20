@@ -20,7 +20,7 @@ export const site = {
 export const homepage = {
   hero: {
     eyebrow: "Specialty matcha & hojicha",
-    headline: "A quiet matcha bar in Tanjong Pagar.",
+    headline: "Matcha at Eon Shenton.",
     supportingCopy:
       "Hand-whisked with exclusive Japanese matcha at Eon Shenton, a five-minute walk from Tanjong Pagar MRT."
   },

@@ -90,6 +90,13 @@ test("menu is one readable, complete product list", () => {
   assert.match(menuRow, /withBase\(item\.image\)/);
 });
 
+test("presentation copy stays grounded in supplied facts", () => {
+  assert.match(menuPage, /Fresh or oat milk\. \{site\.hours\}/);
+  assert.doesNotMatch(menuPage, /on request/i);
+  assert.match(siteData, /headline: "Matcha at Eon Shenton\."/);
+  assert.doesNotMatch(siteData, /quiet matcha bar/i);
+});
+
 test("minimal responsive styles fit narrow screens without document overflow", () => {
   assert.match(css, /--moof-green:/);
   assert.match(baseLayout, /name="theme-color" content="#2f6b42"/);
