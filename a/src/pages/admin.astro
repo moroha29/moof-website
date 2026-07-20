@@ -1,0 +1,929 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { sortMenusForDisplay } from "../lib/carousel.js";
+import { withBase } from "../lib/base.js";
+
+const menus = sortMenusForDisplay((await getCollection("menu")).map((entry) => entry.data));
+const homepage = await getEntry("site", "homepage");
+const specialtyMenu = menus.find((menu) => menu.title.toLowerCase().includes("specialty")) ?? menus[0];
+const specialtyItem = specialtyMenu?.items.find((item) => item.active && item.name.toLowerCase().includes("specialty")) ?? specialtyMenu?.items.find((item) => item.active) ?? menus.flatMap((menu) => menu.items)[0];
+
+const defaultSpecialty = {
+  headline: specialtyItem?.name ?? "Specialty Matcha Latte",
+  description: specialtyItem?.description ?? "A richer pour using Moof's exclusive matcha profile.",
+  price: specialtyItem?.price ?? "$9",
+  image: withBase(specialtyItem?.image ?? "/images/specialty-matcha-latte-cutout.png"),
+};
+
+const menuCatalog = menus.map((menu, groupIndex) => ({
+  id: `group-${groupIndex}-${menu.title.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-").replaceAll(/^-|-$/g, "")}`,
+  title: menu.title,
+  description: menu.description,
+  items: menu.items.map((item) => ({
+    id: item.id,
+    name: item.name,
+    price: item.price,
+    description: item.description,
+    image: withBase(item.image),
+    temperatureOptions: item.temperatureOptions,
+    milkOptions: item.milkOptions,
+    isSeasonal: item.isSeasonal,
+    active: item.active,
+  })),
+}));
+
+const firstMenuItem = menuCatalog.flatMap((group) => group.items.map((item) => ({ ...item, groupId: group.id }))).find((item) => item.active);
+
+const homePreviewDefaults = {
+  logoText: homepage?.data.logoText ?? "Moof",
+  heroEyebrow: homepage?.data.hero.eyebrow ?? "Specialty Matcha",
+  heroHeadline: homepage?.data.hero.headline ?? "Matcha",
+  heroNote: homepage?.data.hero.note ?? "exclusive matcha ingredients, layered fresh with milk.",
+  heroAnnouncement: homepage?.data.hero.announcement ?? "seasonal drinks are pouring now.",
+  ingredients: homepage?.data.ingredients ?? [],
+  storeNote: homepage?.data.about.storeNote ?? "fresh milk / oat milk. hot / cold options available on selected drinks.",
+  aboutBody: homepage?.data.about.body ?? "",
+  findUs: homepage?.data.findUs ?? {
+    address: "70 Shenton Way",
+    unit: "#01-15, Eon Shenton",
+    mrtNote: "5-minute walk from tanjong pagar mrt station",
+    operatingHours: "mon-fri, 9am-6pm",
+    instagramLabel: "@moof__bar",
+    instagramUrl: "https://www.instagram.com/moof__bar/",
+  },
+};
+---
+
+<BaseLayout title="Moof Admin Preview" description="Owner preview sandbox for Moof homepage and menu content.">
+  <main class="admin-shell">
+    <header class="admin-topbar">
+      <a class="wordmark" href={withBase("")} aria-label="Moof home">Moof<span aria-hidden="true">.</span></a>
+      <nav>
+        <a href={withBase("")}>Home</a>
+        <a href={withBase("menu")}>Menu</a>
+      </nav>
+    </header>
+
+    <section class="admin-hero" aria-labelledby="admin-heading">
+      <div>
+        <p class="eyebrow">Owner sandbox</p>
+        <h1 id="admin-heading">Preview content before it goes live.</h1>
+      </div>
+      <p>Drafts stay in this browser. Uploaded images are preview-only until a real backend or CMS is connected.</p>
+    </section>
+
+    <section class="admin-workspace" aria-label="Admin preview workspace">
+      <aside class="admin-controls" aria-label="Content editor">
+        <div class="admin-tabs" role="tablist" aria-label="Admin sections">
+          <button class="admin-tab is-active" type="button" role="tab" aria-selected="true" data-admin-tab="specialty">Specialty</button>
+          <button class="admin-tab" type="button" role="tab" aria-selected="false" data-admin-tab="menu">Menu</button>
+        </div>
+
+        <form class="admin-form is-active" data-admin-panel="specialty">
+          <div class="field-group">
+            <label for="specialty-headline">Headline</label>
+            <input id="specialty-headline" name="headline" type="text" autocomplete="off" />
+          </div>
+          <div class="field-group">
+            <label for="specialty-description">Description</label>
+            <textarea id="specialty-description" name="description" rows="4"></textarea>
+          </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label for="specialty-price">Price</label>
+              <input id="specialty-price" name="price" type="text" autocomplete="off" />
+            </div>
+            <div class="field-group">
+              <label for="specialty-image">Image</label>
+              <input id="specialty-image" name="image" type="file" accept="image/*" />
+            </div>
+          </div>
+        </form>
+
+        <div class="admin-form" data-admin-panel="menu">
+          <div class="menu-manager-top">
+            <div>
+              <p class="mini-label">Menu sandbox</p>
+              <strong data-menu-count>0 visible items</strong>
+            </div>
+            <button class="button-link" type="button" data-add-item>Add item</button>
+          </div>
+
+          <div class="field-row">
+            <div class="field-group">
+              <label for="category-title">Category name</label>
+              <input id="category-title" name="categoryTitle" type="text" autocomplete="off" />
+            </div>
+            <div class="field-group">
+              <label for="item-category">Move item to</label>
+              <select id="item-category" name="itemCategory"></select>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="category-description">Category note</label>
+            <input id="category-description" name="categoryDescription" type="text" autocomplete="off" />
+          </div>
+
+          <div class="menu-editor-list" data-menu-editor-list></div>
+
+          <div class="menu-item-editor">
+            <div class="editor-heading">
+              <div>
+                <p class="mini-label">Selected item</p>
+                <strong data-selected-item-name>{firstMenuItem?.name ?? "New item"}</strong>
+              </div>
+              <button class="danger-link" type="button" data-remove-selected>Remove</button>
+            </div>
+
+            <div class="field-group">
+              <label for="menu-name">Item name</label>
+              <input id="menu-name" name="name" type="text" autocomplete="off" />
+            </div>
+            <div class="field-row">
+              <div class="field-group">
+                <label for="menu-price">Price</label>
+                <input id="menu-price" name="price" type="text" autocomplete="off" />
+              </div>
+              <div class="field-group">
+                <label for="menu-image">Image</label>
+                <input id="menu-image" name="image" type="file" accept="image/*" />
+              </div>
+            </div>
+            <div class="field-group">
+              <label for="menu-description">Description</label>
+              <textarea id="menu-description" name="description" rows="4"></textarea>
+            </div>
+            <div class="option-grid" aria-label="Menu options">
+              <label><input type="checkbox" name="temperature" value="hot" /> Hot</label>
+              <label><input type="checkbox" name="temperature" value="cold" /> Cold</label>
+              <label><input type="checkbox" name="milk" value="fresh milk" /> Fresh milk</label>
+              <label><input type="checkbox" name="milk" value="oat milk" /> Oat milk</label>
+              <label><input type="checkbox" name="milk" value="no milk" /> No milk</label>
+              <label><input type="checkbox" name="seasonal" value="seasonal" /> Seasonal tag</label>
+            </div>
+          </div>
+
+          <div class="admin-actions compact-actions">
+            <button class="ink-link admin-reset" type="button" data-add-category>Add category</button>
+            <button class="ink-link admin-reset" type="button" data-restore-menu>Restore full menu</button>
+          </div>
+        </div>
+
+        <div class="admin-actions">
+          <button class="button-link" type="button" data-save-draft>Save draft</button>
+          <button class="ink-link admin-reset" type="button" data-reset-draft>Reset all</button>
+        </div>
+
+        <details class="export-panel">
+          <summary>Export draft data</summary>
+          <textarea readonly rows="10" data-export-output></textarea>
+        </details>
+      </aside>
+
+      <section class="admin-preview" aria-label="Live previews">
+        <div class="preview-heading">
+          <div>
+            <p class="eyebrow">Desktop and mobile</p>
+            <h2 data-preview-title>Specialty preview</h2>
+          </div>
+          <span data-save-status>Unsaved draft</span>
+        </div>
+
+        <div class="device-grid">
+          <section class="device-frame device-desktop" aria-label="Desktop preview">
+            <div class="device-label">Web</div>
+            <div class="device-surface">
+              <div data-preview-specialty>
+                <div class="site-preview" data-home-page-preview></div>
+              </div>
+
+              <div class="is-hidden admin-menu-preview" data-preview-menu>
+                <div class="site-preview" data-menu-page-preview></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="device-frame device-phone" aria-label="Mobile preview">
+            <div class="device-label">Mobile</div>
+            <div class="device-surface admin-phone">
+              <div data-mobile-specialty>
+                <div class="site-preview site-preview-phone" data-home-page-preview></div>
+              </div>
+
+              <div class="is-hidden admin-menu-preview" data-mobile-menu>
+                <div class="site-preview site-preview-phone" data-menu-page-preview></div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <style>
+    .admin-shell { width: min(100%, 1360px); margin: 0 auto; padding: 18px 30px 56px; }
+    .admin-topbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 12px 0 28px; border-bottom: 1px solid var(--ink); }
+    .admin-topbar nav { display: flex; align-items: center; gap: 18px; font: 500 .72rem/1 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
+    .admin-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 390px); gap: 28px; align-items: end; padding: 48px 0 34px; }
+    .admin-hero h1, .preview-heading h2 { margin: 0; font-family: var(--serif); font-weight: 600; line-height: .98; letter-spacing: -.05em; }
+    .admin-hero h1 { max-width: 12ch; font-size: clamp(3rem, 7vw, 6rem); }
+    .admin-hero > p { margin: 0; color: #536158; font-size: .98rem; line-height: 1.55; }
+    .admin-workspace { display: grid; grid-template-columns: minmax(320px, 420px) minmax(0, 1fr); gap: 22px; align-items: start; border-top: 1px solid var(--ink); padding-top: 22px; }
+    .admin-controls, .device-frame, .export-panel { border: 1px solid var(--ink); background: var(--paper); box-shadow: 4px 5px 0 rgba(36, 49, 42, .9); }
+    .admin-controls { position: sticky; top: 18px; display: grid; gap: 18px; max-height: calc(100vh - 36px); overflow: auto; padding: 18px; }
+    .admin-tabs { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--ink); background: var(--ink); gap: 1px; }
+    .admin-tab { min-height: 42px; border: 0; background: var(--paper); color: var(--ink); cursor: pointer; font: 500 .68rem/1 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
+    .admin-tab.is-active { background: var(--matcha); color: var(--cream); }
+    .admin-form { display: none; gap: 14px; }
+    .admin-form.is-active { display: grid; }
+    .field-row { display: grid; grid-template-columns: 1fr 1.2fr; gap: 12px; }
+    .field-group { display: grid; gap: 7px; }
+    .field-group label, .export-panel summary, .device-label, .mini-label { color: var(--terracotta); font: 500 .65rem/1 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+    .mini-label { margin: 0 0 6px; }
+    .field-group input, .field-group textarea, .field-group select, .export-panel textarea { width: 100%; border: 1px solid var(--rule); border-radius: 0; background: #fffdf6; color: var(--ink); font: 500 .9rem/1.35 var(--sans); padding: 11px 10px; }
+    .field-group textarea, .export-panel textarea { resize: vertical; }
+    .option-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .option-grid label { display: flex; align-items: center; gap: 8px; min-height: 36px; border: 1px solid var(--rule); padding: 8px; font: 500 .76rem/1.2 var(--mono); text-transform: uppercase; }
+    .admin-actions, .menu-manager-top, .editor-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .compact-actions { align-items: start; }
+    .admin-actions .button-link, .admin-actions .ink-link, .menu-manager-top .button-link, .danger-link { cursor: pointer; }
+    .admin-reset, .danger-link { border: 0; border-bottom: 1px solid var(--ink); background: transparent; color: var(--ink); padding: 0 0 4px; font: 500 .68rem/1 var(--mono); text-transform: uppercase; }
+    .danger-link { color: #9b3d2a; border-color: currentColor; }
+    .export-panel { padding: 14px; box-shadow: none; }
+    .export-panel textarea { margin-top: 12px; min-height: 180px; font-family: var(--mono); font-size: .68rem; }
+    .menu-editor-list { display: grid; gap: 8px; max-height: 280px; overflow: auto; border: 1px solid var(--rule); padding: 8px; background: #fffdf6; }
+    .editor-category { display: grid; gap: 6px; }
+    .editor-category h3 { margin: 10px 0 2px; font: 500 .68rem/1.25 var(--mono); letter-spacing: .04em; text-transform: uppercase; color: var(--terracotta); }
+    .editor-item { display: grid; grid-template-columns: 1fr auto auto; gap: 8px; align-items: center; border: 1px solid var(--rule); background: var(--paper); padding: 8px; text-align: left; }
+    .editor-item.is-selected { border-color: var(--ink); box-shadow: 2px 3px 0 rgba(36, 49, 42, .75); }
+    .editor-item-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 700 .82rem/1.2 var(--sans); }
+    .editor-item button { border: 0; border-bottom: 1px solid currentColor; background: transparent; color: var(--ink); cursor: pointer; padding: 0 0 3px; font: 500 .62rem/1 var(--mono); text-transform: uppercase; }
+    .menu-item-editor { display: grid; gap: 14px; border-top: 1px dashed var(--rule); padding-top: 16px; }
+    .admin-preview { min-width: 0; }
+    .preview-heading { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 18px; }
+    .preview-heading h2 { font-size: clamp(2rem, 4vw, 3.1rem); }
+    .preview-heading > span { border: 1px solid var(--rule); padding: 8px 10px; background: var(--butter); font: 500 .65rem/1 var(--mono); text-transform: uppercase; }
+    .device-grid { display: grid; grid-template-columns: 1fr; gap: 18px; align-items: start; }
+    .device-frame { min-width: 0; padding: 14px; }
+    .device-surface { overflow: auto; border-top: 1px solid var(--ink); margin-top: 12px; padding-top: 18px; background-image: radial-gradient(rgba(45, 65, 46, .09) .65px, transparent .65px); background-size: 8px 8px; }
+    .device-desktop .device-surface { max-height: 720px; min-height: 370px; padding: 28px; }
+    .device-phone .device-surface { width: 320px; max-height: 680px; min-height: 480px; margin-inline: auto; padding: 18px 12px; }
+    .admin-specialty-card { max-width: 560px; min-height: 0; }
+    .device-desktop .admin-specialty-card { grid-template-columns: 210px minmax(0, 1fr); grid-template-rows: 1fr; gap: 20px; align-items: center; }
+    .device-desktop .admin-specialty-card img { width: 190px; height: 225px; }
+    :global(.site-preview) { container-type: inline-size; contain: layout paint; min-width: 0; overflow-x: clip; }
+    :global(.site-preview *) { max-width: 100%; }
+    :global(.site-preview .counter-shell) { width: 100%; padding: 0; }
+    :global(.site-preview .counter-header) { gap: 12px 18px; padding-bottom: 18px; }
+    :global(.site-preview .wordmark) { font-size: clamp(2.1rem, 6cqw, 3.2rem); letter-spacing: -.08em; }
+    :global(.site-preview .counter-header nav) { gap: 10px; font-size: clamp(.56rem, 1.5cqw, .68rem); }
+    :global(.site-preview .counter-hero) { min-height: 430px; grid-template-columns: minmax(0, 1fr) minmax(220px, .75fr); gap: clamp(24px, 5cqw, 52px); padding: 46px 0 56px; }
+    :global(.site-preview .hero-copy h1), :global(.site-preview .menu-hero h1) { font-size: clamp(3rem, 9cqw, 5.2rem); }
+    :global(.site-preview .hero-note) { max-width: 44ch; font-size: clamp(.88rem, 1.7cqw, 1rem); }
+    :global(.site-preview .hero-drink img) { width: min(100%, 280px); max-height: 310px; }
+    :global(.site-preview .hero-drink figcaption) { width: min(100%, 310px); }
+    :global(.site-preview .counter-notes), :global(.site-preview .menu-preview), :global(.site-preview .visit-section) { padding: 54px 0; }
+    :global(.site-preview .section-intro h2) { font-size: clamp(1.8rem, 5cqw, 3rem); }
+    :global(.site-preview .note-grid) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    :global(.site-preview .paper-note) { padding: clamp(18px, 3cqw, 24px); }
+    :global(.site-preview .note-seasonal), :global(.site-preview .note-milk) { transform: none; }
+    :global(.site-preview .preview-grid) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    :global(.site-preview .preview-card) { grid-template-rows: 180px auto; min-width: 0; }
+    :global(.site-preview .preview-card img) { width: 145px; height: 165px; }
+    :global(.site-preview .drink-title h3) { font-size: clamp(1rem, 2.4cqw, 1.28rem); }
+    :global(.site-preview .visit-board) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    :global(.site-preview .visit-board article) { border-right: 1px solid var(--ink); border-bottom: 0; padding: clamp(18px, 3cqw, 24px); }
+    :global(.site-preview .visit-board article:last-child) { border-right: 0; }
+    :global(.site-preview .visit-board strong) { font-size: clamp(1rem, 2.5cqw, 1.25rem); }
+    :global(.site-preview .counter-menu) { border-top: 0; }
+    :global(.site-preview .menu-hero) { padding: 58px 0 46px; }
+    :global(.site-preview .menu-group:first-child) { padding-top: 0; }
+    :global(.site-preview .menu-group:last-child) { border-bottom: 0; padding-bottom: 0; }
+    :global(.site-preview .menu-row) { grid-template-columns: minmax(78px, 96px) minmax(0, 1fr); gap: clamp(12px, 2.5cqw, 18px); }
+    :global(.site-preview .menu-row > img) { width: clamp(68px, 10cqw, 90px); height: clamp(82px, 12cqw, 102px); }
+    :global(.empty-menu-note) { border: 1px dashed var(--rule); padding: 28px; color: #536158; font-size: .92rem; line-height: 1.45; }
+    @container (max-width: 760px) {
+      :global(.site-preview .counter-hero) { grid-template-columns: 1fr; min-height: 0; }
+      :global(.site-preview .hero-drink) { width: min(100%, 390px); justify-self: center; }
+      :global(.site-preview .note-grid), :global(.site-preview .preview-grid), :global(.site-preview .visit-board) { grid-template-columns: 1fr; }
+      :global(.site-preview .visit-board article) { border-right: 0; border-bottom: 1px solid var(--ink); }
+      :global(.site-preview .visit-board article:last-child) { border-bottom: 0; }
+      :global(.site-preview .section-intro-inline), :global(.site-preview .menu-footer-note) { align-items: start; flex-direction: column; }
+    }
+    :global(.site-preview-phone .counter-header) { align-items: start; flex-direction: column; gap: 12px; }
+    :global(.site-preview-phone .counter-hero) { grid-template-columns: 1fr; min-height: 0; gap: 28px; padding: 38px 0 46px; }
+    :global(.site-preview-phone .hero-copy h1), :global(.site-preview-phone .menu-hero h1) { font-size: clamp(2.55rem, 15cqw, 3rem); }
+    :global(.site-preview-phone .hero-drink img) { max-height: 240px; }
+    :global(.site-preview-phone .preview-grid) { grid-template-columns: 1fr; }
+    :global(.site-preview-phone .preview-card) { grid-template-columns: 96px minmax(0, 1fr); grid-template-rows: 1fr; gap: 9px; padding: 16px; }
+    :global(.site-preview-phone .preview-card img) { width: 86px; height: 110px; }
+    :global(.site-preview-phone .drink-title) { grid-template-columns: 1fr; gap: 5px; }
+    :global(.site-preview-phone .drink-title h3) { font-size: 1.06rem; }
+    :global(.site-preview-phone .menu-group) { padding: 28px 0 34px; }
+    :global(.site-preview-phone .menu-group-heading) { grid-template-columns: 34px minmax(0, 1fr); }
+    :global(.site-preview-phone .menu-group-heading h2) { font-size: 1.6rem; }
+    :global(.site-preview-phone .menu-row) { grid-template-columns: 70px minmax(0, 1fr); gap: 10px; padding: 16px 0; }
+    :global(.site-preview-phone .menu-row > img) { width: 62px; height: 78px; }
+    :global(.site-preview-phone .menu-options span) { font-size: .56rem; }
+    .is-hidden { display: none !important; }
+
+    @media (max-width: 980px) {
+      .admin-workspace, .admin-hero, .device-grid { grid-template-columns: 1fr; }
+      .admin-controls { position: static; max-height: none; }
+      .device-grid { justify-items: stretch; }
+      .device-phone { width: min(100%, 390px); }
+    }
+
+    @media (max-width: 680px) {
+      .admin-shell { padding: 13px 16px 40px; }
+      .admin-topbar { padding-bottom: 19px; }
+      .admin-hero { padding: 40px 0 28px; }
+      .admin-hero h1 { font-size: clamp(2.8rem, 14vw, 4.2rem); }
+      .field-row, .option-grid, .preview-heading { grid-template-columns: 1fr; }
+      .preview-heading { display: grid; }
+      .editor-item { grid-template-columns: 1fr auto; }
+      .editor-item button[data-remove-item] { grid-column: 2; }
+      .device-desktop { display: none; }
+      .device-desktop .device-surface { padding: 18px 12px; }
+      .device-desktop .admin-specialty-card { grid-template-columns: 125px minmax(0, 1fr); gap: 9px; }
+      .device-desktop .admin-specialty-card img { width: 112px; height: 125px; }
+      :global(.site-preview .counter-hero), :global(.site-preview .preview-grid) { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <script define:vars={{ defaultSpecialty, menuCatalog, homePreviewDefaults }}>
+    const storageKey = "moof-admin-preview-v2";
+    const clone = (value) => JSON.parse(JSON.stringify(value));
+    const fallback = {
+      specialty: { ...defaultSpecialty },
+      menuGroups: clone(menuCatalog),
+      selectedItemId: menuCatalog.flatMap((group) => group.items).find((item) => item.active)?.id || "",
+      activePanel: "specialty",
+    };
+
+    let saved = null;
+    try {
+      saved = JSON.parse(window.localStorage.getItem(storageKey) || "null");
+    } catch {
+      window.localStorage.removeItem(storageKey);
+    }
+
+    const state = saved ? { ...fallback, ...saved } : clone(fallback);
+    state.specialty = { ...fallback.specialty, ...(state.specialty || {}) };
+    state.menuGroups = Array.isArray(state.menuGroups) ? state.menuGroups : clone(fallback.menuGroups);
+    if (!findSelectedItem()) state.selectedItemId = firstVisibleItem()?.id || "";
+
+    const all = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+    const one = (selector, root = document) => root.querySelector(selector);
+    const setText = (selector, value) => all(selector).forEach((node) => { node.textContent = value; });
+    const setImage = (selector, value, alt) => all(selector).forEach((node) => {
+      if (node instanceof HTMLImageElement) {
+        node.src = value;
+        node.alt = alt || "";
+      }
+    });
+
+    const specialtyForm = one('[data-admin-panel="specialty"]');
+    const menuPanel = one('[data-admin-panel="menu"]');
+    const saveStatus = one("[data-save-status]");
+    const exportOutput = one("[data-export-output]");
+    const categorySelect = one("#item-category");
+    const editorList = one("[data-menu-editor-list]");
+
+    function field(form, name) {
+      return form?.elements?.[name] || form?.querySelector(`[name="${name}"]`);
+    }
+
+    function firstVisibleItem() {
+      return state.menuGroups.flatMap((group) => group.items).find((item) => item.active);
+    }
+
+    function selectedGroup() {
+      return state.menuGroups.find((group) => group.items.some((item) => item.id === state.selectedItemId)) || state.menuGroups[0];
+    }
+
+    function findSelectedItem() {
+      return state.menuGroups.flatMap((group) => group.items).find((item) => item.id === state.selectedItemId);
+    }
+
+    function visibleGroups() {
+      return state.menuGroups
+        .map((group) => ({ ...group, items: group.items.filter((item) => item.active) }))
+        .filter((group) => group.items.length > 0);
+    }
+
+    function selectedValues(name) {
+      return all(`[data-admin-panel="menu"] input[name="${name}"]:checked`).map((input) => input.value);
+    }
+
+    function makeId(value) {
+      const slug = value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+      return `${slug || "item"}-${Date.now().toString(36)}`;
+    }
+
+    function syncSpecialtyFields() {
+      field(specialtyForm, "headline").value = state.specialty.headline;
+      field(specialtyForm, "description").value = state.specialty.description;
+      field(specialtyForm, "price").value = state.specialty.price;
+    }
+
+    function syncCategorySelect() {
+      categorySelect.replaceChildren(...state.menuGroups.map((group) => {
+        const option = document.createElement("option");
+        option.value = group.id;
+        option.textContent = group.title;
+        return option;
+      }));
+    }
+
+    function refreshCategoryOptionLabels() {
+      all("option", categorySelect).forEach((option) => {
+        const group = state.menuGroups.find((candidate) => candidate.id === option.value);
+        if (group) option.textContent = group.title;
+      });
+      const group = selectedGroup();
+      if (group) categorySelect.value = group.id;
+    }
+
+    function syncMenuFields() {
+      syncCategorySelect();
+      const item = findSelectedItem() || firstVisibleItem();
+      const group = selectedGroup();
+      if (!item || !group) return;
+      state.selectedItemId = item.id;
+      field(menuPanel, "categoryTitle").value = group.title;
+      field(menuPanel, "categoryDescription").value = group.description;
+      field(menuPanel, "itemCategory").value = group.id;
+      field(menuPanel, "name").value = item.name;
+      field(menuPanel, "price").value = item.price;
+      field(menuPanel, "description").value = item.description;
+      all('[data-admin-panel="menu"] input[type="checkbox"]').forEach((input) => {
+        if (input.name === "temperature") input.checked = item.temperatureOptions.includes(input.value);
+        if (input.name === "milk") input.checked = item.milkOptions.includes(input.value);
+        if (input.name === "seasonal") input.checked = Boolean(item.isSeasonal);
+      });
+      setText("[data-selected-item-name]", item.name);
+    }
+
+    function readSpecialtyForm() {
+      state.specialty.headline = field(specialtyForm, "headline").value.trim() || fallback.specialty.headline;
+      state.specialty.description = field(specialtyForm, "description").value.trim() || fallback.specialty.description;
+      state.specialty.price = field(specialtyForm, "price").value.trim() || fallback.specialty.price;
+    }
+
+    function readMenuFields() {
+      const item = findSelectedItem();
+      const group = selectedGroup();
+      if (!item || !group) return;
+
+      group.title = field(menuPanel, "categoryTitle").value.trim() || group.title;
+      group.description = field(menuPanel, "categoryDescription").value.trim() || group.description;
+
+      item.name = field(menuPanel, "name").value.trim() || item.name;
+      item.price = field(menuPanel, "price").value.trim() || item.price;
+      item.description = field(menuPanel, "description").value.trim() || item.description;
+      item.temperatureOptions = selectedValues("temperature");
+      item.milkOptions = selectedValues("milk");
+      item.isSeasonal = Boolean(field(menuPanel, "seasonal").checked);
+      if (item.temperatureOptions.length === 0) item.temperatureOptions = ["cold"];
+      if (item.milkOptions.length === 0) item.milkOptions = ["fresh milk"];
+
+      const nextGroupId = field(menuPanel, "itemCategory").value;
+      if (nextGroupId && nextGroupId !== group.id) {
+        group.items = group.items.filter((candidate) => candidate.id !== item.id);
+        const nextGroup = state.menuGroups.find((candidate) => candidate.id === nextGroupId) || group;
+        nextGroup.items.push(item);
+      }
+      refreshCategoryOptionLabels();
+    }
+
+    function optionTags(item) {
+      return [
+        ...(item.isSeasonal ? ["seasonal"] : []),
+        item.temperatureOptions.join(" / "),
+        item.milkOptions.join(" / "),
+      ].filter(Boolean);
+    }
+
+    function createElement(tag, className = "", text = "") {
+      const element = document.createElement(tag);
+      if (className) element.className = className;
+      if (text) element.textContent = text;
+      return element;
+    }
+
+    function appendHeader(shell, activePage) {
+      const header = createElement("header", "counter-header");
+      header.setAttribute("aria-label", "Website preview navigation");
+      const brand = createElement("a", "wordmark", homePreviewDefaults.logoText);
+      brand.href = "#";
+      const dot = createElement("span", "", ".");
+      dot.setAttribute("aria-hidden", "true");
+      brand.append(dot);
+      const nav = document.createElement("nav");
+      ["Home", "Menu", "Visit"].forEach((label) => {
+        const link = createElement("a", "", label);
+        link.href = "#";
+        if (label.toLowerCase() === activePage) link.setAttribute("aria-current", "page");
+        nav.append(link);
+      });
+      header.append(brand, nav);
+      shell.append(header);
+    }
+
+    function allVisibleItems() {
+      return visibleGroups().flatMap((group) => group.items);
+    }
+
+    function renderMenuEditorList() {
+      editorList.replaceChildren();
+      state.menuGroups.forEach((group) => {
+        const section = document.createElement("section");
+        section.className = "editor-category";
+        const title = document.createElement("h3");
+        title.textContent = group.title;
+        section.append(title);
+
+        group.items.filter((item) => item.active).forEach((item) => {
+          const row = document.createElement("div");
+          row.className = `editor-item${item.id === state.selectedItemId ? " is-selected" : ""}`;
+          row.dataset.itemId = item.id;
+
+          const name = document.createElement("span");
+          name.className = "editor-item-name";
+          name.textContent = item.name;
+
+          const edit = document.createElement("button");
+          edit.type = "button";
+          edit.dataset.editItem = item.id;
+          edit.textContent = "Edit";
+
+          const remove = document.createElement("button");
+          remove.type = "button";
+          remove.dataset.removeItem = item.id;
+          remove.textContent = "Remove";
+
+          row.append(name, edit, remove);
+          section.append(row);
+        });
+
+        editorList.append(section);
+      });
+
+      const count = visibleGroups().reduce((total, group) => total + group.items.length, 0);
+      setText("[data-menu-count]", `${count} visible item${count === 1 ? "" : "s"}`);
+    }
+
+    function renderFullMenu(root) {
+      root.replaceChildren();
+      const groups = visibleGroups();
+      if (groups.length === 0) {
+        const empty = document.createElement("p");
+        empty.className = "empty-menu-note";
+        empty.textContent = "No menu items are visible. Add an item or restore the full menu to preview the public menu again.";
+        root.append(empty);
+        return;
+      }
+
+      groups.forEach((group, groupIndex) => {
+        const section = document.createElement("section");
+        section.className = "menu-group";
+
+        const heading = document.createElement("div");
+        heading.className = "menu-group-heading";
+        const number = document.createElement("span");
+        number.textContent = String(groupIndex + 1).padStart(2, "0");
+        const copy = document.createElement("div");
+        const h2 = document.createElement("h2");
+        h2.textContent = group.title;
+        const note = document.createElement("p");
+        note.textContent = group.description;
+        copy.append(h2, note);
+        heading.append(number, copy);
+
+        const list = document.createElement("div");
+        list.className = "menu-list";
+        group.items.forEach((item) => {
+          const article = document.createElement("article");
+          article.className = "menu-row";
+
+          const image = document.createElement("img");
+          image.src = item.image;
+          image.alt = "";
+          image.loading = "lazy";
+
+          const main = document.createElement("div");
+          main.className = "menu-row-main";
+          const title = document.createElement("div");
+          title.className = "drink-title";
+          const name = document.createElement("h3");
+          name.textContent = item.name;
+          const price = document.createElement("strong");
+          price.textContent = item.price;
+          title.append(name, price);
+
+          const description = document.createElement("p");
+          description.textContent = item.description;
+
+          const options = document.createElement("div");
+          options.className = "menu-options";
+          options.setAttribute("aria-label", `${item.name} options`);
+          optionTags(item).forEach((option) => {
+            const tag = document.createElement("span");
+            tag.textContent = option;
+            options.append(tag);
+          });
+
+          main.append(title, description, options);
+          article.append(image, main);
+          list.append(article);
+        });
+
+        section.append(heading, list);
+        root.append(section);
+      });
+    }
+
+    function renderHomePage(root) {
+      root.replaceChildren();
+      const shell = createElement("main", "counter-shell");
+      appendHeader(shell, "home");
+
+      const hero = createElement("section", "counter-hero");
+      const copy = createElement("div", "hero-copy");
+      const eyebrow = createElement("p", "eyebrow", homePreviewDefaults.heroEyebrow);
+      const h1 = createElement("h1", "", homePreviewDefaults.heroHeadline);
+      const emphasis = createElement("em", "", " at the counter");
+      h1.append(emphasis);
+      const note = createElement("p", "hero-note", homePreviewDefaults.heroNote);
+      const announcement = createElement("p", "pour-note", homePreviewDefaults.heroAnnouncement);
+      copy.append(eyebrow, h1, note, announcement);
+
+      const figure = createElement("figure", "hero-drink");
+      const image = document.createElement("img");
+      image.src = state.specialty.image;
+      image.alt = state.specialty.headline;
+      const caption = document.createElement("figcaption");
+      caption.append(
+        createElement("span", "", "featured drink"),
+        createElement("strong", "", state.specialty.headline),
+        createElement("b", "", state.specialty.price),
+      );
+      figure.append(image, caption);
+      hero.append(copy, figure);
+
+      const notes = createElement("section", "counter-notes");
+      const intro = createElement("div", "section-intro");
+      intro.append(createElement("p", "eyebrow", "Today at Moof"), createElement("h2", "", "A little counter board for the current season."));
+      const grid = createElement("div", "note-grid");
+      const seasonal = firstVisibleItem() || state.specialty;
+      const seasonalNote = createElement("article", "paper-note note-seasonal");
+      seasonalNote.append(createElement("p", "", "Current seasonal menu"), createElement("h3", "", seasonal.name || state.specialty.headline), createElement("span", "", seasonal.description || state.specialty.description));
+      const ingredientNote = createElement("article", "paper-note note-ingredients");
+      ingredientNote.append(createElement("p", "", "Our matcha shelf"));
+      const ingredientList = createElement("div", "ingredient-list");
+      homePreviewDefaults.ingredients.forEach((ingredient) => {
+        const item = document.createElement("div");
+        item.append(createElement("strong", "", ingredient.name), createElement("span", "", ingredient.origin), createElement("p", "", ingredient.description));
+        ingredientList.append(item);
+      });
+      ingredientNote.append(ingredientList);
+      const milkNote = createElement("article", "paper-note note-milk");
+      milkNote.append(createElement("p", "", "At the bar"), createElement("h3", "", homePreviewDefaults.storeNote), createElement("span", "", homePreviewDefaults.aboutBody));
+      grid.append(seasonalNote, ingredientNote, milkNote);
+      notes.append(intro, grid);
+
+      const preview = createElement("section", "menu-preview");
+      const previewIntro = createElement("div", "section-intro section-intro-inline");
+      const previewCopy = document.createElement("div");
+      previewCopy.append(createElement("p", "eyebrow", "A short pour list"), createElement("h2", "", "Pick a favourite, then make it yours."));
+      previewIntro.append(previewCopy);
+      const previewGrid = createElement("div", "preview-grid");
+      const previewItems = [
+        {
+          name: state.specialty.headline,
+          price: state.specialty.price,
+          description: state.specialty.description,
+          image: state.specialty.image,
+          temperatureOptions: ["hot", "cold"],
+          milkOptions: ["fresh milk", "oat milk"],
+        },
+        ...allVisibleItems().filter((item) => item.name !== state.specialty.headline),
+      ].slice(0, 3);
+      previewItems.forEach((item, index) => {
+        const card = createElement("article", `preview-card${index === 1 ? " preview-card-tint" : ""}`);
+        const number = createElement("span", "card-number", `0${index + 1}`);
+        number.setAttribute("aria-hidden", "true");
+        const itemImage = document.createElement("img");
+        itemImage.src = item.image;
+        itemImage.alt = "";
+        const body = document.createElement("div");
+        const title = createElement("div", "drink-title");
+        title.append(createElement("h3", "", item.name), createElement("strong", "", item.price));
+        body.append(title, createElement("p", "", item.description), createElement("span", "drink-options", `${item.temperatureOptions.join(" / ")} / ${item.milkOptions.join(" / ")}`));
+        card.append(number, itemImage, body);
+        previewGrid.append(card);
+      });
+      preview.append(previewIntro, previewGrid);
+
+      const visit = createElement("section", "visit-section");
+      const visitIntro = createElement("div", "section-intro");
+      visitIntro.append(createElement("p", "eyebrow", "Come by"), createElement("h2", "", "Visit Moof."), createElement("p", "", homePreviewDefaults.findUs.body || ""));
+      const board = createElement("div", "visit-board");
+      const address = document.createElement("article");
+      address.append(createElement("span", "visit-label", "Address"), createElement("strong", "", homePreviewDefaults.findUs.address), createElement("p", "", homePreviewDefaults.findUs.unit));
+      const transit = document.createElement("article");
+      transit.append(createElement("span", "visit-label", "Getting here"), createElement("strong", "", homePreviewDefaults.findUs.mrtNote));
+      const hours = document.createElement("article");
+      hours.append(createElement("span", "visit-label", "Counter hours"), createElement("strong", "", homePreviewDefaults.findUs.operatingHours), createElement("p", "", homePreviewDefaults.findUs.instagramLabel));
+      board.append(address, transit, hours);
+      visit.append(visitIntro, board);
+
+      shell.append(hero, notes, preview, visit);
+      root.append(shell);
+    }
+
+    function renderMenuPage(root) {
+      root.replaceChildren();
+      const shell = createElement("main", "counter-shell menu-shell");
+      appendHeader(shell, "menu");
+      const hero = createElement("section", "menu-hero");
+      hero.append(createElement("p", "eyebrow", "The counter menu"), createElement("h1", "", "Good things, whisked simply."), createElement("p", "", "Specialty matcha, hojicha, and seasonal drinks."));
+      const menu = createElement("section", "counter-menu");
+      renderFullMenu(menu);
+      const footer = createElement("section", "menu-footer-note");
+      footer.append(createElement("p", "", `Find us at ${homePreviewDefaults.findUs.address}, ${homePreviewDefaults.findUs.unit}.`));
+      shell.append(hero, menu, footer);
+      root.append(shell);
+    }
+
+    function renderExport() {
+      exportOutput.value = JSON.stringify({
+        specialtyPreview: state.specialty,
+        menuSandbox: state.menuGroups.map((group) => ({
+          title: group.title,
+          description: group.description,
+          items: group.items.map((item) => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            description: item.description,
+            image: item.image.startsWith("data:") ? "uploaded image preview only" : item.image,
+            temperatureOptions: item.temperatureOptions,
+            milkOptions: item.milkOptions,
+            isSeasonal: item.isSeasonal,
+            active: item.active,
+          })),
+        })),
+      }, null, 2);
+    }
+
+    function renderPreview() {
+      readSpecialtyForm();
+      if (state.activePanel === "menu") readMenuFields();
+
+      all("[data-home-page-preview]").forEach(renderHomePage);
+      all("[data-menu-page-preview]").forEach(renderMenuPage);
+      renderMenuEditorList();
+      renderExport();
+      saveStatus.textContent = "Unsaved draft";
+    }
+
+    function setPanel(panelName) {
+      state.activePanel = panelName;
+      all("[data-admin-tab]").forEach((tab) => {
+        const active = tab.dataset.adminTab === panelName;
+        tab.classList.toggle("is-active", active);
+        tab.setAttribute("aria-selected", active ? "true" : "false");
+      });
+      all("[data-admin-panel]").forEach((panel) => panel.classList.toggle("is-active", panel.dataset.adminPanel === panelName));
+      all("[data-preview-specialty], [data-mobile-specialty]").forEach((node) => node.classList.toggle("is-hidden", panelName !== "specialty"));
+      all("[data-preview-menu], [data-mobile-menu]").forEach((node) => node.classList.toggle("is-hidden", panelName !== "menu"));
+      setText("[data-preview-title]", panelName === "specialty" ? "Homepage sandbox" : "Menu page sandbox");
+      syncMenuFields();
+      renderPreview();
+    }
+
+    function selectItem(itemId) {
+      readMenuFields();
+      state.selectedItemId = itemId;
+      syncMenuFields();
+      renderPreview();
+    }
+
+    function removeItem(itemId) {
+      const item = state.menuGroups.flatMap((group) => group.items).find((candidate) => candidate.id === itemId);
+      if (!item) return;
+      item.active = false;
+      if (state.selectedItemId === itemId) state.selectedItemId = firstVisibleItem()?.id || "";
+      syncMenuFields();
+      renderPreview();
+    }
+
+    function addCategory() {
+      readMenuFields();
+      const nextNumber = state.menuGroups.length + 1;
+      const group = {
+        id: `group-custom-${Date.now().toString(36)}`,
+        title: `New Category ${nextNumber}`,
+        description: "Add a short note for this menu section.",
+        items: [],
+      };
+      state.menuGroups.push(group);
+      const item = {
+        id: makeId("new item"),
+        name: "New menu item",
+        price: "$8",
+        description: "Add the drink description here.",
+        image: defaultSpecialty.image,
+        temperatureOptions: ["cold"],
+        milkOptions: ["fresh milk"],
+        isSeasonal: false,
+        active: true,
+      };
+      group.items.push(item);
+      state.selectedItemId = item.id;
+      syncMenuFields();
+      renderPreview();
+    }
+
+    function addItem() {
+      readMenuFields();
+      const group = selectedGroup() || state.menuGroups[0];
+      const item = {
+        id: makeId("new item"),
+        name: "New menu item",
+        price: "$8",
+        description: "Add the drink description here.",
+        image: defaultSpecialty.image,
+        temperatureOptions: ["cold"],
+        milkOptions: ["fresh milk"],
+        isSeasonal: group.title.toLowerCase().includes("seasonal"),
+        active: true,
+      };
+      group.items.push(item);
+      state.selectedItemId = item.id;
+      syncMenuFields();
+      renderPreview();
+    }
+
+    function handleImageUpload(input, target) {
+      const file = input.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.addEventListener("load", () => {
+        if (target === "specialty") state.specialty.image = String(reader.result || state.specialty.image);
+        if (target === "menu") {
+          const item = findSelectedItem();
+          if (item) item.image = String(reader.result || item.image);
+        }
+        renderPreview();
+      });
+      reader.readAsDataURL(file);
+    }
+
+    syncSpecialtyFields();
+    syncMenuFields();
+    setPanel(state.activePanel);
+
+    all("[data-admin-tab]").forEach((tab) => tab.addEventListener("click", () => setPanel(tab.dataset.adminTab)));
+    specialtyForm.addEventListener("input", renderPreview);
+    menuPanel.addEventListener("input", renderPreview);
+    categorySelect.addEventListener("change", () => {
+      readMenuFields();
+      syncMenuFields();
+      renderPreview();
+    });
+    editorList.addEventListener("click", (event) => {
+      const button = event.target.closest("button");
+      if (!button) return;
+      if (button.dataset.editItem) selectItem(button.dataset.editItem);
+      if (button.dataset.removeItem) removeItem(button.dataset.removeItem);
+    });
+
+    field(specialtyForm, "image").addEventListener("change", (event) => handleImageUpload(event.currentTarget, "specialty"));
+    field(menuPanel, "image").addEventListener("change", (event) => handleImageUpload(event.currentTarget, "menu"));
+    one("[data-add-item]").addEventListener("click", addItem);
+    one("[data-add-category]").addEventListener("click", addCategory);
+    one("[data-remove-selected]").addEventListener("click", () => removeItem(state.selectedItemId));
+    one("[data-restore-menu]").addEventListener("click", () => {
+      state.menuGroups = clone(fallback.menuGroups);
+      state.selectedItemId = fallback.selectedItemId;
+      syncMenuFields();
+      renderPreview();
+    });
+
+    one("[data-save-draft]").addEventListener("click", () => {
+      renderPreview();
+      window.localStorage.setItem(storageKey, JSON.stringify(state));
+      saveStatus.textContent = "Draft saved";
+    });
+
+    one("[data-reset-draft]").addEventListener("click", () => {
+      window.localStorage.removeItem(storageKey);
+      window.location.reload();
+    });
+  </script>
+</BaseLayout>
