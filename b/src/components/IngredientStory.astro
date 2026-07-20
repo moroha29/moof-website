@@ -2,30 +2,30 @@
 import { site } from "../data/site.js";
 ---
 
-<section id="origin" class="section origin">
+<section id="origin" class="section ingredients">
   <div class="wrap">
-    <span class="section-tag">{site.ingredients.eyebrow}</span>
-    <div class="section-heading">
+    <div class="section-intro">
+      <p class="eyebrow">{site.ingredients.eyebrow}</p>
       <h2>{site.ingredients.heading}</h2>
       <p>{site.ingredients.intro}</p>
     </div>
-    <div class="origin-grid">
+    <div class="ingredient-grid">
       {
-        site.ingredients.items.map((ingredient, index) => (
-          <div class="origin-card">
-            <span class={`badge ${index === 0 ? "badge-pink" : "badge-sky"} origin-stamp`}>
-              {ingredient.origin}
-            </span>
-            <p class="origin-name"><span class="origin-flag">{ingredient.icon}</span> {ingredient.name}</p>
-            <p class="origin-tagline">{ingredient.tagline}</p>
-            <p class="origin-body">{ingredient.description}</p>
-          </div>
+        site.ingredients.items.map((ingredient) => (
+          <article class="ingredient-card">
+            <p class="ingredient-origin">Source · {ingredient.origin}</p>
+            <h3>{ingredient.name}</h3>
+            <p class="ingredient-label">{ingredient.label}</p>
+            <p>{ingredient.description}</p>
+          </article>
         ))
       }
     </div>
-    <div class="origin-note">
-      <span>🫡</span>
-      <span>{site.ingredients.note}</span>
+    <div class="ritual" aria-label={site.ingredients.ritual.label}>
+      <p class="ritual-label">{site.ingredients.ritual.label}</p>
+      <ol>
+        {site.ingredients.ritual.steps.map((step, index) => <li><span>0{index + 1}</span>{step}</li>)}
+      </ol>
     </div>
   </div>
 </section>

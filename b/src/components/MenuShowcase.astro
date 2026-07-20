@@ -1,35 +1,27 @@
 ---
-import { coreMenu, seasonalMenu } from "../data/menu.js";
+import { coreMenu } from "../data/menu.js";
 import { site } from "../data/site.js";
 import { withBase } from "../lib/base.js";
 import DrinkCard from "./DrinkCard.astro";
 ---
 
-<section id="menu" class="section menu-block">
+<section id="menu" class="section menu-showcase">
   <div class="wrap">
-    <span class="section-tag">{site.menuShowcase.coreEyebrow}</span>
-    <div class="section-heading">
-      <h2>{site.menuShowcase.coreHeading}</h2>
-      <p>{site.menuShowcase.coreIntro}</p>
+    <div class="section-intro menu-intro">
+      <p class="eyebrow">{site.menuShowcase.eyebrow}</p>
+      <h2>{site.menuShowcase.heading}</h2>
+      <p>{site.menuShowcase.intro}</p>
     </div>
-    <div class="menu-grid">
-      {coreMenu.map((item) => <DrinkCard {...item} />)}
+    <div class="choice-grid">
+      {coreMenu.slice(0, 3).map((item) => <DrinkCard {...item} />)}
     </div>
-  </div>
-</section>
-
-<section class="section menu-block alt">
-  <div class="wrap">
-    <span class="section-tag">{site.menuShowcase.seasonalEyebrow}</span>
-    <div class="section-heading">
-      <h2>{site.menuShowcase.seasonalHeading}</h2>
-      <p>{site.menuShowcase.seasonalIntro}</p>
-    </div>
-    <div class="menu-grid">
-      {seasonalMenu.map((item) => <DrinkCard {...item} />)}
-    </div>
-    <div class="menu-cta">
-      <a class="btn btn-matcha" href={withBase("menu")}>{site.menuShowcase.menuCta}</a>
-    </div>
+    <aside class="menu-preview">
+      <div>
+        <p class="eyebrow">Menu preview</p>
+        <h3>{site.menuShowcase.previewHeading}</h3>
+      </div>
+      <p>{site.menuShowcase.previewBody}</p>
+      <a class="button button-secondary" href={withBase("menu")}>{site.menuShowcase.menuCta} <span aria-hidden="true">→</span></a>
+    </aside>
   </div>
 </section>

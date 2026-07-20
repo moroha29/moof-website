@@ -93,3 +93,32 @@ test("menu data exposes only the collections used by the pages", () => {
 test("Design B uses its GitHub Pages base path", () => {
   assert.match(astroConfig, /base:\s*"\/moof-website\/b"/);
 });
+
+test("ingredient-led home is built around source, ritual, flavour, and choice", () => {
+  const homeCopy = [siteData, ...contentSources.map(({ source }) => source)].join("\n");
+
+  assert.match(homeCopy, /source/i);
+  assert.match(homeCopy, /ritual/i);
+  assert.match(homeCopy, /flavou?r/i);
+  assert.match(homeCopy, /choice/i);
+  assert.match(homeCopy, /Mori/);
+  assert.match(homeCopy, /Shiran/);
+});
+
+test("ingredient-led copy avoids medical and wellbeing promises", () => {
+  const renderedCopySources = [siteData, menuData, ...contentSources.map(({ source }) => source)].join(
+    "\n"
+  );
+
+  assert.doesNotMatch(
+    renderedCopySources,
+    /\b(?:wellness|wellbeing|health(?:y)?|detox|healing|immunity|immune|energy boost|focus|stress relief)\b/i
+  );
+});
+
+test("calm mineral-and-sage visual system has a single-column phone layout", () => {
+  assert.match(css, /--mineral:\s*#/);
+  assert.match(css, /--sage:\s*#/);
+  assert.match(css, /@media\s*\(max-width:\s*760px\)[\s\S]*\.hero-grid\s*\{[^}]*grid-template-columns:\s*1fr/s);
+  assert.match(css, /body\s*\{[^}]*overflow-x:\s*hidden;/s);
+});

@@ -15,17 +15,21 @@ const { name, price, tag, blurb, temp, milk, image } = Astro.props;
 ---
 
 <article class="drink-card">
-  <span class="badge drink-tag">{tag}</span>
   <div class="drink-media">
     <img src={withBase(image)} alt={name} loading="lazy" />
   </div>
-  <div class="drink-top">
-    <h3>{name}</h3>
-    <span class="drink-price">{price}</span>
-  </div>
-  <p class="drink-blurb">{blurb}</p>
-  <div class="drink-meta">
-    <span class="chip">{temp}</span>
-    <span class="chip">{milk}</span>
+  <div class="drink-content">
+    <div class="drink-heading">
+      <div>
+        <p class="drink-tag">{tag}</p>
+        <h3>{name}</h3>
+      </div>
+      <span class="drink-price">{price}</span>
+    </div>
+    <p class="drink-blurb">{blurb}</p>
+    <dl class="drink-meta">
+      <div><dt>Serve</dt><dd>{temp}</dd></div>
+      <div><dt>Choice</dt><dd>{milk}</dd></div>
+    </dl>
   </div>
 </article>

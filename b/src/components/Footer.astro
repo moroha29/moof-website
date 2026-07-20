@@ -4,15 +4,13 @@ import { site } from "../data/site.js";
 ---
 
 <footer class="site-footer">
-  <div class="wrap">
-    <p class="foot-logo">{site.storeName}</p>
-    <p>
-      {site.findUs.addressLines.join(", ")} &middot; {site.findUs.operatingDays}, {site.findUs.operatingHours}
-    </p>
-    <p>
-      <a href={site.instagram.url} target="_blank" rel="noreferrer">{site.instagram.handle}</a>
-      &middot;
+  <div class="wrap footer-grid">
+    <p class="foot-logo">moof<span aria-hidden="true">.</span></p>
+    <p>{site.findUs.addressLines.join(", ")}</p>
+    <p>{site.findUs.operatingDays}, {site.findUs.operatingHours}</p>
+    <div class="footer-links">
       <a href={withBase("menu")}>Menu</a>
-    </p>
+      <a href={site.instagram.url} target="_blank" rel="noreferrer">{site.instagram.handle}</a>
+    </div>
   </div>
 </footer>

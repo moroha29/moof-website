@@ -2,24 +2,24 @@
 import { site } from "../data/site.js";
 ---
 
-<section id="find-us" class="section find-us">
-  <div class="wrap">
-    <span class="section-tag">{site.findUs.eyebrow}</span>
-    <div class="section-heading">
+<section id="find-us" class="section visit">
+  <div class="wrap visit-grid">
+    <div class="section-intro">
+      <p class="eyebrow">{site.findUs.eyebrow}</p>
       <h2>{site.findUs.heading}</h2>
       <p>{site.findUs.intro}</p>
     </div>
-    <div class="find-grid">
-      <div class="find-card">
-        <h3><span class="find-icon">📍</span> {site.findUs.addressLabel}</h3>
+    <div class="visit-details">
+      <div>
+        <h3>{site.findUs.addressLabel}</h3>
         <p>{site.findUs.addressLines[0]}<br />{site.findUs.addressLines[1]}</p>
       </div>
-      <div class="find-card">
-        <h3><span class="find-icon">🚶</span> {site.findUs.directionsLabel}</h3>
+      <div>
+        <h3>{site.findUs.directionsLabel}</h3>
         <p>{site.findUs.mrtNote}</p>
       </div>
-      <div class="find-card">
-        <h3><span class="find-icon">🕘</span> {site.findUs.hoursLabel}</h3>
+      <div>
+        <h3>{site.findUs.hoursLabel}</h3>
         <p>{site.findUs.operatingDays}<br />{site.findUs.operatingHours}</p>
       </div>
     </div>

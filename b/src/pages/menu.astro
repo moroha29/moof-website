@@ -12,6 +12,7 @@ import { site } from "../data/site.js";
   <main>
     <section class="page-hero">
       <div class="wrap">
+        <p class="eyebrow">{site.menuPage.eyebrow}</p>
         <h1>{site.menuPage.heading}</h1>
         <p>{site.menuPage.intro}</p>
       </div>
@@ -19,8 +20,8 @@ import { site } from "../data/site.js";
 
     <section class="menu-page-section">
       <div class="wrap">
-        <span class="section-tag">{site.menuPage.coreEyebrow}</span>
-        <div class="section-heading">
+        <div class="section-intro">
+          <p class="eyebrow">{site.menuPage.coreEyebrow}</p>
           <h2>{site.menuPage.coreHeading}</h2>
           <p>On the board every {site.findUs.operatingDays}, {site.findUs.operatingHours}.</p>
         </div>
@@ -32,8 +33,8 @@ import { site } from "../data/site.js";
 
     <section class="menu-page-section">
       <div class="wrap">
-        <span class="section-tag">{site.menuPage.seasonalEyebrow}</span>
-        <div class="section-heading">
+        <div class="section-intro">
+          <p class="eyebrow">{site.menuPage.seasonalEyebrow}</p>
           <h2>{site.menuPage.seasonalHeading}</h2>
           <p>{site.menuPage.seasonalIntro}</p>
         </div>

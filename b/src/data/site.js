@@ -1,57 +1,55 @@
 export const site = {
   storeName: "Moof",
   seo: {
-    homeTitle: "Moof — Specialty Matcha & Hojicha Bar, Tanjong Pagar",
+    homeTitle: "Moof — Curated Matcha & Hojicha, Tanjong Pagar",
     homeDescription:
-      "Moof is a specialty matcha and hojicha bar in Singapore's CBD, built around hand-whisked drinks and exclusive Japanese matcha Mori and Shiran.",
+      "Moof is a specialty matcha and hojicha bar in Singapore's CBD, centred on hand-whisked drinks and two Japanese matchas: Mori and Shiran.",
     menuTitle: "Menu — Moof",
-    menuDescription:
-      "The full Moof menu: core matcha and hojicha lattes plus seasonal drops, with prices."
+    menuDescription: "Moof's current matcha and hojicha menu, with tasting notes, options, and prices."
   },
   navigation: [
     { label: "Home", target: "home" },
-    { label: "The Menu", target: "menu" },
-    { label: "Meet the Matcha", target: "origin" },
-    { label: "Find Us", target: "find-us" }
+    { label: "Menu", target: "menu" },
+    { label: "Ingredients", target: "origin" },
+    { label: "Visit", target: "find-us" }
   ],
   hero: {
     eyebrow: "Specialty matcha & hojicha",
-    headline: "Whisked fresh.",
-    accent: "Never basic.",
+    headline: "The ingredient comes first.",
     body:
-      "Moof is a specialty matcha and hojicha bar in the CBD, built around hand-whisked ceremonial-grade drinks and two exclusive Japanese matchas — Mori and Shiran.",
-    menuCta: "See the menu →",
-    findUsCta: "Find us in Tanjong Pagar",
+      "At Moof, each drink begins with a chosen Japanese matcha, then is hand-whisked and poured to order in the CBD.",
+    menuCta: "Explore the menu",
+    findUsCta: "Plan a visit",
     image: "images/specialty-matcha-latte-cutout.png",
     imageAlt: "Moof specialty matcha latte",
-    badges: ["Japanese matcha", "Hand whisked"]
+    details: ["Two Japanese matchas", "Hand-whisked to order"]
   },
   ingredients: {
-    eyebrow: "Meet the leaves",
-    heading: "Why our matcha slaps",
-    intro: "Moof works with two exclusive Japanese matchas — Mori and Shiran.",
+    eyebrow: "Our ingredient notes",
+    heading: "A considered source, a simple ritual.",
+    intro: "Moof works with two exclusive Japanese matchas — Mori and Shiran — selected for distinct flavour profiles.",
     items: [
       {
         name: "Mori",
-        origin: "Japan 🇯🇵",
-        icon: "🍵",
-        tagline: "deep and rounded",
-        description:
-          "A deep green matcha with a rounded finish, used when Moof wants richness and body."
+        origin: "Japan",
+        label: "Rounded profile",
+        description: "A deep green matcha with a rounded finish, chosen when a richer pour is wanted."
       },
       {
         name: "Shiran",
-        origin: "Japan 🇯🇵",
-        icon: "🍃",
-        tagline: "smooth and clean",
+        origin: "Japan",
+        label: "Bright profile",
         description: "A smoother matcha profile for clean, bright drinks and layered milk tea."
       }
     ],
-    note: "Every drink is hand-whisked to order."
+    ritual: {
+      label: "The Moof ritual",
+      steps: ["Choose a drink", "Whisk to order", "Pour and serve"]
+    }
   },
   findUs: {
-    eyebrow: "Come say hi",
-    heading: "Find us in the CBD",
+    eyebrow: "Visit Moof",
+    heading: "A small pause in the CBD.",
     intro: "Find Moof at Eon Shenton, a 5-minute walk from Tanjong Pagar MRT station.",
     addressLabel: "Address",
     addressLines: ["70 Shenton Way, #01-15", "Eon Shenton, Singapore CBD"],
@@ -62,35 +60,25 @@ export const site = {
     operatingHours: "9am – 6pm"
   },
   instagram: {
-    eyebrow: "Follow along",
-    heading: "Stalk us (respectfully)",
-    body: "Follow Moof for seasonal drinks, small-batch bakes, and cafe updates.",
     handle: "@moof__bar",
-    url: "https://www.instagram.com/moof__bar/",
-    tiles: [
-      "images/matcha-powder-about.png",
-      "images/menu-drink-group-cutout.png",
-      "images/strawberry-royal-matcha-cutout.png",
-      "images/black-sesame-matcha-cutout.png",
-      "images/pickled-ume-plum-iced-tea-cutout.png"
-    ]
+    url: "https://www.instagram.com/moof__bar/"
   },
   menuShowcase: {
-    coreEyebrow: "Core menu",
-    coreHeading: "The core lineup",
-    coreIntro: "Four drinks available whenever Moof is open.",
-    seasonalEyebrow: "Limited run",
-    seasonalHeading: "Seasonal drops",
-    seasonalIntro: "The current rotating batch.",
-    menuCta: "View full menu & prices →"
+    eyebrow: "Find your pour",
+    heading: "Flavour, then choice.",
+    intro: "Choose between matcha and hojicha drinks, with hot or cold and fresh or oat milk options where listed.",
+    previewHeading: "The menu, at a glance",
+    previewBody: "Core drinks sit alongside the current seasonal rotation. Each listing notes its serving style and milk choice.",
+    menuCta: "View the full menu"
   },
   menuPage: {
-    heading: "The whole menu",
-    intro: "Seven drinks, all hand-whisked to order.",
-    coreEyebrow: "Core menu",
-    coreHeading: "Core lineup",
-    seasonalEyebrow: "Limited run",
-    seasonalHeading: "Seasonal drops",
-    seasonalIntro: "The current rotation — here for a good time, not a long time."
+    eyebrow: "Current menu",
+    heading: "Drinks with room to choose.",
+    intro: "Tasting notes, serving styles, and prices for Moof's hand-whisked matcha and hojicha drinks.",
+    coreEyebrow: "Core drinks",
+    coreHeading: "On the board",
+    seasonalEyebrow: "Seasonal rotation",
+    seasonalHeading: "Current flavours",
+    seasonalIntro: "A rotating selection alongside the core menu."
   }
 };

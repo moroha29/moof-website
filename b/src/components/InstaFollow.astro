@@ -3,24 +3,10 @@ import { withBase } from "../lib/base.js";
 import { site } from "../data/site.js";
 ---
 
-<section class="section insta">
+<section class="section insta" aria-label="Moof on Instagram">
   <div class="wrap">
-    <span class="section-tag">{site.instagram.eyebrow}</span>
-    <div class="section-heading">
-      <h2>{site.instagram.heading}</h2>
-      <p>{site.instagram.body}</p>
-    </div>
     <a class="insta-handle" href={site.instagram.url} target="_blank" rel="noreferrer">
-      📸 {site.instagram.handle}
+      {site.instagram.handle}
     </a>
-    <div class="insta-tiles">
-      {
-        site.instagram.tiles.map((src) => (
-          <div class="insta-tile">
-            <img src={withBase(src)} alt="Moof drink" loading="lazy" />
-          </div>
-        ))
-      }
-    </div>
   </div>
 </section>
