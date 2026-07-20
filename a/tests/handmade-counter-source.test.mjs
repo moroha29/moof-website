@@ -31,3 +31,10 @@ test("counter layout is constrained on phones without document-level horizontal 
   assert.match(phoneRules, /\.visit-board\s*\{[\s\S]*?grid-template-columns:\s*1fr;/);
   assert.match(phoneRules, /\.counter-hero\s*\{[\s\S]*?grid-template-columns:\s*1fr;/);
 });
+
+test("handmade presentation labels do not make unsupported popularity or location claims", () => {
+  const source = readSource("../src/pages/index.astro");
+
+  assert.equal(source.includes("counter favourite"), false);
+  assert.equal(source.includes("little green counter"), false);
+});
