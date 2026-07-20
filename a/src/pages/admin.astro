@@ -131,7 +131,7 @@ const homePreviewDefaults = {
           <div class="menu-item-editor">
             <div class="editor-heading">
               <div>
-                <p class="mini-label">Selected item</p>
+                <p class="mini-label" data-selected-item-label>Selected item</p>
                 <strong data-selected-item-name>{firstMenuItem?.name ?? "New item"}</strong>
               </div>
               <button class="danger-link" type="button" data-remove-selected>Remove</button>
@@ -253,13 +253,20 @@ const homePreviewDefaults = {
     .danger-link { color: #9b3d2a; border-color: currentColor; }
     .export-panel { padding: 14px; box-shadow: none; }
     .export-panel textarea { margin-top: 12px; min-height: 180px; font-family: var(--mono); font-size: .68rem; }
-    .menu-editor-list { display: grid; gap: 8px; max-height: 280px; overflow: auto; border: 1px solid var(--rule); padding: 8px; background: #fffdf6; }
-    .editor-category { display: grid; gap: 6px; }
+    .menu-editor-list { display: grid; gap: 12px; max-height: 340px; overflow: auto; border: 1px solid var(--rule); padding: 10px; background: #fffdf6; }
+    .editor-category { display: grid; gap: 7px; }
     .editor-category h3 { margin: 10px 0 2px; font: 500 .68rem/1.25 var(--mono); letter-spacing: .04em; text-transform: uppercase; color: var(--terracotta); }
-    .editor-item { display: grid; grid-template-columns: 1fr auto auto; gap: 8px; align-items: center; border: 1px solid var(--rule); background: var(--paper); padding: 8px; text-align: left; }
-    .editor-item.is-selected { border-color: var(--ink); box-shadow: 2px 3px 0 rgba(36, 49, 42, .75); }
+    .editor-item { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; align-items: stretch; }
+    .editor-select, .editor-remove { border: 1px solid var(--rule); background: var(--paper); color: var(--ink); cursor: pointer; }
+    .editor-select { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 10px; align-items: center; min-width: 0; padding: 8px; text-align: left; }
+    .editor-select img { width: 38px; height: 44px; object-fit: contain; }
+    .editor-item-copy { display: grid; gap: 3px; min-width: 0; }
     .editor-item-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 700 .82rem/1.2 var(--sans); }
-    .editor-item button { border: 0; border-bottom: 1px solid currentColor; background: transparent; color: var(--ink); cursor: pointer; padding: 0 0 3px; font: 500 .62rem/1 var(--mono); text-transform: uppercase; }
+    .editor-item-meta { color: #536158; font: 500 .58rem/1 var(--mono); letter-spacing: .03em; text-transform: uppercase; }
+    .editor-item-price { font: 500 .68rem/1 var(--mono); white-space: nowrap; }
+    .editor-remove { display: none; }
+    .editor-item.is-selected .editor-select { border-color: var(--ink); background: #e9edcf; box-shadow: 2px 3px 0 rgba(36, 49, 42, .75); }
+    .editor-select:hover, .editor-remove:hover { border-color: var(--ink); }
     .menu-item-editor { display: grid; gap: 14px; border-top: 1px dashed var(--rule); padding-top: 16px; }
     .admin-preview { min-width: 0; }
     .preview-heading { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 18px; }
@@ -343,8 +350,10 @@ const homePreviewDefaults = {
       .admin-hero h1 { font-size: clamp(2.8rem, 14vw, 4.2rem); }
       .field-row, .option-grid, .preview-heading { grid-template-columns: 1fr; }
       .preview-heading { display: grid; }
-      .editor-item { grid-template-columns: 1fr auto; }
-      .editor-item button[data-remove-item] { grid-column: 2; }
+      .editor-item { grid-template-columns: minmax(0, 1fr); }
+      .editor-select { grid-template-columns: 38px minmax(0, 1fr); }
+      .editor-select img { width: 32px; height: 38px; }
+      .editor-item-price { grid-column: 2; }
       .device-desktop { display: none; }
       .device-desktop .device-surface { padding: 18px 12px; }
       .device-desktop .admin-specialty-card { grid-template-columns: 125px minmax(0, 1fr); gap: 9px; }
@@ -451,7 +460,11 @@ const homePreviewDefaults = {
       syncCategorySelect();
       const item = findSelectedItem() || firstVisibleItem();
       const group = selectedGroup();
-      if (!item || !group) return;
+      if (!item || !group) {
+        setText("[data-selected-item-label]", "Item to add");
+        setText("[data-selected-item-name]", "Add a menu item");
+        return;
+      }
       state.selectedItemId = item.id;
       field(menuPanel, "categoryTitle").value = group.title;
       field(menuPanel, "categoryDescription").value = group.description;
@@ -464,6 +477,7 @@ const homePreviewDefaults = {
         if (input.name === "milk") input.checked = item.milkOptions.includes(input.value);
         if (input.name === "seasonal") input.checked = Boolean(item.isSeasonal);
       });
+      setText("[data-selected-item-label]", item.isNew ? "Item to add" : "Selected item");
       setText("[data-selected-item-name]", item.name);
     }
 
@@ -551,21 +565,34 @@ const homePreviewDefaults = {
           row.className = `editor-item${item.id === state.selectedItemId ? " is-selected" : ""}`;
           row.dataset.itemId = item.id;
 
+          const select = document.createElement("button");
+          select.className = "editor-select";
+          select.type = "button";
+          select.dataset.editItem = item.id;
+          select.setAttribute("aria-pressed", item.id === state.selectedItemId ? "true" : "false");
+
+          const image = document.createElement("img");
+          image.src = item.image;
+          image.alt = "";
+
+          const copy = document.createElement("span");
+          copy.className = "editor-item-copy";
+
           const name = document.createElement("span");
           name.className = "editor-item-name";
           name.textContent = item.name;
 
-          const edit = document.createElement("button");
-          edit.type = "button";
-          edit.dataset.editItem = item.id;
-          edit.textContent = "Edit";
+          const meta = document.createElement("span");
+          meta.className = "editor-item-meta";
+          meta.textContent = item.isNew ? "Item to add" : optionTags(item).join(" / ");
 
-          const remove = document.createElement("button");
-          remove.type = "button";
-          remove.dataset.removeItem = item.id;
-          remove.textContent = "Remove";
+          const price = document.createElement("span");
+          price.className = "editor-item-price";
+          price.textContent = item.price;
 
-          row.append(name, edit, remove);
+          copy.append(name, meta);
+          select.append(image, copy, price);
+          row.append(select);
           section.append(row);
         });
 
@@ -775,6 +802,7 @@ const homePreviewDefaults = {
             milkOptions: item.milkOptions,
             isSeasonal: item.isSeasonal,
             active: item.active,
+            isNew: Boolean(item.isNew),
           })),
         })),
       }, null, 2);
@@ -842,6 +870,7 @@ const homePreviewDefaults = {
         milkOptions: ["fresh milk"],
         isSeasonal: false,
         active: true,
+        isNew: true,
       };
       group.items.push(item);
       state.selectedItemId = item.id;
@@ -862,6 +891,7 @@ const homePreviewDefaults = {
         milkOptions: ["fresh milk"],
         isSeasonal: group.title.toLowerCase().includes("seasonal"),
         active: true,
+        isNew: true,
       };
       group.items.push(item);
       state.selectedItemId = item.id;
