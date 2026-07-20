@@ -5,7 +5,6 @@ import { prefixBase } from "../src/lib/base.js";
 import {
   getAdjacentDrinkId,
   getCarouselDrinks,
-  getRatingStars,
   getSelectedDrink,
   sortMenusForDisplay
 } from "../src/lib/carousel.js";
@@ -73,12 +72,6 @@ test("getAdjacentDrinkId wraps carousel arrows around the drink list", () => {
   assert.equal(getAdjacentDrinkId(drinks, "strawberry-royal", "previous"), "classic-matcha");
   assert.equal(getAdjacentDrinkId(drinks, "classic-matcha", "next"), "strawberry-royal");
   assert.equal(getAdjacentDrinkId(drinks, "black-sesame", "next"), "classic-matcha");
-});
-
-test("getRatingStars converts drink tasting scores into five-star display state", () => {
-  assert.deepEqual(getRatingStars(3), [true, true, true, false, false]);
-  assert.deepEqual(getRatingStars(9), [true, true, true, true, true]);
-  assert.deepEqual(getRatingStars(0), [false, false, false, false, false]);
 });
 
 test("DrinkCarousel does not change featured drink from rail scroll", () => {

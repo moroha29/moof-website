@@ -162,102 +162,6 @@ img {
   margin-top: -16px;
 }
 
-.hero-insight {
-  width: min(100%, 340px);
-  display: grid;
-  gap: 12px;
-  border: 1px solid rgba(255, 250, 242, 0.24);
-  border-radius: 8px;
-  padding: 14px;
-  background: rgba(255, 250, 242, 0.14);
-  box-shadow: 0 16px 38px rgba(45, 36, 40, 0.16);
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  transition:
-    opacity 180ms ease,
-    transform 220ms ease;
-  backdrop-filter: blur(12px);
-}
-
-.hero-insight.is-changing {
-  opacity: 0;
-  transform: translateY(14px) scale(0.97);
-}
-
-.hero-insight.has-returned {
-  animation: featured-return 260ms ease both;
-}
-
-.hero-insight-kicker {
-  color: rgba(255, 250, 242, 0.7);
-  font-size: 0.76rem;
-  font-weight: 950;
-  letter-spacing: 0;
-  text-transform: lowercase;
-}
-
-.hero-review p {
-  margin: 0;
-  color: var(--ink);
-  font-size: clamp(1.05rem, 4vw, 1.45rem);
-  line-height: 1.05;
-  font-weight: 950;
-  text-transform: lowercase;
-}
-
-.reviewer {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: rgba(255, 250, 242, 0.8);
-  font-size: 0.88rem;
-  font-weight: 850;
-  text-transform: lowercase;
-}
-
-.reviewer img {
-  width: 46px;
-  height: 46px;
-  flex: 0 0 auto;
-  border: 2px solid rgba(255, 250, 242, 0.68);
-  border-radius: 999px;
-  object-fit: cover;
-}
-
-.tasting-list {
-  display: grid;
-  gap: 9px;
-}
-
-.tasting-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 8px;
-  align-items: center;
-  color: rgba(255, 250, 242, 0.82);
-  font-size: 0.84rem;
-  font-weight: 900;
-  text-transform: lowercase;
-}
-
-.stars {
-  display: inline-flex;
-  gap: 2px;
-  color: rgba(255, 250, 242, 0.28);
-  font-size: 1rem;
-  line-height: 1;
-}
-
-.stars span {
-  display: inline-block;
-  width: 1ch;
-}
-
-.stars .is-filled {
-  color: var(--cream);
-  text-shadow: 0 2px 6px rgba(45, 36, 40, 0.22);
-}
-
 .featured-drink-panel {
   position: relative;
   z-index: 1;
@@ -738,21 +642,9 @@ img {
   }
 
   .hero-stage {
-    grid-template-columns: minmax(170px, 0.76fr) minmax(300px, 1.18fr) minmax(170px, 0.76fr);
+    grid-template-columns: minmax(300px, 1fr);
     gap: 18px;
     margin-top: -8px;
-  }
-
-  .hero-review {
-    justify-self: end;
-    align-self: end;
-    margin-bottom: 42px;
-  }
-
-  .hero-tasting {
-    justify-self: start;
-    align-self: end;
-    margin-bottom: 42px;
   }
 
   .menu-grid {
@@ -792,20 +684,20 @@ img {
 }
 
 @media (max-width: 759px) {
-  .hero-insight {
-    width: min(100%, 420px);
+  .find-us-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    overflow-x: visible;
   }
 
-  .hero-review {
-    order: 2;
+  .find-us-grid article,
+  .instagram-card {
+    width: 100%;
+    min-width: 0;
   }
 
   .featured-drink-panel {
     order: 1;
-  }
-
-  .hero-tasting {
-    order: 3;
   }
 }
 
@@ -825,11 +717,4 @@ img {
     margin-top: 2px;
   }
 
-  .hero-insight {
-    padding: 12px;
-  }
-
-  .tasting-row {
-    font-size: 0.8rem;
-  }
 }
