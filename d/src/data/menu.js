@@ -61,12 +61,3 @@ export const seasonalItems = [
     tags: ["Cold only", "No milk"]
   }
 ];
-
-export const reviews = [
-  { quote: "Clean matcha taste, easy daily drink.", name: "Tan Jun Jie", image: "/images/reviewer-tan-jun-jie.png" },
-  { quote: "Stronger aroma and worth the upgrade.", name: "Regular customer" },
-  { quote: "Bold, grassy, and very pure.", name: "Regular customer" },
-  { quote: "Roasty and mellow, very comforting.", name: "Regular customer" },
-  { quote: "Nutty, smooth, and not too sweet.", name: "Regular customer" },
-  { quote: "Super refreshing after lunch.", name: "Regular customer" }
-];

@@ -1,0 +1,10 @@
+---
+import { withBase } from "../lib/base.js";
+import { homepage } from "../data/site.js";
+---
+
+<section class="menu-preview" aria-labelledby="menu-preview-heading">
+  <p class="eyebrow">{homepage.menuPreview.eyebrow}</p>
+  <h2 id="menu-preview-heading">{homepage.menuPreview.headline}</h2>
+  <a href={withBase("/menu/")}>{homepage.menuPreview.cta} <span aria-hidden="true">→</span></a>
+</section>

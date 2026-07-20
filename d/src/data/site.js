@@ -19,30 +19,23 @@ export const site = {
 
 export const homepage = {
   hero: {
-    eyebrow: "Specialty Matcha & Hojicha Bar · Tanjong Pagar",
-    headline: "Real ceremonial-grade matcha, 5 minutes from your desk.",
+    eyebrow: "Specialty matcha & hojicha",
+    headline: "A quiet matcha bar in Tanjong Pagar.",
     supportingCopy:
-      "Hand-whisked with exclusive Japanese matcha — Mori and Shiran — plus a rotating seasonal menu.",
-    primaryCta: "Get Directions",
-    secondaryCta: "See Today's Menu",
-    seasonalBadge: "Seasonal drinks pouring now"
+      "Hand-whisked with exclusive Japanese matcha at Eon Shenton, a five-minute walk from Tanjong Pagar MRT."
   },
-  socialProofLabel: "What regulars say",
-  seasonal: {
-    eyebrow: "Current seasonal menu",
-    headline: "Seasonal drinks are pouring now.",
-    supportingCopy: "Explore the current seasonal drinks, then get directions to Moof.",
-    cta: "Get Directions — Come Try It"
+  featured: {
+    eyebrow: "A few favourites",
+    headline: "The everyday pour."
   },
-  menuHighlight: {
-    eyebrow: "Every day",
-    headline: "The core lineup",
-    supportingLead: "Made with exclusive Japanese matcha",
-    cta: "View full menu with seasonal drinks →"
+  menuPreview: {
+    eyebrow: "Menu",
+    headline: "Matcha, hojicha, and seasonal drinks.",
+    cta: "See the full menu"
   },
   visit: {
-    eyebrow: "Walk in today",
-    headline: "Find us at Eon Shenton"
+    eyebrow: "Location",
+    headline: "Eon Shenton, Singapore"
   }
 };
 

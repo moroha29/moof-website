@@ -1,0 +1,28 @@
+---
+import { withBase } from "../lib/base.js";
+import { coreItems } from "../data/menu.js";
+import { homepage } from "../data/site.js";
+
+const featuredItems = coreItems.slice(0, 3);
+---
+
+<section class="featured-drinks" aria-labelledby="featured-heading">
+  <div class="section-heading">
+    <p class="eyebrow">{homepage.featured.eyebrow}</p>
+    <h2 id="featured-heading">{homepage.featured.headline}</h2>
+  </div>
+  <ul class="featured-list">
+    {
+      featuredItems.map((item) => (
+        <li>
+          <img src={withBase(item.image)} alt={item.name} loading="lazy" width="320" height="320" />
+          <div>
+            <h3>{item.name}</h3>
+            <p>{item.description}</p>
+            <span>{item.price}</span>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>

@@ -3,49 +3,31 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import MenuRow from "../components/MenuRow.astro";
 import { coreItems, seasonalItems } from "../data/menu.js";
 import { site } from "../data/site.js";
+
+const menuItems = [...coreItems, ...seasonalItems];
 ---
 
 <BaseLayout
   title="Menu — Moof Matcha & Hojicha, Tanjong Pagar"
-  description="Full Moof menu: classic and specialty matcha lattes, hojicha latte, and the current seasonal drinks. Prices and details for the Eon Shenton cafe near Tanjong Pagar MRT."
+  description="Full Moof menu: matcha, hojicha, and seasonal drinks at Eon Shenton in Tanjong Pagar."
 >
   <main class="page-menu">
     <div class="menu-page-heading">
-      <p class="eyebrow">Full menu</p>
-      <h1>Every drink, every price.</h1>
+      <p class="eyebrow">Menu</p>
+      <h1>Matcha, hojicha, and more.</h1>
       <p class="menu-page-sub">
-        Fresh or oat milk on request. Hours: {site.hours} · {site.mrtNote}.
+        Fresh or oat milk on request. {site.hours} · {site.mrtNote}.
       </p>
-      <a class="btn btn-primary" href={site.directionsUrl} target="_blank" rel="noreferrer">Get Directions</a>
     </div>
 
-    <section aria-label="Seasonal drinks" class="menu-list-section seasonal-block">
-      <div class="menu-list-heading">
-        <h2>Seasonal — pouring now</h2>
-        <p>Explore the current seasonal drinks available at Moof.</p>
-      </div>
+    <section aria-label="Moof drinks" class="menu-list-section">
       <ul class="menu-list">
         {
-          seasonalItems.map((item) => <MenuRow item={item} />)
+          menuItems.map((item) => <MenuRow item={item} />)
         }
       </ul>
     </section>
 
-    <section aria-label="Core menu" class="menu-list-section">
-      <div class="menu-list-heading">
-        <h2>Core — every day</h2>
-        <p>Available hot or cold on selected drinks during {site.hours}.</p>
-      </div>
-      <ul class="menu-list">
-        {
-          coreItems.map((item) => <MenuRow item={item} />)
-        }
-      </ul>
-    </section>
-
-    <div class="menu-page-footer-cta">
-      <p>{site.addressLine1}, {site.addressLine2} — {site.mrtNote}.</p>
-      <a class="btn btn-primary" href={site.directionsUrl} target="_blank" rel="noreferrer">Get Directions</a>
-    </div>
+    <p class="menu-page-footer">{site.addressLine1}, {site.addressLine2} · {site.mrtNote}</p>
   </main>
 </BaseLayout>

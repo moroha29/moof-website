@@ -1,21 +1,19 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
-import SocialProof from "../components/SocialProof.astro";
-import SeasonalUrgency from "../components/SeasonalUrgency.astro";
-import MenuHighlight from "../components/MenuHighlight.astro";
+import FeaturedDrinks from "../components/FeaturedDrinks.astro";
+import MenuPreview from "../components/MenuPreview.astro";
 import VisitSection from "../components/VisitSection.astro";
 ---
 
 <BaseLayout
   title="Moof — Specialty Matcha & Hojicha Bar, Tanjong Pagar"
-  description="Moof is a specialty matcha and hojicha bar at Eon Shenton, 5 minutes from Tanjong Pagar MRT. Hand-whisked ceremonial-grade matcha, seasonal drinks, open Mon–Fri 9am–6pm. Get directions and walk in today."
+  description="Moof is a specialty matcha and hojicha bar at Eon Shenton, five minutes from Tanjong Pagar MRT."
 >
   <main class="page-home">
     <Hero />
-    <SocialProof />
-    <SeasonalUrgency />
-    <MenuHighlight />
+    <FeaturedDrinks />
+    <MenuPreview />
     <VisitSection />
   </main>
 </BaseLayout>

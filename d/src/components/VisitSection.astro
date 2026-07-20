@@ -4,7 +4,7 @@ import { homepage, site } from "../data/site.js";
 
 <section class="visit" id="visit" aria-label="Visit Moof">
   <div class="visit-info">
-    <p class="eyebrow eyebrow-light">{homepage.visit.eyebrow}</p>
+    <p class="eyebrow">{homepage.visit.eyebrow}</p>
     <h2>{homepage.visit.headline}</h2>
     <dl>
       <div>
@@ -20,18 +20,6 @@ import { homepage, site } from "../data/site.js";
         <dd>{site.hours}</dd>
       </div>
     </dl>
-    <div class="visit-actions">
-      <a class="btn btn-primary" href={site.directionsUrl} target="_blank" rel="noreferrer">Get Directions</a>
-      <a class="btn btn-ghost" href={site.instagramUrl} target="_blank" rel="noreferrer">{site.instagramHandle}</a>
-    </div>
-  </div>
-
-  <div class="visit-map">
-    <iframe
-      title="Map to Moof, 70 Shenton Way #01-15 Eon Shenton, Singapore"
-      src={site.mapEmbedUrl}
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
-    />
+    <a class="quiet-link" href={site.directionsUrl} target="_blank" rel="noreferrer">Open in Maps <span aria-hidden="true">→</span></a>
   </div>
 </section>

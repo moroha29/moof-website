@@ -1,6 +1,6 @@
 ---
 import { withBase } from "../lib/base.js";
-import { homepage, site } from "../data/site.js";
+import { homepage } from "../data/site.js";
 ---
 
 <section class="hero">
@@ -8,40 +8,16 @@ import { homepage, site } from "../data/site.js";
     <p class="eyebrow">{homepage.hero.eyebrow}</p>
     <h1>{homepage.hero.headline}</h1>
     <p class="hero-sub">{homepage.hero.supportingCopy}</p>
-
-    <div class="hero-actions">
-      <a class="btn btn-primary" href={site.directionsUrl} target="_blank" rel="noreferrer">
-        {homepage.hero.primaryCta}
-      </a>
-      <a class="btn btn-ghost" href={withBase("/menu/")}>{homepage.hero.secondaryCta}</a>
-    </div>
-
-    <ul class="hero-facts" aria-label="Visit details">
-      <li><span aria-hidden="true">📍</span> {site.addressLine1}, {site.addressLine2}</li>
-      <li><span aria-hidden="true">🚶</span> {site.mrtNote}</li>
-      <li><span aria-hidden="true">🕘</span> {site.hours}</li>
-    </ul>
   </div>
-
-  <div class="hero-art" aria-hidden="true">
-    <div class="hero-blob"></div>
+  <div class="hero-art">
     <img
       src={withBase("/images/specialty-matcha-latte-cutout.png")}
-      alt=""
-      class="hero-drink hero-drink-1"
+      alt="Specialty Matcha Latte"
+      class="hero-drink"
       loading="eager"
       fetchpriority="high"
-      width="420"
-      height="420"
+      width="560"
+      height="560"
     />
-    <img
-      src={withBase("/images/strawberry-royal-matcha-cutout.png")}
-      alt=""
-      class="hero-drink hero-drink-2"
-      loading="eager"
-      width="220"
-      height="220"
-    />
-    <span class="hero-badge">{homepage.hero.seasonalBadge}</span>
   </div>
 </section>

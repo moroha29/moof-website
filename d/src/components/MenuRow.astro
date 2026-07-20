@@ -9,27 +9,21 @@ interface Props {
     image: string;
     tags: string[];
   };
-  variant?: "core" | "menu";
 }
 
-const { item, variant = "menu" } = Astro.props;
-const isCore = variant === "core";
-const classes = isCore
-  ? { item: "core-item", body: "core-item-body", top: "core-item-top" }
-  : { item: "menu-list-item", body: "menu-list-item-body", top: "menu-list-item-top" };
-const imageSize = isCore ? 80 : 88;
+const { item } = Astro.props;
 ---
 
-<li class={classes.item}>
+<li class="menu-list-item">
   <img
     src={withBase(item.image)}
     alt={item.name}
     loading="lazy"
-    width={imageSize}
-    height={imageSize}
+    width="112"
+    height="112"
   />
-  <div class={classes.body}>
-    <div class={classes.top}>
+  <div class="menu-list-item-body">
+    <div class="menu-list-item-top">
       <h3>{item.name}</h3>
       <span class="price">{item.price}</span>
     </div>
