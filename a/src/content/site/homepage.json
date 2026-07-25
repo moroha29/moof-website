@@ -2,9 +2,19 @@
   "storeName": "Moof",
   "logoText": "Moof",
   "nav": [
-    { "label": "Menu", "href": "#menu" },
-    { "label": "About", "href": "#about" },
-    { "label": "IG", "href": "https://www.instagram.com/moof__bar/", "external": true }
+    {
+      "label": "Menu",
+      "href": "#menu"
+    },
+    {
+      "label": "About",
+      "href": "#about"
+    },
+    {
+      "label": "IG",
+      "href": "https://www.instagram.com/moof__bar/",
+      "external": true
+    }
   ],
   "hero": {
     "eyebrow": "Specialty Matcha",
@@ -21,7 +31,7 @@
       "specialty-usucha",
       "classic-hojicha-latte"
     ],
-    "announcement": "seasonal drinks are pouring now."
+    "announcement": "management portal test — it works."
   },
   "ingredients": [
     {
