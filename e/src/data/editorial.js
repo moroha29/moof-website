@@ -12,7 +12,7 @@ export const editorialMedia = [
   {
     href: "#story",
     label: "Made at the counter",
-    title: "The counter",
+    title: "Our story",
     image: { src: "/images/editorial/02-counter.jpg", alt: "A matcha drink being prepared at Moof", credit, focal: "center" }
   },
   {

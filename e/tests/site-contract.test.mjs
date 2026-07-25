@@ -21,6 +21,7 @@ test("Design E is a Pages-ready editorial variant with approved local media", ()
   assert.match(workflow, /for dir in a b c d e;/);
   assert.match(siteData, /Photos: Zawani Abdul Ghani \/ HungryGoWhere/);
   assert.match(mediaData, /editorial\/01-moof-exterior\.jpg/);
+  assert.match(mediaData, /title: "Our story"/);
   assert.match(baseHelper, /base\.endsWith\("\/"\)/);
 });
 
