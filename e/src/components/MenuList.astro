@@ -1,0 +1,20 @@
+---
+const { title, items } = Astro.props;
+---
+
+<section class="menu-list" aria-labelledby={`${title.toLowerCase()}-menu-heading`}>
+  <h2 id={`${title.toLowerCase()}-menu-heading`}>{title}</h2>
+  <div>
+    {items.map((item) => (
+      <details>
+        <summary><span>{item.name}</span><b>{item.price}</b></summary>
+        <div class="menu-detail">
+          <p>{item.description}</p>
+          <p class="menu-serving">{item.serving}</p>
+          <p><strong>Ingredients</strong> {item.specialIngredients}</p>
+          <p><strong>Why it stands out</strong> {item.distinctivePoint}</p>
+        </div>
+      </details>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,13 @@
+---
+import { site } from "../data/site.js";
+---
+
+<section id="visit" class="visit-section" aria-labelledby="visit-heading">
+  <p class="section-kicker">Find Moof</p>
+  <h2 id="visit-heading">A small stop in the CBD.</h2>
+  <div class="visit-details">
+    <p>{site.visit.address}</p>
+    <p>{site.visit.hours}<br />{site.visit.mrt}</p>
+    <a href={site.visit.instagramUrl} target="_blank" rel="noreferrer">{site.visit.instagram} <span aria-hidden="true">↗</span></a>
+  </div>
+</section>

@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import MenuList from "../components/MenuList.astro";
+import Footer from "../components/Footer.astro";
+import { coreMenu, seasonalMenu } from "../data/menu.js";
+import { menuMedia } from "../data/editorial.js";
+import { site } from "../data/site.js";
+import { withBase } from "../lib/base.js";
+---
+
+<BaseLayout title={`Menu — ${site.name}`} description="Moof's matcha and hojicha menu.">
+  <Header />
+  <main class="menu-page">
+    <section class="menu-intro"><p>Moof, Eon Shenton</p><h1>Menu</h1><span>Hand-whisked tea, fresh milk or oat milk where listed.</span></section>
+    <figure class="menu-image"><img src={withBase(menuMedia[0].src)} alt={menuMedia[0].alt} /><figcaption>{menuMedia[0].credit}</figcaption></figure>
+    <MenuList title="Core" items={coreMenu} />
+    <figure class="menu-image menu-image--wide"><img src={withBase(menuMedia[1].src)} alt={menuMedia[1].alt} /><figcaption>{menuMedia[1].credit}</figcaption></figure>
+    <MenuList title="Seasonal" items={seasonalMenu} />
+  </main>
+  <Footer />
+</BaseLayout>

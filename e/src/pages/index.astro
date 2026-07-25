@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import EditorialPanel from "../components/EditorialPanel.astro";
+import VisitSection from "../components/VisitSection.astro";
+import Footer from "../components/Footer.astro";
+import { editorialMedia } from "../data/editorial.js";
+import { site } from "../data/site.js";
+---
+
+<BaseLayout title={site.seo.title} description={site.seo.description}>
+  <Header />
+  <main>
+    <section class="intro" aria-labelledby="intro-heading">
+      <p>Shenton Way · Singapore</p>
+      <h1 id="intro-heading">Matcha and hojicha, made slowly.</h1>
+    </section>
+    <section class="editorial-index" aria-label="Explore Moof">
+      {editorialMedia.map((item) => <EditorialPanel item={item} />)}
+    </section>
+    <section id="story" class="story-section" aria-labelledby="story-heading">
+      <p class="section-kicker">The beginning</p>
+      <h2 id="story-heading">{site.story.title}</h2>
+      <p>{site.story.copy}</p>
+    </section>
+    <VisitSection />
+  </main>
+  <Footer />
+</BaseLayout>

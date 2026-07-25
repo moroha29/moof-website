@@ -1,0 +1,14 @@
+---
+import { withBase } from "../lib/base.js";
+
+const { item } = Astro.props;
+---
+
+<a class="editorial-panel" href={withBase(item.href)}>
+  <img src={withBase(item.image.src)} alt={item.image.alt} loading="lazy" />
+  <span class="editorial-panel__shade" aria-hidden="true"></span>
+  <span class="editorial-panel__copy">
+    <span>{item.label}</span>
+    <strong>{item.title}</strong>
+  </span>
+</a>
