@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import TeamSection from "../components/TeamSection.astro";
 import { sortMenusForDisplay } from "../lib/carousel.js";
 import { withBase } from "../lib/base.js";
 
@@ -85,6 +86,13 @@ const previewDrinks = activeDrinks.slice(0, 3);
       </div>
     </section>
 
+    <TeamSection
+      eyebrow={homepage.data.team.eyebrow}
+      heading={homepage.data.team.heading}
+      intro={homepage.data.team.intro}
+      members={homepage.data.team.members}
+    />
+
     <section class="menu-preview" aria-labelledby="preview-heading">
       <div class="section-intro section-intro-inline">
         <div>
@@ -102,6 +110,12 @@ const previewDrinks = activeDrinks.slice(0, 3);
               <div class="drink-title"><h3>{drink.name}</h3><strong>{drink.price}</strong></div>
               <p>{drink.description}</p>
               <span class="drink-options">{drink.temperatureOptions.join(" / ")} · {drink.milkOptions.join(" / ")}</span>
+              {drink.signature && (
+                <details class="signature-detail">
+                  <summary>What makes it signature <span aria-hidden="true">＋</span></summary>
+                  <p>{drink.signature}</p>
+                </details>
+              )}
             </div>
           </article>
         ))}

@@ -57,5 +57,30 @@
     "operatingHours": "mon-fri, 9am-6pm",
     "instagramLabel": "@moof__bar",
     "instagramUrl": "https://www.instagram.com/moof__bar/"
+  },
+  "team": {
+    "eyebrow": "Meet the counter",
+    "heading": "the people behind the counter.",
+    "intro": "a small crew of baristas and matcha nerds who taste every seasonal batch before it goes on the board.",
+    "members": [
+      {
+        "name": "mei tan",
+        "role": "head barista",
+        "bio": "whisks every bowl by hand and keeps the seasonal pours consistent from open to close.",
+        "image": "/images/team/mei-tan.jpg"
+      },
+      {
+        "name": "arif rahman",
+        "role": "matcha specialist",
+        "bio": "sources and tastes each batch of mori and shiran before it ever reaches the counter.",
+        "image": "/images/team/arif-rahman.jpg"
+      },
+      {
+        "name": "priya nair",
+        "role": "pastry & bakes",
+        "bio": "bakes the daily small-batch treats that pair with the counter's matcha and hojicha.",
+        "image": "/images/team/priya-nair.jpg"
+      }
+    ]
   }
 }

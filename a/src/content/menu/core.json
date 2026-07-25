@@ -8,6 +8,7 @@
       "category": "Specialty Matcha / Hojicha",
       "price": "$7",
       "description": "Layered matcha and milk with a soft, clean finish.",
+      "signature": "made with shiran, the smoother of moof's two matcha, whisked fresh per cup so the milk sits soft instead of foamy.",
       "image": "/images/classic-matcha-latte-cutout.png",
       "review": {
         "quote": "clean matcha taste, easy daily drink",
@@ -31,6 +32,7 @@
       "category": "Specialty Matcha / Hojicha",
       "price": "$9",
       "description": "A richer pour using Moof's exclusive matcha profile.",
+      "signature": "built on mori, moof's deeper matcha, double-whisked for extra body before the milk goes in.",
       "image": "/images/specialty-matcha-latte-cutout.png",
       "review": {
         "quote": "stronger aroma and worth the upgrade",
@@ -54,6 +56,7 @@
       "category": "Specialty Matcha / Hojicha",
       "price": "$8",
       "description": "A pure matcha serve with no milk.",
+      "signature": "a traditional thin-tea usucha whisk, no milk, so mori's rounded body carries the whole cup.",
       "image": "/images/specialty-usucha-cutout.png",
       "review": {
         "quote": "bold, grassy, and very pure",
@@ -77,6 +80,7 @@
       "category": "Specialty Matcha / Hojicha",
       "price": "$7",
       "description": "Roasty hojicha layered with milk for a mellow finish.",
+      "signature": "roasted hojicha is steeped hot before it's chilled, so the roastiness stays forward even over ice.",
       "image": "/images/classic-hojicha-latte-cutout.png",
       "review": {
         "quote": "roasty and mellow, very comforting",

@@ -1,0 +1,28 @@
+---
+import { withBase } from "../lib/base.js";
+import { site } from "../data/site.js";
+---
+
+<section class="section team">
+  <div class="wrap">
+    <div class="section-intro">
+      <p class="eyebrow">{site.team.eyebrow}</p>
+      <h2>{site.team.heading}</h2>
+      <p>{site.team.intro}</p>
+    </div>
+    <div class="team-grid">
+      {
+        site.team.members.map((member) => (
+          <article class="team-card">
+            <div class="team-photo">
+              <img src={withBase(member.image)} alt={member.imageAlt} loading="lazy" />
+            </div>
+            <p class="team-role">{member.role}</p>
+            <h3>{member.name}</h3>
+            <p>{member.bio}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

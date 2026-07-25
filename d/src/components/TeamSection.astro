@@ -1,0 +1,31 @@
+---
+import { withBase } from "../lib/base.js";
+import { homepage, team } from "../data/site.js";
+---
+
+<section class="team" aria-labelledby="team-heading">
+  <div class="section-heading">
+    <p class="eyebrow">{homepage.team.eyebrow}</p>
+    <h2 id="team-heading">{homepage.team.headline}</h2>
+  </div>
+  <ul class="team-list">
+    {
+      team.map((person) => (
+        <li>
+          <img
+            src={withBase(person.image)}
+            alt={person.name}
+            loading="lazy"
+            width="200"
+            height="200"
+          />
+          <div>
+            <h3>{person.name}</h3>
+            <p class="team-role">{person.role}</p>
+            <p class="team-bio">{person.bio}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>

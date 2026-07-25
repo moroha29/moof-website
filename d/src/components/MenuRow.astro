@@ -8,6 +8,7 @@ interface Props {
     description: string;
     image: string;
     tags: string[];
+    signature?: string;
   };
 }
 
@@ -29,5 +30,13 @@ const { item } = Astro.props;
     </div>
     <p>{item.description}</p>
     <span class="tags">{item.tags.join(" · ")}</span>
+    {
+      item.signature && (
+        <details class="menu-signature">
+          <summary>What makes it Moof's</summary>
+          <p>{item.signature}</p>
+        </details>
+      )
+    }
   </div>
 </li>

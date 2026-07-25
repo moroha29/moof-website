@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap");
+
 :root {
   --ink: #161916;
   --muted: #656963;
@@ -5,6 +7,7 @@
   --paper: #fafaf8;
   --moof-green: #2f6b42;
   --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
 }
 
 * {
@@ -52,9 +55,10 @@ ul {
 h1,
 h2,
 h3 {
-  font-weight: 760;
-  letter-spacing: -0.055em;
-  line-height: 0.98;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.04;
 }
 
 .eyebrow {
@@ -112,6 +116,7 @@ h3 {
 .featured-drinks,
 .menu-preview,
 .visit,
+.team,
 .page-menu {
   width: min(100% - 2.5rem, 1180px);
   margin: 0 auto;
@@ -132,6 +137,7 @@ h3 {
 .section-heading .eyebrow,
 .menu-preview .eyebrow,
 .visit .eyebrow,
+.team .eyebrow,
 .menu-page-heading .eyebrow {
   margin-bottom: 1.15rem;
 }
@@ -168,6 +174,7 @@ h3 {
 .section-heading h2,
 .menu-preview h2,
 .visit h2,
+.team h2,
 .menu-page-heading h1 {
   max-width: 15ch;
   font-size: clamp(2.35rem, 6vw, 5rem);
@@ -263,6 +270,83 @@ h3 {
   display: inline-block;
   margin-top: 2rem;
   color: var(--moof-green);
+}
+
+.team {
+  padding: clamp(4rem, 9vw, 7rem) 0;
+  border-top: 1px solid var(--line);
+}
+
+.team-list {
+  display: grid;
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+.team-list li {
+  display: grid;
+  gap: 1.1rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.team-list img {
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.team-list h3 {
+  font-size: 1.4rem;
+}
+
+.team-role {
+  margin-top: 0.3rem;
+  color: var(--moof-green);
+  font-family: var(--font);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.team-bio {
+  margin-top: 0.6rem;
+  max-width: 30rem;
+  color: var(--muted);
+}
+
+.menu-signature {
+  margin-top: 0.85rem;
+}
+
+.menu-signature summary {
+  cursor: pointer;
+  color: var(--moof-green);
+  font-family: var(--font);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.menu-signature summary::marker {
+  color: var(--moof-green);
+}
+
+.menu-signature summary:hover,
+.menu-signature summary:focus-visible {
+  color: var(--ink);
+}
+
+.menu-signature[open] summary {
+  margin-bottom: 0.55rem;
+}
+
+.menu-signature p {
+  max-width: 32rem;
+  color: var(--muted);
+  font-size: 0.88rem;
 }
 
 .site-footer {
@@ -387,6 +471,16 @@ h3 {
   }
 
   .featured-list li {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .team-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+  }
+
+  .team-list li {
     padding-bottom: 0;
     border-bottom: 0;
   }

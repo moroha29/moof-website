@@ -20,6 +20,14 @@ const featuredItems = coreItems.slice(0, 3);
             <h3>{item.name}</h3>
             <p>{item.description}</p>
             <span>{item.price}</span>
+            {
+              item.signature && (
+                <details class="menu-signature">
+                  <summary>What makes it Moof's</summary>
+                  <p>{item.signature}</p>
+                </details>
+              )
+            }
           </div>
         </li>
       ))

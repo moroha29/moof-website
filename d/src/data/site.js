@@ -36,8 +36,36 @@ export const homepage = {
   visit: {
     eyebrow: "Location",
     headline: "Eon Shenton, Singapore"
+  },
+  team: {
+    eyebrow: "Team",
+    headline: "Who's behind the counter."
   }
 };
+
+export const team = [
+  {
+    id: "wei-ling-tan",
+    name: "Wei Ling Tan",
+    role: "Bar Lead",
+    bio: "Runs morning matcha prep and checks each batch before service starts.",
+    image: "/images/team/wei-ling-tan.jpg"
+  },
+  {
+    id: "arjun-menon",
+    name: "Arjun Menon",
+    role: "Hojicha & Roasting",
+    bio: "Keeps the hojicha roast notes consistent from one week to the next.",
+    image: "/images/team/arjun-menon.jpg"
+  },
+  {
+    id: "haruka-ito",
+    name: "Haruka Ito",
+    role: "Service",
+    bio: "First face at the counter most mornings. Trained in Uji before moving to Singapore.",
+    image: "/images/team/haruka-ito.jpg"
+  }
+];
 
 export const ingredients = [
   {

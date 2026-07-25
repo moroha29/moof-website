@@ -1,0 +1,39 @@
+---
+import { withBase } from "../lib/base.js";
+
+type TeamMember = {
+  name: string;
+  role: string;
+  bio: string;
+  image: string;
+};
+
+interface Props {
+  eyebrow: string;
+  heading: string;
+  intro: string;
+  members: TeamMember[];
+}
+
+const { eyebrow, heading, intro, members } = Astro.props;
+---
+
+<section id="team" class="team-section" aria-labelledby="team-heading">
+  <div class="section-intro">
+    <p class="eyebrow">{eyebrow} <span aria-hidden="true">☺</span></p>
+    <h2 id="team-heading">{heading}</h2>
+    <p>{intro}</p>
+  </div>
+  <div class="team-grid">
+    {
+      members.map((member) => (
+        <article class="team-card">
+          <img src={withBase(member.image)} alt="" loading="lazy" />
+          <span class="team-role">{member.role}</span>
+          <h3>{member.name}</h3>
+          <p>{member.bio}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>

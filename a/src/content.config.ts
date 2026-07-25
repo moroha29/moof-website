@@ -51,6 +51,19 @@ const site = defineCollection({
       operatingHours: z.string(),
       instagramLabel: z.string(),
       instagramUrl: z.string().url()
+    }),
+    team: z.object({
+      eyebrow: z.string(),
+      heading: z.string(),
+      intro: z.string(),
+      members: z.array(
+        z.object({
+          name: z.string(),
+          role: z.string(),
+          bio: z.string(),
+          image: z.string()
+        })
+      )
     })
   })
 });
@@ -68,6 +81,7 @@ const menu = defineCollection({
         category: z.string(),
         price: z.string().regex(/^\$\d+(\.\d{2})?$/),
         description: z.string(),
+        signature: z.string().optional(),
         image: z.string(),
         review: z.object({
           quote: z.string(),

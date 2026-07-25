@@ -9,9 +9,10 @@ interface Props {
   temp: string;
   milk: string;
   image: string;
+  signature?: string;
 }
 
-const { name, price, tag, blurb, temp, milk, image } = Astro.props;
+const { name, price, tag, blurb, temp, milk, image, signature } = Astro.props;
 ---
 
 <article class="drink-card">
@@ -31,5 +32,11 @@ const { name, price, tag, blurb, temp, milk, image } = Astro.props;
       <div><dt>Serve</dt><dd>{temp}</dd></div>
       <div><dt>Choice</dt><dd>{milk}</dd></div>
     </dl>
+    {signature && (
+      <details class="drink-signature">
+        <summary>What makes it this drink</summary>
+        <p>{signature}</p>
+      </details>
+    )}
   </div>
 </article>

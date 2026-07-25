@@ -45,6 +45,12 @@ const menus = sortMenusForDisplay((await getCollection("menu")).map((entry) => e
                     <span>{item.temperatureOptions.join(" / ")}</span>
                     <span>{item.milkOptions.join(" / ")}</span>
                   </div>
+                  {item.signature && (
+                    <details class="signature-detail">
+                      <summary>What makes it signature <span aria-hidden="true">＋</span></summary>
+                      <p>{item.signature}</p>
+                    </details>
+                  )}
                 </div>
               </article>
             ))}

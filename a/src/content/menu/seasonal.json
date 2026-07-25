@@ -9,6 +9,7 @@
       "category": "Seasonal Drinks",
       "price": "$9",
       "description": "Strawberry puree and milk pudding layered with matcha or hojicha.",
+      "signature": "milk pudding is set in-house daily, then layered under mori matcha or hojicha so each sip moves from creamy to grassy.",
       "image": "/images/strawberry-royal-matcha-cutout.png",
       "review": {
         "quote": "this matcha v good",
@@ -32,6 +33,7 @@
       "category": "Seasonal Drinks",
       "price": "$8.50",
       "description": "Black sesame paste and syrup with matcha or hojicha.",
+      "signature": "black sesame paste is toasted and ground in-house, whisked into shiran matcha for a nutty finish that never turns gritty.",
       "image": "/images/black-sesame-matcha-cutout.png",
       "review": {
         "quote": "nutty, smooth, and not too sweet",
@@ -55,6 +57,7 @@
       "category": "Seasonal Drinks",
       "price": "$7",
       "description": "Bright ume and plum iced tea with a tart finish.",
+      "signature": "ume plums are pickled in-house and steeped cold, no matcha at all, for the one bright, tart pour on the board.",
       "image": "/images/pickled-ume-plum-iced-tea-cutout.png",
       "review": {
         "quote": "super refreshing after lunch",

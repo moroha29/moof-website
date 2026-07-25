@@ -149,8 +149,8 @@ h1, h2, h3 {
 .hero { background: var(--mineral); overflow: clip; padding: clamp(3.8rem, 8vw, 7rem) 0; }
 .hero-grid { align-items: center; display: grid; gap: clamp(2.5rem, 7vw, 6rem); grid-template-columns: 1fr 0.92fr; }
 .hero-copy { max-width: 37rem; }
-.hero h1 { font-size: clamp(3.1rem, 6vw, 5.5rem); margin-top: 1rem; }
-.hero-sub { color: var(--muted); font-size: clamp(1.02rem, 1.5vw, 1.15rem); margin-top: 1.35rem; max-width: 34rem; }
+.hero h1 { font-size: clamp(3.6rem, 6.8vw, 6.3rem); margin-top: 1rem; }
+.hero-sub { color: var(--muted); font-size: clamp(1.18rem, 1.8vw, 1.32rem); margin-top: 1.35rem; max-width: 34rem; }
 .hero-actions { align-items: center; display: flex; flex-wrap: wrap; gap: 1.4rem; margin-top: 2rem; }
 .hero-details { color: var(--muted); display: flex; flex-wrap: wrap; gap: 0.8rem 1.35rem; list-style: none; margin: 2.25rem 0 0; padding: 0; }
 .hero-details li::before { color: var(--warm); content: "•"; padding-right: 0.45rem; }
@@ -175,6 +175,15 @@ h1, h2, h3 {
 .ritual li { color: var(--ink); display: grid; font-size: 0.93rem; gap: 0.6rem; }
 .ritual li span { color: var(--warm); font-family: var(--font-display); font-size: 1.4rem; }
 
+.team { background: #fff; }
+.team-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 2.7rem; }
+.team-card { background: var(--mineral); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.4rem, 3vw, 2.1rem); }
+.team-photo { align-items: center; aspect-ratio: 1 / 1; background: linear-gradient(145deg, #eff0e8, #e5eadf); border-radius: calc(var(--radius) - 0.3rem); display: flex; justify-content: center; margin-bottom: 1.2rem; overflow: hidden; }
+.team-photo img { height: 100%; object-fit: cover; width: 100%; }
+.team-role { color: var(--warm); font-size: 0.86rem; font-weight: 600; }
+.team-card h3 { font-size: clamp(1.5rem, 2.5vw, 1.9rem); margin-top: 0.25rem; }
+.team-card > p:last-child { color: var(--muted); font-size: 0.92rem; margin-top: 0.9rem; }
+
 .menu-showcase { background: var(--mineral); }
 .choice-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 2.7rem; }
 .drink-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); display: flex; flex-direction: column; min-width: 0; overflow: hidden; }
@@ -188,6 +197,13 @@ h1, h2, h3 {
 .drink-meta { border-top: 1px solid var(--line); display: grid; gap: 0.6rem; grid-template-columns: 1fr 1fr; margin: auto 0 0; padding-top: 1rem; }
 .drink-meta dt { color: var(--sage-deep); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
 .drink-meta dd { font-size: 0.77rem; margin: 0.15rem 0 0; }
+.drink-signature { border-top: 1px solid var(--line); margin-top: 1rem; padding-top: 0.9rem; }
+.drink-signature summary { align-items: center; color: var(--sage-deep); cursor: pointer; display: flex; font-size: 0.72rem; font-weight: 600; gap: 0.45rem; letter-spacing: 0.08em; list-style: none; text-transform: uppercase; }
+.drink-signature summary::-webkit-details-marker { display: none; }
+.drink-signature summary::before { content: "+"; font-size: 0.95rem; }
+.drink-signature[open] summary::before { content: "\2013"; }
+.drink-signature summary:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.drink-signature p { color: var(--muted); font-size: 0.85rem; margin-top: 0.65rem; }
 .menu-preview { align-items: center; background: var(--sage); border-radius: var(--radius); display: grid; gap: 1.5rem; grid-template-columns: 1fr 1fr auto; margin-top: 1rem; padding: clamp(1.5rem, 4vw, 2.5rem); }
 .menu-preview h3 { font-size: clamp(1.75rem, 3vw, 2.5rem); margin-top: 0.7rem; }
 .menu-preview > p { color: #344534; font-size: 0.92rem; }
@@ -226,6 +242,8 @@ h1, h2, h3 {
   .site-header { padding-inline: 1.25rem; }
   .choice-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .choice-grid .drink-card:last-child { grid-column: span 2; }
+  .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .team-grid .team-card:last-child { grid-column: span 2; }
   .footer-grid { grid-template-columns: auto 1fr; }
   .footer-links { justify-self: end; }
 }
@@ -250,7 +268,9 @@ h1, h2, h3 {
 @media (max-width: 520px) {
   .choice-grid { grid-template-columns: 1fr; }
   .choice-grid .drink-card:last-child { grid-column: auto; }
-  .hero h1, .page-hero h1 { font-size: 3rem; }
+  .team-grid { grid-template-columns: 1fr; }
+  .team-grid .team-card:last-child { grid-column: auto; }
+  .hero h1, .page-hero h1 { font-size: 3.5rem; }
   .menu-grid .drink-card { grid-template-columns: 1fr; }
   .menu-grid .drink-media { aspect-ratio: 1.4 / 0.85; }
   .drink-meta { grid-template-columns: 1fr; }
