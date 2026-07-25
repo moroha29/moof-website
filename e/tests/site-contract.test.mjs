@@ -29,6 +29,8 @@ test("the Lula-inspired home stays an image-led index with a readable mobile lay
   assert.match(homePage, /<EditorialPanel item=\{item\} \/>/);
   assert.match(css, /overflow-x:\s*clip/);
   assert.match(css, /\.editorial-panel/);
+  assert.match(css, /@media\s*\(min-width:\s*900px\)[\s\S]*\.editorial-index\s*\{[^}]*grid-template-columns:/);
+  assert.match(css, /\.editorial-panel:nth-child\(1\)\s*\{[^}]*grid-row:\s*span 2;/);
 });
 
 test("the menu is a complete, expandable list with factual drink detail", () => {
