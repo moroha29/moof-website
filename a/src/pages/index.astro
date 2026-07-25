@@ -110,21 +110,7 @@ const previewDrinks = activeDrinks.slice(0, 3);
               <div class="drink-title"><h3>{drink.name}</h3><strong>{drink.price}</strong></div>
               <p>{drink.description}</p>
               <span class="drink-options">{drink.temperatureOptions.join(" / ")} · {drink.milkOptions.join(" / ")}</span>
-              {drink.signature && (
-                <>
-                  <button type="button" class="signature-trigger" data-dialog-target={`signature-preview-${drink.id}`}>
-                    What makes it signature <span aria-hidden="true">＋</span>
-                  </button>
-                  <dialog class="signature-dialog" id={`signature-preview-${drink.id}`}>
-                    <div class="signature-dialog-content">
-                      <button type="button" class="signature-dialog-close" data-dialog-close aria-label="Close">✕</button>
-                      <p class="signature-dialog-label">What makes it signature</p>
-                      <h3>{drink.name}</h3>
-                      <p>{drink.signature}</p>
-                    </div>
-                  </dialog>
-                </>
-              )}
+              {drink.signature && <p class="signature-line">{drink.signature}</p>}
             </div>
           </article>
         ))}
@@ -156,29 +142,3 @@ const previewDrinks = activeDrinks.slice(0, 3);
     </section>
   </main>
 </BaseLayout>
-
-<script>
-  document.addEventListener("click", (event) => {
-    const target = event.target;
-    if (!(target instanceof Element)) return;
-
-    const trigger = target.closest("[data-dialog-target]");
-    if (trigger) {
-      const dialogId = trigger.getAttribute("data-dialog-target");
-      const dialog = dialogId ? document.getElementById(dialogId) : null;
-      if (dialog instanceof HTMLDialogElement) dialog.showModal();
-      return;
-    }
-
-    const closeButton = target.closest("[data-dialog-close]");
-    if (closeButton) {
-      const dialog = closeButton.closest("dialog");
-      if (dialog instanceof HTMLDialogElement) dialog.close();
-      return;
-    }
-
-    if (target instanceof HTMLDialogElement) {
-      target.close();
-    }
-  });
-</script>
