@@ -50,10 +50,66 @@ const activeItems = items.filter((item) => item.active);
               {item.temperatureOptions.map((option) => <span>{option}</span>)}
               {item.milkOptions.map((option) => <span>{option}</span>)}
             </div>
-            {item.signature && <p class="signature-line">{item.signature}</p>}
+            {item.signature && (
+              <>
+                <button type="button" class="signature-trigger" popovertarget={`signature-section-${item.id}`}>
+                  What makes it signature <span aria-hidden="true">＋</span>
+                </button>
+                <div id={`signature-section-${item.id}`} popover class="signature-flyout">
+                  <button type="button" class="signature-flyout-close" popovertarget={`signature-section-${item.id}`} popovertargetaction="hide" aria-label="Close">✕</button>
+                  <p class="signature-flyout-label">What makes it signature</p>
+                  <h3>{item.name}</h3>
+                  <p>{item.signature}</p>
+                </div>
+              </>
+            )}
           </div>
         </article>
       ))
     }
   </div>
 </section>
+
+<script>
+  const positionSignatureFlyout = (popover: HTMLElement, event: Event) => {
+    const toggleEvent = event as ToggleEvent;
+    if (toggleEvent.newState !== "open") return;
+
+    // Clear any prior inline placement first so the mobile bottom-sheet CSS can take over cleanly.
+    popover.style.top = "";
+    popover.style.left = "";
+
+    if (window.innerWidth <= 640) return;
+
+    const trigger = document.querySelector(`[popovertarget="${popover.id}"]`);
+    if (!(trigger instanceof HTMLElement)) return;
+
+    const triggerRect = trigger.getBoundingClientRect();
+    const margin = 8;
+
+    popover.style.top = `${triggerRect.bottom + margin}px`;
+    popover.style.left = `${triggerRect.left}px`;
+
+    requestAnimationFrame(() => {
+      const popoverRect = popover.getBoundingClientRect();
+      let top = triggerRect.bottom + margin;
+      let left = triggerRect.left;
+
+      if (left + popoverRect.width > window.innerWidth - margin) {
+        left = Math.max(margin, window.innerWidth - popoverRect.width - margin);
+      }
+
+      if (top + popoverRect.height > window.innerHeight - margin) {
+        const above = triggerRect.top - popoverRect.height - margin;
+        top = above >= margin ? above : Math.max(margin, window.innerHeight - popoverRect.height - margin);
+      }
+
+      popover.style.top = `${top}px`;
+      popover.style.left = `${left}px`;
+    });
+  };
+
+  document.querySelectorAll<HTMLElement>(".signature-flyout").forEach((popover) => {
+    popover.addEventListener("beforetoggle", (event) => positionSignatureFlyout(popover, event));
+  });
+</script>

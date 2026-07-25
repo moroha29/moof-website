@@ -20,7 +20,7 @@ const featuredItems = coreItems.slice(0, 3);
             .toLowerCase()
             .replace(/[^a-z0-9]+/g, "-")
             .replace(/^-+|-+$/g, "");
-        const dialogId = `featured-signature-dialog-${slug}`;
+        const dialogId = `featured-signature-flyout-${slug}`;
 
         return (
           <li>
@@ -35,19 +35,23 @@ const featuredItems = coreItems.slice(0, 3);
                     <button
                       type="button"
                       class="signature-trigger"
-                      data-dialog-target={dialogId}
+                      popovertarget={dialogId}
                     >
                       What makes it Moof's
                     </button>
-                    <dialog class="signature-dialog" id={dialogId}>
-                      <div class="signature-dialog-inner">
-                        <button type="button" class="signature-dialog-close" data-dialog-close aria-label="Close">
-                          &times;
-                        </button>
-                        <h3>{item.name}</h3>
-                        <p>{item.signature}</p>
-                      </div>
-                    </dialog>
+                    <div id={dialogId} popover class="signature-flyout">
+                      <button
+                        type="button"
+                        class="signature-flyout-close"
+                        popovertarget={dialogId}
+                        popovertargetaction="hide"
+                        aria-label="Close"
+                      >
+                        &times;
+                      </button>
+                      <h3>{item.name}</h3>
+                      <p>{item.signature}</p>
+                    </div>
                   </>
                 )
               }
@@ -60,28 +64,36 @@ const featuredItems = coreItems.slice(0, 3);
 </section>
 
 <script>
-  document.addEventListener("click", (event) => {
-    const target = event.target as HTMLElement;
+  document.querySelectorAll<HTMLElement>(".signature-flyout").forEach((popoverEl) => {
+    popoverEl.addEventListener("beforetoggle", (event) => {
+      const toggleEvent = event as ToggleEvent;
+      if (toggleEvent.newState !== "open") return;
+      if (window.innerWidth <= 640) return;
 
-    const opener = target.closest<HTMLElement>("[data-dialog-target]");
-    if (opener) {
-      const id = opener.getAttribute("data-dialog-target");
-      const dialog = id && document.getElementById(id);
-      if (dialog instanceof HTMLDialogElement) {
-        dialog.showModal();
+      const trigger = document.querySelector<HTMLElement>(
+        `[popovertarget="${popoverEl.id}"]`
+      );
+      if (!trigger) return;
+
+      const triggerRect = trigger.getBoundingClientRect();
+      const popoverRect = popoverEl.getBoundingClientRect();
+      const margin = 8;
+
+      let top = triggerRect.bottom + margin;
+      let left = triggerRect.left;
+
+      if (top + popoverRect.height > window.innerHeight) {
+        top = triggerRect.top - popoverRect.height - margin;
       }
-      return;
-    }
+      if (top < margin) top = margin;
 
-    const closer = target.closest<HTMLElement>("[data-dialog-close]");
-    if (closer) {
-      const dialog = closer.closest("dialog");
-      dialog?.close();
-      return;
-    }
+      if (left + popoverRect.width > window.innerWidth) {
+        left = window.innerWidth - popoverRect.width - margin;
+      }
+      if (left < margin) left = margin;
 
-    if (target instanceof HTMLDialogElement) {
-      target.close();
-    }
+      popoverEl.style.top = `${top}px`;
+      popoverEl.style.left = `${left}px`;
+    });
   });
 </script>

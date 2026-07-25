@@ -335,32 +335,25 @@ h3 {
   color: var(--ink);
 }
 
-.signature-dialog {
-  max-width: min(28rem, calc(100% - 2.5rem));
-  margin: auto;
-  padding: 0;
+.signature-flyout {
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  max-width: min(24rem, calc(100% - 2.5rem));
+  padding: 2rem;
   border: none;
   border-radius: 1rem;
   background: var(--paper);
   color: var(--ink);
 }
 
-.signature-dialog::backdrop {
-  background: rgba(22, 25, 22, 0.55);
-}
-
-.signature-dialog-inner {
-  position: relative;
-  padding: 2rem;
-}
-
-.signature-dialog h3 {
+.signature-flyout h3 {
   padding-right: 1.5rem;
   font-family: var(--font-serif);
   font-size: 1.5rem;
 }
 
-.signature-dialog p {
+.signature-flyout p {
   margin-top: 0.75rem;
   max-width: 32rem;
   color: var(--muted);
@@ -369,7 +362,7 @@ h3 {
   line-height: 1.55;
 }
 
-.signature-dialog-close {
+.signature-flyout-close {
   position: absolute;
   top: 0.9rem;
   right: 0.9rem;
@@ -387,16 +380,15 @@ h3 {
   cursor: pointer;
 }
 
-.signature-dialog-close:hover,
-.signature-dialog-close:focus-visible {
+.signature-flyout-close:hover,
+.signature-flyout-close:focus-visible {
   color: var(--ink);
   border-color: var(--moof-green);
 }
 
 @media (max-width: 640px) {
-  .signature-dialog { position: fixed; inset: auto 0 0; width: 100%; max-width: none; margin: 0; border-radius: 1rem 1rem 0 0; }
-  .signature-dialog::before { content: ""; position: absolute; top: 10px; left: 50%; width: 38px; height: 4px; border-radius: 99px; background: var(--line); transform: translateX(-50%); }
-  .signature-dialog-inner { padding: 2rem 1.5rem calc(1.75rem + env(safe-area-inset-bottom)); }
+  .signature-flyout { position: fixed; inset: auto 0 0; width: 100%; max-width: none; margin: 0; padding: 2rem 1.5rem calc(1.75rem + env(safe-area-inset-bottom)); border-radius: 1rem 1rem 0 0; }
+  .signature-flyout::before { content: ""; position: absolute; top: 10px; left: 50%; width: 38px; height: 4px; border-radius: 99px; background: var(--line); transform: translateX(-50%); }
 }
 
 .site-footer {

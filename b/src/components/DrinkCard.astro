@@ -14,7 +14,7 @@ interface Props {
 }
 
 const { id, name, price, tag, blurb, temp, milk, image, signature } = Astro.props;
-const dialogId = `signature-${id}`;
+const popoverId = `signature-${id}`;
 ---
 
 <article class="drink-card">
@@ -39,49 +39,102 @@ const dialogId = `signature-${id}`;
         <button
           type="button"
           class="drink-signature-trigger"
-          data-dialog-target={dialogId}
-          aria-haspopup="dialog"
+          popovertarget={popoverId}
         >
           What makes it this drink
         </button>
-        <dialog class="drink-signature-dialog" id={dialogId}>
-          <div class="drink-signature-panel">
-            <button type="button" class="drink-signature-close" data-dialog-close aria-label="Close">
-              &times;
-            </button>
-            <p class="drink-signature-eyebrow">What makes it this drink</p>
-            <h4>{name}</h4>
-            <p class="drink-signature-copy">{signature}</p>
-          </div>
-        </dialog>
+        <div id={popoverId} popover class="drink-signature-flyout">
+          <button
+            type="button"
+            class="drink-signature-close"
+            popovertarget={popoverId}
+            popovertargetaction="hide"
+            aria-label="Close"
+          >
+            &times;
+          </button>
+          <p class="drink-signature-eyebrow">What makes it this drink</p>
+          <h4>{name}</h4>
+          <p class="drink-signature-copy">{signature}</p>
+        </div>
       </>
     )}
   </div>
 </article>
 
 <script>
-  document.addEventListener("click", (event) => {
-    const target = event.target as HTMLElement;
+  const MOBILE_BREAKPOINT = 640;
+  const GAP = 8;
 
-    const trigger = target.closest<HTMLElement>("[data-dialog-target]");
-    if (trigger) {
-      const dialogId = trigger.dataset.dialogTarget;
-      const dialog = dialogId ? document.getElementById(dialogId) : null;
-      if (dialog instanceof HTMLDialogElement) {
-        dialog.showModal();
-      }
-      return;
+  function placeNear(popoverEl: HTMLElement, top: number, left: number) {
+    popoverEl.style.position = "fixed";
+    popoverEl.style.top = `${top}px`;
+    popoverEl.style.left = `${left}px`;
+    popoverEl.style.right = "auto";
+    popoverEl.style.bottom = "auto";
+    popoverEl.style.margin = "0";
+  }
+
+  function resetFlyoutPosition(popoverEl: HTMLElement) {
+    popoverEl.style.position = "";
+    popoverEl.style.top = "";
+    popoverEl.style.left = "";
+    popoverEl.style.right = "";
+    popoverEl.style.bottom = "";
+    popoverEl.style.margin = "";
+  }
+
+  // Clamp against the popover's own rendered size so it never overflows
+  // the viewport: flip above the trigger if it would run off the bottom,
+  // and shift left if it would run off the right edge.
+  function clampToViewport(popoverEl: HTMLElement, trigger: HTMLElement) {
+    const triggerRect = trigger.getBoundingClientRect();
+    const popoverRect = popoverEl.getBoundingClientRect();
+
+    let top = triggerRect.bottom + GAP;
+    let left = triggerRect.left;
+
+    if (top + popoverRect.height > window.innerHeight) {
+      const above = triggerRect.top - GAP - popoverRect.height;
+      top = above >= 0 ? above : Math.max(GAP, window.innerHeight - popoverRect.height - GAP);
     }
 
-    const closeButton = target.closest<HTMLElement>("[data-dialog-close]");
-    if (closeButton) {
-      const dialog = closeButton.closest("dialog");
-      dialog?.close();
-      return;
+    if (left + popoverRect.width > window.innerWidth) {
+      left = Math.max(GAP, window.innerWidth - popoverRect.width - GAP);
     }
+    if (left < 0) left = GAP;
 
-    if (target instanceof HTMLDialogElement) {
-      target.close();
-    }
-  });
+    placeNear(popoverEl, top, left);
+  }
+
+  document
+    .querySelectorAll<HTMLElement>(".drink-signature-flyout")
+    .forEach((popoverEl) => {
+      popoverEl.addEventListener("beforetoggle", (event) => {
+        const toggleEvent = event as ToggleEvent;
+        if (toggleEvent.newState !== "open") return;
+
+        if (window.innerWidth <= MOBILE_BREAKPOINT) {
+          // Let the bottom-sheet CSS take over on small screens.
+          resetFlyoutPosition(popoverEl);
+          return;
+        }
+
+        const trigger = document.querySelector<HTMLElement>(
+          `[popovertarget="${popoverEl.id}"]`
+        );
+        if (!trigger) return;
+
+        // At this point the popover is still display:none (it hasn't
+        // been promoted to the top layer yet), so its own rect reads as
+        // zero-sized. Place it near the trigger immediately to avoid a
+        // flash in the wrong spot, then refine against its real
+        // dimensions once the browser has applied the top-layer/display
+        // change right after this handler returns.
+        const triggerRect = trigger.getBoundingClientRect();
+        placeNear(popoverEl, triggerRect.bottom + GAP, triggerRect.left);
+
+        requestAnimationFrame(() => clampToViewport(popoverEl, trigger));
+      });
+    });
 </script>
