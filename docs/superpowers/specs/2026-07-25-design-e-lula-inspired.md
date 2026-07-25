@@ -11,12 +11,18 @@ Design E takes its structural cues from Lula Cafe's homepage: a warm cream canva
 ## Home
 
 - A compact header with the Moof wordmark, location, hours, Menu, and Visit.
-- A sequence of large, linked image panels using the supplied photography:
+- On mobile, a sequence of large, linked image panels using the supplied photography:
   - `Menu` leads to the E menu route.
   - `The counter` anchors to a short origin and craft statement.
   - `Visit` anchors to the address and opening hours.
 - Each panel has only a short title and small label; no card grid, review copy, or promotional claims.
 - A compact visit block closes the page with the supplied Moof location and Instagram link.
+
+### Desktop magazine spread
+
+At `900px` and above, the home image index changes from a vertical sequence to a 12-column magazine spread. The `Menu` panel is the large left-hand feature, while `The counter` and `Visit` form two stacked right-hand stories. All three navigation paths are visible at once without scrolling. The existing mobile single-column panel sequence remains unchanged below `900px`.
+
+The headline and header are tightened on desktop so the visual index begins in the first viewport. The story and visit sections use a two-column print-style composition at the same breakpoint.
 
 ## Menu
 
