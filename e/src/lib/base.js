@@ -1,4 +1,5 @@
 export const withBase = (path = "") => {
   const normalized = path.replace(/^\//, "");
-  return `${import.meta.env.BASE_URL}${normalized}`;
+  const base = import.meta.env.BASE_URL;
+  return `${base.endsWith("/") ? base : `${base}/`}${normalized}`;
 };

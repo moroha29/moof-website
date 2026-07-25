@@ -4,11 +4,12 @@ import test from "node:test";
 
 const read = (path) => readFile(new URL(path, import.meta.url), "utf8").catch(() => "");
 
-const [config, workflow, siteData, mediaData, homePage, menuPage, menuList, css] = await Promise.all([
+const [config, workflow, siteData, mediaData, baseHelper, homePage, menuPage, menuList, css] = await Promise.all([
   read("../astro.config.mjs"),
   read("../../.github/workflows/deploy.yml"),
   read("../src/data/site.js"),
   read("../src/data/editorial.js"),
+  read("../src/lib/base.js"),
   read("../src/pages/index.astro"),
   read("../src/pages/menu.astro"),
   read("../src/components/MenuList.astro"),
@@ -20,6 +21,7 @@ test("Design E is a Pages-ready editorial variant with approved local media", ()
   assert.match(workflow, /for dir in a b c d e;/);
   assert.match(siteData, /Photos: Zawani Abdul Ghani \/ HungryGoWhere/);
   assert.match(mediaData, /editorial\/01-moof-exterior\.jpg/);
+  assert.match(baseHelper, /base\.endsWith\("\/"\)/);
 });
 
 test("the Lula-inspired home stays an image-led index with a readable mobile layout", () => {
