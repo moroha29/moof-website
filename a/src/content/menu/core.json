@@ -21,8 +21,14 @@
         "nuttiness": 2,
         "sweetness": 3
       },
-      "temperatureOptions": ["hot", "cold"],
-      "milkOptions": ["fresh milk", "oat milk"],
+      "temperatureOptions": [
+        "hot",
+        "cold"
+      ],
+      "milkOptions": [
+        "fresh milk",
+        "oat milk"
+      ],
       "isSeasonal": false,
       "active": true
     },
@@ -45,8 +51,14 @@
         "nuttiness": 3,
         "sweetness": 3
       },
-      "temperatureOptions": ["hot", "cold"],
-      "milkOptions": ["fresh milk", "oat milk"],
+      "temperatureOptions": [
+        "hot",
+        "cold"
+      ],
+      "milkOptions": [
+        "fresh milk",
+        "oat milk"
+      ],
       "isSeasonal": false,
       "active": true
     },
@@ -69,8 +81,12 @@
         "nuttiness": 2,
         "sweetness": 1
       },
-      "temperatureOptions": ["cold"],
-      "milkOptions": ["no milk"],
+      "temperatureOptions": [
+        "cold"
+      ],
+      "milkOptions": [
+        "no milk"
+      ],
       "isSeasonal": false,
       "active": true
     },
@@ -93,8 +109,14 @@
         "nuttiness": 4,
         "sweetness": 3
       },
-      "temperatureOptions": ["hot", "cold"],
-      "milkOptions": ["fresh milk", "oat milk"],
+      "temperatureOptions": [
+        "hot",
+        "cold"
+      ],
+      "milkOptions": [
+        "fresh milk",
+        "oat milk"
+      ],
       "isSeasonal": false,
       "active": true
     }
