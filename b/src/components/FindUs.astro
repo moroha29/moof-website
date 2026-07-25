@@ -22,6 +22,16 @@ import { site } from "../data/site.js";
         <h3>{site.findUs.hoursLabel}</h3>
         <p>{site.findUs.operatingDays}<br />{site.findUs.operatingHours}</p>
       </div>
+      <div class="visit-map">
+        <div class="visit-map-frame">
+          <iframe
+            src={site.findUs.mapEmbedUrl}
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Map showing Moof's location"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </section>

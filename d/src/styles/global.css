@@ -115,6 +115,7 @@ h3 {
 .hero,
 .featured-drinks,
 .menu-preview,
+.story,
 .visit,
 .team,
 .page-menu {
@@ -231,6 +232,18 @@ h3 {
   color: var(--moof-green);
 }
 
+.story {
+  padding: clamp(4rem, 9vw, 7rem) 0;
+  border-top: 1px solid var(--line);
+}
+
+.story-body {
+  max-width: 38rem;
+  margin-top: 1.75rem;
+  color: var(--muted);
+  font-size: clamp(1rem, 2vw, 1.15rem);
+}
+
 .visit {
   padding: clamp(4rem, 9vw, 7rem) 0;
   border-top: 1px solid var(--line);
@@ -270,6 +283,21 @@ h3 {
   display: inline-block;
   margin-top: 2rem;
   color: var(--moof-green);
+}
+
+.visit-map {
+  max-width: 38rem;
+  margin-top: 2rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+}
+
+.visit-map iframe {
+  display: block;
+  width: 100%;
+  height: 280px;
+  border: 0;
 }
 
 .team {
@@ -345,6 +373,19 @@ h3 {
   border-radius: 1rem;
   background: var(--paper);
   color: var(--ink);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease, overlay 0.2s ease allow-discrete, display 0.2s ease allow-discrete;
+}
+.signature-flyout:popover-open {
+  opacity: 1;
+  transform: translateY(0);
+}
+@starting-style {
+  .signature-flyout:popover-open {
+    opacity: 0;
+    transform: translateY(10px);
+  }
 }
 
 .signature-flyout h3 {

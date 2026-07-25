@@ -115,4 +115,17 @@ const menus = sortMenusForDisplay((await getCollection("menu")).map((entry) => e
   document.querySelectorAll<HTMLElement>(".signature-flyout").forEach((popover) => {
     popover.addEventListener("beforetoggle", (event) => positionSignatureFlyout(popover, event));
   });
+
+  // A flyout anchored to a trigger's on-screen position stops making sense
+  // once the page scrolls out from under it, so dismiss it rather than let
+  // it float disconnected from the card that opened it.
+  window.addEventListener(
+    "scroll",
+    () => {
+      document
+        .querySelectorAll<HTMLElement>(".signature-flyout:popover-open")
+        .forEach((popover) => popover.hidePopover());
+    },
+    { passive: true }
+  );
 </script>

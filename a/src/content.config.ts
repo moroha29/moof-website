@@ -50,7 +50,8 @@ const site = defineCollection({
       mrtNote: z.string(),
       operatingHours: z.string(),
       instagramLabel: z.string(),
-      instagramUrl: z.string().url()
+      instagramUrl: z.string().url(),
+      mapEmbedUrl: z.string().url().optional()
     }),
     team: z.object({
       eyebrow: z.string(),

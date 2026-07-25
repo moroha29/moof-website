@@ -96,4 +96,17 @@ const featuredItems = coreItems.slice(0, 3);
       popoverEl.style.left = `${left}px`;
     });
   });
+
+  // A flyout anchored to a trigger's on-screen position stops making sense
+  // once the page scrolls out from under it, so dismiss it rather than let
+  // it float disconnected from the item that opened it.
+  window.addEventListener(
+    "scroll",
+    () => {
+      document
+        .querySelectorAll<HTMLElement>(".signature-flyout:popover-open")
+        .forEach((popoverEl) => popoverEl.hidePopover());
+    },
+    { passive: true }
+  );
 </script>

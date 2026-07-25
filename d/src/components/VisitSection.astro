@@ -21,5 +21,13 @@ import { homepage, site } from "../data/site.js";
       </div>
     </dl>
     <a class="quiet-link" href={site.directionsUrl} target="_blank" rel="noreferrer">Open in Maps <span aria-hidden="true">→</span></a>
+    <div class="visit-map">
+      <iframe
+        src={site.mapEmbedUrl}
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Map showing Moof's location"
+      ></iframe>
+    </div>
   </div>
 </section>

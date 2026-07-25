@@ -24,6 +24,12 @@ export const site = {
     imageAlt: "Moof specialty matcha latte",
     details: ["Two Japanese matchas", "Hand-whisked to order"]
   },
+  story: {
+    eyebrow: "Our story",
+    heading: "Built around the ingredient, not around us.",
+    body:
+      "Moof started with a simple idea: let two well-chosen Japanese matchas set the pace, and keep everything else calm and unhurried. Every drink is made to order and hand-whisked one at a time, in a small bar tucked into the Tanjong Pagar CBD. It's built to be a short pause in the day — time enough to choose a drink, watch it made, and carry on."
+  },
   ingredients: {
     eyebrow: "Our ingredient notes",
     heading: "A considered source, a simple ritual.",
@@ -57,7 +63,10 @@ export const site = {
     mrtNote: "5-minute walk from Tanjong Pagar MRT station.",
     hoursLabel: "Hours",
     operatingDays: "Monday – Friday",
-    operatingHours: "9am – 6pm"
+    operatingHours: "9am – 6pm",
+    // No-API-key embeddable map for the Visit section.
+    mapEmbedUrl:
+      "https://www.google.com/maps?q=70+Shenton+Way+%2301-15+Eon+Shenton+Singapore&output=embed"
   },
   instagram: {
     handle: "@moof__bar",

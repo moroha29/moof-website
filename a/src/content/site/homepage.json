@@ -56,7 +56,8 @@
     "mrtNote": "5-minute walk from tanjong pagar mrt station",
     "operatingHours": "mon-fri, 9am-6pm",
     "instagramLabel": "@moof__bar",
-    "instagramUrl": "https://www.instagram.com/moof__bar/"
+    "instagramUrl": "https://www.instagram.com/moof__bar/",
+    "mapEmbedUrl": "https://www.google.com/maps?q=70+Shenton+Way+%2301-15+Eon+Shenton+Singapore&output=embed"
   },
   "team": {
     "eyebrow": "Meet the counter",

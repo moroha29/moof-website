@@ -33,6 +33,11 @@ export const homepage = {
     headline: "Matcha, hojicha, and seasonal drinks.",
     cta: "See the full menu"
   },
+  story: {
+    eyebrow: "Our story",
+    headline: "A short walk, a slower pour.",
+    body: "Moof is built around the whisk — matcha and hojicha made to order, not batched ahead of time. We work with two Japanese matcha, Mori and Shiran, alongside hojicha steeped in-house rather than syruped. The bar sits at Eon Shenton, a five-minute walk from Tanjong Pagar MRT, a small pause in the middle of the CBD."
+  },
   visit: {
     eyebrow: "Location",
     headline: "Eon Shenton, Singapore"
