@@ -2,6 +2,9 @@ import { defineConfig } from "astro/config";
 
 export default defineConfig({
   output: "static",
-  site: "https://moethu.com",
-  base: "/moof-website/a"
+  site: process.env.GITHUB_PAGES_SITE ?? "https://moroha29.github.io",
+  base: "/moof-website/a".replace(
+    "/moof-website",
+    process.env.GITHUB_PAGES_BASE ?? "/moof-website"
+  )
 });

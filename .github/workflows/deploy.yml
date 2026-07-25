@@ -17,18 +17,38 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      ASTRO_TELEMETRY_DISABLED: 1
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 20
+          cache: npm
+          cache-dependency-path: |
+            a/package-lock.json
+            b/package-lock.json
+            c/package-lock.json
+            d/package-lock.json
+            e/package-lock.json
 
-      - name: Build each design variant
+      - name: Configure GitHub Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Build site
+        shell: bash
+        env:
+          GITHUB_PAGES_SITE: ${{ steps.pages.outputs.origin }}
+          GITHUB_PAGES_BASE: ${{ steps.pages.outputs.base_path }}
         run: |
           mkdir -p site
+          cp pages/index.html site/index.html
+          touch site/.nojekyll
+
           for dir in a b c d e; do
             if [ -f "$dir/package.json" ]; then
               echo "Building design $dir"
@@ -39,8 +59,16 @@ jobs:
             fi
           done
 
+      - name: Verify site artifact
+        shell: bash
+        run: |
+          test -f site/index.html
+          for dir in a b c d e; do
+            test -f "site/$dir/index.html"
+          done
+
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: site
 

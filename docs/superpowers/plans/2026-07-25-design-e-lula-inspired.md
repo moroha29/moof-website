@@ -176,4 +176,4 @@ git commit -m "Deploy Design E image index"
 git push origin main
 ```
 
-Verify `https://moethu.com/moof-website/e/` and one `/moof-website/e/images/editorial/` asset after the GitHub Pages workflow completes.
+Verify the Design E URL reported by the GitHub Pages deployment and one `/e/images/editorial/` asset after the workflow completes.
