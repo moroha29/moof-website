@@ -13,24 +13,75 @@ const featuredItems = coreItems.slice(0, 3);
   </div>
   <ul class="featured-list">
     {
-      featuredItems.map((item) => (
-        <li>
-          <img src={withBase(item.image)} alt={item.name} loading="lazy" width="320" height="320" />
-          <div>
-            <h3>{item.name}</h3>
-            <p>{item.description}</p>
-            <span>{item.price}</span>
-            {
-              item.signature && (
-                <details class="menu-signature">
-                  <summary>What makes it Moof's</summary>
-                  <p>{item.signature}</p>
-                </details>
-              )
-            }
-          </div>
-        </li>
-      ))
+      featuredItems.map((item) => {
+        const slug =
+          item.id ??
+          item.name
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "");
+        const dialogId = `featured-signature-dialog-${slug}`;
+
+        return (
+          <li>
+            <img src={withBase(item.image)} alt={item.name} loading="lazy" width="320" height="320" />
+            <div>
+              <h3>{item.name}</h3>
+              <p>{item.description}</p>
+              <span>{item.price}</span>
+              {
+                item.signature && (
+                  <>
+                    <button
+                      type="button"
+                      class="signature-trigger"
+                      data-dialog-target={dialogId}
+                    >
+                      What makes it Moof's
+                    </button>
+                    <dialog class="signature-dialog" id={dialogId}>
+                      <div class="signature-dialog-inner">
+                        <button type="button" class="signature-dialog-close" data-dialog-close aria-label="Close">
+                          &times;
+                        </button>
+                        <h3>{item.name}</h3>
+                        <p>{item.signature}</p>
+                      </div>
+                    </dialog>
+                  </>
+                )
+              }
+            </div>
+          </li>
+        );
+      })
     }
   </ul>
 </section>
+
+<script>
+  document.addEventListener("click", (event) => {
+    const target = event.target as HTMLElement;
+
+    const opener = target.closest<HTMLElement>("[data-dialog-target]");
+    if (opener) {
+      const id = opener.getAttribute("data-dialog-target");
+      const dialog = id && document.getElementById(id);
+      if (dialog instanceof HTMLDialogElement) {
+        dialog.showModal();
+      }
+      return;
+    }
+
+    const closer = target.closest<HTMLElement>("[data-dialog-close]");
+    if (closer) {
+      const dialog = closer.closest("dialog");
+      dialog?.close();
+      return;
+    }
+
+    if (target instanceof HTMLDialogElement) {
+      target.close();
+    }
+  });
+</script>

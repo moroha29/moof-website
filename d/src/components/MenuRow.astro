@@ -3,6 +3,7 @@ import { withBase } from "../lib/base.js";
 
 interface Props {
   item: {
+    id?: string;
     name: string;
     price: string;
     description: string;
@@ -13,6 +14,14 @@ interface Props {
 }
 
 const { item } = Astro.props;
+
+const slug =
+  item.id ??
+  item.name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+const dialogId = `signature-dialog-${slug}`;
 ---
 
 <li class="menu-list-item">
@@ -32,11 +41,52 @@ const { item } = Astro.props;
     <span class="tags">{item.tags.join(" · ")}</span>
     {
       item.signature && (
-        <details class="menu-signature">
-          <summary>What makes it Moof's</summary>
-          <p>{item.signature}</p>
-        </details>
+        <>
+          <button
+            type="button"
+            class="signature-trigger"
+            data-dialog-target={dialogId}
+          >
+            What makes it Moof's
+          </button>
+          <dialog class="signature-dialog" id={dialogId}>
+            <div class="signature-dialog-inner">
+              <button type="button" class="signature-dialog-close" data-dialog-close aria-label="Close">
+                &times;
+              </button>
+              <h3>{item.name}</h3>
+              <p>{item.signature}</p>
+            </div>
+          </dialog>
+        </>
       )
     }
   </div>
 </li>
+
+<script>
+  document.addEventListener("click", (event) => {
+    const target = event.target as HTMLElement;
+
+    const opener = target.closest<HTMLElement>("[data-dialog-target]");
+    if (opener) {
+      const id = opener.getAttribute("data-dialog-target");
+      const dialog = id && document.getElementById(id);
+      if (dialog instanceof HTMLDialogElement) {
+        dialog.showModal();
+      }
+      return;
+    }
+
+    const closer = target.closest<HTMLElement>("[data-dialog-close]");
+    if (closer) {
+      const dialog = closer.closest("dialog");
+      dialog?.close();
+      return;
+    }
+
+    if (target instanceof HTMLDialogElement) {
+      target.close();
+    }
+  });
+</script>

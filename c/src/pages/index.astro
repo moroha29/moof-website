@@ -4,6 +4,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import MenuList from "../components/MenuList.astro";
 import SeasonalSocialEdit from "../components/SeasonalSocialEdit.astro";
+import TeamSection from "../components/TeamSection.astro";
 import { withBase } from "../lib/base.js";
 import { core, seasonal, testimonials } from "../data/menu.js";
 import { site } from "../data/site.js";
@@ -80,6 +81,8 @@ const menuPage = withBase("/menu/");
     </section>
 
     <SeasonalSocialEdit />
+
+    <TeamSection />
 
     <section class="testimonials">
       <div class="wrap">

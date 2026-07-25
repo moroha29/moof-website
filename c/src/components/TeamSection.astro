@@ -1,0 +1,23 @@
+---
+import { site } from "../data/site.js";
+import { withBase } from "../lib/base.js";
+---
+
+<section id="team" class="team" aria-labelledby="team-heading">
+  <div class="wrap team-wrap">
+    <div class="team-copy">
+      <span class="eyebrow">{site.team.eyebrow}</span>
+      <h2 id="team-heading">{site.team.heading}</h2>
+      <p>{site.team.supportingCopy}</p>
+    </div>
+    <figure class="team-portrait">
+      <div class="team-portrait-image">
+        <img src={withBase(site.team.image)} alt={site.team.imageAlt} loading="lazy" />
+      </div>
+      <figcaption>
+        <span>{site.team.role}</span>
+        <strong>{site.team.name}</strong>
+      </figcaption>
+    </figure>
+  </div>
+</section>

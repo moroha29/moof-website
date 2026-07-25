@@ -16,6 +16,7 @@ const [
   menuPreview,
   visitSection,
   menuRow,
+  teamSection,
   siteData,
   menuData,
   baseHelper,
@@ -31,6 +32,7 @@ const [
   readSource("../src/components/MenuPreview.astro"),
   readSource("../src/components/VisitSection.astro"),
   readSource("../src/components/MenuRow.astro"),
+  readSource("../src/components/TeamSection.astro"),
   readSource("../src/data/site.js"),
   readSource("../src/data/menu.js"),
   readSource("../src/lib/base.js"),
@@ -106,4 +108,9 @@ test("minimal responsive styles fit narrow screens without document overflow", (
   assert.match(css, /\.hero\s*\{[^}]*display:\s*grid;/s);
   assert.match(css, /@media\s*\(min-width:\s*700px\)/);
   assert.match(css, /img\s*\{[^}]*max-width:\s*100%;/s);
+});
+
+test("team imagery uses the shared neutral staff-portrait placeholder", () => {
+  assert.match(siteData, /images\/team\/staff-placeholder\.png/);
+  assert.match(teamSection, /withBase\(person\.image\)/);
 });

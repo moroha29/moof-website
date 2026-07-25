@@ -4,11 +4,12 @@ import test from "node:test";
 
 const read = (path) => readFile(new URL(path, import.meta.url), "utf8").catch(() => "");
 
-const [header, indexPage, footer, edit, menuData, siteData, css, config] = await Promise.all([
+const [header, indexPage, footer, edit, teamSection, menuData, siteData, css, config] = await Promise.all([
   read("../src/components/Header.astro"),
   read("../src/pages/index.astro"),
   read("../src/components/Footer.astro"),
   read("../src/components/SeasonalSocialEdit.astro"),
+  read("../src/components/TeamSection.astro"),
   read("../src/data/menu.js"),
   read("../src/data/site.js"),
   read("../src/styles/global.css"),
@@ -53,4 +54,11 @@ test("homepage and store copy comes from editable site data", () => {
 
 test("the production base targets Design C", () => {
   assert.match(config, /base:\s*["']\/moof-website\/c["']/);
+});
+
+test("the homepage includes a neutral staff-portrait placeholder", () => {
+  assert.match(indexPage, /import TeamSection/);
+  assert.match(indexPage, /<TeamSection\s*\/>/);
+  assert.match(teamSection, /withBase\(site\.team\.image\)/);
+  assert.match(siteData, /images\/team\/staff-placeholder\.png/);
 });

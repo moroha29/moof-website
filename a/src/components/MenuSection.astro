@@ -51,10 +51,19 @@ const activeItems = items.filter((item) => item.active);
               {item.milkOptions.map((option) => <span>{option}</span>)}
             </div>
             {item.signature && (
-              <details class="signature-detail">
-                <summary>What makes it signature <span aria-hidden="true">＋</span></summary>
-                <p>{item.signature}</p>
-              </details>
+              <>
+                <button type="button" class="signature-trigger" data-dialog-target={`signature-section-${item.id}`}>
+                  What makes it signature <span aria-hidden="true">＋</span>
+                </button>
+                <dialog class="signature-dialog" id={`signature-section-${item.id}`}>
+                  <div class="signature-dialog-content">
+                    <button type="button" class="signature-dialog-close" data-dialog-close aria-label="Close">✕</button>
+                    <p class="signature-dialog-label">What makes it signature</p>
+                    <h3>{item.name}</h3>
+                    <p>{item.signature}</p>
+                  </div>
+                </dialog>
+              </>
             )}
           </div>
         </article>
@@ -62,3 +71,29 @@ const activeItems = items.filter((item) => item.active);
     }
   </div>
 </section>
+
+<script>
+  document.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+
+    const trigger = target.closest("[data-dialog-target]");
+    if (trigger) {
+      const dialogId = trigger.getAttribute("data-dialog-target");
+      const dialog = dialogId ? document.getElementById(dialogId) : null;
+      if (dialog instanceof HTMLDialogElement) dialog.showModal();
+      return;
+    }
+
+    const closeButton = target.closest("[data-dialog-close]");
+    if (closeButton) {
+      const dialog = closeButton.closest("dialog");
+      if (dialog instanceof HTMLDialogElement) dialog.close();
+      return;
+    }
+
+    if (target instanceof HTMLDialogElement) {
+      target.close();
+    }
+  });
+</script>

@@ -317,11 +317,11 @@ h3 {
   color: var(--muted);
 }
 
-.menu-signature {
+.signature-trigger {
   margin-top: 0.85rem;
-}
-
-.menu-signature summary {
+  padding: 0;
+  border: none;
+  background: none;
   cursor: pointer;
   color: var(--moof-green);
   font-family: var(--font);
@@ -330,23 +330,67 @@ h3 {
   letter-spacing: 0.05em;
 }
 
-.menu-signature summary::marker {
-  color: var(--moof-green);
-}
-
-.menu-signature summary:hover,
-.menu-signature summary:focus-visible {
+.signature-trigger:hover,
+.signature-trigger:focus-visible {
   color: var(--ink);
 }
 
-.menu-signature[open] summary {
-  margin-bottom: 0.55rem;
+.signature-dialog {
+  max-width: min(28rem, calc(100% - 2.5rem));
+  margin: auto;
+  padding: 0;
+  border: none;
+  border-radius: 1rem;
+  background: var(--paper);
+  color: var(--ink);
 }
 
-.menu-signature p {
+.signature-dialog::backdrop {
+  background: rgba(22, 25, 22, 0.55);
+}
+
+.signature-dialog-inner {
+  position: relative;
+  padding: 2rem;
+}
+
+.signature-dialog h3 {
+  padding-right: 1.5rem;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+}
+
+.signature-dialog p {
+  margin-top: 0.75rem;
   max-width: 32rem;
   color: var(--muted);
-  font-size: 0.88rem;
+  font-family: var(--font);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.signature-dialog-close {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  width: 1.9rem;
+  height: 1.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.signature-dialog-close:hover,
+.signature-dialog-close:focus-visible {
+  color: var(--ink);
+  border-color: var(--moof-green);
 }
 
 .site-footer {

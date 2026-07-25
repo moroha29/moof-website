@@ -51,6 +51,15 @@ export const site = {
     socialPrompt: "See what is being whisked this week.",
     socialCta: "Follow"
   },
+  team: {
+    eyebrow: "Meet the team",
+    heading: "A friendly face at the counter.",
+    supportingCopy: "A placeholder portrait for this design direction — replace it with the real team when ready.",
+    image: "images/team/staff-placeholder.png",
+    imageAlt: "Staff portrait placeholder",
+    name: "Staff portrait placeholder",
+    role: "Your barista"
+  },
   testimonials: {
     eyebrow: "In their words",
     heading: "What guests shared",

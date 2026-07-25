@@ -23,6 +23,7 @@ const contentSources = await Promise.all(
   ].map(async (path) => ({ path, source: await readFile(new URL(path, import.meta.url), "utf8") }))
 );
 const drinkCard = await readFile(new URL("../src/components/DrinkCard.astro", import.meta.url), "utf8");
+const teamSection = await readFile(new URL("../src/components/TeamSection.astro", import.meta.url), "utf8");
 
 test("menu-route navigation qualifies homepage fragments", () => {
   assert.match(nav, /withBase\("\/"\)/);
@@ -89,6 +90,11 @@ test("site copy avoids unsupported comparative and customer claims", () => {
 
 test("menu data exposes only the collections used by the pages", () => {
   assert.doesNotMatch(menuData, /export const allMenu/);
+});
+
+test("team imagery uses the shared neutral staff-portrait placeholder", () => {
+  assert.match(siteData, /images\/team\/staff-placeholder\.png/);
+  assert.match(teamSection, /withBase\(member\.image\)/);
 });
 
 test("Design B uses its GitHub Pages base path", () => {

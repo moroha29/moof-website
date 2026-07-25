@@ -74,28 +74,14 @@ export const site = {
   team: {
     eyebrow: "Behind the counter",
     heading: "Meet the people pouring.",
-    intro: "A small team who whisk, taste, and adjust the ritual daily so the same drink reads true from one visit to the next.",
+    intro: "A placeholder portrait for this design direction — replace it with the real team when ready.",
     members: [
       {
-        name: "Wei Ling Tan",
-        role: "Bar Lead",
-        bio: "Wei Ling shapes the daily rhythm of whisking, pouring, and tasting notes at the counter. She trains new hires to read the difference between a Mori pour and a Shiran pour by eye.",
-        image: "images/team/wei-ling-tan.jpg",
-        imageAlt: "Wei Ling Tan, Bar Lead at Moof"
-      },
-      {
-        name: "Farid Hassan",
-        role: "Matcha Preparation",
-        bio: "Farid whisks each order to the same ratio and timing, whatever the queue looks like. He keeps the tins labelled and rotated, so a cup today tastes like a cup last week.",
-        image: "images/team/farid-hassan.jpg",
-        imageAlt: "Farid Hassan preparing matcha at Moof"
-      },
-      {
-        name: "Priya Nathan",
-        role: "Front Counter",
-        bio: "Priya walks first-time visitors through the two matchas and the hojicha, matching a flavour profile to what someone describes wanting before they've finished describing it.",
-        image: "images/team/priya-nathan.jpg",
-        imageAlt: "Priya Nathan at the Moof front counter"
+        name: "Staff portrait placeholder",
+        role: "Your barista",
+        bio: "A friendly face at the counter — team details coming soon.",
+        image: "images/team/staff-placeholder.png",
+        imageAlt: "Staff portrait placeholder"
       }
     ]
   },
