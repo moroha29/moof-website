@@ -71,8 +71,8 @@ const menuPage = withBase("/menu/");
           <p class="sub">{site.menuIntro.supportingCopy}</p>
         </div>
 
-        <MenuList title="Core" note="Available daily" items={core} />
-        <MenuList title="Seasonal" note="Current batch" items={seasonal} />
+        <MenuList title={site.menuIntro.coreTitle} note={site.menuIntro.coreNote} items={core} />
+        <MenuList title={site.menuIntro.seasonalTitle} note={site.menuIntro.seasonalNote} items={seasonal} />
 
         <div class="menu-cta">
           <a class="btn btn-outline" href={menuPage}>{site.menuIntro.cta}</a>

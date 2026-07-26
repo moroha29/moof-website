@@ -9,14 +9,18 @@ import { site } from "../data/site.js";
 import { withBase } from "../lib/base.js";
 ---
 
-<BaseLayout title={`Menu — ${site.name}`} description="Moof's matcha and hojicha menu.">
+<BaseLayout title={site.seo.menuTitle} description={site.seo.menuDescription}>
   <Header />
   <main class="menu-page">
-    <section class="menu-intro"><p>Moof, Eon Shenton</p><h1>Menu</h1><span>Hand-whisked tea, fresh milk or oat milk where listed.</span></section>
+    <section class="menu-intro">
+      <p>{site.menuPage.eyebrow}</p>
+      <h1>{site.menuPage.headline}</h1>
+      <span>{site.menuPage.intro}</span>
+    </section>
     <figure class="menu-image"><img src={withBase(menuMedia[0].src)} alt={menuMedia[0].alt} /><figcaption>{menuMedia[0].credit}</figcaption></figure>
-    <MenuList title="Core" items={coreMenu} />
+    <MenuList title={site.menuPage.coreTitle} items={coreMenu} />
     <figure class="menu-image menu-image--wide"><img src={withBase(menuMedia[1].src)} alt={menuMedia[1].alt} /><figcaption>{menuMedia[1].credit}</figcaption></figure>
-    <MenuList title="Seasonal" items={seasonalMenu} />
+    <MenuList title={site.menuPage.seasonalTitle} items={seasonalMenu} />
   </main>
   <Footer />
 </BaseLayout>

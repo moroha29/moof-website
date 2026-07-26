@@ -2,21 +2,21 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import MenuRow from "../components/MenuRow.astro";
 import { coreItems, seasonalItems } from "../data/menu.js";
-import { site } from "../data/site.js";
+import { menuPage, site } from "../data/site.js";
 
 const menuItems = [...coreItems, ...seasonalItems];
 ---
 
 <BaseLayout
-  title="Menu — Moof Matcha & Hojicha, Tanjong Pagar"
-  description="Full Moof menu: matcha, hojicha, and seasonal drinks at Eon Shenton in Tanjong Pagar."
+  title={site.seo.menuTitle}
+  description={site.seo.menuDescription}
 >
   <main class="page-menu">
     <div class="menu-page-heading">
-      <p class="eyebrow">Menu</p>
-      <h1>Matcha, hojicha, and more.</h1>
+      <p class="eyebrow">{menuPage.eyebrow}</p>
+      <h1>{menuPage.headline}</h1>
       <p class="menu-page-sub">
-        Fresh or oat milk where listed. {site.hours} · {site.mrtNote}.
+        {menuPage.introPrefix} {site.hours} - {site.mrtNote}.
       </p>
     </div>
 
@@ -28,6 +28,6 @@ const menuItems = [...coreItems, ...seasonalItems];
       </ul>
     </section>
 
-    <p class="menu-page-footer">{site.addressLine1}, {site.addressLine2} · {site.mrtNote}</p>
+    <p class="menu-page-footer">{site.addressLine1}, {site.addressLine2} - {site.mrtNote}</p>
   </main>
 </BaseLayout>

@@ -1,0 +1,51 @@
+{
+  "editorialMedia": [
+    {
+      "href": "/menu/",
+      "label": "The pour",
+      "title": "Menu",
+      "image": {
+        "src": "/images/editorial/01-moof-exterior.jpg",
+        "alt": "Moof matcha bar at Eon Shenton",
+        "focal": "center"
+      }
+    },
+    {
+      "href": "#story",
+      "label": "Made at the counter",
+      "title": "Our story",
+      "image": {
+        "src": "/images/editorial/02-counter.jpg",
+        "alt": "A matcha drink being prepared at Moof",
+        "focal": "center"
+      }
+    },
+    {
+      "href": "#visit",
+      "label": "Eon Shenton, Singapore",
+      "title": "Visit",
+      "image": {
+        "src": "/images/editorial/04-drink-trio.jpg",
+        "alt": "Three Moof matcha and hojicha drinks on the counter",
+        "focal": "center"
+      }
+    }
+  ],
+  "menuMedia": [
+    {
+      "src": "/images/editorial/05-black-sesame.jpg",
+      "alt": "Black sesame matcha at Moof",
+      "focal": "center"
+    },
+    {
+      "src": "/images/editorial/06-hojicha.jpg",
+      "alt": "Classic hojicha latte at Moof",
+      "focal": "center"
+    },
+    {
+      "src": "/images/editorial/07-strawberry.jpg",
+      "alt": "Strawberry royal milk pudding matcha at Moof",
+      "focal": "center"
+    }
+  ]
+}

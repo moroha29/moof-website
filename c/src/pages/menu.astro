@@ -4,20 +4,21 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import MenuList from "../components/MenuList.astro";
 import { core, seasonal } from "../data/menu.js";
+import { site } from "../data/site.js";
 ---
 
 <BaseLayout
-  title="Menu — Moof"
-  description="The full Moof menu: core matcha and hojicha lattes, and the current seasonal drinks, with prices."
+  title={site.seo.menuTitle}
+  description={site.seo.menuDescription}
 >
   <Header active="menu" />
 
   <main>
     <section class="page-hero">
       <div class="wrap">
-        <span class="eyebrow">Moof</span>
-        <h1>The menu</h1>
-        <p class="sub">Seven drinks, made the same unhurried way every time — four on the counter daily, three for the season.</p>
+        <span class="eyebrow">{site.menuPage.eyebrow}</span>
+        <h1>{site.menuPage.heading}</h1>
+        <p class="sub">{site.menuPage.intro}</p>
       </div>
     </section>
 
@@ -25,8 +26,8 @@ import { core, seasonal } from "../data/menu.js";
 
     <section>
       <div class="wrap">
-        <MenuList title="Core" note="Available daily" items={core} />
-        <MenuList title="Seasonal" note="Current batch" items={seasonal} />
+        <MenuList title={site.menuIntro.coreTitle} note={site.menuIntro.coreNote} items={core} />
+        <MenuList title={site.menuIntro.seasonalTitle} note={site.menuIntro.seasonalNote} items={seasonal} />
       </div>
     </section>
   </main>

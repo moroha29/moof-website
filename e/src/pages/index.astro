@@ -12,14 +12,14 @@ import { site } from "../data/site.js";
   <Header />
   <main>
     <section class="intro" aria-labelledby="intro-heading">
-      <p>Shenton Way · Singapore</p>
-      <h1 id="intro-heading">Matcha and hojicha, made slowly.</h1>
+      <p>{site.intro.eyebrow}</p>
+      <h1 id="intro-heading">{site.intro.headline}</h1>
     </section>
     <section class="editorial-index" aria-label="Explore Moof">
       {editorialMedia.map((item) => <EditorialPanel item={item} />)}
     </section>
     <section id="story" class="story-section" aria-labelledby="story-heading">
-      <p class="section-kicker">The beginning</p>
+      <p class="section-kicker">{site.story.kicker}</p>
       <h2 id="story-heading">{site.story.title}</h2>
       <p>{site.story.copy}</p>
     </section>

@@ -1,0 +1,93 @@
+{
+  "storeName": "moof",
+  "seo": {
+    "title": "Moof - Matcha & Hojicha, Tanjong Pagar",
+    "description": "Moof is a specialty matcha and hojicha bar in Singapore's CBD. Hand-whisked, ceremonial-grade drinks made slowly with Mori and Shiran matcha from Japan.",
+    "menuTitle": "Menu - Moof",
+    "menuDescription": "The full Moof menu: core matcha and hojicha lattes, and the current seasonal drinks, with prices."
+  },
+  "hero": {
+    "eyebrow": "Tanjong Pagar, Singapore",
+    "headline": "Matcha and hojicha, made slowly.",
+    "supportingCopy": "Moof is a small specialty bar for hand-whisked, ceremonial-grade matcha and hojicha - a quiet pause built into the middle of a CBD day.",
+    "primaryCta": "See the menu",
+    "secondaryCta": "Visit the cafe",
+    "image": "images/specialty-matcha-latte-cutout.png",
+    "imageAlt": "Moof specialty matcha latte"
+  },
+  "ritual": {
+    "eyebrow": "The ritual",
+    "heading": "Two leaves, one process.",
+    "image": "images/matcha-powder-about.png",
+    "imageAlt": "Matcha powder, whisked by hand",
+    "paragraphs": [
+      "Matcha is sifted and hand-whisked to order. The menu pairs strong tea with fresh milk or oat milk, alongside a small rotating set of seasonal flavours.",
+      "We work with two matchas from Japan, chosen for what they bring to a cup rather than for novelty. Mori and Shiran sit at the centre of almost everything on the menu."
+    ],
+    "ingredients": [
+      {
+        "name": "Mori",
+        "origin": "Japan",
+        "description": "A deep green matcha with a rounded finish - the one we reach for when a drink needs richness and body."
+      },
+      {
+        "name": "Shiran",
+        "origin": "Japan",
+        "description": "A smoother, cleaner profile, better suited to bright drinks and layered milk tea."
+      }
+    ]
+  },
+  "menuIntro": {
+    "eyebrow": "On the menu",
+    "heading": "A short list, kept honest.",
+    "supportingCopy": "Four drinks on the counter every day, and a small seasonal set that changes with the months.",
+    "cta": "View full menu",
+    "coreTitle": "Core",
+    "coreNote": "Available daily",
+    "seasonalTitle": "Seasonal",
+    "seasonalNote": "Current batch"
+  },
+  "seasonalEdit": {
+    "eyebrow": "The seasonal edit",
+    "heading": "Three drinks worth pausing for.",
+    "supportingCopy": "A small rotation for the season, composed to look as considered as it tastes.",
+    "socialPrompt": "See what is being whisked this week.",
+    "socialCta": "Follow"
+  },
+  "team": {
+    "eyebrow": "Meet the team",
+    "heading": "A friendly face at the counter.",
+    "supportingCopy": "A placeholder portrait for this design direction - replace it with the real team when ready.",
+    "image": "images/team/staff-placeholder.png",
+    "imageAlt": "Staff portrait placeholder",
+    "name": "Staff portrait placeholder",
+    "role": "Your barista"
+  },
+  "testimonials": {
+    "eyebrow": "In their words",
+    "heading": "What guests shared",
+    "supportingCopy": "A selection of supplied customer notes."
+  },
+  "visit": {
+    "eyebrow": "Visit",
+    "heading": "Come sit with us.",
+    "paragraphs": [
+      "Moof is tucked into Eon Shenton, a short walk from the office towers along Shenton Way - an easy stop before work, between meetings, or on the way home.",
+      "A five-minute walk from Tanjong Pagar MRT station, if you're coming from further out."
+    ],
+    "addressLines": ["70 Shenton Way", "#01-15, Eon Shenton", "Singapore"],
+    "hoursLines": ["Mon-Fri", "9am - 6pm"],
+    "mrtLines": ["5-minute walk from", "Tanjong Pagar"],
+    "note": "We're closed weekends - see you Monday.",
+    "footerNote": "70 Shenton Way, #01-15, Eon Shenton, Singapore - Mon-Fri, 9am-6pm"
+  },
+  "social": {
+    "instagramUrl": "https://www.instagram.com/moof__bar/",
+    "instagramHandle": "@moof__bar"
+  },
+  "menuPage": {
+    "eyebrow": "Moof",
+    "heading": "The menu",
+    "intro": "Seven drinks, made the same unhurried way every time - four on the counter daily, three for the season."
+  }
+}

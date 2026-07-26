@@ -16,3 +16,11 @@ yarn-error.log*
 # Local environment files
 .env
 .env.*
+
+# Management portal runtime data
+management/.env
+management/data/websites.json
+management/data/users.json
+management/data/deploy-state.json
+management/data/drafts/*.json
+management/secrets/

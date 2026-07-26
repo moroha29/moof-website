@@ -11,8 +11,8 @@ import { homepage } from "../data/site.js";
   </div>
   <div class="hero-art">
     <img
-      src={withBase("/images/specialty-matcha-latte-cutout.png")}
-      alt="Specialty Matcha Latte"
+      src={withBase(homepage.hero.image)}
+      alt={homepage.hero.imageAlt}
       class="hero-drink"
       loading="eager"
       fetchpriority="high"

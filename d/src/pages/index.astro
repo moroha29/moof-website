@@ -6,11 +6,12 @@ import FeaturedDrinks from "../components/FeaturedDrinks.astro";
 import MenuPreview from "../components/MenuPreview.astro";
 import TeamSection from "../components/TeamSection.astro";
 import VisitSection from "../components/VisitSection.astro";
+import { site } from "../data/site.js";
 ---
 
 <BaseLayout
-  title="Moof — Specialty Matcha & Hojicha Bar, Tanjong Pagar"
-  description="Moof is a specialty matcha and hojicha bar at Eon Shenton, five minutes from Tanjong Pagar MRT."
+  title={site.seo.homeTitle}
+  description={site.seo.homeDescription}
 >
   <main class="page-home">
     <Hero />

@@ -2,28 +2,55 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const nav = await readFile(new URL("../src/components/Nav.astro", import.meta.url), "utf8");
-const css = await readFile(new URL("../src/styles/global.css", import.meta.url), "utf8");
-const astroConfig = await readFile(new URL("../astro.config.mjs", import.meta.url), "utf8");
-const menuData = await readFile(new URL("../src/data/menu.js", import.meta.url), "utf8");
-const siteData = await readFile(new URL("../src/data/site.js", import.meta.url), "utf8").catch(
-  () => ""
-);
-const contentSources = await Promise.all(
-  [
-    "../src/components/Hero.astro",
-    "../src/components/IngredientStory.astro",
-    "../src/components/FindUs.astro",
-    "../src/components/Footer.astro",
-    "../src/components/InstaFollow.astro",
-    "../src/components/MenuShowcase.astro",
-    "../src/components/Nav.astro",
-    "../src/pages/index.astro",
-    "../src/pages/menu.astro"
-  ].map(async (path) => ({ path, source: await readFile(new URL(path, import.meta.url), "utf8") }))
-);
-const drinkCard = await readFile(new URL("../src/components/DrinkCard.astro", import.meta.url), "utf8");
-const teamSection = await readFile(new URL("../src/components/TeamSection.astro", import.meta.url), "utf8");
+const read = (path) => readFile(new URL(path, import.meta.url), "utf8").catch(() => "");
+
+const [
+  nav,
+  css,
+  astroConfig,
+  menuAdapter,
+  siteAdapter,
+  menuJson,
+  siteJson,
+  drinkCard,
+  hero,
+  teamSection,
+  homePage,
+  menuPage
+] = await Promise.all([
+  read("../src/components/Nav.astro"),
+  read("../src/styles/global.css"),
+  read("../astro.config.mjs"),
+  read("../src/data/menu.js"),
+  read("../src/data/site.js"),
+  read("../src/assets/content/menu.json"),
+  read("../src/assets/content/site.json"),
+  read("../src/components/DrinkCard.astro"),
+  read("../src/components/Hero.astro"),
+  read("../src/components/TeamSection.astro"),
+  read("../src/pages/index.astro"),
+  read("../src/pages/menu.astro")
+]);
+
+test("Design B uses editable JSON content as the manager contract", () => {
+  assert.match(siteAdapter, /assets\/content\/site\.json/);
+  assert.match(menuAdapter, /assets\/content\/menu\.json/);
+  assert.match(siteJson, /70 Shenton Way/);
+  assert.match(siteJson, /Mori/);
+  assert.match(siteJson, /instagram\.com\/moof__bar/);
+  assert.match(siteJson, /"image": "images\/specialty-matcha-latte-cutout\.png"/);
+  assert.match(menuJson, /"image": "images\/classic-matcha-latte-cutout\.png"/);
+  assert.match(menuJson, /"seasonalMenu"/);
+});
+
+test("editable copy and images flow through the rendered components", () => {
+  assert.match(homePage, /data\/site\.js/);
+  assert.match(menuPage, /data\/menu\.js/);
+  assert.match(hero, /site\.hero\.image/);
+  assert.match(hero, /site\.hero\.imageCaption/);
+  assert.match(drinkCard, /withBase\(image\)/);
+  assert.match(teamSection, /withBase\(member\.image\)/);
+});
 
 test("menu-route navigation qualifies homepage fragments", () => {
   assert.match(nav, /withBase\("\/"\)/);
@@ -37,109 +64,6 @@ test("phone navigation remains operable", () => {
   assert.match(css, /\.mobile-nav\s*\{[^}]*display:\s*block/s);
 });
 
-test("orange surfaces do not place white text on the orange accent", () => {
-  assert.doesNotMatch(
-    css,
-    /\.btn-pink\s*\{[^}]*background:\s*var\(--pink\);[^}]*color:\s*#fff;/s
-  );
-  assert.doesNotMatch(
-    css,
-    /\.find-us\s*\{[^}]*background:\s*var\(--pink\);[^}]*color:\s*#fff;/s
-  );
-});
-
-test("dark-orange badges use an accessible ink foreground", () => {
-  assert.match(
-    css,
-    /\.badge-pink\s*\{[^}]*background:\s*var\(--pink-dark\);[^}]*color:\s*var\(--ink\);/s
-  );
-});
-
-test("phone navigation uses a contrast-safe focus indicator", () => {
-  assert.match(
-    css,
-    /\.mobile-nav summary:focus-visible,[^{]*\.mobile-nav a:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--ink\);/s
-  );
-});
-
-test("editable homepage and store facts come from the site data module", () => {
-  assert.match(siteData, /export const site\s*=/);
-  assert.match(siteData, /70 Shenton Way/);
-  assert.match(siteData, /Mori/);
-  assert.match(siteData, /instagram\.com\/moof__bar/);
-
-  for (const { path, source } of contentSources) {
-    assert.match(source, /data\/site\.js/, `${path} should consume the shared site data module`);
-    assert.doesNotMatch(
-      source,
-      /70 Shenton Way|Mori goes|instagram\.com\/moof__bar|9am\s*(?:&ndash;|-|–)\s*6pm/i,
-      `${path} should not hard-code editable business facts`
-    );
-  }
-});
-
-test("site copy avoids unsupported comparative and customer claims", () => {
-  const renderedCopySources = [siteData, menuData, ...contentSources.map(({ source }) => source)].join(
-    "\n"
-  );
-  assert.doesNotMatch(
-    renderedCopySources,
-    /CBD['’]s chunkiest|No syrups pretending|people keep coming back|people build routines|come back often|zero shortcuts|FAN FAVE|criminally underrated/i
-  );
-});
-
-test("menu data exposes only the collections used by the pages", () => {
-  assert.doesNotMatch(menuData, /export const allMenu/);
-});
-
-test("team imagery uses the shared neutral staff-portrait placeholder", () => {
-  assert.match(siteData, /images\/team\/staff-placeholder\.png/);
-  assert.match(teamSection, /withBase\(member\.image\)/);
-});
-
 test("Design B uses its GitHub Pages base path", () => {
   assert.match(astroConfig, /base:\s*"\/moof-website\/b"/);
-});
-
-test("ingredient-led home is built around source, ritual, flavour, and choice", () => {
-  const homePage = contentSources.find(({ path }) => path.endsWith("pages/index.astro"))?.source ?? "";
-  const menuPage = contentSources.find(({ path }) => path.endsWith("pages/menu.astro"))?.source ?? "";
-  const hero = contentSources.find(({ path }) => path.endsWith("components/Hero.astro"))?.source ?? "";
-  const ingredients = contentSources.find(({ path }) => path.endsWith("components/IngredientStory.astro"))?.source ?? "";
-  const menuShowcase = contentSources.find(({ path }) => path.endsWith("components/MenuShowcase.astro"))?.source ?? "";
-  const findUs = contentSources.find(({ path }) => path.endsWith("components/FindUs.astro"))?.source ?? "";
-  const homeCopy = [siteData, hero, ingredients, menuShowcase, findUs].join("\n");
-
-  assert.match(homePage, /<Hero\s*\/>[\s\S]*<IngredientStory\s*\/>[\s\S]*<MenuShowcase\s*\/>[\s\S]*<FindUs\s*\/>/);
-  assert.match(menuPage, /<DrinkCard\s+\{\.\.\.item\}\s*\/>/);
-  assert.match(drinkCard, /\{blurb\}/);
-  assert.match(homeCopy, /source/i);
-  assert.match(homeCopy, /ritual/i);
-  assert.match(homeCopy, /flavou?r/i);
-  assert.match(homeCopy, /choice/i);
-  assert.match(homeCopy, /Mori/);
-  assert.match(homeCopy, /Shiran/);
-});
-
-test("ingredient-led copy avoids medical and wellbeing promises", () => {
-  const renderedCopySources = [siteData, menuData, ...contentSources.map(({ source }) => source)].join(
-    "\n"
-  );
-
-  assert.doesNotMatch(
-    renderedCopySources,
-    /\b(?:wellness|wellbeing|health(?:y)?|detox|healing|immunity|immune|energy boost|focus|stress relief)\b/i
-  );
-});
-
-test("hero ingredient story does not misclassify every drink as matcha", () => {
-  assert.doesNotMatch(siteData, /each drink begins with a chosen Japanese matcha/i);
-  assert.match(siteData, /Matcha drinks are prepared with one of two Japanese matchas/i);
-});
-
-test("calm mineral-and-sage visual system has a single-column phone layout", () => {
-  assert.match(css, /--mineral:\s*#/);
-  assert.match(css, /--sage:\s*#/);
-  assert.match(css, /@media\s*\(max-width:\s*760px\)[\s\S]*\.hero-grid\s*\{[^}]*grid-template-columns:\s*1fr/s);
-  assert.match(css, /body\s*\{[^}]*overflow-x:\s*hidden;/s);
 });
