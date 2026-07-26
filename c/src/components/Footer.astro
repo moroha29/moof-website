@@ -10,9 +10,9 @@ const menuPage = withBase("/menu/");
   <div class="wrap">
     <a class="wordmark" href={home}>{site.storeName}</a>
     <div class="foot-links">
-      <a href={menuPage}>Menu</a>
+      <a href={menuPage}>{site.navigation.menu}</a>
       <a href={site.social.instagramUrl} target="_blank" rel="noreferrer">{site.social.instagramHandle}</a>
-      <a href={`${home}#visit`}>Visit</a>
+      <a href={`${home}#visit`}>{site.navigation.visit}</a>
     </div>
     <p class="foot-note">{site.visit.footerNote}</p>
   </div>

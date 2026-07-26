@@ -9,11 +9,11 @@ import { withBase } from "../lib/base.js";
     <span>{site.visit.hours}</span>
   </div>
   <div class="masthead">
-    <a class="wordmark" href={withBase("/")} aria-label="Moof home">moof</a>
+    <a class="wordmark" href={withBase("/")} aria-label="Moof home">{site.wordmark}</a>
     <nav aria-label="Primary navigation">
-      <a href={withBase("/menu/")}>Menu</a>
-      <a href={withBase("/#story")}>About</a>
-      <a href={withBase("/#visit")}>Visit</a>
+      <a href={withBase("/menu/")}>{site.navigation.menu}</a>
+      <a href={withBase("/#story")}>{site.navigation.about}</a>
+      <a href={withBase("/#visit")}>{site.navigation.visit}</a>
     </nav>
   </div>
 </header>

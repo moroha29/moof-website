@@ -1,6 +1,18 @@
 {
   "name": "Moof",
+  "wordmark": "moof",
   "credit": "Photos: Zawani Abdul Ghani / HungryGoWhere",
+  "navigation": {
+    "menu": "Menu",
+    "about": "About",
+    "visit": "Visit"
+  },
+  "labels": {
+    "explore": "Explore Moof",
+    "copyrightName": "Moof",
+    "ingredients": "Ingredients",
+    "distinctivePoint": "Why it stands out"
+  },
   "seo": {
     "title": "Moof - Matcha & Hojicha",
     "description": "Moof is a specialty matcha and hojicha bar at Eon Shenton in Singapore.",
@@ -19,6 +31,8 @@
     "seasonalTitle": "Seasonal"
   },
   "visit": {
+    "eyebrow": "Find Moof",
+    "heading": "A small stop in the CBD.",
     "address": "70 Shenton Way, #01-15, Eon Shenton, Singapore",
     "hours": "Mon-Fri - 9am-6pm",
     "mrt": "5-minute walk from Tanjong Pagar MRT",

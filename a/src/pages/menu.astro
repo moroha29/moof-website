@@ -8,21 +8,21 @@ const homepage = await getEntry("site", "homepage");
 const menus = sortMenusForDisplay((await getCollection("menu")).map((entry) => entry.data));
 ---
 
-<BaseLayout title="Moof — Menu" description="Moof specialty matcha, hojicha, and seasonal drinks menu.">
+<BaseLayout title={homepage?.data.seo.menuTitle ?? "Moof — Menu"} description={homepage?.data.seo.menuDescription ?? "Moof menu"}>
   <main class="counter-shell menu-shell">
     <header class="counter-header" aria-label="Primary navigation">
       <a class="wordmark" href={withBase("")} aria-label="Moof home">{homepage?.data.logoText ?? "Moof"}<span aria-hidden="true">.</span></a>
       <nav>
-        <a href={withBase("")}>Home</a>
-        <a href="#counter-menu" aria-current="page">Menu</a>
-        <a class="nav-instagram" href={homepage?.data.findUs.instagramUrl ?? "https://www.instagram.com/moof__bar/"} target="_blank" rel="noreferrer" aria-label="Open Moof Instagram">IG <span aria-hidden="true">↗</span></a>
+        <a href={withBase("")}>{homepage?.data.labels.navigation.home}</a>
+        <a href="#counter-menu" aria-current="page">{homepage?.data.labels.navigation.menu}</a>
+        <a class="nav-instagram" href={homepage?.data.findUs.instagramUrl ?? "https://www.instagram.com/moof__bar/"} target="_blank" rel="noreferrer" aria-label="Open Moof Instagram">{homepage?.data.labels.navigation.instagram} <span aria-hidden="true">↗</span></a>
       </nav>
     </header>
 
     <section class="menu-hero" aria-labelledby="menu-heading">
-      <p class="eyebrow">The counter menu <span aria-hidden="true">✦</span></p>
-      <h1 id="menu-heading">Good things, <em>whisked simply.</em></h1>
-      <p>Specialty matcha, hojicha, and seasonal drinks.</p>
+      <p class="eyebrow">{homepage?.data.labels.menuPage.eyebrow} <span aria-hidden="true">✦</span></p>
+      <h1 id="menu-heading">{homepage?.data.labels.menuPage.headline} <em>{homepage?.data.labels.menuPage.headlineEmphasis}</em></h1>
+      <p>{homepage?.data.labels.menuPage.intro}</p>
       <div class="menu-hero-rule" aria-hidden="true"><span>◌</span><i></i><span>◌</span></div>
     </section>
 
@@ -41,18 +41,18 @@ const menus = sortMenusForDisplay((await getCollection("menu")).map((entry) => e
                   <div class="drink-title"><h3>{item.name}</h3><strong>{item.price}</strong></div>
                   <p>{item.description}</p>
                   <div class="menu-options" aria-label={`${item.name} options`}>
-                    {item.isSeasonal && <span>seasonal</span>}
+                    {item.isSeasonal && <span>{homepage?.data.labels.menuPreview.seasonal}</span>}
                     <span>{item.temperatureOptions.join(" / ")}</span>
                     <span>{item.milkOptions.join(" / ")}</span>
                   </div>
                   {item.signature && (
                     <>
                       <button type="button" class="signature-trigger" popovertarget={`signature-menu-${item.id}`}>
-                        What makes it signature <span aria-hidden="true">＋</span>
+                        {homepage?.data.labels.menuPreview.signature} <span aria-hidden="true">＋</span>
                       </button>
                       <div id={`signature-menu-${item.id}`} popover class="signature-flyout">
                         <button type="button" class="signature-flyout-close" popovertarget={`signature-menu-${item.id}`} popovertargetaction="hide" aria-label="Close">✕</button>
-                        <p class="signature-flyout-label">What makes it signature</p>
+                        <p class="signature-flyout-label">{homepage?.data.labels.menuPreview.signature}</p>
                         <h3>{item.name}</h3>
                         <p>{item.signature}</p>
                       </div>
@@ -67,8 +67,8 @@ const menus = sortMenusForDisplay((await getCollection("menu")).map((entry) => e
     </section>
 
     <section class="menu-footer-note" aria-label="Visit Moof">
-      <p>Find us at {homepage?.data.findUs.address}, {homepage?.data.findUs.unit}.</p>
-      <a class="ink-link" href={withBase("#find-us")}>Plan a visit <span aria-hidden="true">→</span></a>
+      <p>{homepage?.data.labels.menuPage.footerPrefix} {homepage?.data.findUs.address}, {homepage?.data.findUs.unit}.</p>
+      <a class="ink-link" href={withBase("#find-us")}>{homepage?.data.labels.menuPage.footerCta} <span aria-hidden="true">→</span></a>
     </section>
   </main>
 </BaseLayout>

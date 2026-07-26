@@ -1,5 +1,6 @@
 ---
 import { withBase } from "../lib/base.js";
+import { site } from "../data/site.js";
 
 interface Props {
   item: {
@@ -47,7 +48,7 @@ const dialogId = `signature-flyout-${slug}`;
             class="signature-trigger"
             popovertarget={dialogId}
           >
-            What makes it Moof's
+            {site.labels.signature}
           </button>
           <div id={dialogId} popover class="signature-flyout">
             <button

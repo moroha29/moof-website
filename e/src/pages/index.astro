@@ -15,7 +15,7 @@ import { site } from "../data/site.js";
       <p>{site.intro.eyebrow}</p>
       <h1 id="intro-heading">{site.intro.headline}</h1>
     </section>
-    <section class="editorial-index" aria-label="Explore Moof">
+    <section class="editorial-index" aria-label={site.labels.explore}>
       {editorialMedia.map((item) => <EditorialPanel item={item} />)}
     </section>
     <section id="story" class="story-section" aria-labelledby="story-heading">

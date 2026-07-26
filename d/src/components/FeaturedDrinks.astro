@@ -1,7 +1,7 @@
 ---
 import { withBase } from "../lib/base.js";
 import { coreItems } from "../data/menu.js";
-import { homepage } from "../data/site.js";
+import { homepage, site } from "../data/site.js";
 
 const featuredItems = coreItems.slice(0, 3);
 ---
@@ -37,7 +37,7 @@ const featuredItems = coreItems.slice(0, 3);
                       class="signature-trigger"
                       popovertarget={dialogId}
                     >
-                      What makes it Moof's
+                      {site.labels.signature}
                     </button>
                     <div id={dialogId} popover class="signature-flyout">
                       <button

@@ -12,12 +12,12 @@ const links = site.navigation.map((link) => ({ ...link, href: targetUrls[link.ta
 ---
 
 <header class="site-header">
-  <a class="logo" href={withBase("")} aria-label="Moof home">moof<span aria-hidden="true">.</span></a>
+  <a class="logo" href={withBase("")} aria-label="Moof home">{site.brand.wordmark}<span aria-hidden="true">.</span></a>
   <nav class="site-nav" aria-label="Primary navigation">
     {links.map((link) => <a href={link.href}>{link.label}</a>)}
   </nav>
   <details class="mobile-nav">
-    <summary aria-label="Open navigation"><span>Menu</span><span aria-hidden="true">+</span></summary>
+    <summary aria-label="Open navigation"><span>{site.brand.mobileMenuLabel}</span><span aria-hidden="true">+</span></summary>
     <nav aria-label="Mobile navigation">
       {links.map((link) => <a href={link.href}>{link.label}</a>)}
     </nav>

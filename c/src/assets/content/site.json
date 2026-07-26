@@ -1,5 +1,12 @@
 {
   "storeName": "moof",
+  "navigation": {
+    "story": "Story",
+    "menu": "Menu",
+    "visit": "Visit",
+    "instagram": "Instagram",
+    "mobileToggle": "Menu"
+  },
   "seo": {
     "title": "Moof - Matcha & Hojicha, Tanjong Pagar",
     "description": "Moof is a specialty matcha and hojicha bar in Singapore's CBD. Hand-whisked, ceremonial-grade drinks made slowly with Mori and Shiran matcha from Japan.",
@@ -70,6 +77,10 @@
   },
   "visit": {
     "eyebrow": "Visit",
+    "addressLabel": "Address",
+    "hoursLabel": "Hours",
+    "mrtLabel": "MRT",
+    "instagramLabel": "Instagram",
     "heading": "Come sit with us.",
     "paragraphs": [
       "Moof is tucked into Eon Shenton, a short walk from the office towers along Shenton Way - an easy stop before work, between meetings, or on the way home.",

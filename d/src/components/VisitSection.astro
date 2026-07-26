@@ -8,19 +8,19 @@ import { homepage, site } from "../data/site.js";
     <h2>{homepage.visit.headline}</h2>
     <dl>
       <div>
-        <dt>Address</dt>
+        <dt>{site.labels.address}</dt>
         <dd>{site.addressLine1}<br />{site.addressLine2}</dd>
       </div>
       <div>
-        <dt>Getting there</dt>
+        <dt>{site.labels.directions}</dt>
         <dd>{site.mrtNote}</dd>
       </div>
       <div>
-        <dt>Hours</dt>
+        <dt>{site.labels.hours}</dt>
         <dd>{site.hours}</dd>
       </div>
     </dl>
-    <a class="quiet-link" href={site.directionsUrl} target="_blank" rel="noreferrer">Open in Maps <span aria-hidden="true">→</span></a>
+    <a class="quiet-link" href={site.directionsUrl} target="_blank" rel="noreferrer">{site.labels.openMaps} <span aria-hidden="true">→</span></a>
     <div class="visit-map">
       <iframe
         src={site.mapEmbedUrl}

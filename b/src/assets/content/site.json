@@ -1,5 +1,15 @@
 {
   "storeName": "Moof",
+  "brand": {
+    "wordmark": "moof",
+    "mobileMenuLabel": "Menu",
+    "footerMenuLabel": "Menu"
+  },
+  "drinkLabels": {
+    "serve": "Serve",
+    "choice": "Choice",
+    "signature": "What makes it this drink"
+  },
   "seo": {
     "homeTitle": "Moof - Curated Matcha & Hojicha, Tanjong Pagar",
     "homeDescription": "Moof is a specialty matcha and hojicha bar in Singapore's CBD, centred on hand-whisked drinks and two Japanese matchas: Mori and Shiran.",
@@ -94,6 +104,7 @@
     "eyebrow": "Find your pour",
     "heading": "Flavour, then choice.",
     "intro": "Choose between matcha and hojicha drinks, with hot or cold and fresh or oat milk options where listed.",
+    "previewEyebrow": "Menu preview",
     "previewHeading": "The menu, at a glance",
     "previewBody": "Core drinks sit alongside the current seasonal rotation. Each listing notes its serving style and milk choice.",
     "menuCta": "View the full menu"
@@ -118,6 +129,7 @@
     "intro": "Tasting notes, serving styles, and prices for Moof's hand-whisked matcha and hojicha drinks.",
     "coreEyebrow": "Core drinks",
     "coreHeading": "On the board",
+    "coreSchedule": "On the board every Monday - Friday, 9am - 6pm.",
     "seasonalEyebrow": "Seasonal rotation",
     "seasonalHeading": "Current flavours",
     "seasonalIntro": "A rotating selection alongside the core menu."

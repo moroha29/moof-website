@@ -113,25 +113,25 @@ const menuPage = withBase("/menu/");
         </div>
         <div class="visit-details">
           <div class="visit-row">
-            <span class="label">Address</span>
+            <span class="label">{site.visit.addressLabel}</span>
             <span class="value">
               {site.visit.addressLines.map((line, index) => <>{line}{index < site.visit.addressLines.length - 1 && <br />}</>)}
             </span>
           </div>
           <div class="visit-row">
-            <span class="label">Hours</span>
+            <span class="label">{site.visit.hoursLabel}</span>
             <span class="value">
               {site.visit.hoursLines.map((line, index) => <>{line}{index < site.visit.hoursLines.length - 1 && <br />}</>)}
             </span>
           </div>
           <div class="visit-row">
-            <span class="label">MRT</span>
+            <span class="label">{site.visit.mrtLabel}</span>
             <span class="value">
               {site.visit.mrtLines.map((line, index) => <>{line}{index < site.visit.mrtLines.length - 1 && <br />}</>)}
             </span>
           </div>
           <div class="visit-row">
-            <span class="label">Instagram</span>
+            <span class="label">{site.visit.instagramLabel}</span>
             <span class="value">
               <a href={site.social.instagramUrl} target="_blank" rel="noreferrer">{site.social.instagramHandle}</a>
             </span>

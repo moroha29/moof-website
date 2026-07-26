@@ -12,20 +12,20 @@ const menuPage = withBase("/menu/");
 ---
 
 <header class="site-header" aria-label="Primary navigation">
-  <a class="wordmark" href={home} aria-label="Moof home">moof</a>
+  <a class="wordmark" href={home} aria-label="Moof home">{site.storeName}</a>
   <nav class="desktop-nav">
-    <a href={active === "home" ? "#story" : `${home}#story`}>Story</a>
-    <a href={menuPage}>Menu</a>
-    <a href={active === "home" ? "#visit" : `${home}#visit`}>Visit</a>
-    <a href={site.social.instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
+    <a href={active === "home" ? "#story" : `${home}#story`}>{site.navigation.story}</a>
+    <a href={menuPage}>{site.navigation.menu}</a>
+    <a href={active === "home" ? "#visit" : `${home}#visit`}>{site.navigation.visit}</a>
+    <a href={site.social.instagramUrl} target="_blank" rel="noreferrer">{site.navigation.instagram}</a>
   </nav>
   <details class="mobile-nav">
-    <summary aria-label="Open navigation">Menu</summary>
+    <summary aria-label="Open navigation">{site.navigation.mobileToggle}</summary>
     <nav aria-label="Mobile navigation">
-      <a href={active === "home" ? "#story" : `${home}#story`}>Story</a>
-      <a href={menuPage}>Menu</a>
-      <a href={active === "home" ? "#visit" : `${home}#visit`}>Visit</a>
-      <a href={site.social.instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
+      <a href={active === "home" ? "#story" : `${home}#story`}>{site.navigation.story}</a>
+      <a href={menuPage}>{site.navigation.menu}</a>
+      <a href={active === "home" ? "#visit" : `${home}#visit`}>{site.navigation.visit}</a>
+      <a href={site.social.instagramUrl} target="_blank" rel="noreferrer">{site.navigation.instagram}</a>
     </nav>
   </details>
 </header>

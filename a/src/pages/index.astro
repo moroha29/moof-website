@@ -3,6 +3,7 @@ import { getCollection, getEntry } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import TeamSection from "../components/TeamSection.astro";
 import AboutSection from "../components/AboutSection.astro";
+import AnnouncementSection from "../components/AnnouncementSection.astro";
 import { sortMenusForDisplay } from "../lib/carousel.js";
 import { withBase } from "../lib/base.js";
 
@@ -19,15 +20,15 @@ const seasonalDrinks = menus.find((menu) => menu.seasonName)?.items.filter((item
 const previewDrinks = activeDrinks.slice(0, 3);
 ---
 
-<BaseLayout title="Moof — Specialty Matcha" description="Moof specialty matcha, seasonal drinks, and Japanese ingredients Mori and Shiran.">
+<BaseLayout title={homepage.data.seo.homeTitle} description={homepage.data.seo.homeDescription}>
   <main class="counter-shell">
     <header class="counter-header" aria-label="Primary navigation">
       <a class="wordmark" href={withBase("")} aria-label="Moof home">{homepage.data.logoText}<span aria-hidden="true">.</span></a>
       <nav>
-        <a href={withBase("menu")}>Menu</a>
-        <a href="#find-us">Visit</a>
+        <a href={withBase("menu")}>{homepage.data.labels.navigation.menu}</a>
+        <a href="#find-us">{homepage.data.labels.navigation.visit}</a>
         <a class="nav-instagram" href={homepage.data.findUs.instagramUrl} target="_blank" rel="noreferrer" aria-label="Open Moof Instagram">
-          IG <span aria-hidden="true">↗</span>
+          {homepage.data.labels.navigation.instagram} <span aria-hidden="true">↗</span>
         </a>
       </nav>
     </header>
@@ -35,10 +36,10 @@ const previewDrinks = activeDrinks.slice(0, 3);
     <section class="counter-hero" aria-labelledby="hero-heading">
       <div class="hero-copy">
         <p class="eyebrow"><span aria-hidden="true">✦</span> {homepage.data.hero.eyebrow}</p>
-        <h1 id="hero-heading">{homepage.data.hero.headline}<em> at the counter</em></h1>
+        <h1 id="hero-heading">{homepage.data.hero.headline}<em>{homepage.data.labels.hero.headlineSuffix}</em></h1>
         <p class="hero-note">{homepage.data.hero.note}</p>
         <p class="pour-note">{homepage.data.hero.announcement}</p>
-        <a class="ink-link" href="#today">See today's pour <span aria-hidden="true">↓</span></a>
+        <a class="ink-link" href="#today">{homepage.data.labels.hero.cta} <span aria-hidden="true">↓</span></a>
       </div>
 
       {featuredDrink && (
@@ -47,7 +48,7 @@ const previewDrinks = activeDrinks.slice(0, 3);
           <div class="doodle doodle-spark" aria-hidden="true">✦</div>
           <img src={withBase(featuredDrink.image)} alt={featuredDrink.name} />
           <figcaption>
-            <span>featured drink</span>
+            <span>{homepage.data.labels.hero.featuredDrink}</span>
             <strong>{featuredDrink.name}</strong>
             <b>{featuredDrink.price}</b>
           </figcaption>
@@ -57,18 +58,18 @@ const previewDrinks = activeDrinks.slice(0, 3);
 
     <section id="today" class="counter-notes" aria-labelledby="today-heading">
       <div class="section-intro">
-        <p class="eyebrow">Today at Moof <span aria-hidden="true">↝</span></p>
-        <h2 id="today-heading">A little counter board for the current season.</h2>
+        <p class="eyebrow">{homepage.data.labels.today.eyebrow} <span aria-hidden="true">↝</span></p>
+        <h2 id="today-heading">{homepage.data.labels.today.heading}</h2>
       </div>
       <div class="note-grid">
         <article class="paper-note note-seasonal">
           <span class="note-pin" aria-hidden="true"></span>
-          <p>Current seasonal menu</p>
+          <p>{homepage.data.labels.today.seasonal}</p>
           <h3>{seasonalDrinks[0]?.name ?? homepage.data.hero.announcement}</h3>
           <span>{seasonalDrinks[0]?.description}</span>
         </article>
         <article class="paper-note note-ingredients">
-          <p>Our matcha shelf</p>
+          <p>{homepage.data.labels.today.ingredients}</p>
           <div class="ingredient-list">
             {homepage.data.ingredients.map((ingredient) => (
               <div>
@@ -80,7 +81,7 @@ const previewDrinks = activeDrinks.slice(0, 3);
           </div>
         </article>
         <article class="paper-note note-milk">
-          <p>At the bar</p>
+          <p>{homepage.data.labels.today.bar}</p>
           <h3>{homepage.data.about.storeNote}</h3>
           <span>{homepage.data.about.body}</span>
         </article>
@@ -88,6 +89,8 @@ const previewDrinks = activeDrinks.slice(0, 3);
     </section>
 
     <AboutSection {...homepage.data.about} ingredients={homepage.data.ingredients} />
+
+    <AnnouncementSection {...homepage.data.customAnnouncement} />
 
     <TeamSection
       eyebrow={homepage.data.team.eyebrow}
@@ -99,10 +102,10 @@ const previewDrinks = activeDrinks.slice(0, 3);
     <section class="menu-preview" aria-labelledby="preview-heading">
       <div class="section-intro section-intro-inline">
         <div>
-          <p class="eyebrow">A short pour list <span aria-hidden="true">✦</span></p>
-          <h2 id="preview-heading">Pick a favourite, then make it yours.</h2>
+          <p class="eyebrow">{homepage.data.labels.menuPreview.eyebrow} <span aria-hidden="true">✦</span></p>
+          <h2 id="preview-heading">{homepage.data.labels.menuPreview.heading}</h2>
         </div>
-        <a class="button-link" href={withBase("menu")}>Full menu <span aria-hidden="true">→</span></a>
+        <a class="button-link" href={withBase("menu")}>{homepage.data.labels.menuPreview.cta} <span aria-hidden="true">→</span></a>
       </div>
       <div class="preview-grid">
         {previewDrinks.map((drink, index) => (
@@ -116,11 +119,11 @@ const previewDrinks = activeDrinks.slice(0, 3);
               {drink.signature && (
                 <>
                   <button type="button" class="signature-trigger" popovertarget={`signature-preview-${drink.id}`}>
-                    What makes it signature <span aria-hidden="true">＋</span>
+                    {homepage.data.labels.menuPreview.signature} <span aria-hidden="true">＋</span>
                   </button>
                   <div id={`signature-preview-${drink.id}`} popover class="signature-flyout">
                     <button type="button" class="signature-flyout-close" popovertarget={`signature-preview-${drink.id}`} popovertargetaction="hide" aria-label="Close">✕</button>
-                    <p class="signature-flyout-label">What makes it signature</p>
+                    <p class="signature-flyout-label">{homepage.data.labels.menuPreview.signature}</p>
                     <h3>{drink.name}</h3>
                     <p>{drink.signature}</p>
                   </div>
@@ -134,22 +137,22 @@ const previewDrinks = activeDrinks.slice(0, 3);
 
     <section id="find-us" class="visit-section" aria-labelledby="visit-heading">
       <div class="section-intro">
-        <p class="eyebrow">Come by <span aria-hidden="true">⌇</span></p>
-        <h2 id="visit-heading">Visit Moof.</h2>
+        <p class="eyebrow">{homepage.data.labels.visit.eyebrow} <span aria-hidden="true">⌇</span></p>
+        <h2 id="visit-heading">{homepage.data.labels.visit.heading}</h2>
         <p>{homepage.data.findUs.body}</p>
       </div>
       <div class="visit-board">
         <article>
-          <span class="visit-label">Address</span>
+          <span class="visit-label">{homepage.data.labels.visit.address}</span>
           <strong>{homepage.data.findUs.address}</strong>
           <p>{homepage.data.findUs.unit}</p>
         </article>
         <article>
-          <span class="visit-label">Getting here</span>
+          <span class="visit-label">{homepage.data.labels.visit.directions}</span>
           <strong>{homepage.data.findUs.mrtNote}</strong>
         </article>
         <article>
-          <span class="visit-label">Counter hours</span>
+          <span class="visit-label">{homepage.data.labels.visit.hours}</span>
           <strong>{homepage.data.findUs.operatingHours}</strong>
           <a href={homepage.data.findUs.instagramUrl} target="_blank" rel="noreferrer">{homepage.data.findUs.instagramLabel} <span aria-hidden="true">↗</span></a>
         </article>
@@ -160,7 +163,7 @@ const previewDrinks = activeDrinks.slice(0, 3);
             src={homepage.data.findUs.mapEmbedUrl}
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            title="Map showing Moof's location"
+            title={homepage.data.labels.visit.mapTitle}
           ></iframe>
         </div>
       )}

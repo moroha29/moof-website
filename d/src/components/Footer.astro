@@ -5,7 +5,7 @@ import { site } from "../data/site.js";
 
 <footer class="site-footer">
   <div class="footer-inner">
-    <a class="logo" href={withBase("/")}>Moof</a>
+    <a class="logo" href={withBase("/")}>{site.name}</a>
     <p>{site.addressLine1}, {site.addressLine2} · {site.hours}</p>
     <a href={site.instagramUrl} target="_blank" rel="noreferrer">{site.instagramHandle}</a>
   </div>

@@ -1,11 +1,12 @@
 ---
 import { withBase } from "../lib/base.js";
+import { site } from "../data/site.js";
 ---
 
 <header class="site-header">
-  <a class="logo" href={withBase("/")} aria-label="Moof home">Moof</a>
+  <a class="logo" href={withBase("/")} aria-label="Moof home">{site.name}</a>
   <nav aria-label="Primary">
-    <a href={withBase("/")}>Home</a>
-    <a href={withBase("/menu/")}>Menu</a>
+    <a href={withBase("/")}>{site.navigation.home}</a>
+    <a href={withBase("/menu/")}>{site.navigation.menu}</a>
   </nav>
 </header>

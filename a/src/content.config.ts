@@ -6,6 +6,20 @@ const site = defineCollection({
   schema: z.object({
     storeName: z.string(),
     logoText: z.string(),
+    seo: z.object({
+      homeTitle: z.string(),
+      homeDescription: z.string(),
+      menuTitle: z.string(),
+      menuDescription: z.string()
+    }),
+    labels: z.object({
+      navigation: z.object({ home: z.string(), menu: z.string(), visit: z.string(), instagram: z.string() }),
+      hero: z.object({ headlineSuffix: z.string(), cta: z.string(), featuredDrink: z.string() }),
+      today: z.object({ eyebrow: z.string(), heading: z.string(), seasonal: z.string(), ingredients: z.string(), bar: z.string() }),
+      menuPreview: z.object({ eyebrow: z.string(), heading: z.string(), cta: z.string(), signature: z.string(), seasonal: z.string() }),
+      visit: z.object({ eyebrow: z.string(), heading: z.string(), address: z.string(), directions: z.string(), hours: z.string(), mapTitle: z.string() }),
+      menuPage: z.object({ eyebrow: z.string(), headline: z.string(), headlineEmphasis: z.string(), intro: z.string(), footerPrefix: z.string(), footerCta: z.string() })
+    }),
     nav: z.array(
       z.object({
         label: z.string(),
@@ -30,10 +44,12 @@ const site = defineCollection({
       })
     ),
     about: z.object({
+      eyebrow: z.string(),
       heading: z.string(),
       body: z.string(),
       storeNote: z.string(),
-      image: z.string()
+      image: z.string(),
+      imageAlt: z.string()
     }),
     customAnnouncement: z.object({
       eyebrow: z.string(),

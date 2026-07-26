@@ -1,4 +1,5 @@
 ---
+import { site } from "../data/site.js";
 const { title, items } = Astro.props;
 ---
 
@@ -11,8 +12,8 @@ const { title, items } = Astro.props;
         <div class="menu-detail">
           <p>{item.description}</p>
           <p class="menu-serving">{item.serving}</p>
-          <p><strong>Ingredients</strong> {item.specialIngredients}</p>
-          <p><strong>Why it stands out</strong> {item.distinctivePoint}</p>
+          <p><strong>{site.labels.ingredients}</strong> {item.specialIngredients}</p>
+          <p><strong>{site.labels.distinctivePoint}</strong> {item.distinctivePoint}</p>
         </div>
       </details>
     ))}

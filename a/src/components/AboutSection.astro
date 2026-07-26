@@ -8,19 +8,21 @@ type Ingredient = {
 };
 
 interface Props {
+  eyebrow: string;
   heading: string;
   body: string;
   storeNote: string;
   image: string;
+  imageAlt: string;
   ingredients: Ingredient[];
 }
 
-const { heading, body, storeNote, image, ingredients } = Astro.props;
+const { eyebrow, heading, body, storeNote, image, imageAlt, ingredients } = Astro.props;
 ---
 
 <section class="about-section" id="about" aria-labelledby="about-heading">
   <div class="section-heading">
-    <p>About us</p>
+    <p>{eyebrow}</p>
     <h2 id="about-heading">{heading}</h2>
     <span>{storeNote}</span>
   </div>
@@ -39,6 +41,6 @@ const { heading, body, storeNote, image, ingredients } = Astro.props;
         }
       </div>
     </div>
-    <img class="about-image" src={withBase(image)} alt="matcha powder in a bowl with a bamboo whisk" loading="lazy" />
+    <img class="about-image" src={withBase(image)} alt={imageAlt} loading="lazy" />
   </div>
 </section>

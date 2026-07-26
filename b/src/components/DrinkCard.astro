@@ -1,5 +1,6 @@
 ---
 import { withBase } from "../lib/base.js";
+import { site } from "../data/site.js";
 
 interface Props {
   id: string;
@@ -31,8 +32,8 @@ const popoverId = `signature-${id}`;
     </div>
     <p class="drink-blurb">{blurb}</p>
     <dl class="drink-meta">
-      <div><dt>Serve</dt><dd>{temp}</dd></div>
-      <div><dt>Choice</dt><dd>{milk}</dd></div>
+      <div><dt>{site.drinkLabels.serve}</dt><dd>{temp}</dd></div>
+      <div><dt>{site.drinkLabels.choice}</dt><dd>{milk}</dd></div>
     </dl>
     {signature && (
       <>
@@ -41,7 +42,7 @@ const popoverId = `signature-${id}`;
           class="drink-signature-trigger"
           popovertarget={popoverId}
         >
-          What makes it this drink
+          {site.drinkLabels.signature}
         </button>
         <div id={popoverId} popover class="drink-signature-flyout">
           <button
@@ -53,7 +54,7 @@ const popoverId = `signature-${id}`;
           >
             &times;
           </button>
-          <p class="drink-signature-eyebrow">What makes it this drink</p>
+          <p class="drink-signature-eyebrow">{site.drinkLabels.signature}</p>
           <h4>{name}</h4>
           <p class="drink-signature-copy">{signature}</p>
         </div>

@@ -1,6 +1,20 @@
 {
   "storeName": "Moof",
   "logoText": "Moofs",
+  "seo": {
+    "homeTitle": "Moof — Specialty Matcha",
+    "homeDescription": "Moof specialty matcha, seasonal drinks, and Japanese ingredients Mori and Shiran.",
+    "menuTitle": "Moof — Menu",
+    "menuDescription": "Moof specialty matcha, hojicha, and seasonal drinks menu."
+  },
+  "labels": {
+    "navigation": { "home": "Home", "menu": "Menu", "visit": "Visit", "instagram": "IG" },
+    "hero": { "headlineSuffix": " at the counter", "cta": "See today's pour", "featuredDrink": "featured drink" },
+    "today": { "eyebrow": "Today at Moof", "heading": "A little counter board for the current season.", "seasonal": "Current seasonal menu", "ingredients": "Our matcha shelf", "bar": "At the bar" },
+    "menuPreview": { "eyebrow": "A short pour list", "heading": "Pick a favourite, then make it yours.", "cta": "Full menu", "signature": "What makes it signature", "seasonal": "seasonal" },
+    "visit": { "eyebrow": "Come by", "heading": "Visit Moof.", "address": "Address", "directions": "Getting here", "hours": "Counter hours", "mapTitle": "Map showing Moof's location" },
+    "menuPage": { "eyebrow": "The counter menu", "headline": "Good things,", "headlineEmphasis": "whisked simply.", "intro": "Specialty matcha, hojicha, and seasonal drinks.", "footerPrefix": "Find us at", "footerCta": "Plan a visit" }
+  },
   "nav": [
     {
       "label": "Menu",
@@ -46,10 +60,12 @@
     }
   ],
   "about": {
+    "eyebrow": "About us",
     "heading": "about moof",
     "body": "moof is a specialty matcha and hojicha bar built around hand-whisked ceremonial-grade drinks, soft textures, and exclusive japanese matcha ingredients. the menu keeps things simple: strong tea, fresh milk or oat milk, seasonal flavors, and daily small-batch bakes for takeaway.",
     "storeNote": "fresh milk / oat milk. hot / cold options available on selected drinks.",
-    "image": "/images/matcha-powder-about.png"
+    "image": "/images/matcha-powder-about.png",
+    "imageAlt": "Matcha powder in a bowl with a bamboo whisk"
   },
   "customAnnouncement": {
     "eyebrow": "announcement",

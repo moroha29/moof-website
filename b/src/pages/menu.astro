@@ -23,7 +23,7 @@ import { site } from "../data/site.js";
         <div class="section-intro">
           <p class="eyebrow">{site.menuPage.coreEyebrow}</p>
           <h2>{site.menuPage.coreHeading}</h2>
-          <p>On the board every {site.findUs.operatingDays}, {site.findUs.operatingHours}.</p>
+          <p>{site.menuPage.coreSchedule}</p>
         </div>
         <div class="menu-grid">
           {coreMenu.map((item) => <DrinkCard {...item} />)}
