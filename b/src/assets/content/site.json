@@ -7,21 +7,36 @@
     "menuDescription": "Moof's current matcha and hojicha menu, with tasting notes, options, and prices."
   },
   "navigation": [
-    { "label": "Home", "target": "home" },
-    { "label": "Menu", "target": "menu" },
-    { "label": "Ingredients", "target": "origin" },
-    { "label": "Visit", "target": "find-us" }
+    {
+      "label": "Home",
+      "target": "home"
+    },
+    {
+      "label": "Menu",
+      "target": "menu"
+    },
+    {
+      "label": "Ingredients",
+      "target": "origin"
+    },
+    {
+      "label": "Visit",
+      "target": "find-us"
+    }
   ],
   "hero": {
     "eyebrow": "Specialty matcha & hojicha",
-    "headline": "The ingredient comes first.",
+    "headline": "The ingredients comes first.",
     "body": "At Moof, drinks are made to order. Matcha drinks are prepared with one of two Japanese matchas and hand-whisked in the CBD.",
     "menuCta": "Explore the menu",
     "findUsCta": "Plan a visit",
     "image": "images/specialty-matcha-latte-cutout.png",
     "imageAlt": "Moof specialty matcha latte",
     "imageCaption": "Curated matcha & hojicha",
-    "details": ["Two Japanese matchas", "Hand-whisked to order"]
+    "details": [
+      "Two Japanese matchas",
+      "Hand-whisked to order"
+    ]
   },
   "story": {
     "eyebrow": "Our story",
@@ -48,7 +63,11 @@
     ],
     "ritual": {
       "label": "The Moof ritual",
-      "steps": ["Choose a drink", "Whisk to order", "Pour and serve"]
+      "steps": [
+        "Choose a drink",
+        "Whisk to order",
+        "Pour and serve"
+      ]
     }
   },
   "findUs": {
@@ -56,7 +75,10 @@
     "heading": "A small pause in the CBD.",
     "intro": "Find Moof at Eon Shenton, a 5-minute walk from Tanjong Pagar MRT station.",
     "addressLabel": "Address",
-    "addressLines": ["70 Shenton Way, #01-15", "Eon Shenton, Singapore CBD"],
+    "addressLines": [
+      "70 Shenton Way, #01-15",
+      "Eon Shenton, Singapore CBD"
+    ],
     "directionsLabel": "Getting here",
     "mrtNote": "5-minute walk from Tanjong Pagar MRT station.",
     "hoursLabel": "Hours",
