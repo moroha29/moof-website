@@ -31,7 +31,7 @@
       "specialty-usucha",
       "classic-hojicha-latte"
     ],
-    "announcement": "management portal test — it works."
+    "announcement": "full flow verified via test1 - 26 July 2026."
   },
   "ingredients": [
     {
@@ -72,12 +72,12 @@
   "team": {
     "eyebrow": "Meet the counter",
     "heading": "the people behind the counter.",
-    "intro": "a placeholder portrait for this design direction — swap it for the real team when ready.",
+    "intro": "a placeholder portrait for this design direction - swap it for the real team when ready.",
     "members": [
       {
         "name": "Staff portrait placeholder",
         "role": "your barista",
-        "bio": "a friendly face at the counter — team details coming soon.",
+        "bio": "a friendly face at the counter - team details coming soon.",
         "image": "/images/team/staff-placeholder.png"
       }
     ]
