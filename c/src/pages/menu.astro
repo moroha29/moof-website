@@ -26,8 +26,8 @@ import { site } from "../data/site.js";
 
     <section>
       <div class="wrap">
-        <MenuList title={site.menuIntro.coreTitle} note={site.menuIntro.coreNote} items={core} />
-        <MenuList title={site.menuIntro.seasonalTitle} note={site.menuIntro.seasonalNote} items={seasonal} />
+      <MenuList title={site.menuPage.coreTitle} note={site.menuPage.coreNote} items={core} />
+      <MenuList title={site.menuPage.seasonalTitle} note={site.menuPage.seasonalNote} items={seasonal} />
         {additionalCategories.map((category) => <MenuList title={category.title} note={category.description} items={category.items} />)}
       </div>
     </section>

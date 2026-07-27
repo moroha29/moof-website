@@ -133,7 +133,7 @@ const menuPage = withBase("/menu/");
           <div class="visit-row">
             <span class="label">{site.visit.instagramLabel}</span>
             <span class="value">
-              <a href={site.social.instagramUrl} target="_blank" rel="noreferrer">{site.social.instagramHandle}</a>
+              <a href={site.visit.instagramUrl} target="_blank" rel="noreferrer" data-cms-paths={JSON.stringify([["homepage", "visit", "instagramHandle"], ["homepage", "visit", "instagramUrl"]])}>{site.visit.instagramHandle}</a>
             </span>
           </div>
           <p class="visit-note">{site.visit.note}</p>

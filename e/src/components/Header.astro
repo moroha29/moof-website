@@ -5,8 +5,8 @@ import { withBase } from "../lib/base.js";
 
 <header class="site-header">
   <div class="utility-bar">
-    <span>{site.visit.address}</span>
-    <span>{site.visit.hours}</span>
+    <span data-cms-path={JSON.stringify(["homepage", "header", "address"])}>{site.header.address}</span>
+    <span data-cms-path={JSON.stringify(["homepage", "header", "hours"])}>{site.header.hours}</span>
   </div>
   <div class="masthead">
     <a class="wordmark" href={withBase("/")} aria-label="Moof home">{site.wordmark}</a>

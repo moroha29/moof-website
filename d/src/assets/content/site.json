@@ -26,6 +26,14 @@
       "homeDescription": "Moof is a specialty matcha and hojicha bar at Eon Shenton, five minutes from Tanjong Pagar MRT.",
       "menuTitle": "Menu - Moof Matcha & Hojicha, Tanjong Pagar",
       "menuDescription": "Full Moof menu: matcha, hojicha, and seasonal drinks at Eon Shenton in Tanjong Pagar."
+    },
+    "footer": {
+      "wordmark": "Moof",
+      "addressLine1": "70 Shenton Way, #01-15",
+      "addressLine2": "Eon Shenton, Singapore",
+      "hours": "Mon-Fri, 9am-6pm",
+      "instagramHandle": "@moof__bar",
+      "instagramUrl": "https://www.instagram.com/moof__bar/"
     }
   },
   "homepage": {
@@ -64,7 +72,12 @@
     "headline": "Matcha, hojicha, and more.",
     "introPrefix": "Fresh or oat milk where listed.",
     "footerJoiner": " - ",
-    "categoryEyebrow": "Menu category"
+    "categoryEyebrow": "Menu category",
+    "hours": "Mon-Fri, 9am-6pm",
+    "mrtNote": "5-minute walk from Tanjong Pagar MRT",
+    "footerAddressLine1": "70 Shenton Way, #01-15",
+    "footerAddressLine2": "Eon Shenton, Singapore",
+    "footerMrtNote": "5-minute walk from Tanjong Pagar MRT"
   },
   "team": [
     {

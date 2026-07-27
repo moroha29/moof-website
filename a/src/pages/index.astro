@@ -41,7 +41,7 @@ const previewDrinks = activeDrinks.slice(0, 3);
         <p class="eyebrow"><span aria-hidden="true">✦</span> {homepage.data.hero.eyebrow}</p>
         <h1 id="hero-heading">{homepage.data.hero.headline}<em>{homepage.data.labels.hero.headlineSuffix}</em></h1>
         <p class="hero-note">{homepage.data.hero.note}</p>
-        <p class="pour-note">{homepage.data.hero.announcement}</p>
+        <p class="pour-note" data-cms-path={JSON.stringify(["homepage", "hero", "announcement"])}>{homepage.data.hero.announcement}</p>
         <a class="ink-link" href="#today">{homepage.data.labels.hero.cta} <span aria-hidden="true">↓</span></a>
       </div>
 
@@ -68,7 +68,7 @@ const previewDrinks = activeDrinks.slice(0, 3);
         <article class="paper-note note-seasonal">
           <span class="note-pin" aria-hidden="true"></span>
           <p>{homepage.data.labels.today.seasonal}</p>
-          <h3>{seasonalDrinks[0]?.name ?? homepage.data.hero.announcement}</h3>
+          <h3 data-cms-path={!seasonalDrinks[0] ? JSON.stringify(["homepage", "labels", "today", "seasonalFallback"]) : undefined}>{seasonalDrinks[0]?.name ?? homepage.data.labels.today.seasonalFallback}</h3>
           <span>{seasonalDrinks[0]?.description}</span>
         </article>
         <article class="paper-note note-ingredients">
@@ -85,13 +85,13 @@ const previewDrinks = activeDrinks.slice(0, 3);
         </article>
         <article class="paper-note note-milk">
           <p>{homepage.data.labels.today.bar}</p>
-          <h3>{homepage.data.about.storeNote}</h3>
-          <span>{homepage.data.about.body}</span>
+          <h3 data-cms-path={JSON.stringify(["homepage", "labels", "today", "barHeading"])}>{homepage.data.labels.today.barHeading}</h3>
+          <span data-cms-path={JSON.stringify(["homepage", "labels", "today", "barBody"])}>{homepage.data.labels.today.barBody}</span>
         </article>
       </div>
     </section>
 
-    <AboutSection {...homepage.data.about} ingredients={homepage.data.ingredients} />
+    <AboutSection {...homepage.data.about} />
 
     <AnnouncementSection {...homepage.data.customAnnouncement} />
 

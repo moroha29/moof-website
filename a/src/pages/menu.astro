@@ -70,7 +70,7 @@ const menus = sortMenusForDisplay([
     </section>
 
     <section class="menu-footer-note" aria-label="Visit Moof">
-      <p>{homepage?.data.labels.menuPage.footerPrefix} {homepage?.data.findUs.address}, {homepage?.data.findUs.unit}.</p>
+      <p data-cms-paths={JSON.stringify([["homepage", "labels", "menuPage", "footerPrefix"], ["homepage", "menuPageFooter", "address"], ["homepage", "menuPageFooter", "unit"]])}>{homepage?.data.labels.menuPage.footerPrefix} {homepage?.data.menuPageFooter.address}, {homepage?.data.menuPageFooter.unit}.</p>
       <a class="ink-link" href={withBase("#find-us")}>{homepage?.data.labels.menuPage.footerCta} <span aria-hidden="true">→</span></a>
     </section>
   </main>

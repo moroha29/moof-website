@@ -100,6 +100,14 @@
     "handle": "@moof__bar",
     "url": "https://www.instagram.com/moof__bar/"
   },
+  "footer": {
+    "wordmark": "moof",
+    "address": "70 Shenton Way, #01-15, Eon Shenton, Singapore CBD",
+    "hours": "Monday - Friday, 9am - 6pm",
+    "menuLabel": "Menu",
+    "instagramHandle": "@moof__bar",
+    "instagramUrl": "https://www.instagram.com/moof__bar/"
+  },
   "menuShowcase": {
     "eyebrow": "Find your pour",
     "heading": "Flavour, then choice.",

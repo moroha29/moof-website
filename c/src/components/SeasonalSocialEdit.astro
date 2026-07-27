@@ -29,8 +29,8 @@ import { withBase } from "../lib/base.js";
 
     <div class="seasonal-edit-social">
       <p>{site.seasonalEdit.socialPrompt}</p>
-      <a href={site.social.instagramUrl} target="_blank" rel="noreferrer">
-        {site.seasonalEdit.socialCta} {site.social.instagramHandle} <span aria-hidden="true">↗</span>
+      <a href={site.seasonalEdit.instagramUrl} target="_blank" rel="noreferrer" data-cms-paths={JSON.stringify([["homepage", "seasonalEdit", "socialCta"], ["homepage", "seasonalEdit", "instagramHandle"], ["homepage", "seasonalEdit", "instagramUrl"]])}>
+        {site.seasonalEdit.socialCta} {site.seasonalEdit.instagramHandle} <span aria-hidden="true">↗</span>
       </a>
     </div>
   </div>

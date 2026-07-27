@@ -5,12 +5,12 @@ import { site } from "../data/site.js";
 
 <footer class="site-footer">
   <div class="wrap footer-grid">
-    <p class="foot-logo">{site.brand.wordmark}<span aria-hidden="true">.</span></p>
-    <p>{site.findUs.addressLines.join(", ")}</p>
-    <p>{site.findUs.operatingDays}, {site.findUs.operatingHours}</p>
+    <p class="foot-logo" data-cms-path={JSON.stringify(["homepage", "footer", "wordmark"])}>{site.footer.wordmark}<span aria-hidden="true">.</span></p>
+    <p data-cms-path={JSON.stringify(["homepage", "footer", "address"])}>{site.footer.address}</p>
+    <p data-cms-path={JSON.stringify(["homepage", "footer", "hours"])}>{site.footer.hours}</p>
     <div class="footer-links">
-      <a href={withBase("menu")}>{site.brand.footerMenuLabel}</a>
-      <a href={site.instagram.url} target="_blank" rel="noreferrer">{site.instagram.handle}</a>
+      <a href={withBase("menu")} data-cms-path={JSON.stringify(["homepage", "footer", "menuLabel"])}>{site.footer.menuLabel}</a>
+      <a href={site.footer.instagramUrl} target="_blank" rel="noreferrer" data-cms-paths={JSON.stringify([["homepage", "footer", "instagramHandle"], ["homepage", "footer", "instagramUrl"]])}>{site.footer.instagramHandle}</a>
     </div>
   </div>
 </footer>

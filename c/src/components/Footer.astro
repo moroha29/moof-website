@@ -8,12 +8,12 @@ const menuPage = withBase("/menu/");
 
 <footer>
   <div class="wrap">
-    <a class="wordmark" href={home}>{site.storeName}</a>
+    <a class="wordmark" href={home} data-cms-path={JSON.stringify(["homepage", "footer", "wordmark"])}>{site.footer.wordmark}</a>
     <div class="foot-links">
-      <a href={menuPage}>{site.navigation.menu}</a>
-      <a href={site.social.instagramUrl} target="_blank" rel="noreferrer">{site.social.instagramHandle}</a>
-      <a href={`${home}#visit`}>{site.navigation.visit}</a>
+      <a href={menuPage} data-cms-path={JSON.stringify(["homepage", "footer", "menuLabel"])}>{site.footer.menuLabel}</a>
+      <a href={site.footer.instagramUrl} target="_blank" rel="noreferrer" data-cms-paths={JSON.stringify([["homepage", "footer", "instagramHandle"], ["homepage", "footer", "instagramUrl"]])}>{site.footer.instagramHandle}</a>
+      <a href={`${home}#visit`} data-cms-path={JSON.stringify(["homepage", "footer", "visitLabel"])}>{site.footer.visitLabel}</a>
     </div>
-    <p class="foot-note">{site.visit.footerNote}</p>
+    <p class="foot-note" data-cms-path={JSON.stringify(["homepage", "footer", "note"])}>{site.footer.note}</p>
   </div>
 </footer>

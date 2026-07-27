@@ -5,7 +5,8 @@
     "menu": "Menu",
     "visit": "Visit",
     "instagram": "Instagram",
-    "mobileToggle": "Menu"
+    "mobileToggle": "Menu",
+    "instagramUrl": "https://www.instagram.com/moof__bar/"
   },
   "seo": {
     "title": "Moof - Matcha & Hojicha, Tanjong Pagar",
@@ -59,7 +60,9 @@
     "heading": "Three drinks worth pausing for.",
     "supportingCopy": "A small rotation for the season, composed to look as considered as it tastes.",
     "socialPrompt": "See what is being whisked this week.",
-    "socialCta": "Follow"
+    "socialCta": "Follow",
+    "instagramHandle": "@moof__bar",
+    "instagramUrl": "https://www.instagram.com/moof__bar/"
   },
   "team": {
     "eyebrow": "Meet the team",
@@ -90,15 +93,24 @@
     "hoursLines": ["Mon-Fri", "9am - 6pm"],
     "mrtLines": ["5-minute walk from", "Tanjong Pagar"],
     "note": "We're closed weekends - see you Monday.",
-    "footerNote": "70 Shenton Way, #01-15, Eon Shenton, Singapore - Mon-Fri, 9am-6pm"
-  },
-  "social": {
     "instagramUrl": "https://www.instagram.com/moof__bar/",
     "instagramHandle": "@moof__bar"
   },
   "menuPage": {
     "eyebrow": "Moof",
     "heading": "The menu",
-    "intro": "Seven drinks, made the same unhurried way every time - four on the counter daily, three for the season."
+    "intro": "Seven drinks, made the same unhurried way every time - four on the counter daily, three for the season.",
+    "coreTitle": "Core",
+    "coreNote": "Available daily",
+    "seasonalTitle": "Seasonal",
+    "seasonalNote": "Current batch"
+  },
+  "footer": {
+    "wordmark": "moof",
+    "menuLabel": "Menu",
+    "instagramHandle": "@moof__bar",
+    "instagramUrl": "https://www.instagram.com/moof__bar/",
+    "visitLabel": "Visit",
+    "note": "70 Shenton Way, #01-15, Eon Shenton, Singapore - Mon-Fri, 9am-6pm"
   }
 }

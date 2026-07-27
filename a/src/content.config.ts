@@ -15,7 +15,7 @@ const site = defineCollection({
     labels: z.object({
       navigation: z.object({ home: z.string(), menu: z.string(), visit: z.string(), instagram: z.string() }),
       hero: z.object({ headlineSuffix: z.string(), cta: z.string(), featuredDrink: z.string() }),
-      today: z.object({ eyebrow: z.string(), heading: z.string(), seasonal: z.string(), ingredients: z.string(), bar: z.string() }),
+      today: z.object({ eyebrow: z.string(), heading: z.string(), seasonal: z.string(), seasonalFallback: z.string(), ingredients: z.string(), bar: z.string(), barHeading: z.string(), barBody: z.string() }),
       menuPreview: z.object({ eyebrow: z.string(), heading: z.string(), cta: z.string(), signature: z.string(), seasonal: z.string() }),
       visit: z.object({ eyebrow: z.string(), heading: z.string(), address: z.string(), directions: z.string(), hours: z.string(), mapTitle: z.string() }),
       menuPage: z.object({ eyebrow: z.string(), headline: z.string(), headlineEmphasis: z.string(), intro: z.string(), footerPrefix: z.string(), footerCta: z.string() })
@@ -49,7 +49,8 @@ const site = defineCollection({
       body: z.string(),
       storeNote: z.string(),
       image: z.string(),
-      imageAlt: z.string()
+      imageAlt: z.string(),
+      ingredients: z.array(z.object({ name: z.string(), origin: z.string(), description: z.string() }))
     }),
     customAnnouncement: z.object({
       eyebrow: z.string(),
@@ -69,6 +70,7 @@ const site = defineCollection({
       instagramUrl: z.string().url(),
       mapEmbedUrl: z.string().url().optional()
     }),
+    menuPageFooter: z.object({ address: z.string(), unit: z.string() }),
     additionalMenuCategories: z.array(
       z.object({
         id: z.string(),

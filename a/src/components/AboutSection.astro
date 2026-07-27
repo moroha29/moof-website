@@ -22,25 +22,25 @@ const { eyebrow, heading, body, storeNote, image, imageAlt, ingredients } = Astr
 
 <section class="about-section" id="about" aria-labelledby="about-heading">
   <div class="section-heading">
-    <p>{eyebrow}</p>
-    <h2 id="about-heading">{heading}</h2>
-    <span>{storeNote}</span>
+    <p data-cms-path={JSON.stringify(["homepage", "about", "eyebrow"])}>{eyebrow}</p>
+    <h2 id="about-heading" data-cms-path={JSON.stringify(["homepage", "about", "heading"])}>{heading}</h2>
+    <span data-cms-path={JSON.stringify(["homepage", "about", "storeNote"])}>{storeNote}</span>
   </div>
   <div class="about-layout">
     <div class="about-copy">
-      <p class="about-body">{body}</p>
+      <p class="about-body" data-cms-path={JSON.stringify(["homepage", "about", "body"])}>{body}</p>
       <div class="ingredient-strip">
         {
-          ingredients.map((ingredient) => (
+          ingredients.map((ingredient, index) => (
             <article>
-              <span>{ingredient.origin}</span>
-              <h3>{ingredient.name}</h3>
-              <p>{ingredient.description}</p>
+              <span data-cms-path={JSON.stringify(["homepage", "about", "ingredients", index, "origin"])}>{ingredient.origin}</span>
+              <h3 data-cms-path={JSON.stringify(["homepage", "about", "ingredients", index, "name"])}>{ingredient.name}</h3>
+              <p data-cms-path={JSON.stringify(["homepage", "about", "ingredients", index, "description"])}>{ingredient.description}</p>
             </article>
           ))
         }
       </div>
     </div>
-    <img class="about-image" src={withBase(image)} alt={imageAlt} loading="lazy" />
+    <img class="about-image" src={withBase(image)} alt={imageAlt} loading="lazy" data-cms-paths={JSON.stringify([["homepage", "about", "image"], ["homepage", "about", "imageAlt"]])} />
   </div>
 </section>

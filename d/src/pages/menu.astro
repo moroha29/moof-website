@@ -15,8 +15,8 @@ const menuItems = [...coreItems, ...seasonalItems];
     <div class="menu-page-heading">
       <p class="eyebrow">{menuPage.eyebrow}</p>
       <h1>{menuPage.headline}</h1>
-      <p class="menu-page-sub">
-        {menuPage.introPrefix} {site.hours} - {site.mrtNote}.
+      <p class="menu-page-sub" data-cms-paths={JSON.stringify([["homepage", "menuPage", "introPrefix"], ["homepage", "menuPage", "hours"], ["homepage", "menuPage", "mrtNote"]])}>
+        {menuPage.introPrefix} {menuPage.hours} - {menuPage.mrtNote}.
       </p>
     </div>
 
@@ -38,6 +38,6 @@ const menuItems = [...coreItems, ...seasonalItems];
       </ul>
     </section>
 
-    <p class="menu-page-footer">{site.addressLine1}, {site.addressLine2} - {site.mrtNote}</p>
+    <p class="menu-page-footer" data-cms-paths={JSON.stringify([["homepage", "menuPage", "footerAddressLine1"], ["homepage", "menuPage", "footerAddressLine2"], ["homepage", "menuPage", "footerMrtNote"]])}>{menuPage.footerAddressLine1}, {menuPage.footerAddressLine2} - {menuPage.footerMrtNote}</p>
   </main>
 </BaseLayout>

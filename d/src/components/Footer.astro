@@ -5,8 +5,8 @@ import { site } from "../data/site.js";
 
 <footer class="site-footer">
   <div class="footer-inner">
-    <a class="logo" href={withBase("/")}>{site.name}</a>
-    <p>{site.addressLine1}, {site.addressLine2} · {site.hours}</p>
-    <a href={site.instagramUrl} target="_blank" rel="noreferrer">{site.instagramHandle}</a>
+    <a class="logo" href={withBase("/")} data-cms-path={JSON.stringify(["homepage", "site", "footer", "wordmark"])}>{site.footer.wordmark}</a>
+    <p data-cms-paths={JSON.stringify([["homepage", "site", "footer", "addressLine1"], ["homepage", "site", "footer", "addressLine2"], ["homepage", "site", "footer", "hours"]])}>{site.footer.addressLine1}, {site.footer.addressLine2} · {site.footer.hours}</p>
+    <a href={site.footer.instagramUrl} target="_blank" rel="noreferrer" data-cms-paths={JSON.stringify([["homepage", "site", "footer", "instagramHandle"], ["homepage", "site", "footer", "instagramUrl"]])}>{site.footer.instagramHandle}</a>
   </div>
 </footer>
