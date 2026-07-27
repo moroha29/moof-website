@@ -63,7 +63,8 @@
     "eyebrow": "Menu",
     "headline": "Matcha, hojicha, and more.",
     "introPrefix": "Fresh or oat milk where listed.",
-    "footerJoiner": " - "
+    "footerJoiner": " - ",
+    "categoryEyebrow": "Menu category"
   },
   "team": [
     {

@@ -72,10 +72,12 @@ test("home and menu navigation stay accessible and base-path aware", () => {
   assert.match(astroConfig, /base:\s*["']\/moof-website\/d["']/);
 });
 
-test("menu is one readable, complete product list", () => {
+test("menu is one readable list with deployable additional categories", () => {
   assert.match(menuPageSource, /const menuItems = \[\.\.\.coreItems, \.\.\.seasonalItems\]/);
-  assert.equal((menuPageSource.match(/<MenuRow/g) ?? []).length, 1);
+  assert.equal((menuPageSource.match(/<MenuRow/g) ?? []).length, 2);
   assert.match(menuPageSource, /menuItems\.map\(\(item\) => <MenuRow item=\{item\} \/>\)/);
+  assert.match(menuPageSource, /additionalCategories\.map/);
+  assert.match(menuPageSource, /category\.items\.map\(\(item\) => <MenuRow item=\{item\} \/>\)/);
   assert.match(menuPageSource, /menuPage\.headline/);
   assert.match(menuRow, /item\.tags\.join/);
   assert.match(menuRow, /withBase\(item\.image\)/);

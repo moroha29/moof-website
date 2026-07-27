@@ -5,7 +5,10 @@ import { sortMenusForDisplay } from "../lib/carousel.js";
 import { withBase } from "../lib/base.js";
 
 const homepage = await getEntry("site", "homepage");
-const menus = sortMenusForDisplay((await getCollection("menu")).map((entry) => entry.data));
+const menus = sortMenusForDisplay([
+  ...(await getCollection("menu")).map((entry) => entry.data),
+  ...(homepage?.data.additionalMenuCategories ?? [])
+]);
 ---
 
 <BaseLayout title={homepage?.data.seo.menuTitle ?? "Moof — Menu"} description={homepage?.data.seo.menuDescription ?? "Moof menu"}>

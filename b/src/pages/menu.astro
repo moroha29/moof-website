@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import DrinkCard from "../components/DrinkCard.astro";
-import { coreMenu, seasonalMenu } from "../data/menu.js";
+import { coreMenu, seasonalMenu, additionalCategories } from "../data/menu.js";
 import { site } from "../data/site.js";
 ---
 
@@ -43,5 +43,18 @@ import { site } from "../data/site.js";
         </div>
       </div>
     </section>
+
+    {additionalCategories.map((category) => (
+      <section class="menu-page-section">
+        <div class="wrap">
+          <div class="section-intro">
+            <p class="eyebrow">{site.menuPage.categoryEyebrow}</p>
+            <h2>{category.title}</h2>
+            {category.description && <p>{category.description}</p>}
+          </div>
+          <div class="menu-grid">{category.items.map((item) => <DrinkCard {...item} />)}</div>
+        </div>
+      </section>
+    ))}
   </main>
 </BaseLayout>

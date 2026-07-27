@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import MenuRow from "../components/MenuRow.astro";
-import { coreItems, seasonalItems } from "../data/menu.js";
+import { coreItems, seasonalItems, additionalCategories } from "../data/menu.js";
 import { menuPage, site } from "../data/site.js";
 
 const menuItems = [...coreItems, ...seasonalItems];
@@ -25,6 +25,16 @@ const menuItems = [...coreItems, ...seasonalItems];
         {
           menuItems.map((item) => <MenuRow item={item} />)
         }
+        {additionalCategories.map((category) => (
+          <>
+            <li class="menu-category-divider" id={`category-${category.id}`}>
+              <p class="eyebrow">{menuPage.categoryEyebrow}</p>
+              <h2>{category.title}</h2>
+              {category.description && <p>{category.description}</p>}
+            </li>
+            {category.items.map((item) => <MenuRow item={item} />)}
+          </>
+        ))}
       </ul>
     </section>
 

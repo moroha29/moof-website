@@ -13,7 +13,10 @@ if (!homepage) {
   throw new Error("Missing homepage content");
 }
 
-const menus = sortMenusForDisplay((await getCollection("menu")).map((entry) => entry.data));
+const menus = sortMenusForDisplay([
+  ...(await getCollection("menu")).map((entry) => entry.data),
+  ...homepage.data.additionalMenuCategories
+]);
 const activeDrinks = menus.flatMap((menu) => menu.items).filter((item) => item.active);
 const featuredDrink = activeDrinks.find((item) => item.id === homepage.data.hero.featuredDrinkId) ?? activeDrinks[0];
 const seasonalDrinks = menus.find((menu) => menu.seasonName)?.items.filter((item) => item.active) ?? [];

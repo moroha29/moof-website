@@ -479,6 +479,23 @@ h3 {
   border-top: 1px solid var(--line);
 }
 
+.menu-category-divider {
+  padding: 3rem 0 1.2rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.menu-category-divider h2 {
+  margin: 0.35rem 0 0;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  letter-spacing: -0.04em;
+}
+
+.menu-category-divider > p:last-child:not(.eyebrow) {
+  max-width: 36rem;
+  margin: 0.65rem 0 0;
+  color: var(--muted);
+}
+
 .menu-list-item {
   display: grid;
   grid-template-columns: minmax(5.25rem, 7rem) minmax(0, 1fr);

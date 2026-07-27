@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import MenuList from "../components/MenuList.astro";
-import { core, seasonal } from "../data/menu.js";
+import { core, seasonal, additionalCategories } from "../data/menu.js";
 import { site } from "../data/site.js";
 ---
 
@@ -28,6 +28,7 @@ import { site } from "../data/site.js";
       <div class="wrap">
         <MenuList title={site.menuIntro.coreTitle} note={site.menuIntro.coreNote} items={core} />
         <MenuList title={site.menuIntro.seasonalTitle} note={site.menuIntro.seasonalNote} items={seasonal} />
+        {additionalCategories.map((category) => <MenuList title={category.title} note={category.description} items={category.items} />)}
       </div>
     </section>
   </main>

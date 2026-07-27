@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import MenuList from "../components/MenuList.astro";
 import Footer from "../components/Footer.astro";
-import { coreMenu, seasonalMenu } from "../data/menu.js";
+import { coreMenu, seasonalMenu, additionalCategories } from "../data/menu.js";
 import { menuMedia } from "../data/editorial.js";
 import { site } from "../data/site.js";
 import { withBase } from "../lib/base.js";
@@ -21,6 +21,7 @@ import { withBase } from "../lib/base.js";
     <MenuList title={site.menuPage.coreTitle} items={coreMenu} />
     <figure class="menu-image menu-image--wide"><img src={withBase(menuMedia[1].src)} alt={menuMedia[1].alt} /><figcaption>{menuMedia[1].credit}</figcaption></figure>
     <MenuList title={site.menuPage.seasonalTitle} items={seasonalMenu} />
+    {additionalCategories.map((category) => <MenuList title={category.title} items={category.items} />)}
   </main>
   <Footer />
 </BaseLayout>

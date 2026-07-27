@@ -132,6 +132,7 @@
     "coreSchedule": "On the board every Monday - Friday, 9am - 6pm.",
     "seasonalEyebrow": "Seasonal rotation",
     "seasonalHeading": "Current flavours",
-    "seasonalIntro": "A rotating selection alongside the core menu."
+    "seasonalIntro": "A rotating selection alongside the core menu.",
+    "categoryEyebrow": "Menu category"
   }
 }

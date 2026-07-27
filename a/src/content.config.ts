@@ -69,6 +69,15 @@ const site = defineCollection({
       instagramUrl: z.string().url(),
       mapEmbedUrl: z.string().url().optional()
     }),
+    additionalMenuCategories: z.array(
+      z.object({
+        id: z.string(),
+        title: z.string(),
+        description: z.string(),
+        seasonName: z.string().optional(),
+        items: z.array(z.any())
+      })
+    ).default([]),
     team: z.object({
       eyebrow: z.string(),
       heading: z.string(),
