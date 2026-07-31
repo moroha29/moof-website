@@ -1,0 +1,43 @@
+name: Validate managed website content
+
+on:
+  pull_request:
+    paths:
+      - "a/**"
+      - "b/**"
+      - "c/**"
+      - "d/**"
+      - "e/**"
+      - ".github/workflows/content-validation.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: content-validation-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build all managed designs
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        site: [a, b, c, d, e]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.12.0
+          cache: npm
+          cache-dependency-path: ${{ matrix.site }}/package-lock.json
+      - name: Install dependencies
+        run: npm --prefix "${{ matrix.site }}" ci
+      - name: Build design
+        env:
+          ASTRO_TELEMETRY_DISABLED: 1
+        run: npm --prefix "${{ matrix.site }}" run build
+      - name: Confirm deployable output
+        run: test -f "${{ matrix.site }}/dist/index.html"
