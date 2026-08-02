@@ -1,7 +1,16 @@
-name: Deploy to GitHub Pages
+name: Deploy website
 
 on:
   workflow_dispatch:
+    inputs:
+      deploy_target:
+        description: Where should this release be deployed?
+        required: true
+        default: github-pages
+        type: choice
+        options:
+          - github-pages
+          - aws
 
 permissions:
   contents: read
@@ -9,17 +18,34 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: deploy-${{ inputs.deploy_target || 'github-pages' }}
   cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      deploy_target: ${{ steps.target.outputs.deploy_target }}
     env:
       ASTRO_TELEMETRY_DISABLED: 1
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+
+      - name: Resolve deployment target
+        id: target
+        shell: bash
+        env:
+          REQUESTED_TARGET: ${{ inputs.deploy_target || 'github-pages' }}
+        run: |
+          case "$REQUESTED_TARGET" in
+            github-pages|aws) ;;
+            *)
+              echo "::error::Unknown deployment target: $REQUESTED_TARGET"
+              exit 1
+              ;;
+          esac
+          echo "deploy_target=$REQUESTED_TARGET" >> "$GITHUB_OUTPUT"
 
       - name: Setup Node
         uses: actions/setup-node@v6
@@ -34,14 +60,40 @@ jobs:
             e/package-lock.json
 
       - name: Configure GitHub Pages
+        if: steps.target.outputs.deploy_target == 'github-pages'
         id: pages
         uses: actions/configure-pages@v5
+
+      - name: Resolve public URL
+        id: public-url
+        shell: bash
+        env:
+          DEPLOY_TARGET: ${{ steps.target.outputs.deploy_target }}
+          PAGES_SITE: ${{ steps.pages.outputs.origin }}
+          PAGES_BASE: ${{ steps.pages.outputs.base_path }}
+          AWS_SITE_URL: ${{ vars.AWS_SITE_URL }}
+          AWS_BASE_PATH: ${{ vars.AWS_BASE_PATH }}
+        run: |
+          if [ "$DEPLOY_TARGET" = "aws" ]; then
+            if [ -z "$AWS_SITE_URL" ]; then
+              echo "::error::AWS_SITE_URL is not configured. Run infra/setup-aws.ps1 first."
+              exit 1
+            fi
+            site_url="$AWS_SITE_URL"
+            base_path="$AWS_BASE_PATH"
+          else
+            site_url="$PAGES_SITE"
+            base_path="$PAGES_BASE"
+          fi
+
+          echo "site_url=$site_url" >> "$GITHUB_OUTPUT"
+          echo "base_path=$base_path" >> "$GITHUB_OUTPUT"
 
       - name: Build site
         shell: bash
         env:
-          GITHUB_PAGES_SITE: ${{ steps.pages.outputs.origin }}
-          GITHUB_PAGES_BASE: ${{ steps.pages.outputs.base_path }}
+          GITHUB_PAGES_SITE: ${{ steps.public-url.outputs.site_url }}
+          GITHUB_PAGES_BASE: ${{ steps.public-url.outputs.base_path }}
         run: |
           mkdir -p site
           cp pages/index.html site/index.html
@@ -65,12 +117,23 @@ jobs:
             test -f "site/$dir/index.html"
           done
 
-      - name: Upload artifact
+      - name: Upload GitHub Pages artifact
+        if: steps.target.outputs.deploy_target == 'github-pages'
         uses: actions/upload-pages-artifact@v4
         with:
           path: site
 
-  deploy:
+      - name: Upload AWS artifact
+        if: steps.target.outputs.deploy_target == 'aws'
+        uses: actions/upload-artifact@v7
+        with:
+          name: aws-site
+          path: site
+          include-hidden-files: true
+          retention-days: 1
+
+  deploy-pages:
+    if: needs.build.outputs.deploy_target == 'github-pages'
     needs: build
     runs-on: ubuntu-latest
     environment:
@@ -80,3 +143,54 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  deploy-aws:
+    if: needs.build.outputs.deploy_target == 'aws'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check AWS configuration
+        shell: bash
+        env:
+          AWS_ROLE_ARN: ${{ vars.AWS_ROLE_ARN }}
+          AWS_REGION: ${{ vars.AWS_REGION }}
+          AWS_S3_BUCKET: ${{ vars.AWS_S3_BUCKET }}
+          AWS_CLOUDFRONT_DISTRIBUTION_ID: ${{ vars.AWS_CLOUDFRONT_DISTRIBUTION_ID }}
+        run: |
+          missing=0
+          for name in AWS_ROLE_ARN AWS_REGION AWS_S3_BUCKET AWS_CLOUDFRONT_DISTRIBUTION_ID; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Repository variable $name is not configured."
+              missing=1
+            fi
+          done
+          exit "$missing"
+
+      - name: Download site artifact
+        uses: actions/download-artifact@v7
+        with:
+          name: aws-site
+          path: site
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Publish to S3
+        env:
+          AWS_S3_BUCKET: ${{ vars.AWS_S3_BUCKET }}
+        run: >-
+          aws s3 sync site "s3://$AWS_S3_BUCKET"
+          --delete
+          --only-show-errors
+          --cache-control "public,max-age=300,must-revalidate"
+
+      - name: Refresh CloudFront
+        env:
+          AWS_CLOUDFRONT_DISTRIBUTION_ID: ${{ vars.AWS_CLOUDFRONT_DISTRIBUTION_ID }}
+        run: >-
+          aws cloudfront create-invalidation
+          --distribution-id "$AWS_CLOUDFRONT_DISTRIBUTION_ID"
+          --paths "/*"
