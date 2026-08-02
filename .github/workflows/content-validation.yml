@@ -9,6 +9,9 @@ on:
       - "d/**"
       - "e/**"
       - ".github/workflows/content-validation.yml"
+      - ".github/workflows/deploy.yml"
+      - "infra/**"
+      - "docs/aws-deployment.md"
 
 permissions:
   contents: read
