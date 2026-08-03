@@ -58,6 +58,7 @@ jobs:
             c/package-lock.json
             d/package-lock.json
             e/package-lock.json
+            f/package-lock.json
 
       - name: Configure GitHub Pages
         if: steps.target.outputs.deploy_target == 'github-pages'
@@ -99,7 +100,7 @@ jobs:
           cp pages/index.html site/index.html
           touch site/.nojekyll
 
-          for dir in a b c d e; do
+          for dir in a b c d e f; do
             if [ -f "$dir/package.json" ]; then
               echo "Building design $dir"
               npm --prefix "$dir" ci
@@ -113,7 +114,7 @@ jobs:
         shell: bash
         run: |
           test -f site/index.html
-          for dir in a b c d e; do
+          for dir in a b c d e f; do
             test -f "site/$dir/index.html"
           done
 
