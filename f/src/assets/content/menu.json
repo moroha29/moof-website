@@ -1,0 +1,12 @@
+{
+  "coreMenu": [
+    { "id": "orange-cloud", "name": "Orange Cloud", "price": "$8", "description": "Espresso, house orange cream and sea salt.", "image": "/images/menu-orange-cloud.png", "imageAlt": "Iced orange cream espresso in a short glass", "active": true, "isSeasonal": false, "temperatureOptions": ["Iced"], "milkOptions": ["Dairy", "Oat"], "tags": ["House favourite"] },
+    { "id": "walnut-latte", "name": "Walnut Latte", "price": "$7.50", "description": "Toasted walnut, double espresso and silky milk.", "image": "/images/menu-walnut-latte.png", "imageAlt": "Warm walnut latte in a cream ceramic cup", "active": true, "isSeasonal": false, "temperatureOptions": ["Hot", "Iced"], "milkOptions": ["Dairy", "Oat"], "tags": [] },
+    { "id": "black-coffee", "name": "Black Coffee", "price": "$6", "description": "Our rotating single origin, brewed clean and sweet.", "image": "/images/menu-black.png", "imageAlt": "Black filter coffee beside roasted beans", "active": true, "isSeasonal": false, "temperatureOptions": ["Hot", "Iced"], "milkOptions": [], "tags": [] }
+  ],
+  "seasonalMenu": [
+    { "id": "sunset-soda", "name": "Sunset Soda", "price": "$9", "description": "Blood orange, cascara, tonic and a coffee cherry finish.", "image": "/images/menu-sunset-soda.png", "imageAlt": "Sparkling red-orange cascara soda", "active": true, "isSeasonal": true, "temperatureOptions": ["Iced"], "milkOptions": [], "tags": ["Seasonal"] },
+    { "id": "miso-caramel", "name": "Miso Caramel Flat White", "price": "$8.50", "description": "White miso caramel, ristretto and velvety milk.", "image": "/images/menu-miso-flat-white.png", "imageAlt": "Flat white with caramel-coloured latte art", "active": true, "isSeasonal": true, "temperatureOptions": ["Hot"], "milkOptions": ["Dairy", "Oat"], "tags": ["Seasonal"] }
+  ],
+  "additionalCategories": []
+}

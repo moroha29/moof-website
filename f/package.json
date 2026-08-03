@@ -1,0 +1,1 @@
+{"name":"moof-static-site-f","version":"0.1.0","private":true,"type":"module","scripts":{"dev":"set ASTRO_TELEMETRY_DISABLED=1&& astro dev --host 127.0.0.1","build":"set ASTRO_TELEMETRY_DISABLED=1&& astro build","test":"node --test tests/site-contract.test.mjs"},"dependencies":{"astro":"^5.12.0","typescript":"^5.8.3"}}
