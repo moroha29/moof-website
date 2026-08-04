@@ -1,5 +1,5 @@
 {
-  "brand": { "headerWordmark": "MOOF", "footerWordmark": "MOOF AFTER HOURS", "logoImage": "", "logoImageAlt": "" },
+  "brand": { "headerWordmark": "MOOF", "footerWordmark": "MOOF AFTER HOURS", "logoImage": "/images/moof-logo.png", "logoImageAlt": "Moof" },
   "seo": { "homeTitle": "Moof — Coffee with a bright side", "homeDescription": "An independent Singapore coffee bar for bright cups, long lunches and good gatherings.", "menuTitle": "Moof Menu — Coffee, coolers and bakes", "menuDescription": "Explore the current menu at Moof." },
   "navigation": { "menuToggleLabel": "Explore", "closeLabel": "Close", "bannerLabel": "Hello", "aboutLabel": "About us", "menuLabel": "Menu", "storyLabel": "Our story", "eventsLabel": "Gatherings", "visitLabel": "Find us", "businessLabel": "Business" },
   "hero": { "eyebrow": "Coffee, food & a little mischief", "headline": "Take the bright way around.", "supportingCopy": "A neighbourhood coffee bar built for curious palates, slow mornings and plans that run pleasantly late.", "announcement": "Now pouring our orange hour menu.", "image": "/images/moof-f-hero.png", "imageAlt": "Barista finishing a citrus coffee at a warm timber counter" },

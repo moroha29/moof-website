@@ -11,7 +11,7 @@ const p = (path) => JSON.stringify(path);
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="rail">
-    <a class="logo" href="#top" aria-label="Moof home"><span data-cms-path={p(["homepage","brand","headerWordmark"])}>{site.brand.headerWordmark}</span><b aria-hidden="true">●</b></a>
+    <a class="logo" href="#top" aria-label="Moof home"><img src={withBase(site.brand.logoImage)} alt={site.brand.logoImageAlt} data-cms-paths={p([["homepage","brand","logoImage"],["homepage","brand","logoImageAlt"]])} /></a>
     <button class="menu-toggle" aria-expanded="false" aria-controls="side-nav"><span class="open-label" data-cms-path={p(["homepage","navigation","menuToggleLabel"])}>{site.navigation.menuToggleLabel}</span><span class="close-label" data-cms-path={p(["homepage","navigation","closeLabel"])}>{site.navigation.closeLabel}</span><i aria-hidden="true"></i></button>
     <nav id="side-nav" aria-label="Section navigation" aria-hidden="true" inert>
       <a href="#about"><span>01</span><b data-cms-path={p(["homepage","navigation","aboutLabel"])}>{site.navigation.aboutLabel}</b></a>
