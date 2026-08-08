@@ -1,0 +1,291 @@
+---
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Grounds On A Hill Coffee</title>
+    <meta name="description" content="A slow bar and micro-roastery in Sunset Way, Singapore. Coffee, faith and commune." />
+    <style>
+      :root {
+        --bg: #16130f;
+        --bg-elevated: #1e1a14;
+        --cream: #f3ede3;
+        --brass: #c08a45;
+        --brass-soft: #9c6f38;
+        --text: #f3ede3;
+        --text-muted: #c9beac;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+        line-height: 1.6;
+      }
+      h1, h2, h3 {
+        font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        color: var(--cream);
+      }
+      a { color: var(--brass); }
+      .skip-link {
+        position: absolute;
+        left: -999px;
+        top: 0;
+      }
+      .skip-link:focus {
+        left: 1rem;
+        top: 1rem;
+        background: var(--brass);
+        color: var(--bg);
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        z-index: 10;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem clamp(1.25rem, 5vw, 4rem);
+        border-bottom: 1px solid #2c261d;
+      }
+      .wordmark {
+        font-family: Georgia, serif;
+        font-size: 1.15rem;
+        color: var(--cream);
+        text-decoration: none;
+        letter-spacing: 0.02em;
+      }
+      nav a {
+        color: var(--text-muted);
+        text-decoration: none;
+        margin-left: 1.75rem;
+        font-size: 0.95rem;
+      }
+      nav a:hover { color: var(--brass); }
+      main { max-width: 860px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 4rem); }
+      .hero {
+        padding: clamp(3rem, 10vw, 6rem) 0 clamp(2rem, 6vw, 4rem);
+        text-align: left;
+      }
+      .eyebrow {
+        color: var(--brass);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 0.8rem;
+        margin: 0 0 1rem;
+      }
+      .hero h1 {
+        font-size: clamp(2rem, 5vw, 3.2rem);
+        margin: 0 0 1.5rem;
+        max-width: 14ch;
+      }
+      /* Photo + CSS-only watermark overlay. The overlay is rendered at
+         request time, never written into the image file itself. */
+      .photo {
+        position: relative;
+        overflow: hidden;
+        border-radius: 6px;
+        border: 1px solid #3a2f1e;
+        background: var(--bg-elevated);
+      }
+      .photo img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .photo .watermark {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(1.5rem, 6vw, 3rem);
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .photo .watermark span {
+        color: rgba(255, 255, 255, 0.4);
+        font-weight: 700;
+        font-size: clamp(0.85rem, 2vw, 1.15rem);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+        transform: rotate(-30deg);
+        white-space: nowrap;
+      }
+      .hero-photo { height: 320px; }
+      section {
+        padding: clamp(2rem, 6vw, 3.5rem) 0;
+        border-top: 1px solid #2c261d;
+      }
+      .kicker {
+        color: var(--brass);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-size: 0.78rem;
+        margin: 0 0 0.75rem;
+      }
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1.3fr 1fr;
+        gap: 2rem;
+        align-items: center;
+      }
+      .about p {
+        max-width: 62ch;
+        color: var(--text-muted);
+        font-size: 1.05rem;
+      }
+      .about-photo { height: 220px; }
+      .menu-preview {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.25rem;
+        margin-top: 1.5rem;
+      }
+      .menu-card {
+        background: var(--bg-elevated);
+        border: 1px solid #2c261d;
+        border-radius: 6px;
+        padding: 1.25rem;
+      }
+      .menu-card h3 { font-size: 1.05rem; margin: 0 0 0.5rem; }
+      .menu-card p { margin: 0; color: var(--text-muted); font-size: 0.92rem; }
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+      .gallery .photo { height: 180px; }
+      .visit-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin-top: 1rem;
+      }
+      .visit-grid h3 { font-size: 1rem; margin: 0 0 0.4rem; color: var(--cream); }
+      .visit-grid p { margin: 0; color: var(--text-muted); }
+      footer {
+        padding: 2rem clamp(1.25rem, 5vw, 4rem) 3rem;
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        text-align: center;
+      }
+      @media (max-width: 560px) {
+        .visit-grid { grid-template-columns: 1fr; }
+        .about-grid { grid-template-columns: 1fr; }
+        .gallery { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header>
+      <a class="wordmark" href={base}>Grounds On A Hill</a>
+      <nav aria-label="Primary">
+        <a href={base}>Home</a>
+        <a href={`${base}menu/`}>Menu</a>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-heading">
+        <p class="eyebrow">Coffee shop &middot; Sunset Way, Singapore</p>
+        <h1 id="hero-heading">A slow bar for coffee, and for commune.</h1>
+        <div class="photo hero-photo">
+          <img src={`${base}images/pour-over.png`} alt="Pouring fresh grounds into a pour-over filter" />
+          <div class="watermark" aria-hidden="true">
+            <span>For preview only</span>
+            <span>For preview only</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="about" aria-labelledby="about-heading">
+        <p class="kicker">Our philosophy</p>
+        <h2 id="about-heading">Slow bar, micro-roastery</h2>
+        <div class="about-grid">
+          <p>
+            Grounds On A Hill is a slow bar and micro-roastery — a simple space for coffee, faith and commune.
+            Every season we chase specific expressions of origin: this year it's two new Ethiopian filters,
+            fruit-forward but distinct in character, alongside a Panama Elida Catuai and a Rwanda Musasa Ruli
+            Women's Coffee that celebrates the producers behind the cup. We brew slowly, share openly, and
+            we're always grateful when you stop by.
+          </p>
+          <div class="photo about-photo">
+            <img src={`${base}images/latte-art.png`} alt="Latte art in a dark ceramic cup" />
+            <div class="watermark" aria-hidden="true">
+              <span>For preview only</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="menu-highlights" aria-labelledby="menu-heading">
+        <p class="kicker">On the bar right now</p>
+        <h2 id="menu-heading">Seasonal highlights</h2>
+        <div class="menu-preview">
+          <div class="menu-card">
+            <h3>Ethiopia, Buku Abel</h3>
+            <p>Natural &middot; sweet orange, black plum, blackberry, floral</p>
+          </div>
+          <div class="menu-card">
+            <h3>Ethiopia, Rumudamo</h3>
+            <p>Washed &middot; Meyer lemon, clementine, Earl Grey</p>
+          </div>
+          <div class="menu-card">
+            <h3>Panama, Elida Catuai</h3>
+            <p>Natural &middot; jasmine, honey, strawberry, peach tea</p>
+          </div>
+          <div class="menu-card">
+            <h3>Toasted sourdough</h3>
+            <p>With house-made yuzu butter — a regulars' favourite</p>
+          </div>
+        </div>
+        <div class="gallery">
+          <div class="photo">
+            <img src={`${base}images/pour-over.png`} alt="Pour-over brewing detail" />
+            <div class="watermark" aria-hidden="true"><span>For preview only</span></div>
+          </div>
+          <div class="photo">
+            <img src={`${base}images/latte-art.png`} alt="Latte art detail" />
+            <div class="watermark" aria-hidden="true"><span>For preview only</span></div>
+          </div>
+          <div class="photo">
+            <img src={`${base}images/iced-filter.png`} alt="Iced filter coffee held outdoors" />
+            <div class="watermark" aria-hidden="true"><span>For preview only</span></div>
+          </div>
+        </div>
+        <p style="margin-top:1.5rem;"><a href={`${base}menu/`}>See the full menu &rarr;</a></p>
+      </section>
+
+      <section class="visit" aria-labelledby="visit-heading">
+        <p class="kicker">Visit</p>
+        <h2 id="visit-heading">Find us on the hill</h2>
+        <div class="visit-grid">
+          <div>
+            <h3>Address</h3>
+            <p>106 Clementi Street 12, #01-44, Singapore 120106</p>
+          </div>
+          <div>
+            <h3>Hours</h3>
+            <p>Weekdays 8:30am&ndash;4:30pm (Tues closed)<br />Sat&ndash;Sun 8:30am&ndash;5:30pm</p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>Grounds On A Hill Coffee &middot; Demo preview, not a live site</p>
+    </footer>
+  </body>
+</html>
