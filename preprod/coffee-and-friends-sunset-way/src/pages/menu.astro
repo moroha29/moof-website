@@ -1,0 +1,151 @@
+---
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Menu — Coffee &amp; Friends (Sunset Way)</title>
+    <meta name="description" content="Brunch, pasta, acai bowls and coffee at Coffee & Friends, Sunset Way." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --cream: #FAF6EC;
+        --cream-deep: #F1EADA;
+        --ink: #262220;
+        --coral: #E4785A;
+        --leaf: #6B8F5C;
+        --marigold: #E8A93B;
+        --space-3: 0.75rem;
+        --space-4: 1rem;
+        --space-5: 1.5rem;
+        --space-6: 2rem;
+        --space-7: 3rem;
+        --space-8: 4rem;
+        --radius-sm: 8px;
+        --radius-full: 999px;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; background: var(--cream); color: var(--ink);
+        font-family: "Nunito Sans", system-ui, sans-serif; line-height: 1.65; font-size: 1.125rem;
+      }
+      h1, h2 { font-family: "Fredoka", sans-serif; color: var(--ink); margin: 0; }
+      h1 { font-weight: 700; }
+      h2 { font-weight: 600; }
+      a { color: var(--coral); }
+      header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: var(--space-5) clamp(1.25rem, 5vw, 4rem); border-bottom: 1px solid var(--cream-deep);
+      }
+      .wordmark {
+        display: flex; align-items: center; gap: 0.6rem;
+        font-family: "Fredoka", sans-serif; font-weight: 600;
+        font-size: 1.15rem; color: var(--ink); text-decoration: none;
+      }
+      .wordmark img { width: 34px; height: 34px; border-radius: var(--radius-full); object-fit: cover; }
+      nav a {
+        color: var(--ink); text-decoration: none; margin-left: var(--space-5);
+        font-size: 1rem; font-weight: 600;
+        padding-bottom: 2px; border-bottom: 2px solid transparent;
+        transition: border-color 0.18s ease-out, color 0.18s ease-out;
+      }
+      nav a:hover, nav a:focus-visible { color: var(--coral); border-color: var(--coral); }
+      nav a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+      main { max-width: 860px; margin: 0 auto; padding: var(--space-7) clamp(1.25rem, 5vw, 4rem) var(--space-8); }
+      .kicker {
+        color: var(--leaf); text-transform: uppercase; letter-spacing: 0.08em;
+        font-size: 0.875rem; margin: 0 0 var(--space-4); font-weight: 700;
+      }
+      .menu-group { margin-top: var(--space-7); }
+      .menu-group h2 { display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--cream-deep); padding-bottom: 0.6rem; font-size: 1.5rem; }
+      .menu-group h2 .pawprint { width: 20px; height: 20px; color: var(--coral); flex-shrink: 0; }
+      .item { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); padding: 0.9rem 0; border-bottom: 1px solid var(--cream-deep); }
+      .item h3 { font-family: "Fredoka", sans-serif; font-size: 1.05rem; margin: 0 0 0.25rem; font-weight: 500; }
+      .item p { margin: 0; color: var(--ink); opacity: 0.75; font-size: 0.92rem; }
+      .price { font-family: "Nunito Sans", sans-serif; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--ink); white-space: nowrap; }
+      .tag {
+        display: inline-flex; align-items: center; gap: 0.25rem;
+        background: var(--marigold); color: var(--ink);
+        font-weight: 800; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.04em;
+        padding: 0.1rem 0.4rem; border-radius: var(--radius-sm); margin-left: 0.5rem; vertical-align: middle;
+      }
+      .tag .pawprint { width: 10px; height: 10px; }
+    </style>
+  </head>
+  <body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <symbol id="pawprint" viewBox="0 0 24 24">
+        <ellipse cx="12" cy="16.5" rx="6" ry="5" fill="currentColor" />
+        <ellipse cx="6.3" cy="8.5" rx="2.3" ry="3" fill="currentColor" transform="rotate(-25 6.3 8.5)" />
+        <ellipse cx="12" cy="6" rx="2.4" ry="3.2" fill="currentColor" />
+        <ellipse cx="17.7" cy="8.5" rx="2.3" ry="3" fill="currentColor" transform="rotate(25 17.7 8.5)" />
+      </symbol>
+    </svg>
+    <header>
+      <a class="wordmark" href={base}><img src={`${base}images/logo.png`} alt="" /> Coffee &amp; Friends</a>
+      <nav aria-label="Primary">
+        <a href={base}>Home</a>
+        <a href={`${base}menu/`}>Menu</a>
+      </nav>
+    </header>
+    <main>
+      <p class="kicker">Menu</p>
+      <h1>Brunch, pasta &amp; acai bowls</h1>
+
+      <div class="menu-group">
+        <h2><svg class="pawprint"><use href="#pawprint" /></svg> Brunch</h2>
+        <div class="item">
+          <div>
+            <h3>Big Breakfast<span class="tag"><svg class="pawprint"><use href="#pawprint" /></svg> Favourite</span></h3>
+            <p>Sausage, mushroom, tater tots, salad greens, scrambled egg</p>
+          </div>
+          <span class="price">$24.90</span>
+        </div>
+        <div class="item">
+          <div>
+            <h3>Mushroom Soup</h3>
+            <p>Served with garlic bread</p>
+          </div>
+          <span class="price">$7.90</span>
+        </div>
+        <div class="item">
+          <div><h3>Waffles</h3></div>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <h2><svg class="pawprint"><use href="#pawprint" /></svg> Acai &amp; gelato</h2>
+        <div class="item">
+          <div>
+            <h3>Acai Bowl</h3>
+            <p>Nutty or Lotus</p>
+          </div>
+          <span class="price">$12.80</span>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <h2><svg class="pawprint"><use href="#pawprint" /></svg> Coffee &amp; drinks</h2>
+        <div class="item">
+          <div><h3>Espresso bar</h3></div>
+        </div>
+        <div class="item">
+          <div>
+            <h3>Matcha Latte</h3>
+            <p>Made with Tsujiri leaves</p>
+          </div>
+        </div>
+      </div>
+
+      <p style="margin-top: var(--space-7); color: var(--ink); opacity: 0.65; font-size: 0.85rem;">
+        Prices available in-store &mdash; this is a preview, not the final menu.
+      </p>
+    </main>
+  </body>
+</html>
