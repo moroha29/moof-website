@@ -1,0 +1,258 @@
+---
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>SOD Cafe</title>
+    <meta name="description" content="A cafe at Longhaus, Upper Thomson, Singapore. All-day breakfast and build-your-own pasta." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --cream: #F7F3E8;
+        --cream-deep: #ECE5D2;
+        --sage: #A8BC93;
+        --ink: #201D1A;
+        --coral: #C1503F;
+        --space-1: 0.25rem;
+        --space-2: 0.5rem;
+        --space-3: 0.75rem;
+        --space-4: 1rem;
+        --space-5: 1.5rem;
+        --space-6: 2rem;
+        --space-7: 3rem;
+        --space-8: 4rem;
+        --space-9: 6rem;
+        --space-10: 8rem;
+      }
+      * { box-sizing: border-box; }
+      html { font-size: 106.25%; }
+      body {
+        margin: 0; background: var(--cream); color: var(--ink);
+        font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+        font-size: 1rem; line-height: 1.6;
+      }
+      h1, h2, h3 { font-family: "Baloo 2", sans-serif; margin: 0; color: var(--ink); }
+      a { color: var(--coral); }
+      .skip-link { position: absolute; left: -999px; top: 0; }
+      .skip-link:focus {
+        left: var(--space-5); top: var(--space-5); background: var(--coral); color: var(--cream);
+        padding: 0.5rem 1rem; border-radius: 4px; z-index: 20;
+      }
+      header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: var(--space-5) clamp(1.25rem, 5vw, 3.5rem);
+        border-bottom: 1px solid var(--cream-deep);
+      }
+      .wordmark {
+        display: flex; align-items: center; gap: 0.6rem;
+        font-family: "Baloo 2", sans-serif; font-weight: 700;
+        font-size: 1.2rem; color: var(--ink); text-decoration: none;
+      }
+      .wordmark img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
+      nav { display: flex; align-items: center; gap: var(--space-3); }
+      nav a {
+        color: var(--ink); text-decoration: none;
+        font-family: "Inter", sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;
+        font-size: 0.875rem; position: relative; padding-bottom: 4px;
+      }
+      nav a::after {
+        content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 2px;
+        background: var(--coral); transform: scaleX(0); transform-origin: center;
+        transition: transform 0.15s ease-out;
+      }
+      nav a:hover::after, nav a:focus-visible::after { transform: scaleX(1); }
+      nav a:focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; }
+      .dots { display: inline-flex; align-items: center; gap: 4px; }
+      .dots span { display: inline-block; border-radius: 50%; }
+      .dots.inline span:nth-child(1) { width: 8px; height: 8px; background: var(--coral); }
+      .dots.inline span:nth-child(2) { width: 14px; height: 14px; background: var(--ink); margin-top: -3px; }
+      .dots.inline span:nth-child(3) { width: 10px; height: 10px; background: var(--sage); margin-top: 2px; }
+
+      main { max-width: 1120px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 3.5rem); }
+      .hero { padding: var(--space-8) 0 var(--space-6); }
+      @media (min-width: 1024px) { .hero { padding-top: var(--space-10); } }
+      .eyebrow {
+        color: var(--coral); text-transform: uppercase; letter-spacing: 0.06em;
+        font-family: "Inter", sans-serif; font-weight: 600;
+        font-size: 0.875rem; margin: 0 0 var(--space-4);
+      }
+      .hero h1 {
+        font-weight: 800; letter-spacing: -0.01em; line-height: 1.05;
+        font-size: clamp(2.5rem, 1.9rem + 2.6vw, 4.25rem);
+        margin: 0; max-width: 16ch;
+      }
+      .photo {
+        position: relative; overflow: hidden; border-radius: 12px;
+        border: 1px solid var(--cream-deep); background: var(--cream-deep);
+      }
+      .photo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+      .hero-photo { height: 420px; margin-top: var(--space-6); }
+      .dot-divider { display: flex; justify-content: center; margin: var(--space-9) 0; }
+      .dots.standalone span:nth-child(1) { width: 12px; height: 12px; background: var(--coral); opacity: 0; transform: translateY(-6px); animation: settle 0.48s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+      .dots.standalone span:nth-child(2) { width: 18px; height: 18px; background: var(--ink); margin: 0 -2px; opacity: 0; transform: translateY(-6px); animation: settle 0.48s cubic-bezier(0.34,1.56,0.64,1) 0.06s forwards; }
+      .dots.standalone span:nth-child(3) { width: 12px; height: 12px; background: var(--sage); opacity: 0; transform: translateY(-6px); animation: settle 0.48s cubic-bezier(0.34,1.56,0.64,1) 0.12s forwards; }
+      @keyframes settle { to { opacity: 1; transform: translateY(0); } }
+      @media (prefers-reduced-motion: reduce) {
+        .dots.standalone span { animation: none !important; opacity: 1; transform: none; }
+      }
+      section { padding: var(--space-8) 0; border-top: 1px solid var(--cream-deep); }
+      @media (min-width: 1024px) { section { padding: var(--space-9) 0; } }
+      .reveal { opacity: 0; transform: translateY(12px); transition: opacity 0.28s ease-out, transform 0.28s ease-out; }
+      .reveal.is-visible { opacity: 1; transform: translateY(0); }
+      @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+      .kicker {
+        color: var(--coral); text-transform: uppercase; letter-spacing: 0.06em;
+        font-family: "Inter", sans-serif; font-weight: 600;
+        font-size: 0.875rem; margin: 0 0 var(--space-4);
+      }
+      h2 { font-weight: 700; letter-spacing: -0.005em; font-size: clamp(1.75rem, 1.5rem + 1vw, 2.5rem); }
+      .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-6); align-items: center; }
+      .about p { max-width: 62ch; color: var(--ink); margin: 0; }
+      .about-photo { height: 320px; }
+      .steps { display: flex; flex-direction: column; gap: var(--space-4); margin-top: var(--space-6); max-width: 480px; }
+      .step { display: flex; align-items: center; gap: var(--space-4); }
+      .dots.tiny span:nth-child(1) { width: 5px; height: 5px; background: var(--coral); }
+      .dots.tiny span:nth-child(2) { width: 8px; height: 8px; background: var(--ink); margin-top: -1px; }
+      .dots.tiny span:nth-child(3) { width: 6px; height: 6px; background: var(--sage); }
+      .step h3 { font-size: 1.0625rem; font-weight: 600; margin: 0; }
+      .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-5); margin-top: var(--space-6); }
+      .menu-card { background: var(--cream-deep); border-radius: 10px; padding: var(--space-5); transition: transform 0.15s ease-out, box-shadow 0.15s ease-out; }
+      .menu-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(32,29,26,0.08); }
+      .menu-card h3 { font-size: 1.25rem; font-weight: 600; margin: 0 0 0.35rem; }
+      .menu-card .price { font-family: "Inter", sans-serif; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--coral); font-size: 1.125rem; }
+      .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); margin-top: var(--space-4); }
+      .visit-grid h3 { font-family: "Baloo 2", sans-serif; font-weight: 600; font-size: 1.0625rem; margin: 0 0 0.4rem; color: var(--coral); }
+      .visit-grid p { margin: 0; color: var(--ink); }
+      footer {
+        padding: var(--space-6) clamp(1.25rem, 5vw, 3.5rem) var(--space-8);
+        color: var(--ink); opacity: 0.7; font-size: 0.85rem; text-align: center;
+      }
+      @media (max-width: 560px) {
+        .visit-grid { grid-template-columns: 1fr; }
+        .about-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header>
+      <a class="wordmark" href={base}><img src={`${base}images/logo.png`} alt="" /> SOD Cafe</a>
+      <nav aria-label="Primary">
+        <a href={base}>Home</a>
+        <span class="dots inline" aria-hidden="true"><span></span><span></span><span></span></span>
+        <a href={`${base}menu/`}>Menu</a>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-heading" style="border-top: none;">
+        <p class="eyebrow">Cafe &middot; Longhaus, Upper Thomson</p>
+        <h1 id="hero-heading">Affordable cafe food that actually tastes good.</h1>
+        <div class="photo hero-photo">
+          <img src={`${base}images/storefront.png`} alt="SOD Cafe storefront: backlit sign, glass frontage, wood-boxed snake-plant planters" />
+        </div>
+      </section>
+
+      <div class="dot-divider" aria-hidden="true">
+        <span class="dots standalone"><span></span><span></span><span></span></span>
+      </div>
+
+      <section class="about reveal" aria-labelledby="about-heading" style="border-top: none;">
+        <p class="kicker">About</p>
+        <h2 id="about-heading">All-day breakfast, build-your-own pasta</h2>
+        <div class="about-grid">
+          <div>
+            <p>
+              All-day breakfast, any time you want it &mdash; French toast, sausage, scrambled egg &mdash;
+              plus build-your-own pasta: pick a base, pick your toppings, dial in your own spice level.
+              SOD Cafe is a playful, no-fuss neighbourhood spot at Longhaus, Upper Thomson.
+            </p>
+            <div class="steps">
+              <div class="step">
+                <span class="dots tiny" aria-hidden="true"><span></span><span></span><span></span></span>
+                <h3>Pick a base</h3>
+              </div>
+              <div class="step">
+                <span class="dots tiny" aria-hidden="true"><span></span><span></span><span></span></span>
+                <h3>Pick your toppings</h3>
+              </div>
+              <div class="step">
+                <span class="dots tiny" aria-hidden="true"><span></span><span></span><span></span></span>
+                <h3>Dial in your spice level</h3>
+              </div>
+            </div>
+          </div>
+          <div class="photo about-photo">
+            <img src={`${base}images/breakfast-plate.png`} alt="All-day breakfast: French toast with powdered sugar, sausage, scrambled egg and maple syrup" />
+          </div>
+        </div>
+      </section>
+
+      <section class="menu-preview reveal" aria-labelledby="menu-heading">
+        <p class="kicker">On the menu</p>
+        <h2 id="menu-heading">Breakfast, pasta &amp; more</h2>
+        <div class="menu-grid">
+          <div class="menu-card">
+            <h3>French Toast Breakfast</h3>
+            <p class="price">$14.90</p>
+          </div>
+          <div class="menu-card">
+            <h3>Tomyum Fried Chicken Pasta</h3>
+            <p class="price">$17.90</p>
+          </div>
+          <div class="menu-card">
+            <h3>Aglio Olio Seafood Pasta</h3>
+            <p class="price">$17.90</p>
+          </div>
+          <div class="menu-card">
+            <h3>Mala Pasta</h3>
+            <p class="price">$15.90</p>
+          </div>
+        </div>
+        <p style="margin-top:1.5rem;"><a href={`${base}menu/`}>See the full menu &rarr;</a></p>
+      </section>
+
+      <section class="visit reveal" aria-labelledby="visit-heading">
+        <p class="kicker">Visit</p>
+        <h2 id="visit-heading">Find us at Longhaus</h2>
+        <div class="visit-grid">
+          <div>
+            <h3>Address</h3>
+            <p>183 Upper Thomson Road, #01-05<br />Longhaus, Singapore 574429</p>
+          </div>
+          <div>
+            <h3>Hours</h3>
+            <p>Sat &amp; Sun 10am&ndash;9pm<br />Mon, Wed&ndash;Fri 10:30am&ndash;9:30pm<br />Closed Tuesdays</p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>SOD Cafe &middot; Demo preview, not a live site</p>
+    </footer>
+    <script>
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.2 }
+        );
+        document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+      } else {
+        document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+      }
+    </script>
+  </body>
+</html>
