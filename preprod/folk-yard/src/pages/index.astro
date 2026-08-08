@@ -1,0 +1,258 @@
+---
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Folk Yard</title>
+    <meta name="description" content="A neighbourhood spot at The Poiz Centre, Singapore. Sandwiches and specialty coffee by day, sourdough pizzas and natural wine by night." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --cream: #F3EAD3;
+        --cream-deep: #E9DFC2;
+        --rust: #8B4A2F;
+        --ink: #211D18;
+        --red: #C0392B;
+        --orange: #E08E3E;
+        --yellow: #E8C547;
+        --space-2: 0.5rem;
+        --space-3: 0.75rem;
+        --space-4: 1rem;
+        --space-5: 1.5rem;
+        --space-6: 2rem;
+        --space-7: 3rem;
+        --space-8: 4rem;
+        --space-9: 6rem;
+        --space-10: 9rem;
+        --space-11: 13rem;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; background: var(--cream); color: var(--ink);
+        font-family: "Source Sans 3", system-ui, -apple-system, sans-serif;
+        font-size: 1.0625rem; line-height: 1.6;
+      }
+      h1, h2, h3 { font-family: "Zilla Slab", Georgia, serif; margin: 0; color: var(--rust); line-height: 1.08; }
+      a { color: var(--rust); }
+      .skip-link { position: absolute; left: -999px; top: 0; }
+      .skip-link:focus {
+        left: var(--space-5); top: var(--space-5); background: var(--yellow); color: var(--ink);
+        padding: 0.5rem 1rem; z-index: 20;
+      }
+      header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: var(--space-5) clamp(1.25rem, 5vw, 4rem);
+        border-bottom: 1px solid var(--cream-deep);
+      }
+      .wordmark {
+        display: flex; align-items: center; gap: 0.6rem;
+        font-family: "Zilla Slab", serif; font-weight: 700;
+        font-size: 1.2rem; color: var(--rust); text-decoration: none;
+      }
+      .wordmark img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
+      nav a {
+        color: var(--ink); text-decoration: none; margin-left: var(--space-5);
+        font-family: "Source Sans 3", sans-serif; font-weight: 600;
+        font-size: 0.9375rem;
+        padding-bottom: 3px; border-bottom: 1px solid transparent;
+        transition: border-color 0.2s ease-out;
+      }
+      nav a:hover, nav a:focus-visible { border-color: var(--rust); }
+      nav a:focus-visible { outline: 2px solid var(--rust); outline-offset: 2px; }
+      main { max-width: 1120px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 4rem); }
+      .hero { padding: var(--space-9) 0 var(--space-8); }
+      @media (min-width: 1024px) { .hero { padding-top: var(--space-10); } }
+      .eyebrow {
+        color: var(--ink); opacity: 0.7; text-transform: uppercase; letter-spacing: 0.08em;
+        font-family: "Source Sans 3", sans-serif; font-weight: 600;
+        font-size: 0.75rem; margin: 0 0 var(--space-4);
+      }
+      .hero h1 {
+        font-weight: 700; letter-spacing: -0.02em;
+        font-size: clamp(2.75rem, 4.5vw + 1.5rem, 5rem);
+        margin: 0; max-width: 15ch;
+        opacity: 0; transform: translateY(12px);
+        animation: rise 0.5s ease-out 0.05s forwards;
+      }
+      @media (prefers-reduced-motion: reduce) { .hero h1 { opacity: 1; transform: none; animation: none; } }
+      @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+      .rainbow-bar {
+        display: flex; flex-direction: column; gap: 1px; width: 72px;
+        opacity: 0; animation: rise 0.5s ease-out 0.2s forwards;
+      }
+      @media (prefers-reduced-motion: reduce) { .rainbow-bar { opacity: 1; animation: none; } }
+      .rainbow-bar span { display: block; height: 2px; }
+      .rainbow-bar span:nth-child(1) { background: var(--red); }
+      .rainbow-bar span:nth-child(2) { background: var(--orange); }
+      .rainbow-bar span:nth-child(3) { background: var(--yellow); }
+      .rainbow-bar.wide { width: 120px; }
+      .hero-rainbow { margin: var(--space-4) 0 var(--space-6); }
+      .photo {
+        position: relative; overflow: hidden;
+        border: 1px solid var(--cream-deep); background: var(--cream-deep);
+      }
+      .photo img { display: block; width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s ease-out; }
+      .photo:hover img { transform: scale(1.02); }
+      @media (prefers-reduced-motion: reduce) { .photo:hover img { transform: none; } }
+      .hero-photo { height: 440px; }
+      section { padding: var(--space-9) 0; border-top: 1px solid var(--cream-deep); }
+      @media (min-width: 1024px) { section { padding: var(--space-10) 0; } }
+      .reveal { opacity: 0; transform: translateY(12px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
+      .reveal.is-visible { opacity: 1; transform: translateY(0); }
+      @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+      .kicker {
+        color: var(--ink); opacity: 0.7; text-transform: uppercase; letter-spacing: 0.08em;
+        font-family: "Source Sans 3", sans-serif; font-weight: 600;
+        font-size: 0.75rem; margin: 0 0 var(--space-4);
+      }
+      h2 { font-weight: 700; letter-spacing: -0.01em; font-size: clamp(1.75rem, 1.5vw + 1.25rem, 2.5rem); }
+      .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-6); align-items: center; }
+      .about p { max-width: 62ch; color: var(--ink); margin: 0; }
+      .about-photo { height: 340px; }
+
+      .divider-row { display: flex; justify-content: center; margin: var(--space-8) 0; }
+      .day-night-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-7); margin-top: var(--space-6); }
+      .day-night-grid h3 { font-size: 1.375rem; font-weight: 600; margin: 0 0 var(--space-4); }
+      .menu-item { margin-bottom: var(--space-5); }
+      .menu-item h4 { font-family: "Zilla Slab", serif; font-weight: 600; font-size: 1.0625rem; margin: 0 0 0.25rem; color: var(--ink); }
+      .menu-item p { margin: 0; color: var(--ink); opacity: 0.75; font-size: 0.92rem; }
+
+      .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); margin-top: var(--space-6); }
+      .gallery .photo { height: 320px; }
+      .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); margin-top: var(--space-4); }
+      .visit-grid h3 { font-family: "Zilla Slab", serif; font-size: 1.05rem; margin: 0 0 0.4rem; color: var(--rust); }
+      .visit-grid p { margin: 0; color: var(--ink); opacity: 0.85; }
+      footer {
+        padding: var(--space-6) clamp(1.25rem, 5vw, 4rem) var(--space-8);
+        color: var(--ink); font-size: 0.85rem;
+        display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4);
+        max-width: 1120px; margin: 0 auto;
+      }
+      @media (max-width: 560px) {
+        .visit-grid { grid-template-columns: 1fr; }
+        .about-grid { grid-template-columns: 1fr; }
+        .day-night-grid { grid-template-columns: 1fr; }
+        .gallery { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header>
+      <a class="wordmark" href={base}><img src={`${base}images/logo.png`} alt="" /> Folk Yard</a>
+      <nav aria-label="Primary">
+        <a href={base}>Home</a>
+        <a href={`${base}menu/`}>Menu</a>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-heading" style="border-top: none;">
+        <p class="eyebrow">Neighbourhood spot &middot; The Poiz Centre, Singapore</p>
+        <h1 id="hero-heading">Sandwiches by day, pizzas by night. Same heart, either way.</h1>
+        <div class="rainbow-bar hero-rainbow" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="photo hero-photo">
+          <img src={`${base}images/storefront.png`} alt="Folk Yard storefront: cream signage, glass frontage, wood outdoor furniture and plants" />
+        </div>
+      </section>
+
+      <section class="about reveal" aria-labelledby="about-heading">
+        <p class="kicker">About</p>
+        <h2 id="about-heading">Rooted in the bare necessities</h2>
+        <div class="about-grid">
+          <p>
+            Folk Yard was always meant to be a neighbourhood spot. By day, hearty sandwiches and specialty
+            coffee; by night, sourdough pizzas, natural wines, and a good old time. Rooted in the bare
+            necessities, done properly &mdash; and we'll try our best not to mess up the feng shui.
+          </p>
+          <div class="photo about-photo">
+            <img src={`${base}images/breakfast-sandwich.png`} alt="Layered breakfast sandwich with egg and bacon on toasted sourdough, on Folk Yard branded paper" />
+          </div>
+        </div>
+      </section>
+
+      <section class="day-night reveal" aria-labelledby="menu-heading">
+        <p class="kicker">On the menu</p>
+        <h2 id="menu-heading">Day &amp; Night</h2>
+        <div class="day-night-grid">
+          <div>
+            <h3>Day</h3>
+            <div class="menu-item">
+              <h4>Breakfast Sandwich</h4>
+              <p>Egg, bacon, sauce, toasted sourdough</p>
+            </div>
+            <div class="menu-item">
+              <h4>Specialty Coffee</h4>
+            </div>
+          </div>
+          <div>
+            <h3>Night</h3>
+            <div class="menu-item">
+              <h4>Sourdough Pizza</h4>
+              <p>Wood-fired, classic and white/four-cheese</p>
+            </div>
+            <div class="menu-item">
+              <h4>Grilled Steak</h4>
+              <p>With chimichurri</p>
+            </div>
+            <div class="menu-item">
+              <h4>Natural Wine</h4>
+            </div>
+          </div>
+        </div>
+        <div class="divider-row">
+          <div class="rainbow-bar wide" aria-hidden="true"><span></span><span></span><span></span></div>
+        </div>
+        <div class="gallery">
+          <div class="photo">
+            <img src={`${base}images/pizza-night-spread.png`} alt="Overhead spread: sourdough pizzas, grilled broccolini, fried croquettes, steak and wine on Folk Yard branded paper" />
+          </div>
+        </div>
+        <p style="margin-top:1.5rem;"><a href={`${base}menu/`}>See the full menu &rarr;</a></p>
+      </section>
+
+      <section class="visit reveal" aria-labelledby="visit-heading">
+        <p class="kicker">Visit</p>
+        <h2 id="visit-heading">Find us at The Poiz Centre</h2>
+        <div class="visit-grid">
+          <div>
+            <h3>Address</h3>
+            <p>51 Upper Serangoon Rd, #01-59<br />Singapore 347697</p>
+          </div>
+          <div>
+            <h3>Hours</h3>
+            <p>Tue &amp; Sun 9am&ndash;5pm<br />Wed&ndash;Sat 9am&ndash;12am</p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="rainbow-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+      <p>Folk Yard &middot; Demo preview, not a live site</p>
+    </footer>
+    <script>
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.2 }
+        );
+        document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+      } else {
+        document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+      }
+    </script>
+  </body>
+</html>
