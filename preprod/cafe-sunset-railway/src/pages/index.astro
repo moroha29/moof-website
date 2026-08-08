@@ -1,0 +1,229 @@
+---
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Cafe Sunset Railway</title>
+    <meta name="description" content="A nostalgic railway-themed cafe at Clementi Arcade, Singapore. Peranakan-influenced home-style food: mee siam, kaya toast, beef rendang and more." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Bitter:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --cream: #F5EFE3;
+        --cream-deep: #EAE1CE;
+        --ink: #211D1A;
+        --amber: #A9642F;
+        --brass: #8C7A4E;
+        --space-1: 0.25rem;
+        --space-2: 0.5rem;
+        --space-3: 0.75rem;
+        --space-4: 1rem;
+        --space-5: 1.5rem;
+        --space-6: 2rem;
+        --space-7: 3rem;
+        --space-8: 4rem;
+        --space-9: 6rem;
+        --space-10: 8rem;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; background: var(--cream); color: var(--ink);
+        font-family: "Bitter", Georgia, serif;
+        font-size: 1.0625rem; line-height: 1.6;
+      }
+      h1, h2, h3 { font-family: "Big Shoulders Display", sans-serif; margin: 0; color: var(--ink); }
+      a { color: var(--amber); }
+      .skip-link { position: absolute; left: -999px; top: 0; }
+      .skip-link:focus {
+        left: var(--space-5); top: var(--space-5); background: var(--ink); color: var(--cream);
+        padding: 0.5rem 1rem; border-radius: 4px; z-index: 20;
+      }
+      header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: var(--space-5) clamp(1.25rem, 5vw, 3.5rem);
+        border-bottom: 1px solid var(--cream-deep);
+      }
+      .wordmark {
+        display: flex; align-items: center; gap: 0.6rem;
+        font-family: "Big Shoulders Display", sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: 0.02em;
+        font-size: 1.15rem; color: var(--ink); text-decoration: none;
+      }
+      .wordmark img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
+      nav a {
+        color: var(--ink); text-decoration: none; margin-left: var(--space-5);
+        font-family: "Bitter", serif; font-weight: 500;
+        font-size: 0.9375rem;
+        padding-bottom: 2px; border-bottom: 2px solid transparent;
+        transition: border-color 0.15s ease-out;
+      }
+      nav a:hover, nav a:focus-visible { border-color: var(--amber); }
+      nav a:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+
+      .pill {
+        display: inline-block; background: var(--ink); color: var(--cream);
+        font-family: "Big Shoulders Display", sans-serif; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 0.06em;
+        border-radius: 999px; padding: 6px 16px;
+        transition: transform 0.15s ease-out;
+      }
+      .pill.eyebrow { font-size: 0.8125rem; margin: 0 0 var(--space-4); }
+      .pill.category { font-size: 0.75rem; margin: 0 0 var(--space-3); }
+      a.pill:hover, a.pill:focus-visible { transform: translateY(-1px); }
+      a.pill:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+
+      main { max-width: 1120px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 3.5rem); }
+      .hero { padding: var(--space-8) 0 var(--space-6); }
+      @media (min-width: 1024px) { .hero { padding-top: var(--space-10); } }
+      .hero h1 {
+        font-weight: 900; letter-spacing: -0.01em; line-height: 0.98;
+        font-size: clamp(2.5rem, 5vw + 1rem, 4.25rem);
+        margin: 0; max-width: 16ch;
+        opacity: 0; transform: translateY(8px);
+        animation: rise 0.42s cubic-bezier(0.16,1,0.3,1) 0.1s forwards;
+      }
+      .pill.eyebrow {
+        opacity: 0; transform: translateY(8px);
+        animation: rise 0.42s cubic-bezier(0.16,1,0.3,1) forwards;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .hero h1, .pill.eyebrow { opacity: 1; transform: none; animation: none; }
+      }
+      @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+      .photo {
+        position: relative; overflow: hidden; border-radius: 4px;
+        border: 1px solid var(--cream-deep); background: var(--cream-deep);
+      }
+      .photo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+      .hero-photo { height: 420px; margin-top: var(--space-6); }
+      section { padding: var(--space-8) 0; border-top: 1px solid var(--cream-deep); }
+      @media (min-width: 1024px) { section { padding: var(--space-9) 0; } }
+      .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+      .reveal.is-visible { opacity: 1; transform: translateY(0); }
+      @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+      h2 { font-weight: 700; font-size: clamp(1.75rem, 1.5vw + 1.25rem, 2.5rem); letter-spacing: 0.01em; line-height: 1.1; }
+      .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-6); align-items: center; }
+      .about p { max-width: 62ch; color: var(--ink); margin: 0; }
+      .about-photo { height: 320px; }
+      .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-5); margin-top: var(--space-6); }
+      .menu-card { background: var(--cream-deep); border-radius: 4px; padding: var(--space-5); }
+      .menu-card h3 { font-size: 1.125rem; font-weight: 700; margin: 0 0 0.35rem; }
+      .menu-card p { margin: 0; color: var(--ink); font-size: 0.9375rem; font-style: italic; opacity: 0.85; }
+      .gallery-photo { height: 320px; margin-top: var(--space-6); }
+      .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); margin-top: var(--space-4); }
+      .visit-grid h3 { font-family: "Big Shoulders Display", sans-serif; font-weight: 700; font-size: 1.0625rem; margin: 0 0 0.4rem; color: var(--amber); }
+      .visit-grid p { margin: 0; color: var(--ink); }
+      footer {
+        padding: var(--space-6) clamp(1.25rem, 5vw, 3.5rem) var(--space-8);
+        color: var(--ink); opacity: 0.7; font-size: 0.85rem; text-align: center;
+      }
+      @media (max-width: 560px) {
+        .visit-grid { grid-template-columns: 1fr; }
+        .about-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header>
+      <a class="wordmark" href={base}><img src={`${base}images/logo.png`} alt="" /> Sunset Railway</a>
+      <nav aria-label="Primary">
+        <a href={base}>Home</a>
+        <a href={`${base}menu/`}>Menu</a>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-heading" style="border-top: none;">
+        <span class="pill eyebrow">Local Motif &middot; Clementi Arcade</span>
+        <h1 id="hero-heading">A local motif, slow-braised in the everyday.</h1>
+        <div class="photo hero-photo">
+          <img src={`${base}images/nasi-lemak-spread.png`} alt="Nasi lemak on banana leaf with cucumber, a curry dish, kaya toast, teh, and a coffee milkshake, on a wood table by the window" />
+        </div>
+      </section>
+
+      <section class="about reveal" aria-labelledby="about-heading">
+        <span class="pill category">About</span>
+        <h2 id="about-heading">A long-running local favourite</h2>
+        <div class="about-grid">
+          <p>
+            Cafe Sunset Railway is a nostalgic, railway-themed neighbourhood cafe at Clementi Arcade,
+            serving Peranakan-influenced home-style plates &mdash; mee siam, kaya toast, beef rendang and
+            lontong, babi pongteh &mdash; in a warm, wood-and-vintage-decor space. A long-running local
+            favourite with over a thousand posts of terrible puns and good food.
+          </p>
+          <div class="photo about-photo">
+            <img src={`${base}images/kaya-toast.png`} alt="Charcoal-grilled kaya toast, quartered, on a plate" />
+          </div>
+        </div>
+      </section>
+
+      <section class="menu-preview reveal" aria-labelledby="menu-heading">
+        <span class="pill category">On the menu</span>
+        <h2 id="menu-heading">Peranakan-influenced home-style food</h2>
+        <div class="menu-grid">
+          <div class="menu-card">
+            <h3>Mee Siam</h3>
+            <p>With egg and calamansi</p>
+          </div>
+          <div class="menu-card">
+            <h3>Kaya Toast</h3>
+            <p>Charcoal-grilled</p>
+          </div>
+          <div class="menu-card">
+            <h3>Beef Rendang &amp; Lontong</h3>
+            <p>Coconut-kissed, slow-braised</p>
+          </div>
+          <div class="menu-card">
+            <h3>Babi Pongteh</h3>
+            <p>Served with Kai Lan</p>
+          </div>
+        </div>
+        <div class="photo gallery-photo">
+          <img src={`${base}images/mee-siam.png`} alt="Mee siam with egg and calamansi, served with a vintage teacup" />
+        </div>
+        <p style="margin-top:1.5rem;"><a href={`${base}menu/`}>See the full menu &rarr;</a></p>
+      </section>
+
+      <section class="visit reveal" aria-labelledby="visit-heading">
+        <span class="pill category">Visit</span>
+        <h2 id="visit-heading">Find us at Clementi Arcade</h2>
+        <div class="visit-grid">
+          <div>
+            <h3>Address</h3>
+            <p>41 Sunset Way, #01-02<br />Clementi Arcade<br />Singapore 597071</p>
+          </div>
+          <div>
+            <h3>Hours</h3>
+            <p>Thu&ndash;Sun 8am&ndash;3pm<br />Closed Mon&ndash;Wed</p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>Cafe Sunset Railway &middot; Demo preview, not a live site</p>
+    </footer>
+    <script>
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.2 }
+        );
+        document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+      } else {
+        document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+      }
+    </script>
+  </body>
+</html>
