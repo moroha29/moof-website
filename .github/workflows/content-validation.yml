@@ -2,17 +2,6 @@ name: Validate managed website content
 
 on:
   pull_request:
-    paths:
-      - "a/**"
-      - "b/**"
-      - "c/**"
-      - "d/**"
-      - "e/**"
-      - "f/**"
-      - ".github/workflows/content-validation.yml"
-      - ".github/workflows/deploy.yml"
-      - "infra/**"
-      - "docs/aws-deployment.md"
 
 permissions:
   contents: read
@@ -32,16 +21,38 @@ jobs:
         site: [a, b, c, d, e, f]
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Required status checks can't be scoped by path — they run for every
+      # PR regardless of what changed, or GitHub never reports a status and
+      # the PR sits blocked forever (this happened for two preprod-only PRs).
+      # So the trigger stays unconditional, and each matrix job instead
+      # skips its own build fast when that site wasn't touched, still
+      # reporting success.
+      - name: Check if this site changed
+        id: changed
+        run: |
+          if git diff --name-only "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}" | grep -q "^${{ matrix.site }}/"; then
+            echo "touched=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "touched=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - uses: actions/setup-node@v4
+        if: steps.changed.outputs.touched == 'true'
         with:
           node-version: 22.12.0
           cache: npm
           cache-dependency-path: ${{ matrix.site }}/package-lock.json
       - name: Install dependencies
+        if: steps.changed.outputs.touched == 'true'
         run: npm --prefix "${{ matrix.site }}" ci
       - name: Build design
+        if: steps.changed.outputs.touched == 'true'
         env:
           ASTRO_TELEMETRY_DISABLED: 1
         run: npm --prefix "${{ matrix.site }}" run build
       - name: Confirm deployable output
+        if: steps.changed.outputs.touched == 'true'
         run: test -f "${{ matrix.site }}/dist/index.html"
