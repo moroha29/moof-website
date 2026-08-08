@@ -1,0 +1,250 @@
+---
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>55 Degrees</title>
+    <meta name="description" content="A coffee spot at Nordic European Centre, Singapore. Coffee that connects us, one cup at a time." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --cream: #F7F5EF;
+        --cream-deep: #ECE8DD;
+        --brown: #8B6B4A;
+        --sage: #B9C4A6;
+        --rose: #C98F82;
+        --space-1: 0.25rem;
+        --space-2: 0.5rem;
+        --space-3: 0.75rem;
+        --space-4: 1rem;
+        --space-5: 1.5rem;
+        --space-6: 2rem;
+        --space-7: 3rem;
+        --space-8: 4rem;
+        --space-9: 6rem;
+        --space-10: 8rem;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; background: var(--cream); color: var(--brown);
+        font-family: "Public Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+        font-size: 1rem; line-height: 1.6;
+      }
+      body { color: #3A322A; }
+      h1, h2, h3 { font-family: "Archivo", ui-sans-serif, system-ui, sans-serif; margin: 0; color: var(--brown); }
+      a { color: var(--brown); }
+      .skip-link { position: absolute; left: -999px; top: 0; }
+      .skip-link:focus {
+        left: var(--space-5); top: var(--space-5); background: var(--sage); color: var(--brown);
+        padding: 0.5rem 1rem; border-radius: 4px; z-index: 20;
+      }
+      header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: var(--space-5) clamp(1.25rem, 5vw, 3.5rem);
+        border-bottom: 1px solid var(--cream-deep);
+      }
+      .wordmark {
+        display: flex; align-items: center; gap: 0.6rem;
+        font-family: "Archivo", sans-serif; font-weight: 600;
+        font-size: 1.1rem; color: var(--brown); text-decoration: none;
+      }
+      .wordmark img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+      nav { display: flex; gap: var(--space-5); }
+      nav a {
+        display: inline-flex; align-items: center; gap: 0.4rem;
+        color: #3A322A; text-decoration: none;
+        font-family: "Public Sans", sans-serif; font-weight: 500;
+        font-size: 0.9375rem; letter-spacing: 0.01em;
+      }
+      nav a .ring-sm { border-color: rgba(139, 107, 74, 0.35); transition: background 0.15s ease-out; }
+      nav a:hover .ring-sm, nav a:focus-visible .ring-sm { background: var(--brown); }
+      nav a:focus-visible { outline: 2px solid var(--brown); outline-offset: 2px; }
+      main { max-width: 1080px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 3.5rem); }
+      .hero { padding: var(--space-8) 0 var(--space-6); }
+      @media (min-width: 1024px) { .hero { padding-top: var(--space-10); } }
+      .eyebrow {
+        color: var(--brown); opacity: 0.7; text-transform: uppercase; letter-spacing: 0.08em;
+        font-family: "Public Sans", sans-serif; font-weight: 500;
+        font-size: 0.8125rem; margin: 0 0 var(--space-4);
+      }
+      .ring-divider { display: flex; justify-content: center; margin: var(--space-9) 0; }
+      .ring-lg-svg { width: 48px; height: 48px; }
+      .ring-lg-svg circle {
+        fill: none; stroke: var(--rose); stroke-width: 1.5;
+        stroke-dasharray: 138.2; stroke-dashoffset: 138.2;
+        transform-origin: center; transform: rotate(-90deg);
+        transition: stroke-dashoffset 0.7s ease-out;
+      }
+      .ring-lg-svg.is-visible circle { stroke-dashoffset: 0; }
+      @media (prefers-reduced-motion: reduce) {
+        .ring-lg-svg circle { stroke-dashoffset: 0; transition: none; }
+      }
+      .ring-lg-static {
+        width: 48px; height: 48px; border-radius: 50%;
+        border: 1.5px solid rgba(139, 107, 74, 0.35);
+      }
+      .hero h1 {
+        font-weight: 600; letter-spacing: -0.02em;
+        font-size: clamp(2.5rem, 3.5vw + 1.5rem, 3.25rem);
+        line-height: 1.1; margin: 0; max-width: 16ch;
+      }
+      .photo {
+        position: relative; overflow: hidden;
+        border: 1px solid var(--cream-deep); background: var(--cream-deep);
+      }
+      .photo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+      .hero-photo { height: 400px; margin-top: var(--space-6); }
+      section { padding: var(--space-7) 0; border-top: 1px solid var(--cream-deep); }
+      @media (min-width: 1024px) { section { padding: var(--space-8) 0; } }
+      .kicker {
+        color: var(--brown); opacity: 0.7; text-transform: uppercase; letter-spacing: 0.08em;
+        font-family: "Public Sans", sans-serif; font-weight: 500;
+        font-size: 0.8125rem; margin: 0 0 var(--space-4);
+      }
+      h2 { font-weight: 600; letter-spacing: -0.01em; font-size: clamp(1.75rem, 1.5vw + 1.25rem, 2.5rem); }
+      .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-6); align-items: center; }
+      .about p { max-width: 62ch; color: #3A322A; margin: 0; font-size: 1.0625rem; }
+      .about-photo { height: 300px; }
+      .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-5); margin-top: var(--space-6); }
+      .menu-card { background: var(--cream-deep); border-radius: 4px; padding: var(--space-5); }
+      .menu-card .cat {
+        display: flex; align-items: center; gap: var(--space-2);
+        color: var(--brown); opacity: 0.7; text-transform: uppercase; letter-spacing: 0.06em;
+        font-size: 0.75rem; font-weight: 500; margin: 0 0 0.5rem;
+      }
+      .ring-sm { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid rgba(139, 107, 74, 0.35); display: inline-block; flex-shrink: 0; }
+      .menu-card h3 { font-size: 1.0625rem; font-weight: 600; margin: 0; color: #3A322A; }
+      .menu-card .price { font-family: "Public Sans", sans-serif; font-weight: 500; font-size: 0.9375rem; color: var(--brown); margin-top: 0.25rem; }
+      .gallery-photo { height: 280px; margin-top: var(--space-6); }
+      .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); margin-top: var(--space-4); }
+      .visit-grid h3 { font-family: "Archivo", sans-serif; font-weight: 600; font-size: 1rem; margin: 0 0 0.4rem; color: var(--brown); }
+      .visit-grid p { margin: 0; color: #3A322A; }
+      footer {
+        padding: var(--space-6) clamp(1.25rem, 5vw, 3.5rem) var(--space-7);
+        color: var(--brown); opacity: 0.7; font-size: 0.85rem; text-align: center;
+      }
+      @media (max-width: 560px) {
+        .visit-grid { grid-template-columns: 1fr; }
+        .about-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header>
+      <a class="wordmark" href={base}><img src={`${base}images/logo.png`} alt="" /> 55 Degrees</a>
+      <nav aria-label="Primary">
+        <a href={base}><span class="ring-sm"></span>Home</a>
+        <a href={`${base}menu/`}><span class="ring-sm"></span>Menu</a>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-heading" style="border-top: none;">
+        <p class="eyebrow">Coffee &middot; Nordic European Centre, Singapore</p>
+        <h1 id="hero-heading">Coffee that connects us, one cup at a time.</h1>
+        <div class="photo hero-photo">
+          <img src={`${base}images/interior-counter.png`} alt="55 Degrees interior: wood-slat ceiling, glass display case, plain white chairs, floor-to-ceiling windows" />
+        </div>
+      </section>
+
+      <div class="ring-divider" aria-hidden="true">
+        <svg class="ring-lg-svg" id="hero-ring" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" /></svg>
+      </div>
+
+      <section class="about" aria-labelledby="about-heading">
+        <p class="kicker">About</p>
+        <h2 id="about-heading">Founded by a neurodivergent entrepreneur</h2>
+        <div class="about-grid">
+          <p>
+            55 Degrees serves premium brews and soulful food with cozy vibes &mdash; lunch sets and everyday
+            favourites, specialty coffee and signature drinks. A quiet, functional spot for a real coffee
+            break in the middle of a work day.
+          </p>
+          <div class="photo about-photo">
+            <img src={`${base}images/latte-and-iced-coffee.png`} alt="Latte with heart latte art beside an iced coffee on a wood table" />
+          </div>
+        </div>
+      </section>
+
+      <section class="menu-preview" aria-labelledby="menu-heading">
+        <p class="kicker">On the menu</p>
+        <h2 id="menu-heading">Lunch sets &amp; everyday favourites</h2>
+        <div class="menu-grid">
+          <div class="menu-card">
+            <p class="cat"><span class="ring-sm"></span> Lunch</p>
+            <h3>Beefball Pasta</h3>
+            <p class="price">$10.90</p>
+          </div>
+          <div class="menu-card">
+            <p class="cat"><span class="ring-sm"></span> Coffee</p>
+            <h3>Flat White</h3>
+            <p class="price">$5.00</p>
+          </div>
+          <div class="menu-card">
+            <p class="cat"><span class="ring-sm"></span> Coffee</p>
+            <h3>Taro Latte</h3>
+            <p class="price">$5.00</p>
+          </div>
+          <div class="menu-card">
+            <p class="cat"><span class="ring-sm"></span> Bakery</p>
+            <h3>Assorted Muffins</h3>
+            <p class="price">$4.50</p>
+          </div>
+        </div>
+        <div class="photo gallery-photo">
+          <img src={`${base}images/beefball-pasta.png`} alt="Beefball pasta, overhead view" />
+        </div>
+        <p style="margin-top:1.5rem;"><a href={`${base}menu/`}>See the full menu &rarr;</a></p>
+      </section>
+
+      <div class="ring-divider" aria-hidden="true">
+        <div class="ring-lg-static"></div>
+      </div>
+
+      <section class="visit" aria-labelledby="visit-heading" style="border-top: none;">
+        <p class="kicker">Visit</p>
+        <h2 id="visit-heading">Find us at Nordic European Centre</h2>
+        <div class="visit-grid">
+          <div>
+            <h3>Address</h3>
+            <p>3 International Business Park<br />#01-K2 Nordic European Centre<br />Singapore 609927</p>
+          </div>
+          <div>
+            <h3>Hours</h3>
+            <p>Mon&ndash;Fri 8am&ndash;5pm<br />Closed Sat&ndash;Sun</p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>55 Degrees &middot; Demo preview, not a live site</p>
+    </footer>
+    <script>
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const ring = document.getElementById("hero-ring");
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.5 }
+        );
+        if (ring) observer.observe(ring);
+      } else {
+        const ring = document.getElementById("hero-ring");
+        if (ring) ring.classList.add("is-visible");
+      }
+    </script>
+  </body>
+</html>
