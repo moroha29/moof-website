@@ -1,0 +1,133 @@
+---
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Menu — Corner Corner (Coffee Concept)</title>
+    <meta name="description" content="Filter coffee and cold brew at Corner Corner, inside RPM by D.Bespoke, Duxton." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Hanken+Grotesk:wght@100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #16130F;
+        --bg-elevated: #201B15;
+        --cream: #EDE6D6;
+        --brass: #A8863E;
+        --space-4: 1rem;
+        --space-5: 1.5rem;
+        --space-6: 2rem;
+        --space-7: 3rem;
+        --space-8: 4rem;
+      }
+      * { box-sizing: border-box; }
+      html { font-size: 112.5%; }
+      body {
+        margin: 0; background: var(--bg); color: var(--cream);
+        font-family: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif; line-height: 1.6; font-size: 1rem;
+      }
+      h1, h2 { font-family: "Bodoni Moda", Georgia, serif; margin: 0; color: var(--cream); font-optical-sizing: auto; }
+      a { color: var(--brass); }
+      header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: var(--space-5) clamp(1.25rem, 5vw, 3.5rem); border-bottom: 1px solid #2C261D;
+      }
+      .wordmark {
+        display: flex; align-items: center; gap: 0.6rem;
+        font-family: "Bodoni Moda", serif; font-weight: 500;
+        font-size: 1.15rem; color: var(--cream); text-decoration: none;
+      }
+      .wordmark img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; background: var(--cream); }
+      nav a {
+        color: var(--cream); text-decoration: none; margin-left: var(--space-5);
+        font-family: "Space Mono", monospace; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em;
+        font-size: 0.8125rem; position: relative; padding-bottom: 4px;
+      }
+      nav a::after {
+        content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 1px;
+        background: var(--brass); transform: scaleX(0); transform-origin: center;
+        transition: transform 0.2s ease-out;
+      }
+      nav a:hover::after, nav a:focus-visible::after { transform: scaleX(1); }
+      nav a:focus-visible { outline: 1px solid var(--brass); outline-offset: 2px; }
+      main { max-width: 780px; margin: 0 auto; padding: var(--space-7) clamp(1.25rem, 5vw, 3.5rem) var(--space-8); }
+      .kicker {
+        color: var(--brass); text-transform: uppercase; letter-spacing: 0.1em;
+        font-family: "Space Mono", monospace; font-weight: 400;
+        font-size: 0.8125rem; margin: 0 0 var(--space-4);
+      }
+      h1 { font-weight: 600; letter-spacing: -0.01em; font-size: clamp(2.25rem, 1.75rem + 2vw, 3.25rem); }
+      .menu-group { margin-top: var(--space-7); }
+      .menu-group h2 { border-bottom: 1px solid #2C261D; padding-bottom: 0.6rem; font-size: 1.5rem; font-weight: 500; }
+      .item { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); padding: 0.9rem 0; border-bottom: 1px solid #2C261D; }
+      .item h3 { font-family: "Bodoni Moda", serif; font-weight: 500; font-size: 1.0625rem; margin: 0 0 0.25rem; color: var(--cream); }
+      .item p { margin: 0; color: var(--cream); opacity: 0.65; font-size: 0.9rem; }
+      .tag { font-family: "Space Mono", monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--brass); }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="wordmark" href={base}><img src={`${base}images/logo.png`} alt="" /> Corner Corner</a>
+      <nav aria-label="Primary">
+        <a href={base}>Home</a>
+        <a href={`${base}menu/`}>Menu</a>
+      </nav>
+    </header>
+    <main>
+      <p class="kicker">Menu</p>
+      <h1>Filter coffee &amp; cold brew</h1>
+
+      <div class="menu-group">
+        <h2>Filter Selection</h2>
+        <div class="item">
+          <div>
+            <span class="tag">Washed</span>
+            <h3>Bolivia, Arcangel</h3>
+            <p>Balanced &amp; crisp</p>
+          </div>
+        </div>
+        <div class="item">
+          <div>
+            <span class="tag">Yeast Washed</span>
+            <h3>Ecuador, Vinka Sidra</h3>
+            <p>Funky &amp; complex</p>
+          </div>
+        </div>
+        <div class="item">
+          <div>
+            <span class="tag">Natural</span>
+            <h3>Ethiopia, Alo Peaberry</h3>
+            <p>Floral &amp; layered &mdash; raspberry, pineapple sorbet, orange marmalade</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <h2>Reserve Selection</h2>
+        <div class="item">
+          <div>
+            <span class="tag">Lab Process, Geisha</span>
+            <h3>Panama, Lost Origin</h3>
+            <p>Elegant &amp; refined &mdash; blueberry</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <h2>Cold Brew</h2>
+        <div class="item">
+          <div><h3>Cold Brew</h3></div>
+        </div>
+      </div>
+
+      <p style="margin-top: var(--space-7); color: var(--cream); opacity: 0.5; font-size: 0.85rem;">
+        Prices available in-store &mdash; this is a preview, not the final menu.
+      </p>
+    </main>
+  </body>
+</html>
