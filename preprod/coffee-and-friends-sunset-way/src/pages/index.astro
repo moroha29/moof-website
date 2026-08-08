@@ -1,0 +1,308 @@
+---
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Coffee &amp; Friends (Sunset Way)</title>
+    <meta name="description" content="A small cafe at Sunset Way, Singapore. Brunch, pasta, acai bowls and coffee, brewing good vibes and connections." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --cream: #FAF6EC;
+        --cream-deep: #F1EADA;
+        --ink: #262220;
+        --coral: #E4785A;
+        --leaf: #6B8F5C;
+        --marigold: #E8A93B;
+        --space-3: 0.75rem;
+        --space-4: 1rem;
+        --space-5: 1.5rem;
+        --space-6: 2rem;
+        --space-7: 3rem;
+        --space-8: 4rem;
+        --space-9: 6rem;
+        --radius-sm: 8px;
+        --radius-md: 16px;
+        --radius-lg: 28px;
+        --radius-full: 999px;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--cream);
+        color: var(--ink);
+        font-family: "Nunito Sans", system-ui, -apple-system, sans-serif;
+        font-size: 1.125rem;
+        line-height: 1.65;
+      }
+      h1, h2, h3 { font-family: "Fredoka", sans-serif; color: var(--ink); margin: 0; }
+      h1 { font-weight: 700; }
+      h2 { font-weight: 600; }
+      h3 { font-weight: 500; }
+      a { color: var(--coral); }
+      .skip-link { position: absolute; left: -999px; top: 0; }
+      .skip-link:focus {
+        left: var(--space-5); top: var(--space-5); background: var(--coral); color: var(--cream);
+        padding: 0.5rem 1rem; border-radius: var(--radius-sm); z-index: 10;
+      }
+      header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: var(--space-5) clamp(1.25rem, 5vw, 4rem);
+        border-bottom: 1px solid var(--cream-deep);
+      }
+      .wordmark {
+        display: flex; align-items: center; gap: 0.6rem;
+        font-family: "Fredoka", sans-serif; font-weight: 600;
+        font-size: 1.15rem; color: var(--ink); text-decoration: none;
+      }
+      .wordmark img { width: 34px; height: 34px; border-radius: var(--radius-full); object-fit: cover; }
+      nav a {
+        color: var(--ink); text-decoration: none; margin-left: var(--space-5);
+        font-size: 1rem; font-weight: 600; font-family: "Nunito Sans", sans-serif;
+        padding-bottom: 2px; border-bottom: 2px solid transparent;
+        transition: border-color 0.18s ease-out, color 0.18s ease-out;
+      }
+      nav a:hover, nav a:focus-visible { color: var(--coral); border-color: var(--coral); }
+      nav a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+      main { max-width: 1140px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 4rem); }
+      .hero { padding: var(--space-8) 0 var(--space-7); }
+      @media (min-width: 700px) { .hero { padding-top: var(--space-9); } }
+      .eyebrow {
+        color: var(--leaf); text-transform: uppercase; letter-spacing: 0.08em;
+        font-size: 1rem; margin: 0 0 var(--space-4); font-weight: 600; font-family: "Nunito Sans", sans-serif;
+      }
+      .hero h1 {
+        font-size: clamp(3rem, 6vw, 4rem);
+        line-height: 1.05;
+        margin: 0 0 var(--space-6); max-width: 16ch;
+        opacity: 0; transform: translateY(12px);
+        animation: rise 0.4s ease-out 0.05s forwards;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .hero h1 { opacity: 1; transform: none; animation: none; }
+      }
+      @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+      .photo {
+        position: relative; overflow: hidden; border-radius: var(--radius-lg);
+        border: 1px solid var(--cream-deep); background: var(--cream-deep);
+      }
+      .photo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+      .hero-photo { height: 420px; border-radius: var(--radius-lg); }
+      section { padding: var(--space-8) 0; border-top: 1px solid var(--cream-deep); }
+      @media (min-width: 700px) { section { padding: var(--space-9) 0; } }
+      .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.35s ease-out, transform 0.35s ease-out; }
+      .reveal.is-visible { opacity: 1; transform: translateY(0); }
+      @media (prefers-reduced-motion: reduce) {
+        .reveal { opacity: 1; transform: none; transition: none; }
+      }
+      .kicker {
+        color: var(--leaf); text-transform: uppercase; letter-spacing: 0.08em;
+        font-size: 0.875rem; margin: 0 0 var(--space-4); font-weight: 700; font-family: "Nunito Sans", sans-serif;
+      }
+      .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-6); align-items: center; }
+      .about p { max-width: 62ch; color: var(--ink); margin: 0; }
+      .about-photo { height: 320px; }
+
+      /* Signature element: a paw print, abstracted from the real dog-and-cat
+         mascot pair painted on the storefront signage. Used sparingly. */
+      .pawprint { width: 30px; height: 30px; }
+      .divider { display: flex; justify-content: center; margin: 0 0 var(--space-6); }
+      .divider .pawprint {
+        color: color-mix(in srgb, var(--ink) 70%, transparent);
+        transform: rotate(-8deg) scale(0.8);
+        transition: transform 0.25s ease-out;
+      }
+      .divider.step-in .pawprint { transform: rotate(-8deg) scale(1); }
+      .divider.coral .pawprint { color: var(--coral); }
+      @media (prefers-reduced-motion: reduce) {
+        .divider .pawprint { transform: rotate(-8deg) scale(1); transition: none; }
+      }
+
+      .p-list { list-style: none; margin: var(--space-6) 0 0; padding: 0; display: grid; gap: var(--space-4); max-width: 62ch; }
+      .p-list li { display: flex; align-items: baseline; gap: var(--space-3); }
+      .p-list .pawprint { width: 18px; height: 18px; flex-shrink: 0; }
+      .p-list li:nth-child(3n+1) .pawprint { color: var(--coral); }
+      .p-list li:nth-child(3n+2) .pawprint { color: var(--leaf); }
+      .p-list li:nth-child(3n+3) .pawprint { color: var(--ink); }
+      .p-list strong { font-family: "Fredoka", sans-serif; font-weight: 600; }
+
+      .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: var(--space-5); margin-top: var(--space-6); }
+      .menu-card { background: var(--cream-deep); border-radius: var(--radius-md); padding: var(--space-5); transition: transform 0.15s ease-out, box-shadow 0.15s ease-out; }
+      .menu-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(38,34,32,0.08); }
+      .menu-card h3 { font-size: 1.125rem; margin: 0 0 0.4rem; display: flex; align-items: center; gap: 0.4rem; }
+      .menu-card p { margin: 0; color: var(--ink); font-size: 0.95rem; opacity: 0.85; }
+      .tag {
+        display: inline-flex; align-items: center; gap: 0.25rem;
+        background: var(--marigold); color: var(--ink); font-family: "Nunito Sans", sans-serif;
+        font-weight: 800; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.04em;
+        padding: 0.15rem 0.5rem; border-radius: var(--radius-sm); margin-bottom: 0.5rem;
+      }
+      .tag .pawprint { width: 12px; height: 12px; }
+
+      .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); margin-top: var(--space-6); }
+      .gallery .photo { height: 280px; }
+      .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); margin-top: var(--space-4); }
+      .visit-grid h3 { font-size: 1.05rem; margin: 0 0 0.4rem; color: var(--ink); }
+      .visit-grid p { margin: 0; color: var(--ink); opacity: 0.85; }
+      footer {
+        padding: var(--space-6) clamp(1.25rem, 5vw, 4rem) var(--space-8);
+        color: var(--ink); font-size: 0.9rem; text-align: center;
+        display: flex; flex-direction: column; align-items: center; gap: var(--space-4);
+      }
+      footer .pawprint { width: 22px; height: 22px; color: var(--coral); }
+      @media (max-width: 560px) {
+        .visit-grid { grid-template-columns: 1fr; }
+        .about-grid { grid-template-columns: 1fr; }
+        .gallery { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <symbol id="pawprint" viewBox="0 0 24 24">
+        <ellipse cx="12" cy="16.5" rx="6" ry="5" fill="currentColor" />
+        <ellipse cx="6.3" cy="8.5" rx="2.3" ry="3" fill="currentColor" transform="rotate(-25 6.3 8.5)" />
+        <ellipse cx="12" cy="6" rx="2.4" ry="3.2" fill="currentColor" />
+        <ellipse cx="17.7" cy="8.5" rx="2.3" ry="3" fill="currentColor" transform="rotate(25 17.7 8.5)" />
+      </symbol>
+    </svg>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header>
+      <a class="wordmark" href={base}><img src={`${base}images/logo.png`} alt="" /> Coffee &amp; Friends</a>
+      <nav aria-label="Primary">
+        <a href={base}>Home</a>
+        <a href={`${base}menu/`}>Menu</a>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-heading">
+        <p class="eyebrow">Cafe &middot; Sunset Way, Singapore</p>
+        <h1 id="hero-heading">Brewing good vibes and connections, one cup at a time.</h1>
+        <div class="photo hero-photo">
+          <img src={`${base}images/storefront.png`} alt="Coffee & Friends storefront with hand-drawn dog and cat mascot signage, outdoor seating and plants" />
+        </div>
+      </section>
+
+      <section class="about reveal" aria-labelledby="about-heading">
+        <p class="kicker">About</p>
+        <h2 id="about-heading">For the love of coffee, people &amp; plants</h2>
+        <div class="about-grid">
+          <p>
+            Coffee &amp; Friends is a small Sunset Way stop for brunch, pasta, acai bowls and something warm to
+            drink, with fresh flowers on every table and a curated shelf of plants from Little Big Garden for
+            anyone who wants to take a little green home. Come for the coffee, stay for the little moments &mdash;
+            good reads, local art on the walls, and people who actually want to talk.
+          </p>
+          <div class="photo about-photo">
+            <img src={`${base}images/comic-art-latte.png`} alt="Framed illustrated print reading 'For inner peace, Love, Friends, Coffee' beside a latte with leaf-pattern latte art" />
+          </div>
+        </div>
+      </section>
+
+      <section class="p-section reveal" aria-labelledby="p-heading">
+        <div class="divider">
+          <svg class="pawprint"><use href="#pawprint" /></svg>
+        </div>
+        <p class="kicker">In good company</p>
+        <h2 id="p-heading">P is for...</h2>
+        <ul class="p-list">
+          <li><svg class="pawprint"><use href="#pawprint" /></svg><span><strong>People</strong> &mdash; all the little pleasures, all the happy moments</span></li>
+          <li><svg class="pawprint"><use href="#pawprint" /></svg><span><strong>Plants</strong> &mdash; green vibes, happy hearts, courtesy of Little Big Garden</span></li>
+          <li><svg class="pawprint"><use href="#pawprint" /></svg><span><strong>Pets</strong> &mdash; paw welcomed, tail wags guaranteed</span></li>
+          <li><svg class="pawprint"><use href="#pawprint" /></svg><span><strong>Paintings</strong> &mdash; local art, made to inspire</span></li>
+          <li><svg class="pawprint"><use href="#pawprint" /></svg><span><strong>Paperbacks</strong> &mdash; good reads, great company</span></li>
+        </ul>
+      </section>
+
+      <section class="menu-preview reveal" aria-labelledby="menu-heading">
+        <p class="kicker">On the menu</p>
+        <h2 id="menu-heading">Brunch, pasta &amp; acai bowls</h2>
+        <div class="menu-grid">
+          <div class="menu-card">
+            <span class="tag"><svg class="pawprint"><use href="#pawprint" /></svg> Favourite</span>
+            <h3>Big Breakfast</h3>
+            <p>Sausage, mushroom, tater tots, salad greens, scrambled egg &mdash; $24.90</p>
+          </div>
+          <div class="menu-card">
+            <h3>Acai Bowl</h3>
+            <p>Nutty or Lotus &mdash; $12.80 per bowl</p>
+          </div>
+          <div class="menu-card">
+            <h3>Mushroom Soup</h3>
+            <p>Served with garlic bread &mdash; $7.90</p>
+          </div>
+          <div class="menu-card">
+            <h3>Waffles &amp; Coffee</h3>
+            <p>Espresso bar, plus a matcha latte made with Tsujiri leaves</p>
+          </div>
+        </div>
+        <div class="gallery">
+          <div class="photo">
+            <img src={`${base}images/gelato-bowl.png`} alt="Chocolate gelato bowl with banana slices, teapot and pink teacup" />
+          </div>
+          <div class="photo">
+            <img src={`${base}images/mushroom-soup.png`} alt="Bowl of mushroom soup with a slice of garlic bread" />
+          </div>
+        </div>
+        <p style="margin-top:1.5rem;"><a href={`${base}menu/`}>See the full menu &rarr;</a></p>
+      </section>
+
+      <section class="visit reveal" aria-labelledby="visit-heading">
+        <p class="kicker">Visit</p>
+        <h2 id="visit-heading">Find us at Sunset Way</h2>
+        <div class="visit-grid">
+          <div>
+            <h3>Address</h3>
+            <p>Blk 109, Clementi St 11, Sunset Wy<br />#01-03, Singapore 120109</p>
+          </div>
+          <div>
+            <h3>Hours</h3>
+            <p>Fri &amp; Sat 8am&ndash;10pm<br />Sun 8am&ndash;8pm<br />Mon&ndash;Thu 8am&ndash;6pm</p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <svg class="pawprint"><use href="#pawprint" /></svg>
+      <p>Coffee &amp; Friends (Sunset Way) &middot; Demo preview, not a live site</p>
+    </footer>
+    <script>
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.2 }
+        );
+        document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+        const dividerObserver = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("step-in");
+                dividerObserver.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.5 }
+        );
+        document.querySelectorAll(".divider").forEach((el) => dividerObserver.observe(el));
+      } else {
+        document.querySelectorAll(".reveal, .divider").forEach((el) => el.classList.add("is-visible", "step-in"));
+      }
+    </script>
+  </body>
+</html>
