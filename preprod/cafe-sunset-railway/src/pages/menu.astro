@@ -1,0 +1,130 @@
+---
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Menu — Cafe Sunset Railway</title>
+    <meta name="description" content="Mee siam, kaya toast, beef rendang and more at Cafe Sunset Railway." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Bitter:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --cream: #F5EFE3;
+        --cream-deep: #EAE1CE;
+        --ink: #211D1A;
+        --amber: #A9642F;
+        --brass: #8C7A4E;
+        --space-3: 0.75rem;
+        --space-4: 1rem;
+        --space-5: 1.5rem;
+        --space-6: 2rem;
+        --space-7: 3rem;
+        --space-8: 4rem;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; background: var(--cream); color: var(--ink);
+        font-family: "Bitter", Georgia, serif; line-height: 1.6; font-size: 1.0625rem;
+      }
+      h1, h2 { font-family: "Big Shoulders Display", sans-serif; margin: 0; color: var(--ink); }
+      a { color: var(--amber); }
+      header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: var(--space-5) clamp(1.25rem, 5vw, 3.5rem); border-bottom: 1px solid var(--cream-deep);
+      }
+      .wordmark {
+        display: flex; align-items: center; gap: 0.6rem;
+        font-family: "Big Shoulders Display", sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: 0.02em;
+        font-size: 1.15rem; color: var(--ink); text-decoration: none;
+      }
+      .wordmark img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
+      nav a {
+        color: var(--ink); text-decoration: none; margin-left: var(--space-5);
+        font-family: "Bitter", serif; font-weight: 500; font-size: 0.9375rem;
+        padding-bottom: 2px; border-bottom: 2px solid transparent;
+        transition: border-color 0.15s ease-out;
+      }
+      nav a:hover, nav a:focus-visible { border-color: var(--amber); }
+      nav a:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+      .pill {
+        display: inline-block; background: var(--ink); color: var(--cream);
+        font-family: "Big Shoulders Display", sans-serif; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 0.06em;
+        border-radius: 999px; padding: 6px 16px; font-size: 0.75rem;
+      }
+      main { max-width: 780px; margin: 0 auto; padding: var(--space-7) clamp(1.25rem, 5vw, 3.5rem) var(--space-8); }
+      h1 { font-weight: 900; letter-spacing: -0.01em; line-height: 1; font-size: clamp(2.25rem, 3vw + 1rem, 3.25rem); margin-top: var(--space-4); }
+      .menu-group { margin-top: var(--space-7); }
+      .menu-group h2 { border-bottom: 1px solid var(--cream-deep); padding-bottom: 0.6rem; font-size: 1.75rem; font-weight: 700; }
+      .item { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); padding: 0.9rem 0; border-bottom: 1px solid var(--cream-deep); }
+      .item h3 { font-family: "Bitter", serif; font-weight: 600; font-size: 1.0625rem; margin: 0 0 0.25rem; color: var(--ink); }
+      .item p { margin: 0; color: var(--ink); opacity: 0.75; font-size: 0.9rem; font-style: italic; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="wordmark" href={base}><img src={`${base}images/logo.png`} alt="" /> Sunset Railway</a>
+      <nav aria-label="Primary">
+        <a href={base}>Home</a>
+        <a href={`${base}menu/`}>Menu</a>
+      </nav>
+    </header>
+    <main>
+      <span class="pill">Menu</span>
+      <h1>Peranakan-influenced home-style food</h1>
+
+      <div class="menu-group">
+        <h2>Mains</h2>
+        <div class="item">
+          <div>
+            <h3>Mee Siam</h3>
+            <p>With egg and calamansi</p>
+          </div>
+        </div>
+        <div class="item">
+          <div>
+            <h3>Beef Rendang &amp; Lontong</h3>
+            <p>Coconut-kissed, slow-braised</p>
+          </div>
+        </div>
+        <div class="item">
+          <div>
+            <h3>Babi Pongteh</h3>
+            <p>Served with Kai Lan</p>
+          </div>
+        </div>
+        <div class="item">
+          <div><h3>Beef Rawon</h3></div>
+        </div>
+        <div class="item">
+          <div><h3>Nasi Lemak</h3></div>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <h2>Toast &amp; Sandwiches</h2>
+        <div class="item">
+          <div>
+            <h3>Kaya Toast</h3>
+            <p>Charcoal-grilled</p>
+          </div>
+        </div>
+        <div class="item">
+          <div>
+            <h3>Butter, Cucumber, Egg &amp; Otak Sandwich</h3>
+          </div>
+        </div>
+      </div>
+
+      <p style="margin-top: var(--space-7); color: var(--ink); opacity: 0.6; font-size: 0.85rem;">
+        Prices available in-store &mdash; this is a preview, not the final menu.
+      </p>
+    </main>
+  </body>
+</html>
