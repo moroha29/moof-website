@@ -36,7 +36,7 @@ const [
 
 test("Design E is a Pages-ready editorial variant with editable local media", () => {
   assert.match(config, /base:\s*["']\/moof-website\/e["']/);
-  assert.match(workflow, /for dir in a b c d e;/);
+  assert.match(workflow, /for dir in a b c d e f;/);
   assert.match(siteAdapter, /assets\/content\/site\.json/);
   assert.match(menuAdapter, /assets\/content\/menu\.json/);
   assert.match(mediaAdapter, /assets\/content\/editorial\.json/);

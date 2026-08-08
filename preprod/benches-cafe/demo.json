@@ -1,5 +1,15 @@
 {
   "businessName": "Benches Cafe",
   "designBrief": "Quiet park-side cafe inside Clementi Woods Park, Singapore. Palette pulled from the business's own real logo (deep emerald/teal, warm gold) plus a moss-green nod to the literal park setting, on a warm cream background. Fraunces (dialed toward its rounded SOFT axis, WONK off) for headings, Karla for body — matching a real voice sample that is plain and unhyped. Single-page, photography-led, generous whitespace, minimal nav. Signature element: an abstracted 4-petal pinwheel mark, referencing the real decorative ornaments visible outside the storefront, used sparingly as a section-divider/menu-marker/footer motif rather than literal decoration.",
-  "createdDate": "2026-08-08"
+  "createdDate": "2026-08-08",
+  "lead": {
+    "rowNumber": 2,
+    "category": "Contact New Website",
+    "companyName": "Benches Cafe",
+    "googleMapsUrl": "https://share.google/CWygrvMz92co4Q8bz",
+    "emailOrWhatsapp": "https://www.facebook.com/benchescafe/",
+    "otherContact": "",
+    "remarks": "",
+    "sampleWebsite": ""
+  }
 }

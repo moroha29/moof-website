@@ -128,46 +128,7 @@ jobs:
           fi
 
       - name: Generate preprod index
-        shell: bash
-        run: |
-          if [ -d "preprod" ]; then
-            mkdir -p site/preprod
-            {
-              echo "<!doctype html><html><head><meta charset=\"utf-8\"><title>Preprod demos</title>"
-              echo "<style>body{font-family:system-ui,sans-serif;max-width:960px;margin:2rem auto;padding:0 1rem}"
-              echo "table{border-collapse:collapse;width:100%}th,td{border:1px solid #ddd;padding:.5rem .75rem;text-align:left}"
-              echo "th{background:#f4f4f4}.status-live{color:#0a7c2f}.status-failed{color:#b3261e}</style></head><body>"
-              echo "<h1>Preprod demo sites</h1><p>Generated $(date -u +%Y-%m-%dT%H:%M:%SZ)</p>"
-              echo "<table><tr><th>Business</th><th>Brief</th><th>Created</th><th>Status</th><th>Link</th></tr>"
-              for dir in preprod/*/; do
-                dir="${dir%/}"
-                slug="$(basename "$dir")"
-                meta="$dir/demo.json"
-                name="$slug"
-                brief=""
-                created=""
-                if [ -f "$meta" ]; then
-                  name="$(jq -r '.businessName // empty' "$meta")"
-                  brief="$(jq -r '.designBrief // empty' "$meta")"
-                  created="$(jq -r '.createdDate // empty' "$meta")"
-                  [ -z "$name" ] && name="$slug"
-                fi
-                if [ -f "site/preprod/$slug/index.html" ]; then
-                  state="Live"
-                  stateClass="status-live"
-                  link="<a href=\"./$slug/\">View</a>"
-                else
-                  state="Build failed"
-                  stateClass="status-failed"
-                  link=""
-                fi
-                esc_name="$(printf '%s' "$name" | sed 's/&/\&amp;/g;s/</\&lt;/g')"
-                esc_brief="$(printf '%s' "$brief" | sed 's/&/\&amp;/g;s/</\&lt;/g')"
-                echo "<tr><td>$esc_name</td><td>$esc_brief</td><td>$created</td><td class=\"$stateClass\">$state</td><td>$link</td></tr>"
-              done
-              echo "</table></body></html>"
-            } > site/preprod/index.html
-          fi
+        run: node scripts/generate-preprod-index.mjs
 
       - name: Verify site artifact
         shell: bash
