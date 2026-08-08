@@ -1,0 +1,120 @@
+---
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Menu — Grounds On A Hill Coffee</title>
+    <meta name="description" content="Seasonal filter coffees and small bakes at Grounds On A Hill Coffee." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,480;1,9..144,480&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --ink: #16130f;
+        --paper: #f3ede3;
+        --brass: #c08a45;
+        --ember: #e0793e;
+        --smoke: #c9beac;
+        --bg-elevated: #1e1a14;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; background: var(--ink); color: var(--paper);
+        font-family: "Work Sans", system-ui, sans-serif; line-height: 1.6;
+      }
+      h1, h2, h3 { font-family: "Fraunces", Georgia, serif; font-weight: 480; color: var(--paper); margin: 0; }
+      a { color: var(--brass); }
+      header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 1.5rem clamp(1.25rem, 5vw, 4rem); border-bottom: 1px solid #2c261d;
+      }
+      .wordmark { display: flex; align-items: center; gap: 0.6rem; font-family: "Fraunces", Georgia, serif; font-size: 1.15rem; text-decoration: none; }
+      .wordmark img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+      nav a { color: var(--smoke); text-decoration: none; margin-left: 1.75rem; font-size: 0.95rem; }
+      nav a:hover { color: var(--brass); }
+      main { max-width: 860px; margin: 0 auto; padding: 2.5rem clamp(1.25rem, 5vw, 4rem) 4rem; }
+      .kicker { color: var(--brass); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.78rem; margin: 0 0 0.75rem; font-weight: 500; }
+      .menu-group { margin-top: 2.5rem; }
+      .menu-group h2 { border-bottom: 1px solid #2c261d; padding-bottom: 0.5rem; font-size: 1.5rem; }
+      .item { display: flex; justify-content: space-between; gap: 1rem; padding: 0.9rem 0; border-bottom: 1px solid #221d16; }
+      .item h3 { font-family: "Work Sans", sans-serif; font-size: 1rem; margin: 0 0 0.25rem; font-weight: 600; }
+      .item p { margin: 0; color: var(--smoke); font-size: 0.9rem; }
+      .badge {
+        display: inline-block; background: var(--ember); color: var(--ink);
+        font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+        padding: 0.1rem 0.4rem; border-radius: 3px; margin-left: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="wordmark" href={base}><img src={`${base}images/logo.png`} alt="" /> Grounds On A Hill</a>
+      <nav aria-label="Primary">
+        <a href={base}>Home</a>
+        <a href={`${base}menu/`}>Menu</a>
+      </nav>
+    </header>
+    <main>
+      <p class="kicker">Menu</p>
+      <h1>Filter, bar &amp; a few small bakes</h1>
+
+      <div class="menu-group">
+        <h2>Seasonal filter</h2>
+        <div class="item">
+          <div>
+            <h3>Ethiopia, Buku Abel <span class="badge">Natural</span></h3>
+          </div>
+          <p>Sweet orange, black plum, blackberry, floral</p>
+        </div>
+        <div class="item">
+          <div>
+            <h3>Ethiopia, Rumudamo <span class="badge">Washed</span></h3>
+          </div>
+          <p>Meyer lemon, clementine, Earl Grey</p>
+        </div>
+        <div class="item">
+          <div>
+            <h3>Panama, Elida Catuai <span class="badge">Natural</span></h3>
+          </div>
+          <p>Jasmine, honey, strawberry, peach tea</p>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <h2>Bar</h2>
+        <div class="item">
+          <div><h3>Espresso</h3></div>
+          <p>Ask what's on rotation</p>
+        </div>
+        <div class="item">
+          <div><h3>Filter &mdash; hot or over ice</h3></div>
+          <p>Rotating single-origin</p>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <h2>From the counter</h2>
+        <div class="item">
+          <div>
+            <h3>Toasted sourdough</h3>
+            <p>Regulars' favourite</p>
+          </div>
+          <p>House-made yuzu butter</p>
+        </div>
+        <div class="item">
+          <div><h3>Tarts &amp; financiers</h3></div>
+          <p>Rotating selection</p>
+        </div>
+      </div>
+
+      <p style="margin-top:2.5rem; color:#c9beac; font-size:0.85rem;">
+        Prices available in-store — this is a preview, not the final menu.
+      </p>
+    </main>
+  </body>
+</html>
