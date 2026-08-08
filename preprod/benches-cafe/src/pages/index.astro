@@ -1,0 +1,283 @@
+---
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Benches Cafe</title>
+    <meta name="description" content="A small cafe inside Clementi Woods Park, Singapore. Freshly ground coffee, a park view, and a bench to slow down on." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,SOFT,WONK,wght@0,9..144,0..100,0..1,300..600&family=Karla:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --emerald: #1B4B43;
+        --emerald-ink: #20302C;
+        --gold: #C9A227;
+        --cream: #F6F2E9;
+        --cream-deep: #EDE6D6;
+        --moss: #7C8A6E;
+        --space-4: 1rem;
+        --space-5: 1.5rem;
+        --space-6: 2rem;
+        --space-8: 3rem;
+        --space-10: 4rem;
+        --space-12: 6rem;
+        --space-16: 8rem;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--cream);
+        color: var(--emerald-ink);
+        font-family: "Karla", system-ui, -apple-system, sans-serif;
+        font-size: 1.0625rem;
+        line-height: 1.7;
+      }
+      h1, h2 {
+        font-family: "Fraunces", Georgia, serif;
+        font-optical-sizing: auto;
+        color: var(--emerald);
+        margin: 0;
+      }
+      h1 {
+        font-variation-settings: "opsz" 100, "SOFT" 80, "WONK" 0, "wght" 380;
+        letter-spacing: -0.015em;
+      }
+      h2 {
+        font-variation-settings: "opsz" 40, "SOFT" 60, "WONK" 0, "wght" 500;
+        letter-spacing: -0.005em;
+      }
+      a { color: var(--gold); }
+      .skip-link { position: absolute; left: -999px; top: 0; }
+      .skip-link:focus {
+        left: var(--space-5); top: var(--space-5); background: var(--gold); color: var(--emerald-ink);
+        padding: 0.5rem 1rem; border-radius: 4px; z-index: 10;
+      }
+      header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: var(--space-5) clamp(1.25rem, 5vw, 4rem);
+        border-bottom: 1px solid var(--cream-deep);
+      }
+      .wordmark {
+        display: flex; align-items: center; gap: 0.6rem;
+        font-family: "Fraunces", Georgia, serif;
+        font-variation-settings: "opsz" 24, "SOFT" 60, "WONK" 0, "wght" 500;
+        font-size: 1.15rem; color: var(--emerald);
+        text-decoration: none; letter-spacing: 0.01em;
+      }
+      .wordmark img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+      nav a {
+        color: var(--emerald); text-decoration: none; margin-left: var(--space-5);
+        font-size: 0.9375rem; font-weight: 500; letter-spacing: 0.02em;
+        padding-bottom: 2px; border-bottom: 1px solid transparent;
+        transition: border-color 0.2s ease, color 0.2s ease;
+      }
+      nav a:hover, nav a:focus-visible { color: var(--gold); border-color: var(--gold); }
+      nav a:focus-visible { outline: 2px solid var(--emerald); outline-offset: 2px; }
+      main { max-width: 860px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 4rem); }
+      .hero { padding: var(--space-10) 0 var(--space-8); }
+      @media (min-width: 700px) { .hero { padding-top: var(--space-16); } }
+      .eyebrow {
+        color: var(--moss); text-transform: uppercase; letter-spacing: 0.08em;
+        font-size: 0.8125rem; margin: 0 0 var(--space-4); font-weight: 600;
+      }
+      .hero h1 {
+        font-size: clamp(2.1rem, 5vw, 3.5rem);
+        line-height: 1.05;
+        margin: 0 0 var(--space-6); max-width: 16ch;
+        opacity: 0; transform: translateY(10px);
+        animation: rise 0.45s ease-out 0.05s forwards;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .hero h1 { opacity: 1; transform: none; animation: none; }
+      }
+      @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+      .photo {
+        position: relative; overflow: hidden; border-radius: 6px;
+        border: 1px solid var(--cream-deep); background: var(--cream-deep);
+      }
+      .photo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+      .hero-photo { height: 420px; }
+      section { padding: var(--space-10) 0; border-top: 1px solid var(--cream-deep); }
+      @media (min-width: 700px) { section { padding: var(--space-12) 0; } }
+      .reveal { opacity: 0; transform: translateY(8px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
+      .reveal.is-visible { opacity: 1; transform: translateY(0); }
+      @media (prefers-reduced-motion: reduce) {
+        .reveal { opacity: 1; transform: none; transition: none; }
+      }
+      .kicker {
+        color: var(--moss); text-transform: uppercase; letter-spacing: 0.08em;
+        font-size: 0.78rem; margin: 0 0 var(--space-4); font-weight: 600;
+      }
+      .about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: var(--space-6); align-items: center; }
+      .about p { max-width: 62ch; color: var(--emerald-ink); margin: 0; }
+      .about-photo { height: 300px; }
+
+      /* Signature element: an abstracted 4-petal pinwheel, referencing the
+         real decorative ornaments outside the storefront. Used sparingly:
+         section dividers, menu category markers, footer sign-off. */
+      .pinwheel-divider { display: flex; justify-content: center; margin: 0 0 var(--space-6); }
+      .pinwheel-divider a { display: inline-flex; color: var(--gold); }
+      .pinwheel-divider svg {
+        width: 40px; height: 40px;
+        transition: transform 0.3s ease-out;
+      }
+      .pinwheel-divider a:hover svg,
+      .pinwheel-divider a:focus-visible svg { transform: rotate(18deg); }
+      @media (prefers-reduced-motion: reduce) {
+        .pinwheel-divider svg { transition: opacity 0.2s ease; }
+        .pinwheel-divider a:hover svg, .pinwheel-divider a:focus-visible svg { transform: none; opacity: 0.7; }
+      }
+      .pinwheel-divider a:focus-visible { outline: 2px solid var(--emerald); outline-offset: 4px; border-radius: 50%; }
+
+      .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-5); margin-top: var(--space-6); }
+      .menu-card { background: var(--cream-deep); border-radius: 6px; padding: var(--space-5); }
+      .menu-card .cat {
+        display: flex; align-items: center; gap: 0.4rem;
+        color: var(--moss); text-transform: uppercase; letter-spacing: 0.08em;
+        font-size: 0.875rem; font-weight: 600; margin: 0 0 0.5rem;
+      }
+      .menu-card .cat svg { width: 14px; height: 14px; color: var(--moss); flex-shrink: 0; }
+      .menu-card h3 { font-family: "Karla", sans-serif; font-weight: 600; font-size: 1.0625rem; margin: 0; color: var(--emerald-ink); }
+
+      .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); margin-top: var(--space-6); }
+      .gallery .photo { height: 260px; }
+      .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); margin-top: var(--space-4); }
+      .visit-grid h3 { font-size: 1rem; margin: 0 0 0.4rem; color: var(--emerald); font-family: "Karla", sans-serif; font-weight: 600; }
+      .visit-grid p { margin: 0; color: var(--emerald-ink); }
+      footer {
+        padding: var(--space-6) clamp(1.25rem, 5vw, 4rem) var(--space-8);
+        color: var(--emerald); font-size: 0.85rem; text-align: center;
+        display: flex; flex-direction: column; align-items: center; gap: var(--space-4);
+      }
+      footer svg { width: 20px; height: 20px; color: var(--gold); }
+      @media (max-width: 560px) {
+        .visit-grid { grid-template-columns: 1fr; }
+        .about-grid { grid-template-columns: 1fr; }
+        .gallery { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <symbol id="pinwheel" viewBox="0 0 24 24">
+        <path d="M12 12 C12 6 4 4 2 2 C8 2 12 8 12 12 Z" fill="currentColor" />
+        <path d="M12 12 C12 6 4 4 2 2 C8 2 12 8 12 12 Z" fill="currentColor" transform="rotate(90 12 12)" />
+        <path d="M12 12 C12 6 4 4 2 2 C8 2 12 8 12 12 Z" fill="currentColor" transform="rotate(180 12 12)" />
+        <path d="M12 12 C12 6 4 4 2 2 C8 2 12 8 12 12 Z" fill="currentColor" transform="rotate(270 12 12)" />
+      </symbol>
+    </svg>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header>
+      <a class="wordmark" href={base}><img src={`${base}images/logo.png`} alt="" /> Benches Cafe</a>
+      <nav aria-label="Primary">
+        <a href={base}>Home</a>
+        <a href={`${base}menu/`}>Menu</a>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-heading">
+        <p class="eyebrow">Cafe &middot; Clementi Woods Park, Singapore</p>
+        <h1 id="hero-heading">Freshly ground coffee, a park view, and a bench to slow down on.</h1>
+        <div class="photo hero-photo">
+          <img src={`${base}images/storefront.png`} alt="Benches Cafe storefront, glass frontage with window decals and decorative pinwheel-flower ornaments" />
+        </div>
+      </section>
+
+      <section class="about reveal" aria-labelledby="about-heading">
+        <p class="kicker">About</p>
+        <h2 id="about-heading">A small stop, tucked in the park</h2>
+        <div class="about-grid">
+          <p>
+            Tucked inside Clementi Woods Park, Benches Cafe is a small stop for freshly ground coffee, tea,
+            and a plate of something simple &mdash; grilled cheese, a waffle with ice cream &mdash; with a
+            park view instead of a storefront window. Open weekday mornings through mid-afternoon, last
+            order 4pm. No rush, no crowd, just a bench and a coffee.
+          </p>
+          <div class="photo about-photo">
+            <img src={`${base}images/flatlay.png`} alt="Overhead flat-lay of a waffle, strawberry shortcake, grilled cheese sandwich and two coffees" />
+          </div>
+        </div>
+      </section>
+
+      <section class="menu-preview reveal" aria-labelledby="menu-heading">
+        <div class="pinwheel-divider">
+          <a href={`${base}menu/`} aria-label="See the full menu">
+            <svg><use href="#pinwheel" /></svg>
+          </a>
+        </div>
+        <p class="kicker">On the menu</p>
+        <h2 id="menu-heading">Coffee, tea, and a few simple plates</h2>
+        <div class="menu-grid">
+          <div class="menu-card">
+            <p class="cat"><svg><use href="#pinwheel" /></svg> Coffee</p>
+            <h3>Freshly ground coffee</h3>
+          </div>
+          <div class="menu-card">
+            <p class="cat"><svg><use href="#pinwheel" /></svg> Coffee</p>
+            <h3>Tea &amp; milkshake</h3>
+          </div>
+          <div class="menu-card">
+            <p class="cat"><svg><use href="#pinwheel" /></svg> From the counter</p>
+            <h3>Grilled cheese sandwich</h3>
+          </div>
+          <div class="menu-card">
+            <p class="cat"><svg><use href="#pinwheel" /></svg> From the counter</p>
+            <h3>Waffle, ice cream &amp; salted caramel</h3>
+          </div>
+        </div>
+        <div class="gallery">
+          <div class="photo">
+            <img src={`${base}images/waffle-dessert.png`} alt="Waffle with a scoop of ice cream, caramel drizzle and powdered sugar" />
+          </div>
+          <div class="photo">
+            <img src={`${base}images/flatlay.png`} alt="Overhead flat-lay of cafe dishes and coffee" />
+          </div>
+        </div>
+        <p style="margin-top:1.5rem;"><a href={`${base}menu/`}>See the full menu &rarr;</a></p>
+      </section>
+
+      <section class="visit reveal" aria-labelledby="visit-heading">
+        <p class="kicker">Visit</p>
+        <h2 id="visit-heading">Find us in the park</h2>
+        <div class="visit-grid">
+          <div>
+            <h3>Address</h3>
+            <p>93A Clementi Rd, Singapore 129781<br />(within Clementi Woods Park)</p>
+          </div>
+          <div>
+            <h3>Hours</h3>
+            <p>Mon&ndash;Fri 8:00am&ndash;4:30pm<br />(last order 4pm)<br />Closed Sat&ndash;Sun</p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <svg><use href="#pinwheel" /></svg>
+      <p>Benches Cafe &middot; Demo preview, not a live site</p>
+    </footer>
+    <script>
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.2 }
+        );
+        document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+      } else {
+        document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+      }
+    </script>
+  </body>
+</html>
