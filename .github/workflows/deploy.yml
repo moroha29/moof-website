@@ -110,6 +110,23 @@ jobs:
             fi
           done
 
+          # Not-yet-converted demo sites. Isolated from the client loop above:
+          # a failed preprod build is skipped, never aborts the client deploy.
+          if [ -d "preprod" ]; then
+            for dir in preprod/*/; do
+              dir="${dir%/}"
+              if [ -f "$dir/package.json" ]; then
+                echo "Building preprod demo $dir"
+                if npm --prefix "$dir" ci && npm --prefix "$dir" run build; then
+                  mkdir -p "site/$dir"
+                  cp -r "$dir/dist/." "site/$dir/"
+                else
+                  echo "::warning::Skipping preprod demo $dir - build failed"
+                fi
+              fi
+            done
+          fi
+
       - name: Verify site artifact
         shell: bash
         run: |
