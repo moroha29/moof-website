@@ -1,0 +1,137 @@
+---
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Menu — Folk Yard</title>
+    <meta name="description" content="Sandwiches and specialty coffee by day, sourdough pizzas and natural wine by night at Folk Yard." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --cream: #F3EAD3;
+        --cream-deep: #E9DFC2;
+        --rust: #8B4A2F;
+        --ink: #211D18;
+        --red: #C0392B;
+        --orange: #E08E3E;
+        --yellow: #E8C547;
+        --space-4: 1rem;
+        --space-5: 1.5rem;
+        --space-6: 2rem;
+        --space-7: 3rem;
+        --space-8: 4rem;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; background: var(--cream); color: var(--ink);
+        font-family: "Source Sans 3", system-ui, sans-serif; line-height: 1.6; font-size: 1.0625rem;
+      }
+      h1, h2 { font-family: "Zilla Slab", Georgia, serif; margin: 0; color: var(--rust); line-height: 1.08; }
+      a { color: var(--rust); }
+      header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: var(--space-5) clamp(1.25rem, 5vw, 4rem); border-bottom: 1px solid var(--cream-deep);
+      }
+      .wordmark {
+        display: flex; align-items: center; gap: 0.6rem;
+        font-family: "Zilla Slab", serif; font-weight: 700;
+        font-size: 1.2rem; color: var(--rust); text-decoration: none;
+      }
+      .wordmark img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
+      nav a {
+        color: var(--ink); text-decoration: none; margin-left: var(--space-5);
+        font-family: "Source Sans 3", sans-serif; font-weight: 600; font-size: 0.9375rem;
+        padding-bottom: 3px; border-bottom: 1px solid transparent;
+        transition: border-color 0.2s ease-out;
+      }
+      nav a:hover, nav a:focus-visible { border-color: var(--rust); }
+      nav a:focus-visible { outline: 2px solid var(--rust); outline-offset: 2px; }
+      main { max-width: 860px; margin: 0 auto; padding: var(--space-7) clamp(1.25rem, 5vw, 4rem) var(--space-8); }
+      .kicker {
+        color: var(--ink); opacity: 0.7; text-transform: uppercase; letter-spacing: 0.08em;
+        font-family: "Source Sans 3", sans-serif; font-weight: 600;
+        font-size: 0.75rem; margin: 0 0 var(--space-4);
+      }
+      h1 { font-weight: 700; letter-spacing: -0.02em; font-size: clamp(2rem, 3vw + 1rem, 3rem); }
+      .rainbow-bar { display: flex; flex-direction: column; gap: 1px; width: 72px; margin: var(--space-4) 0 0; }
+      .rainbow-bar span { display: block; height: 2px; }
+      .rainbow-bar span:nth-child(1) { background: var(--red); }
+      .rainbow-bar span:nth-child(2) { background: var(--orange); }
+      .rainbow-bar span:nth-child(3) { background: var(--yellow); }
+      .menu-group { margin-top: var(--space-7); }
+      .menu-group h2 {
+        font-weight: 700; letter-spacing: -0.01em; font-size: 1.75rem;
+        border-bottom: 1px solid var(--cream-deep); padding-bottom: 0.6rem;
+      }
+      .item { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); padding: 0.9rem 0; border-bottom: 1px solid var(--cream-deep); }
+      .item h3 { font-family: "Zilla Slab", serif; font-weight: 600; font-size: 1.0625rem; margin: 0 0 0.25rem; color: var(--ink); }
+      .item p { margin: 0; color: var(--ink); opacity: 0.75; font-size: 0.9rem; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="wordmark" href={base}><img src={`${base}images/logo.png`} alt="" /> Folk Yard</a>
+      <nav aria-label="Primary">
+        <a href={base}>Home</a>
+        <a href={`${base}menu/`}>Menu</a>
+      </nav>
+    </header>
+    <main>
+      <p class="kicker">Menu</p>
+      <h1>Day &amp; Night</h1>
+      <div class="rainbow-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+
+      <div class="menu-group">
+        <h2>Day &mdash; Sandwiches &amp; Coffee</h2>
+        <div class="item">
+          <div>
+            <h3>Breakfast Sandwich</h3>
+            <p>Egg, bacon, sauce, toasted sourdough</p>
+          </div>
+        </div>
+        <div class="item">
+          <div><h3>Specialty Coffee</h3></div>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <h2>Night &mdash; Pizza &amp; Wine</h2>
+        <div class="item">
+          <div>
+            <h3>Sourdough Pizza</h3>
+            <p>Classic and white/four-cheese</p>
+          </div>
+        </div>
+        <div class="item">
+          <div>
+            <h3>Grilled Steak</h3>
+            <p>With chimichurri</p>
+          </div>
+        </div>
+        <div class="item">
+          <div>
+            <h3>Grilled Broccolini</h3>
+            <p>With toasted almonds</p>
+          </div>
+        </div>
+        <div class="item">
+          <div><h3>Fried Croquettes</h3></div>
+        </div>
+        <div class="item">
+          <div><h3>Natural Wine</h3></div>
+        </div>
+      </div>
+
+      <p style="margin-top: var(--space-7); color: var(--ink); opacity: 0.6; font-size: 0.85rem;">
+        Prices available in-store &mdash; this is a preview, not the final menu.
+      </p>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,134 @@
+---
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Menu — Wanderlust Cafe Singapore</title>
+    <meta name="description" content="Eggs, soba and specialty coffee at Wanderlust Cafe, Takashimaya." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --cream: #FAF5EE;
+        --blush: #EFD9D3;
+        --gold: #B08D57;
+        --taupe: #6B5D52;
+        --space-3: 0.75rem;
+        --space-4: 1rem;
+        --space-5: 1.5rem;
+        --space-6: 2rem;
+        --space-7: 3rem;
+        --space-8: 4rem;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; background: var(--cream); color: var(--taupe);
+        font-family: "Quicksand", ui-sans-serif, system-ui, sans-serif; line-height: 1.7; font-size: 1.0625rem;
+      }
+      h1, h2 { font-family: "Cormorant Garamond", Georgia, serif; margin: 0; color: var(--taupe); }
+      a { color: var(--gold); }
+      header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: var(--space-5) clamp(1.25rem, 5vw, 3.5rem); border-bottom: 1px solid var(--blush);
+      }
+      .wordmark {
+        display: flex; align-items: center; gap: 0.6rem;
+        font-family: "Cormorant Garamond", serif; font-weight: 600;
+        font-size: 1.25rem; color: var(--taupe); text-decoration: none;
+      }
+      .wordmark img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
+      nav a {
+        position: relative; color: var(--taupe); text-decoration: none; margin-left: var(--space-5);
+        font-family: "Quicksand", sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+        font-size: 0.8125rem; padding-bottom: 6px;
+      }
+      nav a::after {
+        content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 2px;
+        background-image: radial-gradient(circle, var(--gold) 1.2px, transparent 1.2px);
+        background-size: 8px 100%; opacity: 0; transition: opacity 0.2s ease-out;
+      }
+      nav a:hover::after, nav a:focus-visible::after { opacity: 0.7; }
+      nav a:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+      main { max-width: 780px; margin: 0 auto; padding: var(--space-7) clamp(1.25rem, 5vw, 3.5rem) var(--space-8); }
+      .kicker {
+        color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em;
+        font-family: "Quicksand", sans-serif; font-weight: 600;
+        font-size: 0.8125rem; margin: 0 0 var(--space-4);
+      }
+      h1 { font-style: italic; font-weight: 500; letter-spacing: -0.01em; font-size: clamp(2.25rem, 1.75rem + 2vw, 3.25rem); }
+      .menu-group { margin-top: var(--space-7); }
+      .menu-group h2 { border-bottom: 1px solid var(--blush); padding-bottom: 0.6rem; font-size: 1.75rem; font-weight: 600; }
+      .item { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); padding: 0.9rem 0; border-bottom: 1px solid var(--blush); }
+      .item h3 { font-family: "Cormorant Garamond", serif; font-weight: 500; font-style: italic; font-size: 1.1875rem; margin: 0 0 0.25rem; color: var(--taupe); }
+      .item p { margin: 0; color: var(--taupe); opacity: 0.75; font-size: 0.9rem; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="wordmark" href={base}><img src={`${base}images/logo.png`} alt="" /> Wanderlust Cafe</a>
+      <nav aria-label="Primary">
+        <a href={base}>Home</a>
+        <a href={`${base}menu/`}>Menu</a>
+      </nav>
+    </header>
+    <main>
+      <p class="kicker">Menu</p>
+      <h1>Eggs, soba &amp; specialty coffee</h1>
+
+      <div class="menu-group">
+        <h2>Eggs</h2>
+        <div class="item">
+          <div>
+            <h3>Sunny Side Up</h3>
+            <p>Egg on sourdough toast with miso butter</p>
+          </div>
+        </div>
+        <div class="item">
+          <div>
+            <h3>Creamy Scrambled Eggs</h3>
+            <p>On sourdough toast with French butter</p>
+          </div>
+        </div>
+        <div class="item">
+          <div>
+            <h3>Loaded Omelette</h3>
+            <p>Ham, tomatoes, Gouda cheese and greens</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <h2>Bowls</h2>
+        <div class="item">
+          <div>
+            <h3>Sesame Soba</h3>
+            <p>With nori, topped with mentaiko salmon</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <h2>Sandwiches &amp; Coffee</h2>
+        <div class="item">
+          <div>
+            <h3>Handcrafted Sandwiches</h3>
+            <p>Hand-rolled bread</p>
+          </div>
+        </div>
+        <div class="item">
+          <div><h3>Specialty Coffee</h3></div>
+        </div>
+      </div>
+
+      <p style="margin-top: var(--space-7); color: var(--taupe); opacity: 0.6; font-size: 0.85rem;">
+        Prices available in-store &mdash; this is a preview, not the final menu.
+      </p>
+    </main>
+  </body>
+</html>

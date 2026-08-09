@@ -1,0 +1,219 @@
+---
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Grounds On A Hill Coffee</title>
+    <meta name="description" content="A slow bar and micro-roastery in Sunset Way, Singapore. Coffee, faith and commune." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,480;1,9..144,480&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --ink: #16130f;
+        --paper: #f3ede3;
+        --brass: #c08a45;
+        --brass-deep: #8f6530;
+        --smoke: #c9beac;
+        --ember: #e0793e;
+        --bg-elevated: #1e1a14;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--ink);
+        color: var(--paper);
+        font-family: "Work Sans", system-ui, -apple-system, sans-serif;
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+      h1, h2, h3 {
+        font-family: "Fraunces", Georgia, serif;
+        font-weight: 480;
+        letter-spacing: 0.01em;
+        color: var(--paper);
+        margin: 0;
+      }
+      a { color: var(--brass); text-decoration-color: var(--brass); }
+      a:hover { color: var(--brass-deep); }
+      .skip-link { position: absolute; left: -999px; top: 0; }
+      .skip-link:focus {
+        left: 1.5rem; top: 1.5rem; background: var(--brass); color: var(--ink);
+        padding: 0.5rem 1rem; border-radius: 4px; z-index: 10;
+      }
+      header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 1.5rem clamp(1.25rem, 5vw, 4rem);
+        border-bottom: 1px solid #2c261d;
+      }
+      .wordmark {
+        display: flex; align-items: center; gap: 0.6rem;
+        font-family: "Fraunces", Georgia, serif; font-size: 1.15rem;
+        text-decoration: none; letter-spacing: 0.02em;
+      }
+      .wordmark img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+      nav a { color: var(--smoke); text-decoration: none; margin-left: 1.75rem; font-size: 0.95rem; }
+      nav a:hover { color: var(--brass); }
+      main { max-width: 860px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 4rem); }
+      .hero { padding: clamp(3rem, 10vw, 6rem) 0 clamp(2rem, 6vw, 4rem); }
+      .eyebrow {
+        color: var(--brass); text-transform: uppercase; letter-spacing: 0.12em;
+        font-size: 0.8125rem; margin: 0 0 1rem; font-weight: 500;
+      }
+      .hero h1 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        margin: 0 0 1.5rem; max-width: 14ch;
+        opacity: 0; transform: translateY(8px);
+        animation: rise 0.4s ease-out 0.05s forwards;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .hero h1 { opacity: 1; transform: none; animation: none; }
+      }
+      @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+      .photo {
+        position: relative; overflow: hidden; border-radius: 6px;
+        border: 1px solid #3a2f1e; background: var(--bg-elevated);
+      }
+      .photo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+      .hero-photo { height: 440px; }
+      section { padding: clamp(2rem, 6vw, 3.5rem) 0; border-top: 1px solid #2c261d; }
+      .kicker {
+        color: var(--brass); text-transform: uppercase; letter-spacing: 0.1em;
+        font-size: 0.78rem; margin: 0 0 0.75rem; font-weight: 500;
+      }
+      .about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 2rem; align-items: center; }
+      .about p { max-width: 62ch; color: var(--smoke); font-size: 1.0625rem; margin: 0; }
+      .about-photo { height: 320px; }
+
+      /* Signature element: tasting cards styled after the business's own
+         Instagram "Coffee Spotlight" post format — italic serif eyebrow,
+         bold origin name, a rare ember-accent process badge. */
+      .tasting-grid {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.25rem; margin-top: 1.5rem;
+      }
+      .tasting-card { background: var(--bg-elevated); border: 1px solid #2c261d; border-radius: 6px; padding: 1.5rem; }
+      .tasting-card .spotlight {
+        font-family: "Fraunces", Georgia, serif; font-style: italic; font-weight: 480;
+        color: var(--brass); font-size: 0.875rem; margin: 0 0 0.5rem;
+      }
+      .tasting-card h3 { font-family: "Work Sans", sans-serif; font-weight: 600; font-size: 1.125rem; margin: 0 0 0.5rem; }
+      .tasting-card .badge {
+        display: inline-block; background: var(--ember); color: var(--ink);
+        font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+        padding: 0.15rem 0.5rem; border-radius: 3px; margin-bottom: 0.5rem;
+      }
+      .tasting-card p { margin: 0; color: var(--smoke); font-size: 0.92rem; }
+
+      .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.5rem; }
+      .gallery .photo { height: 280px; }
+      .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1rem; }
+      .visit-grid h3 { font-size: 1rem; margin: 0 0 0.4rem; color: var(--paper); font-family: "Work Sans", sans-serif; font-weight: 600; }
+      .visit-grid p { margin: 0; color: var(--smoke); }
+      footer { padding: 2rem clamp(1.25rem, 5vw, 4rem) 3rem; color: var(--smoke); font-size: 0.85rem; text-align: center; }
+      @media (max-width: 560px) {
+        .visit-grid { grid-template-columns: 1fr; }
+        .about-grid { grid-template-columns: 1fr; }
+        .gallery { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header>
+      <a class="wordmark" href={base}><img src={`${base}images/logo.png`} alt="" /> Grounds On A Hill</a>
+      <nav aria-label="Primary">
+        <a href={base}>Home</a>
+        <a href={`${base}menu/`}>Menu</a>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-heading">
+        <p class="eyebrow">Coffee shop &middot; Sunset Way, Singapore</p>
+        <h1 id="hero-heading">A slow bar for coffee, and for commune.</h1>
+        <div class="photo hero-photo">
+          <img src={`${base}images/storefront.png`} alt="Grounds On A Hill storefront signage" />
+        </div>
+      </section>
+
+      <section class="about" aria-labelledby="about-heading">
+        <p class="kicker">Our philosophy</p>
+        <h2 id="about-heading">Slow bar, micro-roastery</h2>
+        <div class="about-grid">
+          <p>
+            Grounds On A Hill is a slow bar and micro-roastery — a simple space for coffee, faith and commune.
+            Every season we chase specific expressions of origin: this year it's two new Ethiopian filters,
+            fruit-forward but distinct in character, alongside a Panama Elida Catuai and a Rwanda Musasa Ruli
+            Women's Coffee that celebrates the producers behind the cup. We brew slowly, share openly, and
+            we're always grateful when you stop by.
+          </p>
+          <div class="photo about-photo">
+            <img src={`${base}images/latte-heart.png`} alt="Latte art in a dark ceramic cup" />
+          </div>
+        </div>
+      </section>
+
+      <section class="tasting" aria-labelledby="tasting-heading">
+        <p class="kicker">On the bar right now</p>
+        <h2 id="tasting-heading">Seasonal highlights</h2>
+        <div class="tasting-grid">
+          <div class="tasting-card">
+            <p class="spotlight">Coffee Spotlight</p>
+            <span class="badge">Natural</span>
+            <h3>Ethiopia, Buku Abel</h3>
+            <p>Sweet orange, black plum, blackberry, floral</p>
+          </div>
+          <div class="tasting-card">
+            <p class="spotlight">Coffee Spotlight</p>
+            <span class="badge">Washed</span>
+            <h3>Ethiopia, Rumudamo</h3>
+            <p>Meyer lemon, clementine, Earl Grey</p>
+          </div>
+          <div class="tasting-card">
+            <p class="spotlight">Coffee Spotlight</p>
+            <span class="badge">Natural</span>
+            <h3>Panama, Elida Catuai</h3>
+            <p>Jasmine, honey, strawberry, peach tea</p>
+          </div>
+          <div class="tasting-card">
+            <p class="spotlight">From the counter</p>
+            <h3>Toasted sourdough</h3>
+            <p>With house-made yuzu butter — a regulars' favourite</p>
+          </div>
+        </div>
+        <div class="gallery">
+          <div class="photo">
+            <img src={`${base}images/flatlay.png`} alt="Latte with toasted sourdough" />
+          </div>
+          <div class="photo">
+            <img src={`${base}images/latte-heart.png`} alt="Latte art detail" />
+          </div>
+        </div>
+        <p style="margin-top:1.5rem;"><a href={`${base}menu/`}>See the full menu &rarr;</a></p>
+      </section>
+
+      <section class="visit" aria-labelledby="visit-heading">
+        <p class="kicker">Visit</p>
+        <h2 id="visit-heading">Find us on the hill</h2>
+        <div class="visit-grid">
+          <div>
+            <h3>Address</h3>
+            <p>106 Clementi Street 12, #01-44, Singapore 120106</p>
+          </div>
+          <div>
+            <h3>Hours</h3>
+            <p>Weekdays 8:30am&ndash;4:30pm (Tues closed)<br />Sat&ndash;Sun 8:30am&ndash;5:30pm</p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>Grounds On A Hill Coffee &middot; Demo preview, not a live site</p>
+    </footer>
+  </body>
+</html>

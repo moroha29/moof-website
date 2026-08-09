@@ -1,0 +1,246 @@
+---
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Wanderlust Cafe Singapore</title>
+    <meta name="description" content="A soft, pastel-toned cafe at Takashimaya, Orchard Road. In life... eat, drink, and wander." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --cream: #FAF5EE;
+        --blush: #EFD9D3;
+        --gold: #B08D57;
+        --taupe: #6B5D52;
+        --space-2: 0.5rem;
+        --space-3: 0.75rem;
+        --space-4: 1rem;
+        --space-5: 1.5rem;
+        --space-6: 2rem;
+        --space-7: 3rem;
+        --space-8: 4rem;
+        --space-9: 6rem;
+        --space-10: 8rem;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; background: var(--cream); color: var(--taupe);
+        font-family: "Quicksand", ui-sans-serif, system-ui, -apple-system, sans-serif;
+        font-size: 1.0625rem; line-height: 1.7;
+      }
+      h1, h2, h3 { font-family: "Cormorant Garamond", Georgia, serif; margin: 0; color: var(--taupe); }
+      a { color: var(--gold); }
+      .skip-link { position: absolute; left: -999px; top: 0; }
+      .skip-link:focus {
+        left: var(--space-5); top: var(--space-5); background: var(--gold); color: var(--cream);
+        padding: 0.5rem 1rem; border-radius: 4px; z-index: 20;
+      }
+      header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: var(--space-5) clamp(1.25rem, 5vw, 3.5rem);
+        border-bottom: 1px solid var(--blush);
+      }
+      .wordmark {
+        display: flex; align-items: center; gap: 0.6rem;
+        font-family: "Cormorant Garamond", serif; font-weight: 600;
+        font-size: 1.25rem; color: var(--taupe); text-decoration: none;
+      }
+      .wordmark img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
+      nav a {
+        position: relative; color: var(--taupe); text-decoration: none; margin-left: var(--space-5);
+        font-family: "Quicksand", sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+        font-size: 0.8125rem; padding-bottom: 6px;
+      }
+      nav a::after {
+        content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 2px;
+        background-image: radial-gradient(circle, var(--gold) 1.2px, transparent 1.2px);
+        background-size: 8px 100%; opacity: 0; transition: opacity 0.2s ease-out;
+      }
+      nav a:hover::after, nav a:focus-visible::after { opacity: 0.7; }
+      nav a:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+      main { max-width: 1120px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 3.5rem); }
+      .hero { padding: var(--space-8) 0 var(--space-6); }
+      @media (min-width: 1024px) { .hero { padding-top: var(--space-10); } }
+      .eyebrow {
+        color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em;
+        font-family: "Quicksand", sans-serif; font-weight: 600;
+        font-size: 0.8125rem; margin: 0 0 var(--space-4);
+      }
+      .hero h1 {
+        font-style: italic; font-weight: 500; letter-spacing: -0.01em;
+        font-size: clamp(2.75rem, 2rem + 4vw, 4.75rem);
+        line-height: 1.05; margin: 0; max-width: 16ch;
+        opacity: 0; transform: translateY(10px);
+        animation: rise 0.45s ease-out 0.05s forwards;
+      }
+      @media (prefers-reduced-motion: reduce) { .hero h1 { opacity: 1; transform: none; animation: none; } }
+      @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+      .photo {
+        position: relative; overflow: hidden; border-radius: 4px;
+        border: 1px solid var(--blush); background: var(--blush);
+      }
+      .photo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+      .hero-photo { height: 420px; margin-top: var(--space-6); }
+      .hero-photo img { animation: kenburns 20s linear infinite alternate; }
+      @keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.04); } }
+      @media (prefers-reduced-motion: reduce) { .hero-photo img { animation: none; } }
+
+      .wander-divider { display: flex; justify-content: center; margin: var(--space-9) 0; }
+      .wander-line {
+        position: relative; height: 3px; width: 100%; max-width: 1120px;
+        background-image: radial-gradient(circle, rgba(176,141,87,0.45) 1.5px, transparent 1.5px);
+        background-size: 12px 100%; background-repeat: repeat-x;
+      }
+      .wander-line .marker {
+        position: absolute; top: 50%; left: 30%; width: 7px; height: 7px;
+        border-radius: 50%; background: var(--gold);
+        box-shadow: 0 0 0 4px var(--cream);
+        transform: translate(-50%, -50%);
+      }
+      .wander-line.short { max-width: 150px; height: 2px; margin: var(--space-3) 0 0; }
+      .wander-line.short .marker { width: 6px; height: 6px; left: 70%; }
+
+      section { padding: var(--space-8) 0; border-top: 1px solid var(--blush); }
+      @media (min-width: 1024px) { section { padding: var(--space-9) 0; } }
+      .reveal { opacity: 0; transform: translateY(8px); transition: opacity 0.45s ease-out, transform 0.45s ease-out; }
+      .reveal.is-visible { opacity: 1; transform: translateY(0); }
+      @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+      .kicker {
+        color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em;
+        font-family: "Quicksand", sans-serif; font-weight: 600;
+        font-size: 0.8125rem; margin: 0 0 var(--space-4);
+      }
+      h2 { font-weight: 600; letter-spacing: -0.01em; font-size: clamp(1.875rem, 1.5rem + 2vw, 2.5rem); }
+      .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-6); align-items: center; }
+      .about p { max-width: 680px; color: var(--taupe); margin: var(--space-4) 0 0; font-size: 1.25rem; font-family: "Cormorant Garamond", serif; font-style: italic; }
+      .about-photo { height: 340px; }
+      .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: var(--space-5); margin-top: var(--space-6); }
+      .menu-card { background: var(--blush); border-radius: 4px; padding: var(--space-5); }
+      .menu-card h3 { font-size: 1.375rem; font-weight: 500; font-style: italic; margin: 0 0 0.35rem; }
+      .menu-card p { margin: 0; color: var(--taupe); font-size: 0.9375rem; opacity: 0.85; }
+      .gallery-photo { height: 320px; margin-top: var(--space-6); }
+      .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); margin-top: var(--space-4); }
+      .visit-grid h3 { font-family: "Cormorant Garamond", serif; font-weight: 600; font-size: 1.125rem; margin: 0 0 0.4rem; color: var(--gold); }
+      .visit-grid p { margin: 0; color: var(--taupe); }
+      footer {
+        padding: var(--space-6) clamp(1.25rem, 5vw, 3.5rem) var(--space-8);
+        color: var(--taupe); opacity: 0.7; font-size: 0.85rem; text-align: center;
+      }
+      @media (max-width: 560px) {
+        .visit-grid { grid-template-columns: 1fr; }
+        .about-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header>
+      <a class="wordmark" href={base}><img src={`${base}images/logo.png`} alt="" /> Wanderlust Cafe</a>
+      <nav aria-label="Primary">
+        <a href={base}>Home</a>
+        <a href={`${base}menu/`}>Menu</a>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-heading" style="border-top: none;">
+        <p class="eyebrow">Cafe &middot; Takashimaya, Orchard Road</p>
+        <h1 id="hero-heading">In life... eat, drink, and wander.</h1>
+        <div class="photo hero-photo">
+          <img src={`${base}images/counter-signage.png`} alt="Wanderlust Cafe counter with real gold storefront signage, wood crate shelving and fresh flowers" />
+        </div>
+      </section>
+
+      <div class="wander-divider" aria-hidden="true">
+        <div class="wander-line"><span class="marker"></span></div>
+      </div>
+
+      <section class="about reveal" aria-labelledby="about-heading" style="border-top: none;">
+        <p class="kicker">About</p>
+        <h2 id="about-heading">A soft corner to slow down in</h2>
+        <div class="about-grid">
+          <div>
+            <p>
+              Hand-rolled sandwiches, specialty coffee, and eggs done properly &mdash; sunny side up with
+              miso butter, a loaded omelette, sesame soba topped with mentaiko salmon. A cozy corner to
+              slow down in, whether that's Takashimaya on Orchard Road or the newer outlet at Tanglin Place.
+            </p>
+            <div class="wander-line short" aria-hidden="true"><span class="marker"></span></div>
+          </div>
+          <div class="photo about-photo">
+            <img src={`${base}images/egg-toast.png`} alt="Sunny side up egg on sourdough toast with miso butter" />
+          </div>
+        </div>
+      </section>
+
+      <section class="menu-preview reveal" aria-labelledby="menu-heading">
+        <p class="kicker">On the menu</p>
+        <h2 id="menu-heading">Eggs, soba &amp; specialty coffee</h2>
+        <div class="menu-grid">
+          <div class="menu-card">
+            <h3>Sunny Side Up</h3>
+            <p>Egg on sourdough toast with miso butter</p>
+          </div>
+          <div class="menu-card">
+            <h3>Creamy Scrambled Eggs</h3>
+            <p>On sourdough toast with French butter</p>
+          </div>
+          <div class="menu-card">
+            <h3>Loaded Omelette</h3>
+            <p>Ham, tomatoes, Gouda cheese and greens</p>
+          </div>
+          <div class="menu-card">
+            <h3>Sesame Soba</h3>
+            <p>With nori, topped with mentaiko salmon</p>
+          </div>
+        </div>
+        <div class="photo gallery-photo">
+          <img src={`${base}images/soba-salmon.png`} alt="Sesame soba with nori and mentaiko salmon, overhead" />
+        </div>
+        <p style="margin-top:1.5rem;"><a href={`${base}menu/`}>See the full menu &rarr;</a></p>
+      </section>
+
+      <section class="visit reveal" aria-labelledby="visit-heading">
+        <p class="kicker">Visit</p>
+        <h2 id="visit-heading">Find us at Takashimaya</h2>
+        <div class="visit-grid">
+          <div>
+            <h3>Address</h3>
+            <p>391A Orchard Road<br />Takashimaya Dept Store, Level 3 Ladies' Dept<br />Singapore 238873</p>
+          </div>
+          <div>
+            <h3>Hours</h3>
+            <p>Daily 10:30am&ndash;9pm</p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>Wanderlust Cafe Singapore &middot; Demo preview, not a live site</p>
+    </footer>
+    <script>
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.2 }
+        );
+        document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+      } else {
+        document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+      }
+    </script>
+  </body>
+</html>
