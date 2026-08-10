@@ -1,0 +1,129 @@
+---
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Menu — Hideout Coffee Bar</title>
+    <meta name="description" content="Filter coffee, chalkboard sandwiches and sweets at Hideout Coffee Bar." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --cream: #F1E8D8;
+        --cream-deep: #E6DAC3;
+        --maroon: #6E1F2A;
+        --amber: #8B5A34;
+        --ink: #241A12;
+        --space-3: 0.75rem;
+        --space-4: 1rem;
+        --space-5: 1.5rem;
+        --space-6: 2rem;
+        --space-7: 3rem;
+        --space-8: 4rem;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; background: var(--cream); color: var(--ink);
+        font-family: "Manrope", ui-sans-serif, system-ui, sans-serif; line-height: 1.65; font-size: 1rem;
+      }
+      h1, h2 { font-family: "Alegreya", Georgia, serif; margin: 0; color: var(--maroon); }
+      a { color: var(--maroon); }
+      header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: var(--space-5) clamp(1.25rem, 5vw, 3.5rem); border-bottom: 1px solid var(--cream-deep);
+      }
+      .wordmark {
+        display: flex; align-items: center; gap: 0.7rem;
+        font-family: "Alegreya", serif; font-weight: 700;
+        font-size: 1.2rem; color: var(--maroon); text-decoration: none;
+      }
+      .wordmark img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
+      nav a {
+        color: var(--ink); text-decoration: none; margin-left: var(--space-5);
+        font-family: "Manrope", sans-serif; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em;
+        font-size: 0.875rem; position: relative; padding-bottom: 4px;
+      }
+      nav a::after {
+        content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 1.5px;
+        background: var(--maroon); transform: scaleX(0); transform-origin: left;
+        transition: transform 0.2s ease-out;
+      }
+      nav a:hover::after, nav a:focus-visible::after { transform: scaleX(1); }
+      nav a:focus-visible { outline: 2px solid var(--maroon); outline-offset: 2px; }
+      main { max-width: 780px; margin: 0 auto; padding: var(--space-7) clamp(1.25rem, 5vw, 3.5rem) var(--space-8); }
+      .kicker {
+        color: var(--amber); text-transform: uppercase; letter-spacing: 0.08em;
+        font-family: "Manrope", sans-serif; font-weight: 500;
+        font-size: 0.8125rem; margin: 0 0 var(--space-4);
+      }
+      h1 { font-weight: 700; letter-spacing: -0.01em; font-size: clamp(2rem, 2.5vw + 1rem, 3rem); }
+      .menu-group { margin-top: var(--space-7); }
+      .menu-group h2 { border-bottom: 1px solid var(--cream-deep); padding-bottom: 0.6rem; font-size: 1.5rem; font-weight: 600; }
+      .item { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); padding: 0.9rem 0; border-bottom: 1px solid var(--cream-deep); }
+      .item h3 { font-family: "Alegreya", serif; font-weight: 500; font-size: 1.0625rem; margin: 0 0 0.25rem; color: var(--ink); }
+      .item p { margin: 0; color: var(--ink); opacity: 0.7; font-size: 0.9rem; }
+      .price { font-family: "Manrope", sans-serif; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--maroon); white-space: nowrap; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="wordmark" href={base}><img src={`${base}images/logo.png`} alt="" /> Hideout Coffee Bar</a>
+      <nav aria-label="Primary">
+        <a href={base}>Home</a>
+        <a href={`${base}menu/`}>Menu</a>
+      </nav>
+    </header>
+    <main>
+      <p class="kicker">Menu</p>
+      <h1>Filter coffee, chalkboard sandwiches</h1>
+
+      <div class="menu-group">
+        <h2>Coffee</h2>
+        <div class="item"><div><h3>Black</h3></div><span class="price">$5 / $5.50</span></div>
+        <div class="item"><div><h3>White</h3></div><span class="price">$6 / $6.50</span></div>
+        <div class="item"><div><h3>Espresso Ale</h3></div><span class="price">$7.50</span></div>
+        <div class="item"><div><h3>Cold Brew</h3></div><span class="price">$7.50</span></div>
+        <div class="item"><div><h3>Filter</h3></div><span class="price">$8</span></div>
+      </div>
+
+      <div class="menu-group">
+        <h2>Sandwiches</h2>
+        <div class="item"><div><h3>Kimchi Focaccia</h3></div><span class="price">$9</span></div>
+        <div class="item"><div><h3>Apple Burrata</h3></div><span class="price">$16</span></div>
+        <div class="item"><div><h3>Honey Ham</h3></div></div>
+        <div class="item"><div><h3>Tuna Melt</h3></div><span class="price">$14</span></div>
+        <div class="item"><div><h3>Butter Chicken</h3></div><span class="price">$16</span></div>
+        <div class="item"><div><h3>Salt Beef</h3></div><span class="price">$18</span></div>
+        <div class="item"><div><h3>Meatball</h3></div><span class="price">$16</span></div>
+      </div>
+
+      <div class="menu-group">
+        <h2>Non-Coffee</h2>
+        <div class="item"><div><h3>Chocolate</h3></div><span class="price">$7 / $7.50</span></div>
+        <div class="item"><div><h3>Matcha</h3></div><span class="price">$7 / $7.50</span></div>
+        <div class="item"><div><h3>Genmaicha</h3></div><span class="price">$7 / $7.50</span></div>
+        <div class="item"><div><h3>PBP Shake</h3></div><span class="price">$9.50</span></div>
+        <div class="item"><div><h3>Mixed Berries</h3></div><span class="price">$8</span></div>
+        <div class="item"><div><h3>Jamu Soda</h3></div><span class="price">$7.50</span></div>
+      </div>
+
+      <div class="menu-group">
+        <h2>Sweets</h2>
+        <div class="item"><div><h3>Banana Bread</h3><p>With espresso butter</p></div><span class="price">$8.50</span></div>
+        <div class="item"><div><h3>Lemon Cake</h3></div><span class="price">$6</span></div>
+        <div class="item"><div><h3>Biscoff Cookie</h3></div><span class="price">$5</span></div>
+        <div class="item"><div><h3>P.B. Choc Cookie</h3></div><span class="price">$5</span></div>
+      </div>
+
+      <p style="margin-top: var(--space-7); color: var(--ink); opacity: 0.6; font-size: 0.85rem;">
+        After Hours (Fri&ndash;Sat, 7pm&ndash;11:59pm) menu available in-store &mdash; this is a preview of the day menu, not the final menu.
+      </p>
+    </main>
+  </body>
+</html>

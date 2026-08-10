@@ -91,6 +91,16 @@
       "otherContact": "https://www.instagram.com/sodcafesg/?hl=en",
       "remarks": "",
       "sampleWebsite": ""
+    },
+    "hideout-coffee-bar": {
+      "rowNumber": 11,
+      "category": "Contact New Website",
+      "companyName": "Hideout Coffee Bar",
+      "googleMapsUrl": "https://share.google/5OrLUF59GRUbED3Jp",
+      "emailOrWhatsapp": "https://www.instagram.com/hideout.coffeebar/?hl=en",
+      "otherContact": "",
+      "remarks": "",
+      "sampleWebsite": ""
     }
   }
 }
