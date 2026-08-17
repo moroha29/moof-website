@@ -49,6 +49,14 @@ test("why, solutions, stories and blog match the requested section counts", asyn
   const content = JSON.parse(await read("src/assets/content/pages.json"));
   assert.equal(content.why.reasons.length, 5);
   assert.deepEqual(content.why.process.map((step) => step.title), ["Enquiry", "Recommendation", "Quotation", "Sampling", "Production", "Delivery"]);
+  assert.deepEqual(content.why.pillars.map((item) => item.slug), ["one-supplier", "premium-quality", "flexible-quantities", "expert-recommendations", "tailored-to-you"]);
+  for (const pillar of content.why.pillars) {
+    assert.ok(pillar.title && pillar.subtitle && pillar.problemIntro && pillar.solutionIntro);
+    assert.ok(pillar.problemPoints.length >= 2);
+    assert.ok(pillar.expectPoints.length >= 4);
+    assert.ok(pillar.faq.length >= 3);
+    assert.ok(pillar.storySlug && pillar.recommendedProductSlugs.length && pillar.ctaHeading);
+  }
   assert.deepEqual(content.solutions.industries.map((item) => item.name), ["Schools", "Businesses", "Events", "Churches", "Sports Teams", "Community Organisations"]);
   for (const solution of content.solutions.industries) {
     assert.ok(solution.bundle.length >= 4);
@@ -92,6 +100,20 @@ test("solutions landing and industry detail pages implement the full TRD section
   const stories = await read("src/pages/success-stories/[slug].astro");
   const home = await read("src/pages/index.astro");
   for (const source of [products, stories, home]) assert.doesNotMatch(source, /solutions\/#/);
+});
+
+test("why-mysos pillar pages implement the full TRD section set and link from the landing page", async () => {
+  const detail = await read("src/pages/why-mysos/[slug].astro");
+  for (const section of ["top", "the-problem", "our-solution", "what-you-can-expect", "recommended-products", "faq"]) {
+    assert.match(detail, new RegExp(`id=["']${section}["']`), `why-mysos pillar page is missing ${section}`);
+  }
+  assert.match(detail, /getStaticPaths/);
+  assert.match(detail, /success-stories\//);
+  assert.match(detail, /See more success stories/);
+  assert.match(detail, /CallToAction/);
+
+  const landing = await read("src/pages/why-mysos.astro");
+  assert.match(landing, /\/why-mysos\/\$\{pages\.why\.pillars\[i\]\.slug\}\//);
 });
 
 test("all content imagery has useful alternative text and internal cards have real destinations", async () => {

@@ -154,6 +154,103 @@
       {"number": "04", "title": "Sampling", "body": "Confirm the material, colour and finish when sampling is appropriate."},
       {"number": "05", "title": "Production", "body": "We coordinate customisation and quality checks with trusted partners."},
       {"number": "06", "title": "Delivery", "body": "Your completed order is consolidated and delivered around your schedule."}
+    ],
+    "pillars": [
+      {
+        "slug": "one-supplier",
+        "title": "One Supplier. Endless Possibilities.",
+        "subtitle": "From customised apparel and event merchandise to corporate gifts and promotional products, source everything you need through one trusted partner.",
+        "problemIntro": "Managing multiple suppliers often results in:",
+        "problemPoints": ["Inconsistent product quality", "Different lead times", "Higher shipping costs", "More time spent coordinating orders", "Communication across multiple vendors"],
+        "solutionIntro": "Instead of working with different suppliers for every product, MySOS helps you consolidate your sourcing into one seamless experience. We can help you source:",
+        "solutionPoints": ["Apparel", "Tote Bags", "Drinkware", "Stationery", "Corporate Gifts", "Event Merchandise", "Packaging", "Promotional Products"],
+        "expectPoints": ["One point of contact", "Consistent quality", "Easier project management", "Better branding consistency", "Less time coordinating suppliers"],
+        "recommendedProductsNote": "Display a variety of product categories that showcase MySOS as a one-stop sourcing partner.",
+        "recommendedProductSlugs": ["apparel", "bags", "corporate-gifts", "event-essentials"],
+        "storySlug": "ocbc-onboarding",
+        "faq": [
+          {"question": "Can I order multiple product categories together?", "answer": "Yes. Combining apparel, bags, drinkware and gifts into one order is one of the main reasons clients work with MySOS."},
+          {"question": "Can you source products not listed on your website?", "answer": "Yes. Our website shows popular categories, but we regularly source items outside this list. Tell us what you need."},
+          {"question": "Do I receive everything in one shipment?", "answer": "Where possible, yes. We consolidate production so your order can be delivered together on one schedule."}
+        ],
+        "ctaHeading": "Let's Build Your Next Project Together."
+      },
+      {
+        "slug": "premium-quality",
+        "title": "Premium Quality Without the Premium Price.",
+        "subtitle": "We carefully recommend products that deliver outstanding value, balancing quality, durability and affordability.",
+        "problemIntro": "Customers often struggle between:",
+        "problemPoints": ["Cheap products with disappointing quality", "Premium products that exceed their budget"],
+        "solutionIntro": "We focus on recommending products that provide the best value for your investment instead of simply offering the cheapest or most expensive options. Every recommendation considers:",
+        "solutionPoints": ["Quality", "Comfort", "Durability", "Print Results", "Budget"],
+        "expectPoints": ["Better product recommendations", "Products built to last", "Consistent print quality", "Greater value for your budget"],
+        "recommendedProductsNote": "Feature products that represent excellent value across different budgets.",
+        "recommendedProductSlugs": ["apparel", "drinkware", "stationery"],
+        "storySlug": "marina-sports-club",
+        "faq": [
+          {"question": "How do I choose between different shirt qualities?", "answer": "Tell us how the shirt will be worn and how often. We will recommend a fabric weight and finish that matches the use case and budget."},
+          {"question": "Can you recommend products based on my budget?", "answer": "Yes. Share a budget range and we will shortlist options that deliver the best result within it."},
+          {"question": "What materials do you recommend?", "answer": "It depends on the product and use case. We compare comfort, durability and print results before suggesting a material."}
+        ],
+        "ctaHeading": "Let's Find the Right Product for Your Budget."
+      },
+      {
+        "slug": "flexible-quantities",
+        "title": "Flexible Order Quantities.",
+        "subtitle": "Whether you need a few pieces or thousands, we offer flexible ordering options and recommend the most suitable solution for your project.",
+        "problemIntro": "Many suppliers only cater to bulk orders, making it difficult for smaller organisations or first-time buyers. Common frustrations include:",
+        "problemPoints": ["High minimum order quantities", "Limited options for smaller orders", "Expensive pricing for low quantities", "Difficulty finding suppliers willing to help"],
+        "solutionIntro": "At MySOS, every project matters regardless of its size. We recommend products and printing methods based on your order quantity so you receive the most suitable and cost-effective solution.",
+        "solutionPoints": [],
+        "expectPoints": ["Low minimum order quantities on selected products", "Small orders are welcome", "Competitive pricing for bulk orders", "Printing recommendations based on quantity", "Flexible solutions for different project sizes"],
+        "recommendedProductsNote": "Display products suitable for: Small Orders, Medium Orders, Bulk Orders.",
+        "recommendedProductSlugs": ["stationery", "bags", "event-essentials"],
+        "storySlug": "marina-sports-club",
+        "faq": [
+          {"question": "Is there a minimum order quantity?", "answer": "It depends on the product and customisation method. We will recommend options that work for your required volume."},
+          {"question": "Can I order just a few pieces?", "answer": "Yes, on selected products. Tell us what you need and we will confirm the smallest workable quantity."},
+          {"question": "Do prices change with quantity?", "answer": "Yes. Pricing generally improves at higher quantities, and we will show you where the best value sits for your project."}
+        ],
+        "ctaHeading": "Let's Find the Best Solution for Your Order."
+      },
+      {
+        "slug": "expert-recommendations",
+        "title": "New to Custom Merchandise? We Are Here to Help.",
+        "subtitle": "Whether it is your first time ordering event shirts, company uniforms or promotional merchandise, we will guide you through every step with confidence.",
+        "problemIntro": "Ordering customised products can feel overwhelming. Customers often wonder:",
+        "problemPoints": ["Which shirt should I choose?", "Which printing method is best?", "What fits my budget?", "Will my artwork print well?", "How long does production take?"],
+        "solutionIntro": "Our experienced team takes the time to understand your goals before recommending products, materials and printing methods that suit your needs.",
+        "solutionPoints": [],
+        "expectPoints": ["Personalised product recommendations", "Material guidance", "Printing method recommendations", "Artwork advice", "Budget planning", "Timeline planning"],
+        "recommendedProductsNote": "Cotton vs Dry Fit; Silkscreen vs DTF; Embroidery vs Printing; How to Prepare Artwork; Choosing the Right Shirt.",
+        "recommendedProductSlugs": ["apparel", "corporate-gifts"],
+        "storySlug": "temasek-orientation",
+        "faq": [
+          {"question": "Can you recommend products for me?", "answer": "Yes. Tell us your goal, audience and budget and we will turn it into a practical shortlist."},
+          {"question": "Can you check my artwork?", "answer": "Yes. Send your artwork and we will advise on how well it will reproduce with your chosen printing method."},
+          {"question": "I have never ordered customised shirts before. Can you help?", "answer": "Yes, this is one of the most common enquiries we receive. We will guide you through fabric, fit, printing and timeline."}
+        ],
+        "ctaHeading": "Not Sure Where to Start? Let's Chat."
+      },
+      {
+        "slug": "tailored-to-you",
+        "title": "Every Project Is Unique.",
+        "subtitle": "No two organisations are the same. Every recommendation we make is tailored to your goals, audience, branding, timeline and budget.",
+        "problemIntro": "Every customer has different objectives.",
+        "problemPoints": ["A school camp requires different products from a corporate event.", "A startup has different needs from a multinational company.", "Using the same recommendation for everyone rarely delivers the best results."],
+        "solutionIntro": "Instead of selling products, we build solutions around your specific project. We first understand your requirements before recommending the most suitable products and customisation options.",
+        "solutionPoints": [],
+        "expectPoints": ["Recommendations tailored to your industry", "Products matched to your objectives", "Solutions based on your timeline", "Budget-conscious recommendations", "Personalised sourcing support"],
+        "recommendedProductsNote": "Industry solutions: Schools, Businesses, Events, Sports Teams, Churches, Community Organisations. Recommended bundles: School Orientation Pack, Corporate Welcome Kit, Event Registration Pack, Volunteer Essentials, Sports Team Bundle. See the full list on the Solutions page.",
+        "recommendedProductSlugs": ["apparel", "bags", "event-essentials"],
+        "storySlug": "temasek-orientation",
+        "faq": [
+          {"question": "Can you recommend products for my event?", "answer": "Yes. Tell us your event type, audience and timeline and we will recommend a suitable product mix."},
+          {"question": "Can I customise a bundle?", "answer": "Yes. Every bundle on our Solutions page is a starting point that we adjust to your project."},
+          {"question": "Can you help if I am unsure what I need?", "answer": "Yes. This is exactly where we start most conversations. Tell us the outcome you want and we will shape the rest."}
+        ],
+        "ctaHeading": "Let's Build the Right Solution Together."
+      }
     ]
   },
   "solutions": {
