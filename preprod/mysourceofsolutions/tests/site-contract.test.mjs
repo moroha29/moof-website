@@ -187,7 +187,8 @@ test("mobile styles keep the logo, navigation, wordmarks and content grids visib
   assert.match(css, /\.brand img\{[^}]*object-fit:contain/);
   assert.match(css, /\.brand\{[^}]*overflow:visible/);
   assert.match(css, /\.mobile-nav nav\{[^}]*overflow-y:auto/);
-  assert.match(css, /\.trust \.logo-row\{[^}]*grid-template-columns:1fr 1fr/);
+  assert.match(css, /@keyframes trust-marquee/);
+  assert.match(css, /prefers-reduced-motion:reduce\)\{\.trust \.logo-row\{animation:none/);
   assert.match(css, /@media\(max-width:380px\)/);
   assert.match(css, /\.portrait-grid[^}]*grid-template-columns:1fr/);
   assert.match(css, /input,select,textarea\{max-width:100%\}/);
@@ -202,6 +203,29 @@ test("trusted-by section renders real client logos, not plain text names", async
   assert.equal("names" in site.trust, false, "trust.names should be replaced by trust.logos");
   assert.match(page, /site\.trust\.logos\.map/);
   assert.match(page, /class="client-logo"/);
+});
+
+test("trust logo strip is full colour and slides continuously, not grayscale/static", async () => {
+  const css = await read("src/styles/global.css");
+  const page = await read("src/pages/index.astro");
+  assert.doesNotMatch(css, /\.client-logo\{[^}]*grayscale/, "logos should render in full colour");
+  assert.match(css, /\.trust \.logo-row\{[^}]*animation:trust-marquee/);
+  assert.match(page, /aria-hidden="true"/, "duplicated logo set for the seamless loop should be hidden from assistive tech");
+});
+
+test("solutions preview grid lays out six industries without an orphaned row", async () => {
+  const css = await read("src/styles/global.css");
+  const site = JSON.parse(await read("src/content/site/homepage.json"));
+  assert.equal(site.solutions.length, 6);
+  assert.match(css, /\.solution-grid\{display:grid;grid-template-columns:repeat\(3,1fr\)/);
+});
+
+test("blog category pills filter articles client-side with a real empty state, no dead links", async () => {
+  const page = await read("src/pages/blog/index.astro");
+  assert.doesNotMatch(page, /href=["']#/, "category pills must not be dead anchor links");
+  assert.match(page, /data-category-filter/);
+  assert.match(page, /id="article-empty-state"/);
+  assert.match(page, /<script>/);
 });
 
 test("desktop header logo, menu and quote action share one alignment height", async () => {
