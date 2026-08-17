@@ -1,0 +1,19 @@
+---
+import { withBase } from "../lib/base.js";
+const { hero, paths = null } = Astro.props;
+const p = (path) => JSON.stringify(path);
+const fieldPath = (field) => paths ? p([...paths, field]) : undefined;
+const imagePaths = paths ? p([[...paths, "image"], [...paths, "imageAlt"]]) : undefined;
+---
+<section class="page-hero" id="top">
+  <div>
+    <p class="eyebrow" data-cms-path={fieldPath("eyebrow")}>{hero.eyebrow}</p>
+    <h1 data-cms-path={fieldPath("heading")}>{hero.heading}</h1>
+    <p class="lede" data-cms-path={fieldPath("body")}>{hero.body}</p>
+    <div class="actions">
+      <a class="button" href={withBase("/#quote")}>Start a project <span aria-hidden="true">&nearr;</span></a>
+      <a class="text-button" href="https://wa.me/6588547109">Chat on WhatsApp &rarr;</a>
+    </div>
+  </div>
+  <figure><img src={withBase(hero.image)} alt={hero.imageAlt} data-cms-paths={imagePaths} /></figure>
+</section>

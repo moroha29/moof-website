@@ -1,0 +1,32 @@
+---
+import pages from "../../assets/content/pages.json";
+import PageHero from "../../components/PageHero.astro";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { withBase } from "../../lib/base.js";
+
+const content = pages.blog;
+const featured = content.articles.filter((article) => article.featured);
+const popular = content.articles.filter((article) => article.popular);
+const latest = [...content.articles].sort((a, b) => b.date.localeCompare(a.date));
+---
+<SiteLayout title={content.seo.title} description={content.seo.description} current="blog">
+  <PageHero hero={content.hero} paths={["homepage", "pages", "blog", "hero"]} />
+  <nav class="category-pills" aria-label="Blog categories">{content.categories.map((category) => <a href={`#${category.toLowerCase().replaceAll(" ", "-")}`}>{category}</a>)}</nav>
+
+  <section class="section featured-articles">
+    <header class="section-heading"><p class="eyebrow">Featured articles</p><h2>Start with the essentials.</h2><p>Practical answers to the questions that shape product choice, print quality and planning.</p></header>
+    <div>{featured.map((article) => <a href={withBase(`/blog/${article.slug}/`)}><img src={withBase(article.image)} alt={article.imageAlt} loading="lazy" /><section><span>{article.category} / {article.readTime}</span><h2>{article.title}</h2><p>{article.summary}</p><b>Read article &rarr;</b></section></a>)}</div>
+  </section>
+
+  <section class="section popular-articles">
+    <header class="section-heading"><p class="eyebrow">Top posts</p><h2>Most useful right now.</h2><p>Fast reads for teams preparing their first shortlist or quote.</p></header>
+    <div class="numbered-list">{popular.map((article, i) => <a href={withBase(`/blog/${article.slug}/`)}><span>0{i + 1}</span><div><small>{article.category}</small><h3>{article.title}</h3><p>{article.summary}</p></div><b>&rarr;</b></a>)}</div>
+  </section>
+
+  <section class="section latest-articles">
+    <header class="section-heading"><p class="eyebrow">Latest articles</p><h2>Newest from MySOS.</h2><p>Printing, materials, design tips, buying guides, behind the scenes and case studies.</p></header>
+    <div class="article-grid">{latest.map((article) => <a id={article.category.toLowerCase().replaceAll(" ", "-")} href={withBase(`/blog/${article.slug}/`)}><img src={withBase(article.image)} alt={article.imageAlt} loading="lazy" /><div><span>{article.category}</span><h3>{article.title}</h3><p>{article.summary}</p><small>{article.date} / {article.readTime}</small></div></a>)}</div>
+  </section>
+
+  <section class="newsletter"><div><p class="eyebrow">Newsletter</p><h2>{content.newsletter.heading}</h2><p>{content.newsletter.body}</p></div><form action="mailto:mysourceofsolutions@gmail.com?subject=MySOS%20newsletter%20subscription" method="post" enctype="text/plain"><label for="newsletter-email">Email address</label><input id="newsletter-email" type="email" name="email" autocomplete="email" required placeholder="you@example.com" /><button class="button" type="submit">{content.newsletter.buttonLabel} &nearr;</button><small>This opens your email app to confirm the request.</small></form></section>
+</SiteLayout>

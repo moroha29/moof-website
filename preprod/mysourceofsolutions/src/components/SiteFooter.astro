@@ -1,0 +1,25 @@
+---
+import site from "../assets/content/site.json";
+import { withBase } from "../lib/base.js";
+---
+<footer class="site-footer">
+  <div>
+    <a class="footer-brand" href={withBase("/")}>{site.brand.name}<small>{site.brand.tagline}</small></a>
+    <p>{site.footer.copyright}<br />{site.footer.registration}</p>
+  </div>
+  <nav aria-label="Explore">
+    <strong>Explore</strong>
+    <a href={withBase("/products/")}>Products</a>
+    <a href={withBase("/why-mysos/")}>Why MySOS</a>
+    <a href={withBase("/solutions/")}>Solutions</a>
+    <a href={withBase("/success-stories/")}>Success stories</a>
+    <a href={withBase("/blog/")}>Blog</a>
+  </nav>
+  <div>
+    <strong>Contact</strong>
+    <a href={site.contact.phoneUrl}>{site.contact.phoneLabel}</a>
+    <a href={site.contact.emailUrl}>{site.contact.emailLabel}</a>
+    <a href={site.contact.whatsappUrl}>{site.contact.whatsappLabel} &nearr;</a>
+  </div>
+  <a class="back-top" href="#top">{site.footer.backToTopLabel} &uarr;</a>
+</footer>

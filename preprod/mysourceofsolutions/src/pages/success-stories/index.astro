@@ -1,0 +1,17 @@
+---
+import pages from "../../assets/content/pages.json";
+import CallToAction from "../../components/CallToAction.astro";
+import PageHero from "../../components/PageHero.astro";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { withBase } from "../../lib/base.js";
+
+const content = pages.stories;
+---
+<SiteLayout title={content.seo.title} description={content.seo.description} current="stories">
+  <PageHero hero={content.hero} paths={["homepage", "pages", "stories", "hero"]} />
+  <section class="section story-index" id="projects">
+    <header class="section-heading"><p class="eyebrow">Project grid</p><h2>Challenge. Solution. Outcome.</h2><p>Open any project for the complete story, gallery, testimonial and related links.</p></header>
+    <div class="story-grid">{content.items.map((story) => <a href={withBase(`/success-stories/${story.slug}/`)}><img src={withBase(story.image)} alt={story.imageAlt} loading="lazy" /><div><span>{story.type}</span><h2>{story.title}</h2><p>{story.summary}</p><strong>{story.result}</strong><b>Read the story &rarr;</b></div></a>)}</div>
+  </section>
+  <CallToAction eyebrow="Planning something similar?" heading="Use these stories as a starting point." body="We will adapt the products, quantities and production plan to your people and deadline." />
+</SiteLayout>

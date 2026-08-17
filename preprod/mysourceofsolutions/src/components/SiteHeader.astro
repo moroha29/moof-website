@@ -1,0 +1,31 @@
+---
+import site from "../assets/content/site.json";
+import { withBase } from "../lib/base.js";
+
+const { current = "home" } = Astro.props;
+const p = (path) => JSON.stringify(path);
+const imagePaths = (base) => p([[...base, "image"], [...base, "imageAlt"]]);
+const links = [
+  { key: "products", label: site.navigation.productsLabel, href: "/products/" },
+  { key: "why", label: site.navigation.whyLabel, href: "/why-mysos/" },
+  { key: "solutions", label: site.navigation.solutionsLabel, href: "/solutions/" },
+  { key: "stories", label: site.navigation.workLabel, href: "/success-stories/" },
+  { key: "blog", label: "Blog", href: "/blog/" }
+];
+---
+<header class="site-header">
+  <a class="brand" href={withBase("/")} aria-label="MySOS home">
+    <img src={withBase(site.brand.image)} alt={site.brand.imageAlt} data-cms-paths={imagePaths(["homepage", "brand"])} />
+  </a>
+  <nav class="desktop-nav" aria-label="Primary navigation">
+    {links.map((link) => <a href={withBase(link.href)} aria-current={current === link.key ? "page" : undefined}>{link.label}</a>)}
+  </nav>
+  <a class="button button-small header-quote" href={withBase("/#quote")} data-cms-path={p(["homepage", "navigation", "quoteLabel"])}>{site.navigation.quoteLabel}</a>
+  <details class="mobile-nav">
+    <summary aria-label="Open navigation">Menu</summary>
+    <nav aria-label="Mobile navigation">
+      {links.map((link) => <a href={withBase(link.href)} aria-current={current === link.key ? "page" : undefined}>{link.label}</a>)}
+      <a href={withBase("/#quote")}>{site.navigation.quoteLabel}</a>
+    </nav>
+  </details>
+</header>

@@ -1,0 +1,28 @@
+---
+import pages from "../assets/content/pages.json";
+import site from "../assets/content/site.json";
+import CallToAction from "../components/CallToAction.astro";
+import PageHero from "../components/PageHero.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+
+const content = pages.why;
+---
+<SiteLayout title={content.seo.title} description={content.seo.description} current="why">
+  <PageHero hero={content.hero} paths={["homepage", "pages", "why", "hero"]} />
+
+  <section class="section reasons" id="why-choose-mysos">
+    <header class="section-heading"><p class="eyebrow">Why choose MySOS</p><h2>Less coordination. Better recommendations.</h2><p>Five practical advantages for projects that need to move from idea to delivered items.</p></header>
+    <div class="reason-stack">{content.reasons.map((reason, i) => <article><span>0{i + 1}</span><div><small>{reason.label}</small><h3>{reason.title}</h3></div><p>{reason.body}</p></article>)}</div>
+  </section>
+
+  <section class="section process-full" id="process">
+    <header class="section-heading light"><p class="eyebrow">Our process</p><h2>Six clear steps. One accountable partner.</h2><p>Enquiry &rarr; Recommendation &rarr; Quotation &rarr; Sampling &rarr; Production &rarr; Delivery</p></header>
+    <ol>{content.process.map((step) => <li><span>{step.number}</span><h3>{step.title}</h3><p>{step.body}</p></li>)}</ol>
+  </section>
+
+  <section class="section testimonials" id="testimonials">
+    <header class="section-heading light"><p class="eyebrow">Customer trust</p><h2>Trusted to make the complicated feel manageable.</h2><p>Feedback from teams using MySOS as one point of contact.</p></header>
+    <div>{site.testimonials.map((item) => <figure><blockquote>&ldquo;{item.quote}&rdquo;</blockquote><figcaption>&mdash; {item.person}</figcaption></figure>)}</div>
+  </section>
+  <CallToAction eyebrow="Why not start with a conversation?" heading="One brief can cover the whole project." />
+</SiteLayout>

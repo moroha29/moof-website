@@ -6,12 +6,12 @@
   "trust": {"eyebrow":"Trusted by teams across Singapore","names":["National University","Temasek Polytechnic","OCBC Bank","SG Youth Council","Marina Sports Club"]},
   "categoriesIntro":{"eyebrow":"What we print","heading":"Six categories. Endless customisation.","body":"Can't find what you're looking for? Tell us what you need and we'll help source it."},
   "categories": [
-    {"name":"Apparel","title":"T-shirts, polos & jackets","body":"Everyday wear, printed or embroidered to match your brand.","image":"/images/project-showcase.png","imageAlt":"Custom printed apparel prepared by MySOS"},
-    {"name":"Bags","title":"Totes, drawstring & backpacks","body":"Practical giveaways that keep your logo moving.","image":"/images/smu-event.jpg","imageAlt":"Branded event merchandise displayed at a university event"},
-    {"name":"Drinkware","title":"Bottles, tumblers & mugs","body":"Everyday essentials your recipients actually use.","image":"/images/custom-towel.png","imageAlt":"Collection of custom branded merchandise supplied by MySOS"},
-    {"name":"Stationery","title":"Notebooks, pens & folders","body":"Polished takeaways for onboarding kits and events.","image":"/images/project-showcase.png","imageAlt":"Custom corporate products arranged for delivery"},
-    {"name":"Corporate gifts","title":"Premium gift sets","body":"Curated bundles for clients, staff and milestones.","image":"/images/custom-towel.png","imageAlt":"Custom branded gift item produced for a client"},
-    {"name":"Event essentials","title":"Lanyards, medals & banners","body":"Everything to brand and run your next event.","image":"/images/smu-event.jpg","imageAlt":"Crowd at a branded university event supplied by MySOS"}
+    {"slug":"apparel","name":"Apparel","title":"T-shirts, polos & jackets","body":"Everyday wear, printed or embroidered to match your brand.","image":"/images/project-showcase.png","imageAlt":"Custom printed apparel prepared by MySOS"},
+    {"slug":"bags","name":"Bags","title":"Totes, drawstring & backpacks","body":"Practical giveaways that keep your logo moving.","image":"/images/smu-event.jpg","imageAlt":"Branded event merchandise displayed at a university event"},
+    {"slug":"drinkware","name":"Drinkware","title":"Bottles, tumblers & mugs","body":"Everyday essentials your recipients actually use.","image":"/images/custom-towel.png","imageAlt":"Collection of custom branded merchandise supplied by MySOS"},
+    {"slug":"stationery","name":"Stationery","title":"Notebooks, pens & folders","body":"Polished takeaways for onboarding kits and events.","image":"/images/project-showcase.png","imageAlt":"Custom corporate products arranged for delivery"},
+    {"slug":"corporate-gifts","name":"Corporate gifts","title":"Premium gift sets","body":"Curated bundles for clients, staff and milestones.","image":"/images/custom-towel.png","imageAlt":"Custom branded gift item produced for a client"},
+    {"slug":"event-essentials","name":"Event essentials","title":"Lanyards, medals & banners","body":"Everything to brand and run your next event.","image":"/images/smu-event.jpg","imageAlt":"Crowd at a branded university event supplied by MySOS"}
   ],
   "benefitsIntro":{"eyebrow":"Why MySOS","heading":"One brief. One partner. Everything handled."},
   "benefits":[
@@ -25,9 +25,9 @@
   "solutions":[{"name":"Schools","body":"Uniforms, class tees and graduation gifts."},{"name":"Businesses","body":"Onboarding kits and branded merchandise."},{"name":"Events","body":"Lanyards, banners and exhibition giveaways."},{"name":"Churches","body":"Ministry apparel and congregation gifts."},{"name":"Sports teams","body":"Jerseys, medals and complete team bundles."}],
   "workIntro":{"eyebrow":"Success stories","heading":"Real projects. Real results."},
   "caseStudies":[
-    {"type":"Sports team","title":"Marina Sports Club","result":"200 jerseys delivered in 10 days for a regional tournament.","image":"/images/project-showcase.png","imageAlt":"MySOS custom sports apparel project"},
-    {"type":"Corporate","title":"OCBC onboarding kits","result":"A consolidated gift set for 500 new hires, delivered in one shipment.","image":"/images/custom-towel.png","imageAlt":"Custom branded product from a corporate gift project"},
-    {"type":"University","title":"Temasek Poly orientation","result":"A full orientation merchandise bundle across six product lines.","image":"/images/smu-event.jpg","imageAlt":"University event featuring custom merchandise and branding"}
+    {"slug":"marina-sports-club","type":"Sports team","title":"Marina Sports Club","result":"200 jerseys delivered in 10 days for a regional tournament.","image":"/images/project-showcase.png","imageAlt":"MySOS custom sports apparel project"},
+    {"slug":"ocbc-onboarding","type":"Corporate","title":"OCBC onboarding kits","result":"A consolidated gift set for 500 new hires, delivered in one shipment.","image":"/images/custom-towel.png","imageAlt":"Custom branded product from a corporate gift project"},
+    {"slug":"temasek-orientation","type":"University","title":"Temasek Poly orientation","result":"A full orientation merchandise bundle across six product lines.","image":"/images/smu-event.jpg","imageAlt":"University event featuring custom merchandise and branding"}
   ],
   "processIntro":{"eyebrow":"The SOS way","heading":"From idea to doorstep, without the runaround.","body":"A clear four-step process built around your needs, budget and deadline."},
   "process":[{"number":"01","title":"Consultation","body":"Tell us what you need, your budget and timeline. We recommend the best route."},{"number":"02","title":"Fulfilment","body":"We source from trusted factories, support the design and oversee production."},{"number":"03","title":"Quality check","body":"Every item is hand-counted and inspected before it leaves us."},{"number":"04","title":"Delivery","body":"We consolidate shipments and deliver around your schedule."}],
