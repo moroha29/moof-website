@@ -3,13 +3,15 @@
 
 /* Multi-page blueprint */
 body{min-width:320px}
-.site-header{padding-inline:max(24px,calc((100vw - var(--max))/2));height:84px}
+.site-header{--header-control-height:44px;padding-inline:max(24px,calc((100vw - var(--max))/2));height:84px;align-items:center}
 .site-header>*{min-width:0}
-.brand{flex:0 0 142px;width:142px;height:52px;overflow:visible}
-.brand img{width:100%;height:auto;max-height:46px;object-fit:contain;object-position:left center}
-.site-header .desktop-nav a{position:relative;padding:.35rem 0}
+.brand{flex:0 0 142px;width:142px;height:var(--header-control-height);overflow:visible;display:inline-flex;align-items:center}
+.brand img{width:100%;height:auto;max-height:40px;object-fit:contain;object-position:left center}
+.site-header .desktop-nav{height:var(--header-control-height);align-items:center}
+.site-header .desktop-nav a{position:relative;display:inline-flex;align-items:center;justify-content:center;height:var(--header-control-height);padding:0;line-height:1}
 .site-header .desktop-nav a[aria-current="page"]{color:var(--blue)}
 .site-header .desktop-nav a[aria-current="page"]:after{content:"";position:absolute;left:0;right:0;bottom:-.35rem;height:2px;background:var(--red)}
+.site-header .header-quote{flex:none;height:var(--header-control-height);min-height:var(--header-control-height);padding-block:0;line-height:1;align-self:center}
 .mobile-nav{display:none;position:relative}
 .mobile-nav summary{list-style:none;font-weight:800;cursor:pointer;border:1px solid var(--line);border-radius:999px;padding:.65rem .9rem}
 .mobile-nav summary::-webkit-details-marker{display:none}
@@ -103,7 +105,7 @@ input,select,textarea{max-width:100%}
   .final-cta{grid-template-columns:1fr}.final-cta .actions{justify-content:flex-start}
 }
 @media(max-width:600px){
-  .site-header{height:68px;padding-inline:16px}.brand{flex-basis:112px;width:112px;height:44px}.brand img{max-height:38px}.mobile-nav{margin-left:auto}.mobile-nav summary{padding:.55rem .75rem;font-size:.8rem}.mobile-nav nav{right:0;max-height:calc(100vh - 84px);overflow-y:auto}.anchor-nav,.category-pills{top:68px;justify-content:flex-start}
+  .site-header{height:68px;padding-inline:16px}.brand{flex-basis:112px;width:112px;height:var(--header-control-height)}.brand img{max-height:38px}.mobile-nav{margin-left:auto}.mobile-nav summary{height:var(--header-control-height);display:flex;align-items:center;padding:0 .75rem;font-size:.8rem}.mobile-nav nav{right:0;max-height:calc(100vh - 84px);overflow-y:auto}.anchor-nav,.category-pills{top:68px;justify-content:flex-start}
   .trust{padding-inline:16px}.trust .logo-row{display:grid;grid-template-columns:1fr 1fr;gap:.4rem .8rem}.client-wordmark{min-height:48px;padding:.45rem .55rem;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:.78rem;text-align:center;justify-content:center}
   .site-footer{grid-template-columns:1fr}.site-footer .back-top{margin-top:1rem}
   .page-hero,.detail-hero,.story-hero{padding-top:2.8rem;padding-bottom:4rem}.page-hero h1,.detail-hero h1,.story-hero h1,.article-page h1{font-size:clamp(3rem,14vw,4.4rem)}.page-hero figure img,.detail-hero figure img,.story-hero figure img{height:390px;border-radius:18px 70px 18px 18px}

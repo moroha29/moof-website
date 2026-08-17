@@ -109,3 +109,12 @@ test("mobile styles keep the logo, navigation, wordmarks and content grids visib
   assert.match(header, /class="mobile-nav"/);
   assert.match(header, /aria-label="Mobile navigation"/);
 });
+
+test("desktop header logo, menu and quote action share one alignment height", async () => {
+  const css = await read("src/styles/global.css");
+  assert.match(css, /\.site-header\{--header-control-height:44px;[^}]*align-items:center/);
+  assert.match(css, /\.brand\{[^}]*height:var\(--header-control-height\)[^}]*align-items:center/);
+  assert.match(css, /\.site-header \.desktop-nav\{height:var\(--header-control-height\);align-items:center\}/);
+  assert.match(css, /\.site-header \.desktop-nav a\{[^}]*height:var\(--header-control-height\)[^}]*line-height:1/);
+  assert.match(css, /\.site-header \.header-quote\{[^}]*height:var\(--header-control-height\)[^}]*line-height:1/);
+});
