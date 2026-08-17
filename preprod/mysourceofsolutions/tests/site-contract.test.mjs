@@ -22,7 +22,9 @@ test("all blueprint pages and detail routes are implemented", async () => {
     "src/pages/products/index.astro",
     "src/pages/products/[slug].astro",
     "src/pages/why-mysos.astro",
-    "src/pages/solutions.astro",
+    "src/pages/why-mysos/[slug].astro",
+    "src/pages/solutions/index.astro",
+    "src/pages/solutions/[slug].astro",
     "src/pages/success-stories/index.astro",
     "src/pages/success-stories/[slug].astro",
     "src/pages/blog/index.astro",
@@ -51,7 +53,12 @@ test("why, solutions, stories and blog match the requested section counts", asyn
   for (const solution of content.solutions.industries) {
     assert.ok(solution.bundle.length >= 4);
     assert.ok(solution.problem && solution.outcome && solution.storySlug);
+    assert.equal(solution.needsGrid.length, 3, `${solution.name} needs a 3-item needs grid`);
+    assert.equal(solution.recommendedSolutions.length, 4, `${solution.name} needs four recommended solutions`);
+    for (const rec of solution.recommendedSolutions) assert.ok(rec.name && rec.description && rec.products.length >= 2);
+    assert.ok(solution.faq.length >= 3, `${solution.name} needs FAQ entries`);
   }
+  assert.ok(content.solutions.whyChoose.length >= 3);
   assert.ok(content.stories.items.length >= 3);
   for (const story of content.stories.items) {
     assert.ok(story.challenge && story.solution && story.outcome && story.testimonial);
@@ -62,6 +69,29 @@ test("why, solutions, stories and blog match the requested section counts", asyn
   assert.ok(content.blog.articles.some((article) => article.featured));
   assert.ok(content.blog.articles.some((article) => article.popular));
   assert.ok(content.blog.newsletter.heading);
+});
+
+test("solutions landing and industry detail pages implement the full TRD section set", async () => {
+  const landing = await read("src/pages/solutions/index.astro");
+  for (const section of ["industries", "why-choose-a-solution", "featured-success-stories"]) {
+    assert.match(landing, new RegExp(`id=["']${section}["']`), `solutions landing is missing ${section}`);
+  }
+  assert.match(landing, /\/solutions\/\$\{industry\.slug\}\//);
+
+  const detail = await read("src/pages/solutions/[slug].astro");
+  for (const section of ["top", "understanding-your-needs", "recommended-solutions", "popular-products", "why-mysos", "success-stories", "faq"]) {
+    assert.match(detail, new RegExp(`id=["']${section}["']`), `solutions detail page is missing ${section}`);
+  }
+  assert.match(detail, /getStaticPaths/);
+  assert.match(detail, /industry\.needsGrid/);
+  assert.match(detail, /industry\.recommendedSolutions/);
+  assert.match(detail, /industry\.faq/);
+  assert.match(detail, /CallToAction/);
+
+  const products = await read("src/pages/products/[slug].astro");
+  const stories = await read("src/pages/success-stories/[slug].astro");
+  const home = await read("src/pages/index.astro");
+  for (const source of [products, stories, home]) assert.doesNotMatch(source, /solutions\/#/);
 });
 
 test("all content imagery has useful alternative text and internal cards have real destinations", async () => {

@@ -39,7 +39,7 @@ const imagePaths = (base) => p([[...base, "image"], [...base, "imageAlt"]]);
 
   <section class="section solutions" id="solutions">
     <header class="section-heading"><p class="eyebrow" data-cms-path={p(["homepage", "solutionsIntro", "eyebrow"])}>{site.solutionsIntro.eyebrow}</p><h2 data-cms-path={p(["homepage", "solutionsIntro", "heading"])}>{site.solutionsIntro.heading}</h2><p>Recommended starting points for the groups we support most often.</p></header>
-    <div class="solution-grid">{site.solutions.map((item, i) => <a href={withBase(`/solutions/#${item.name.toLowerCase().replaceAll(" ", "-")}`)}><span>0{i + 1}</span><h3 data-cms-path={p(["homepage", "solutions", i, "name"])}>{item.name}</h3><p data-cms-path={p(["homepage", "solutions", i, "body"])}>{item.body}</p><b>See solution &rarr;</b></a>)}</div>
+    <div class="solution-grid">{site.solutions.map((item, i) => <a href={withBase(`/solutions/${item.name.toLowerCase().replaceAll(" ", "-")}/`)}><span>0{i + 1}</span><h3 data-cms-path={p(["homepage", "solutions", i, "name"])}>{item.name}</h3><p data-cms-path={p(["homepage", "solutions", i, "body"])}>{item.body}</p><b>See solution &rarr;</b></a>)}</div>
   </section>
 
   <section class="section work" id="work">

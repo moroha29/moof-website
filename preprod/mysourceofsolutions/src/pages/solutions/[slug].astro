@@ -1,0 +1,73 @@
+---
+import pages from "../../assets/content/pages.json";
+import CallToAction from "../../components/CallToAction.astro";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { withBase } from "../../lib/base.js";
+
+export function getStaticPaths() {
+  return pages.solutions.industries.map((industry) => ({ params: { slug: industry.slug }, props: { industry } }));
+}
+
+const { industry } = Astro.props;
+const industryIndex = pages.solutions.industries.findIndex((item) => item.slug === industry.slug);
+const p = (path) => JSON.stringify(path);
+const base = ["homepage", "pages", "solutions", "industries", industryIndex];
+
+const solutionImages = ["/images/project-showcase.png", "/images/tote-bag.png", "/images/custom-towel.png", "/images/stationery.png", "/images/smu-event.jpg"];
+
+const popularProducts = pages.products.categories.filter((category) => category.relatedSolutions.includes(industry.slug)).slice(0, 4);
+
+const matchedStories = pages.stories.items.filter((story) => story.relatedSolutions.includes(industry.slug));
+const stories = (matchedStories.length ? matchedStories : pages.stories.items.filter((story) => story.slug === industry.storySlug)).slice(0, 3);
+---
+<SiteLayout title={`${industry.name} Solutions | MySOS`} description={industry.problem} current="solutions">
+  <section class="detail-hero" id="top">
+    <div>
+      <p class="eyebrow">Solutions / {industry.name}</p>
+      <h1 data-cms-path={p([...base, "kicker"])}>{industry.kicker}</h1>
+      <p class="lede" data-cms-path={p([...base, "problem"])}>{industry.problem}</p>
+      <div class="actions"><a class="button" href={withBase("/#quote")}>Request a recommendation &nearr;</a><a class="text-button" href={withBase("/solutions/")}>All solutions &rarr;</a></div>
+    </div>
+    <figure><img src={withBase(industry.image)} alt={industry.imageAlt} data-cms-paths={p([[...base, "image"], [...base, "imageAlt"]])} /></figure>
+  </section>
+
+  <section class="section" id="understanding-your-needs">
+    <header class="section-heading"><p class="eyebrow">Understanding your needs</p><h2>What {industry.name.toLowerCase()} usually need to get right.</h2><p>Three things we plan for before recommending a single product.</p></header>
+    <div class="needs-grid">{industry.needsGrid.map((need, i) => <article><span aria-hidden="true">{need.icon}</span><h3 data-cms-path={p([...base, "needsGrid", i, "title"])}>{need.title}</h3><p data-cms-path={p([...base, "needsGrid", i, "description"])}>{need.description}</p></article>)}</div>
+  </section>
+
+  <section class="section recommended-solutions" id="recommended-solutions">
+    <header class="section-heading"><p class="eyebrow">Recommended solutions</p><h2>Named bundles built for {industry.name.toLowerCase()}.</h2><p>Start from one of these, or use it as a starting point for something more specific.</p></header>
+    <div class="solution-card-grid">{industry.recommendedSolutions.map((solution, i) => <article>
+      <img src={withBase(solutionImages[i % solutionImages.length])} alt={`${solution.name} merchandise for ${industry.name}`} loading="lazy" />
+      <div>
+        <h3 data-cms-path={p([...base, "recommendedSolutions", i, "name"])}>{solution.name}</h3>
+        <p data-cms-path={p([...base, "recommendedSolutions", i, "description"])}>{solution.description}</p>
+        <ul>{solution.products.map((item) => <li>{item}</li>)}</ul>
+        <a class="text-button" href={withBase("/#quote")}>View details &rarr;</a>
+      </div>
+    </article>)}</div>
+  </section>
+
+  {popularProducts.length > 0 && <section class="section popular-products" id="popular-products">
+    <header class="section-heading"><p class="eyebrow">Popular products</p><h2>Frequently sourced for this industry.</h2><p>A quick shortlist. We can source beyond it when your brief needs something different.</p></header>
+    <div class="product-scroll-row">{popularProducts.map((category) => <a href={withBase(`/products/${category.slug}/`)}><img src={withBase(category.image)} alt={category.imageAlt} loading="lazy" /><div><span>{category.name}</span><b>View category &rarr;</b></div></a>)}</div>
+  </section>}
+
+  <section class="section why-mysos-mini" id="why-mysos">
+    <header class="section-heading"><p class="eyebrow">Why MySOS</p><h2>The same five advantages, applied here.</h2><p>See the full picture on the <a href={withBase("/why-mysos/")}>Why MySOS</a> page.</p></header>
+    <div class="why-mini-grid">{pages.why.reasons.map((reason, i) => <article><span>0{i + 1}</span><h3>{reason.title}</h3><p>{reason.body}</p></article>)}</div>
+  </section>
+
+  {stories.length > 0 && <section class="section related-links muted-section" id="success-stories">
+    <header class="section-heading"><p class="eyebrow">Success stories</p><h2>See it delivered.</h2><p>Projects from organisations like yours.</p></header>
+    <div class="link-grid">{stories.map((story) => <a href={withBase(`/success-stories/${story.slug}/`)}><span>{story.type}</span><b>{story.title}</b><em>{story.result}</em></a>)}</div>
+  </section>}
+
+  <section class="section faq" id="faq">
+    <header class="section-heading"><p class="eyebrow">FAQ</p><h2>Common {industry.name.toLowerCase()} questions.</h2><p>Quick answers before you send a brief.</p></header>
+    <div class="faq-list">{industry.faq.map((item, i) => <details><summary data-cms-path={p([...base, "faq", i, "question"])}>{item.question}</summary><p data-cms-path={p([...base, "faq", i, "answer"])}>{item.answer}</p></details>)}</div>
+  </section>
+
+  <CallToAction heading={`Ready to plan your ${industry.name.toLowerCase()} order?`} body="Tell us your audience, quantity, deadline and budget. We will recommend a practical route." />
+</SiteLayout>

@@ -34,7 +34,7 @@ const otherCategories = pages.products.categories.filter((item) => item.slug !==
     <div class="method-gallery">{methods.map((method) => <article><img src={withBase(method.image)} alt={method.imageAlt} loading="lazy" /><div><h3>{method.name}</h3><p>{method.description}</p><small>Best for: {method.bestFor}</small></div></article>)}</div>
   </section>
 
-  <section class="section related-links"><header class="section-heading"><p class="eyebrow">Related solutions</p><h2>See it in context.</h2><p>Explore bundles designed around teams and organisations.</p></header><div class="link-grid">{solutions.map((solution) => <a href={withBase(`/solutions/#${solution.slug}`)}><span>{solution.name}</span><b>{solution.kicker}</b><em>View solution &rarr;</em></a>)}</div></section>
+  <section class="section related-links"><header class="section-heading"><p class="eyebrow">Related solutions</p><h2>See it in context.</h2><p>Explore bundles designed around teams and organisations.</p></header><div class="link-grid">{solutions.map((solution) => <a href={withBase(`/solutions/${solution.slug}/`)}><span>{solution.name}</span><b>{solution.kicker}</b><em>View solution &rarr;</em></a>)}</div></section>
   <section class="section also-explore"><header class="section-heading"><p class="eyebrow">Also explore</p><h2>Build a complete set.</h2></header><div class="link-grid">{otherCategories.map((item) => <a href={withBase(`/products/${item.slug}/`)}><span>{item.name}</span><b>{item.title}</b><em>View category &rarr;</em></a>)}</div></section>
   <CallToAction heading={`Need custom ${category.name.toLowerCase()}?`} body="Share your quantity, artwork, deadline and budget. We will recommend the best-fit product and finish." />
 </SiteLayout>

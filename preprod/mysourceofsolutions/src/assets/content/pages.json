@@ -159,13 +159,115 @@
   "solutions": {
     "seo": {"title": "Solutions for Teams and Organisations | MySOS", "description": "Custom product bundles and sourcing solutions for schools, businesses, events, churches and sports teams."},
     "hero": {"eyebrow": "Solutions", "heading": "Solutions designed around your needs.", "body": "Start with the outcome you need. We will recommend the right bundle, products and production route for your audience, timeline and budget.", "image": "/images/smu-event.jpg", "imageAlt": "People gathered at a large branded event"},
+    "whyChoose": [
+      {"title": "Built around your group", "body": "Every recommendation starts with who the products are for, not a generic catalogue page."},
+      {"title": "One brief, multiple products", "body": "Apparel, bags, drinkware and signage can be sourced and delivered together."},
+      {"title": "Sized for your budget", "body": "From a small team run to a large rollout, the same solution scales with your quantity."},
+      {"title": "Backed by real projects", "body": "Every solution reflects patterns we have already delivered for similar organisations."}
+    ],
     "industries": [
-      {"slug": "schools", "name": "Schools", "kicker": "Build belonging from orientation to graduation.", "problem": "School teams often need several coordinated items, different quantities and one immovable event date.", "bundle": ["Orientation tee or class shirt", "Drawstring bag", "Bottle", "Lanyard and event signage"], "outcome": "One coordinated student experience with fewer suppliers and clearer delivery planning.", "image": "/images/smu-event.jpg", "imageAlt": "Students at a branded university event", "storySlug": "temasek-orientation", "storyLabel": "Temasek Poly orientation"},
-      {"slug": "businesses", "name": "Businesses", "kicker": "Make every employee and client touchpoint feel intentional.", "problem": "Onboarding, campaigns and client gifting can become fragmented across teams, items and delivery dates.", "bundle": ["Corporate polo or tee", "Notebook and pen", "Drinkware", "Curated gift packaging"], "outcome": "Consistent branding across a practical, ready-to-distribute set.", "image": "/images/custom-towel.png", "imageAlt": "A branded corporate gift prepared for delivery", "storySlug": "ocbc-onboarding", "storyLabel": "OCBC onboarding kits"},
-      {"slug": "events", "name": "Events", "kicker": "One brief for the details people see and remember.", "problem": "Event organisers need participant items, venue branding and giveaways to arrive together and on time.", "bundle": ["Lanyards and passes", "Crew apparel", "Banners and signage", "Participant gifts"], "outcome": "A cohesive event kit with one point of contact from sourcing through delivery.", "image": "/images/smu-event.jpg", "imageAlt": "A coordinated branded event environment", "storySlug": "temasek-orientation", "storyLabel": "See an event bundle in action"},
-      {"slug": "churches", "name": "Churches", "kicker": "Support community moments with useful, meaningful items.", "problem": "Ministries often need flexible quantities across camps, services, volunteer teams and seasonal programmes.", "bundle": ["Ministry apparel", "Camp bags", "Volunteer lanyards", "Welcome and appreciation gifts"], "outcome": "Approachable options tailored to the group, programme and available budget.", "image": "/images/project-showcase.png", "imageAlt": "Custom apparel and gifts suited to community groups", "storySlug": "temasek-orientation", "storyLabel": "See a multi-item community bundle"},
-      {"slug": "sports-teams", "name": "Sports Teams", "kicker": "Kit the team, recognise the effort and show up together.", "problem": "Teams need performance-ready apparel, accurate sizing and event items that share one visual identity.", "bundle": ["Performance jersey", "Team bag", "Bottle and towel", "Medals and event banners"], "outcome": "A coordinated team package built for training, competition and presentation day.", "image": "/images/project-showcase.png", "imageAlt": "Custom sports apparel and team merchandise", "storySlug": "marina-sports-club", "storyLabel": "Marina Sports Club jerseys"},
-      {"slug": "community-organisations", "name": "Community Organisations", "kicker": "Turn a good cause into a visible, coordinated campaign.", "problem": "Community groups run on volunteer time and tight budgets, but still need a consistent look across events, campaigns and outreach.", "bundle": ["Community event tee", "Fundraiser tote bag", "Awareness campaign banner", "Volunteer lanyard"], "outcome": "A recognisable, affordable identity that carries across every event and campaign.", "image": "/images/project-showcase.png", "imageAlt": "Volunteers wearing custom merchandise at a community event", "storySlug": "temasek-orientation", "storyLabel": "See a multi-item community bundle"}
+      {"slug": "schools", "name": "Schools", "kicker": "Build belonging from orientation to graduation.", "problem": "School teams often need several coordinated items, different quantities and one immovable event date.", "bundle": ["Orientation tee or class shirt", "Drawstring bag", "Bottle", "Lanyard and event signage"], "outcome": "One coordinated student experience with fewer suppliers and clearer delivery planning.", "image": "/images/smu-event.jpg", "imageAlt": "Students at a branded university event", "storySlug": "temasek-orientation", "storyLabel": "Temasek Poly orientation",
+        "needsGrid": [
+          {"icon": "🎒", "title": "Coordinated events", "description": "Orientation, camps and graduation each need matching apparel and gear delivered on one date."},
+          {"icon": "📚", "title": "Student-friendly budgets", "description": "Recommendations that work across cohort sizes without stretching the activity budget."},
+          {"icon": "🤝", "title": "One committee contact", "description": "A single point of contact instead of juggling vendors across every student committee."}
+        ],
+        "recommendedSolutions": [
+          {"name": "Orientation Camp", "description": "A complete welcome-week kit that gives new students one shared identity from day one.", "products": ["Orientation tee", "Drawstring bag", "Lanyard", "Water bottle"]},
+          {"name": "Graduation", "description": "Keepsake pieces that mark the milestone and photograph well on stage.", "products": ["Graduation sash", "Commemorative tee", "Photo backdrop banner"]},
+          {"name": "CCA", "description": "Durable, recognisable kit for co-curricular groups that train and perform together.", "products": ["CCA polo", "Team bag", "Embroidered cap"]},
+          {"name": "Open House", "description": "Friendly, informative pieces that help visitors and student guides stand out.", "products": ["Guide lanyard", "Info folder", "Welcome tote"]}
+        ],
+        "faq": [
+          {"question": "Can you handle orientation timelines with a fixed start date?", "answer": "Yes. Tell us the date early and we will plan production and delivery backwards from it."},
+          {"question": "Do you offer bulk pricing for large cohorts?", "answer": "Yes, pricing improves with quantity and we will recommend the most cost-effective option for your cohort size."},
+          {"question": "Can different CCAs or classes order separate designs in one batch?", "answer": "Yes. We can coordinate multiple designs and quantities under a single school-wide order."}
+        ]},
+      {"slug": "businesses", "name": "Businesses", "kicker": "Make every employee and client touchpoint feel intentional.", "problem": "Onboarding, campaigns and client gifting can become fragmented across teams, items and delivery dates.", "bundle": ["Corporate polo or tee", "Notebook and pen", "Drinkware", "Curated gift packaging"], "outcome": "Consistent branding across a practical, ready-to-distribute set.", "image": "/images/custom-towel.png", "imageAlt": "A branded corporate gift prepared for delivery", "storySlug": "ocbc-onboarding", "storyLabel": "OCBC onboarding kits",
+        "needsGrid": [
+          {"icon": "🏢", "title": "Consistent branding", "description": "Every touchpoint, from onboarding to client gifting, carries the same look and quality."},
+          {"icon": "⏱", "title": "Reliable timelines", "description": "Coordinated production and delivery so HR, marketing and events teams hit their dates."},
+          {"icon": "🎁", "title": "Scalable gifting", "description": "From ten client gifts to five hundred welcome kits, the same process scales up."}
+        ],
+        "recommendedSolutions": [
+          {"name": "Staff Uniforms", "description": "Comfortable, durable uniforms that keep every location looking consistent.", "products": ["Corporate polo", "Name-embroidered shirt", "Branded apron"]},
+          {"name": "Welcome Kits", "description": "A coordinated new-hire set that makes onboarding feel considered.", "products": ["Welcome tee", "Notebook and pen", "Insulated tumbler"]},
+          {"name": "Corporate Gifts", "description": "Curated sets for clients and milestones that reflect your brand's quality.", "products": ["Executive gift set", "Wellness kit", "Branded packaging"]},
+          {"name": "Exhibitions", "description": "Booth-ready pieces that keep staff visible and visitors engaged.", "products": ["Staff polo", "Branded tote", "Lanyard and badge"]}
+        ],
+        "faq": [
+          {"question": "Can you match our existing brand guidelines?", "answer": "Yes. Share your brand colours, logo files and guidelines and we will keep every item consistent."},
+          {"question": "Can you deliver to multiple office locations?", "answer": "Yes. We can consolidate production and split delivery across your locations."},
+          {"question": "Do you support recurring orders, like quarterly gifting?", "answer": "Yes. Many clients set up a recurring schedule so gifting or uniform top-ups happen automatically."}
+        ]},
+      {"slug": "events", "name": "Events", "kicker": "One brief for the details people see and remember.", "problem": "Event organisers need participant items, venue branding and giveaways to arrive together and on time.", "bundle": ["Lanyards and passes", "Crew apparel", "Banners and signage", "Participant gifts"], "outcome": "A cohesive event kit with one point of contact from sourcing through delivery.", "image": "/images/smu-event.jpg", "imageAlt": "A coordinated branded event environment", "storySlug": "temasek-orientation", "storyLabel": "See an event bundle in action",
+        "needsGrid": [
+          {"icon": "🎪", "title": "One event identity", "description": "Apparel, signage and giveaways that all read as one coordinated event."},
+          {"icon": "🚚", "title": "On-time delivery", "description": "Production planned backwards from your event date, not forwards from ours."},
+          {"icon": "🧾", "title": "Simplified ordering", "description": "One brief covers crew wear, participant items and venue branding."}
+        ],
+        "recommendedSolutions": [
+          {"name": "Conference", "description": "Registration-ready kits and signage for delegates and speakers.", "products": ["Lanyard and badge", "Delegate tote", "Banner and signage"]},
+          {"name": "Charity Run", "description": "Participant and volunteer wear built to perform and photograph well.", "products": ["Performance tee", "Race bib holder", "Finisher medal"]},
+          {"name": "Festival", "description": "Bold, durable merchandise for crew, vendors and attendees.", "products": ["Crew tee", "Wristband", "Tote bag"]},
+          {"name": "Roadshow", "description": "Portable, brand-forward pieces for a team on the move.", "products": ["Staff polo", "Pop-up banner", "Giveaway drawstring bag"]}
+        ],
+        "faq": [
+          {"question": "Can you turn around an order quickly for a fixed event date?", "answer": "Yes, subject to product and quantity. Share your event date early so we can confirm a realistic timeline."},
+          {"question": "Can you supply both apparel and signage in one order?", "answer": "Yes. Consolidating apparel, signage and giveaways into one brief is one of our most common event requests."},
+          {"question": "What happens if attendee numbers change close to the event?", "answer": "Tell us as early as possible. We will advise on what quantity changes are still possible given the timeline."}
+        ]},
+      {"slug": "churches", "name": "Churches", "kicker": "Support community moments with useful, meaningful items.", "problem": "Ministries often need flexible quantities across camps, services, volunteer teams and seasonal programmes.", "bundle": ["Ministry apparel", "Camp bags", "Volunteer lanyards", "Welcome and appreciation gifts"], "outcome": "Approachable options tailored to the group, programme and available budget.", "image": "/images/project-showcase.png", "imageAlt": "Custom apparel and gifts suited to community groups", "storySlug": "temasek-orientation", "storyLabel": "See a multi-item community bundle",
+        "needsGrid": [
+          {"icon": "⛪", "title": "Ministry-wide consistency", "description": "Camps, services and outreach share one recognisable look across every team."},
+          {"icon": "🙏", "title": "Volunteer-friendly pricing", "description": "Flexible quantities that respect ministry and volunteer budgets."},
+          {"icon": "❤️", "title": "Meaningful keepsakes", "description": "Items that feel personal, not just promotional, for congregation moments."}
+        ],
+        "recommendedSolutions": [
+          {"name": "Church Camp", "description": "A shared camp identity across cabins, activities and worship sessions.", "products": ["Camp tee", "Drawstring bag", "Water bottle"]},
+          {"name": "Youth Ministry", "description": "Apparel that youth actually want to wear beyond the event.", "products": ["Youth hoodie", "Graphic tee", "Cap"]},
+          {"name": "Conference", "description": "Coordinated pieces for speakers, volunteers and attendees.", "products": ["Lanyard", "Tote bag", "Notebook"]},
+          {"name": "Outreach", "description": "Approachable, low-cost items for community outreach and giving.", "products": ["Outreach tee", "Tote bag", "Printed flyers and banner"]}
+        ],
+        "faq": [
+          {"question": "Do you offer special pricing for ministries and non-profits?", "answer": "We will always recommend the most cost-effective option for your budget and quantity."},
+          {"question": "Can you help design something meaningful, not just branded?", "answer": "Yes. Share the message or verse you want to feature and we can help bring it to life."},
+          {"question": "Can small volunteer teams order alongside a larger camp order?", "answer": "Yes. We can combine multiple team quantities into one coordinated order."}
+        ]},
+      {"slug": "sports-teams", "name": "Sports Teams", "kicker": "Kit the team, recognise the effort and show up together.", "problem": "Teams need performance-ready apparel, accurate sizing and event items that share one visual identity.", "bundle": ["Performance jersey", "Team bag", "Bottle and towel", "Medals and event banners"], "outcome": "A coordinated team package built for training, competition and presentation day.", "image": "/images/project-showcase.png", "imageAlt": "Custom sports apparel and team merchandise", "storySlug": "marina-sports-club", "storyLabel": "Marina Sports Club jerseys",
+        "needsGrid": [
+          {"icon": "🏆", "title": "Performance-ready kit", "description": "Fabric and fit chosen for training, competition and everyday wear."},
+          {"icon": "📏", "title": "Accurate team sizing", "description": "Consolidated size confirmation so every jersey fits before it ships."},
+          {"icon": "🎽", "title": "One visual identity", "description": "Jerseys, bags and event pieces that share one consistent design."}
+        ],
+        "recommendedSolutions": [
+          {"name": "Match Day", "description": "Sharp, sublimated jerseys built to perform under match conditions.", "products": ["Match jersey", "Match shorts", "Team bag"]},
+          {"name": "Training", "description": "Everyday practice wear that holds up to repeated washing and use.", "products": ["Training tee", "Training bib", "Sports bottle"]},
+          {"name": "Tournament", "description": "A complete kit plus recognition pieces for competition day.", "products": ["Tournament jersey", "Medal and ribbon", "Team banner"]},
+          {"name": "Supporter Merchandise", "description": "Fan-facing pieces that build team spirit on and off the field.", "products": ["Supporter tee", "Cap", "Scarf or towel"]}
+        ],
+        "faq": [
+          {"question": "Can you manage individual player sizing and names?", "answer": "Yes. We can consolidate size confirmation and name or number personalisation into one order."},
+          {"question": "How durable is the print on match jerseys?", "answer": "We recommend sublimation or embroidery for match wear so the design holds up to washing and match conditions."},
+          {"question": "Can you turn around jerseys quickly before a tournament?", "answer": "Yes, subject to quantity and design complexity. Share your tournament date early so we can confirm timing."}
+        ]},
+      {"slug": "community-organisations", "name": "Community Organisations", "kicker": "Turn a good cause into a visible, coordinated campaign.", "problem": "Community groups run on volunteer time and tight budgets, but still need a consistent look across events, campaigns and outreach.", "bundle": ["Community event tee", "Fundraiser tote bag", "Awareness campaign banner", "Volunteer lanyard"], "outcome": "A recognisable, affordable identity that carries across every event and campaign.", "image": "/images/project-showcase.png", "imageAlt": "Volunteers wearing custom merchandise at a community event", "storySlug": "temasek-orientation", "storyLabel": "See a multi-item community bundle",
+        "needsGrid": [
+          {"icon": "🌱", "title": "Consistent cause identity", "description": "The same recognisable look across every event, campaign and outreach."},
+          {"icon": "💸", "title": "Volunteer-friendly budgets", "description": "Options that respect tight, donor-funded budgets without looking cheap."},
+          {"icon": "📢", "title": "Ready for any turnout", "description": "Recommendations that flex from a small gathering to a large public campaign."}
+        ],
+        "recommendedSolutions": [
+          {"name": "Community Event", "description": "A simple, recognisable kit for gatherings and celebrations.", "products": ["Event tee", "Tote bag", "Signage"]},
+          {"name": "Fundraiser", "description": "Giveaway and thank-you pieces that support donor engagement.", "products": ["Fundraiser tote", "Wristband", "Thank-you card set"]},
+          {"name": "Awareness Campaign", "description": "High-visibility pieces that carry a message into public spaces.", "products": ["Campaign tee", "Banner", "Sticker and pin set"]},
+          {"name": "Volunteer Programme", "description": "Durable, identifiable wear for volunteers across every shift.", "products": ["Volunteer lanyard", "Volunteer tee", "Cap"]}
+        ],
+        "faq": [
+          {"question": "Do you offer pricing suited to non-profit and volunteer budgets?", "answer": "Yes. We will recommend options that balance visibility and cost for donor-funded budgets."},
+          {"question": "Can you support a campaign that runs across several small events?", "answer": "Yes. We can plan one order that covers multiple events or phase quantities as needed."},
+          {"question": "Can you help design something that reflects our cause?", "answer": "Yes. Share your campaign message and we will help translate it into the merchandise design."}
+        ]}
     ]
   },
   "stories": {
