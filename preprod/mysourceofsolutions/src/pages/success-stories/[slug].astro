@@ -1,14 +1,16 @@
 ---
-import pages from "../../assets/content/pages.json";
+import { getEntry } from "astro:content";
 import CallToAction from "../../components/CallToAction.astro";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 import { withBase } from "../../lib/base.js";
 
-export function getStaticPaths() {
-  return pages.stories.items.map((story) => ({ params: { slug: story.slug }, props: { story } }));
+export async function getStaticPaths() {
+  const pagesEntry = await getEntry("pages", "pages");
+  const pages = pagesEntry.data;
+  return pages.stories.items.map((story) => ({ params: { slug: story.slug }, props: { story, pages } }));
 }
 
-const { story } = Astro.props;
+const { story, pages } = Astro.props;
 const products = pages.products.categories.filter((product) => story.relatedProducts.includes(product.slug));
 const solutions = pages.solutions.industries.filter((solution) => story.relatedSolutions.includes(solution.slug));
 ---
@@ -26,6 +28,6 @@ const solutions = pages.solutions.industries.filter((solution) => story.relatedS
   <section class="story-quote"><blockquote>&ldquo;{story.testimonial}&rdquo;</blockquote><p>&mdash; {story.person}</p></section>
 
   <section class="section related-links"><header class="section-heading"><p class="eyebrow">Related products</p><h2>Build from the same ingredients.</h2><p>Explore the product categories used in projects like this one.</p></header><div class="link-grid">{products.map((product) => <a href={withBase(`/products/${product.slug}/`)}><span>{product.name}</span><b>{product.title}</b><em>View products &rarr;</em></a>)}</div></section>
-  <section class="section related-links muted-section"><header class="section-heading"><p class="eyebrow">Related solutions</p><h2>See the wider bundle.</h2><p>Recommendations organised around the type of team or event.</p></header><div class="link-grid">{solutions.map((solution) => <a href={withBase(`/solutions/#${solution.slug}`)}><span>{solution.name}</span><b>{solution.kicker}</b><em>View solution &rarr;</em></a>)}</div></section>
+  <section class="section related-links muted-section"><header class="section-heading"><p class="eyebrow">Related solutions</p><h2>See the wider bundle.</h2><p>Recommendations organised around the type of team or event.</p></header><div class="link-grid">{solutions.map((solution) => <a href={withBase(`/solutions/${solution.slug}/`)}><span>{solution.name}</span><b>{solution.kicker}</b><em>View solution &rarr;</em></a>)}</div></section>
   <CallToAction eyebrow="Your project can start here." heading="Bring us the challenge. We will shape the solution." />
 </SiteLayout>

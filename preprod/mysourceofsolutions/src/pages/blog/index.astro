@@ -1,8 +1,11 @@
 ---
-import pages from "../../assets/content/pages.json";
+import { getEntry } from "astro:content";
 import PageHero from "../../components/PageHero.astro";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 import { withBase } from "../../lib/base.js";
+
+const pagesEntry = await getEntry("pages", "pages");
+const pages = pagesEntry.data;
 
 const content = pages.blog;
 const featured = content.articles.filter((article) => article.featured);
@@ -10,7 +13,7 @@ const popular = content.articles.filter((article) => article.popular);
 const latest = [...content.articles].sort((a, b) => b.date.localeCompare(a.date));
 ---
 <SiteLayout title={content.seo.title} description={content.seo.description} current="blog">
-  <PageHero hero={content.hero} paths={["homepage", "pages", "blog", "hero"]} />
+  <PageHero hero={content.hero} paths={["pages", "pages", "blog", "hero"]} />
   <nav class="category-pills" aria-label="Blog categories">{content.categories.map((category) => <a href={`#${category.toLowerCase().replaceAll(" ", "-")}`}>{category}</a>)}</nav>
 
   <section class="section featured-articles">

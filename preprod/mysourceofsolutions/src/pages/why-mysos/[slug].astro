@@ -1,0 +1,74 @@
+---
+import { getEntry } from "astro:content";
+import CallToAction from "../../components/CallToAction.astro";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { withBase } from "../../lib/base.js";
+
+export async function getStaticPaths() {
+  const pagesEntry = await getEntry("pages", "pages");
+  const pages = pagesEntry.data;
+  return pages.why.pillars.map((pillar) => ({ params: { slug: pillar.slug }, props: { pillar, pages } }));
+}
+
+const { pillar, pages } = Astro.props;
+const pillarIndex = pages.why.pillars.findIndex((item) => item.slug === pillar.slug);
+const p = (path) => JSON.stringify(path);
+const base = ["pages", "pages", "why", "pillars", pillarIndex];
+
+const pillarImages = ["/images/custom-towel.png", "/images/project-showcase.png", "/images/tote-bag.png", "/images/stationery.png", "/images/smu-event.jpg"];
+const heroImage = pillarImages[pillarIndex % pillarImages.length];
+
+const recommendedProducts = pages.products.categories.filter((category) => pillar.recommendedProductSlugs.includes(category.slug));
+const story = pages.stories.items.find((item) => item.slug === pillar.storySlug);
+---
+<SiteLayout title={`${pillar.title} | Why MySOS`} description={pillar.subtitle} current="why">
+  <section class="page-hero" id="top">
+    <div>
+      <p class="eyebrow">Why MySOS</p>
+      <h1 data-cms-path={p([...base, "title"])}>{pillar.title}</h1>
+      <p class="lede" data-cms-path={p([...base, "subtitle"])}>{pillar.subtitle}</p>
+      <div class="actions"><a class="button" href={withBase("/#quote")}>Start a project <span aria-hidden="true">&nearr;</span></a><a class="text-button" href={withBase("/why-mysos/")}>All reasons to choose MySOS &rarr;</a></div>
+    </div>
+    <figure><img src={withBase(heroImage)} alt={`Example of MySOS work illustrating ${pillar.title}`} /></figure>
+  </section>
+
+  <section class="pillar-narrative" id="the-problem">
+    <p class="eyebrow">The problem</p>
+    <h2 data-cms-path={p([...base, "problemIntro"])}>{pillar.problemIntro}</h2>
+    <ul>{pillar.problemPoints.map((point, i) => <li data-cms-path={p([...base, "problemPoints", i])}>{point}</li>)}</ul>
+  </section>
+
+  <section class="pillar-narrative" id="our-solution">
+    <p class="eyebrow">Our solution</p>
+    <h2 data-cms-path={p([...base, "solutionIntro"])}>{pillar.solutionIntro}</h2>
+    {pillar.solutionPoints.length > 0 && <ul>{pillar.solutionPoints.map((point, i) => <li data-cms-path={p([...base, "solutionPoints", i])}>{point}</li>)}</ul>}
+  </section>
+
+  <section class="section pillar-expect" id="what-you-can-expect">
+    <header class="section-heading light"><p class="eyebrow">What you can expect</p><h2>The difference this makes for you.</h2></header>
+    <ul>{pillar.expectPoints.map((point, i) => <li data-cms-path={p([...base, "expectPoints", i])}>{point}</li>)}</ul>
+  </section>
+
+  <section class="section" id="recommended-products">
+    <header class="section-heading"><p class="eyebrow">Recommended products</p><h2>A starting shortlist.</h2><p data-cms-path={p([...base, "recommendedProductsNote"])}>{pillar.recommendedProductsNote}</p></header>
+    {recommendedProducts.length > 0 && <div class="portrait-grid">{recommendedProducts.map((category, i) => <a class="portrait-card" href={withBase(`/products/${category.slug}/`)}>
+      <img src={withBase(category.image)} alt={category.imageAlt} loading="lazy" />
+      <div><span>0{i + 1}</span><h2>{category.name}</h2><p>{category.description}</p><b>View products &rarr;</b></div>
+    </a>)}</div>}
+  </section>
+
+  {story && <section class="section related-links muted-section" id="success-story">
+    <header class="section-heading"><p class="eyebrow">Success story</p><h2>{story.title}</h2><p>{story.summary}</p></header>
+    <div class="link-grid">
+      <a href={withBase(`/success-stories/${story.slug}/`)}><span>{story.type}</span><b>{story.result}</b><em>Read the story &rarr;</em></a>
+    </div>
+    <p class="section-link"><a class="text-button" href={withBase("/success-stories/")}>See more success stories &rarr;</a></p>
+  </section>}
+
+  <section class="section faq" id="faq">
+    <header class="section-heading"><p class="eyebrow">FAQ</p><h2>Common questions.</h2><p>Quick answers before you send a brief.</p></header>
+    <div class="faq-list">{pillar.faq.map((item, i) => <details><summary data-cms-path={p([...base, "faq", i, "question"])}>{item.question}</summary><p data-cms-path={p([...base, "faq", i, "answer"])}>{item.answer}</p></details>)}</div>
+  </section>
+
+  <CallToAction heading={pillar.ctaHeading} />
+</SiteLayout>

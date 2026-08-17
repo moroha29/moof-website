@@ -1,14 +1,16 @@
 ---
-import pages from "../../assets/content/pages.json";
+import { getEntry } from "astro:content";
 import CallToAction from "../../components/CallToAction.astro";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 import { withBase } from "../../lib/base.js";
 
-export function getStaticPaths() {
-  return pages.products.categories.map((category) => ({ params: { slug: category.slug }, props: { category } }));
+export async function getStaticPaths() {
+  const pagesEntry = await getEntry("pages", "pages");
+  const pages = pagesEntry.data;
+  return pages.products.categories.map((category) => ({ params: { slug: category.slug }, props: { category, pages } }));
 }
 
-const { category } = Astro.props;
+const { category, pages } = Astro.props;
 const methods = pages.products.printingMethods.filter((method) => category.methods.includes(method.name));
 const solutions = pages.solutions.industries.filter((solution) => category.relatedSolutions.includes(solution.slug));
 const otherCategories = pages.products.categories.filter((item) => item.slug !== category.slug).slice(0, 3);
@@ -34,7 +36,7 @@ const otherCategories = pages.products.categories.filter((item) => item.slug !==
     <div class="method-gallery">{methods.map((method) => <article><img src={withBase(method.image)} alt={method.imageAlt} loading="lazy" /><div><h3>{method.name}</h3><p>{method.description}</p><small>Best for: {method.bestFor}</small></div></article>)}</div>
   </section>
 
-  <section class="section related-links"><header class="section-heading"><p class="eyebrow">Related solutions</p><h2>See it in context.</h2><p>Explore bundles designed around teams and organisations.</p></header><div class="link-grid">{solutions.map((solution) => <a href={withBase(`/solutions/#${solution.slug}`)}><span>{solution.name}</span><b>{solution.kicker}</b><em>View solution &rarr;</em></a>)}</div></section>
+  <section class="section related-links"><header class="section-heading"><p class="eyebrow">Related solutions</p><h2>See it in context.</h2><p>Explore bundles designed around teams and organisations.</p></header><div class="link-grid">{solutions.map((solution) => <a href={withBase(`/solutions/${solution.slug}/`)}><span>{solution.name}</span><b>{solution.kicker}</b><em>View solution &rarr;</em></a>)}</div></section>
   <section class="section also-explore"><header class="section-heading"><p class="eyebrow">Also explore</p><h2>Build a complete set.</h2></header><div class="link-grid">{otherCategories.map((item) => <a href={withBase(`/products/${item.slug}/`)}><span>{item.name}</span><b>{item.title}</b><em>View category &rarr;</em></a>)}</div></section>
   <CallToAction heading={`Need custom ${category.name.toLowerCase()}?`} body="Share your quantity, artwork, deadline and budget. We will recommend the best-fit product and finish." />
 </SiteLayout>

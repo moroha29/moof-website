@@ -1,18 +1,23 @@
 ---
-import pages from "../assets/content/pages.json";
-import site from "../assets/content/site.json";
+import { getEntry } from "astro:content";
 import CallToAction from "../components/CallToAction.astro";
 import PageHero from "../components/PageHero.astro";
 import SiteLayout from "../layouts/SiteLayout.astro";
+import { withBase } from "../lib/base.js";
+
+const pagesEntry = await getEntry("pages", "pages");
+const pages = pagesEntry.data;
+const siteEntry = await getEntry("site", "homepage");
+const site = siteEntry.data;
 
 const content = pages.why;
 ---
 <SiteLayout title={content.seo.title} description={content.seo.description} current="why">
-  <PageHero hero={content.hero} paths={["homepage", "pages", "why", "hero"]} />
+  <PageHero hero={content.hero} paths={["pages", "pages", "why", "hero"]} />
 
   <section class="section reasons" id="why-choose-mysos">
     <header class="section-heading"><p class="eyebrow">Why choose MySOS</p><h2>Less coordination. Better recommendations.</h2><p>Five practical advantages for projects that need to move from idea to delivered items.</p></header>
-    <div class="reason-stack">{content.reasons.map((reason, i) => <article><span>0{i + 1}</span><div><small>{reason.label}</small><h3>{reason.title}</h3></div><p>{reason.body}</p></article>)}</div>
+    <div class="reason-stack">{content.reasons.map((reason, i) => <article><span>0{i + 1}</span><div><small>{reason.label}</small><h3>{reason.title}</h3></div><div><p>{reason.body}</p>{pages.why.pillars[i] && <a class="text-button" href={withBase(`/why-mysos/${pages.why.pillars[i].slug}/`)}>Learn more &rarr;</a>}</div></article>)}</div>
   </section>
 
   <section class="section process-full" id="process">

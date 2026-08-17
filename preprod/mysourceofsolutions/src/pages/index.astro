@@ -1,62 +1,64 @@
 ---
-import site from "../assets/content/site.json";
+import { getEntry } from "astro:content";
 import SiteLayout from "../layouts/SiteLayout.astro";
 import { withBase } from "../lib/base.js";
 
+const siteEntry = await getEntry("site", "homepage");
+const site = siteEntry.data;
 const p = (path) => JSON.stringify(path);
 const imagePaths = (base) => p([[...base, "image"], [...base, "imageAlt"]]);
 ---
 <SiteLayout title={site.seo.homeTitle} description={site.seo.homeDescription} current="home">
   <section class="hero" id="hero">
     <div class="hero-copy" id="top">
-      <p class="eyebrow" data-cms-path={p(["homepage", "hero", "eyebrow"])}>{site.hero.eyebrow}</p>
-      <h1 data-cms-path={p(["homepage", "hero", "headline"])}>{site.hero.headline}</h1>
-      <p class="lede" data-cms-path={p(["homepage", "hero", "supportingCopy"])}>{site.hero.supportingCopy}</p>
+      <p class="eyebrow" data-cms-path={p(["site", "homepage", "hero", "eyebrow"])}>{site.hero.eyebrow}</p>
+      <h1 data-cms-path={p(["site", "homepage", "hero", "headline"])}>{site.hero.headline}</h1>
+      <p class="lede" data-cms-path={p(["site", "homepage", "hero", "supportingCopy"])}>{site.hero.supportingCopy}</p>
       <div class="actions">
-        <a class="button" href={site.hero.primaryUrl} data-cms-paths={p([["homepage", "hero", "primaryUrl"]])}><span data-cms-path={p(["homepage", "hero", "primaryLabel"])}>{site.hero.primaryLabel}</span><b aria-hidden="true">&nearr;</b></a>
-        <a class="text-button" href={site.hero.secondaryUrl} data-cms-paths={p([["homepage", "hero", "secondaryUrl"]])}><span data-cms-path={p(["homepage", "hero", "secondaryLabel"])}>{site.hero.secondaryLabel}</span> &rarr;</a>
+        <a class="button" href={site.hero.primaryUrl} data-cms-paths={p([["site", "homepage", "hero", "primaryUrl"]])}><span data-cms-path={p(["site", "homepage", "hero", "primaryLabel"])}>{site.hero.primaryLabel}</span><b aria-hidden="true">&nearr;</b></a>
+        <a class="text-button" href={site.hero.secondaryUrl} data-cms-paths={p([["site", "homepage", "hero", "secondaryUrl"]])}><span data-cms-path={p(["site", "homepage", "hero", "secondaryLabel"])}>{site.hero.secondaryLabel}</span> &rarr;</a>
       </div>
     </div>
-    <figure class="hero-visual"><img src={withBase(site.hero.image)} alt={site.hero.imageAlt} data-cms-paths={imagePaths(["homepage", "hero"])} /><figcaption><span>One brief</span><span>Every item</span><span>Delivered</span></figcaption></figure>
+    <figure class="hero-visual"><img src={withBase(site.hero.image)} alt={site.hero.imageAlt} data-cms-paths={imagePaths(["site", "homepage", "hero"])} /><figcaption><span>One brief</span><span>Every item</span><span>Delivered</span></figcaption></figure>
   </section>
 
   <section class="trust" aria-labelledby="trusted-heading">
-    <p id="trusted-heading" data-cms-path={p(["homepage", "trust", "eyebrow"])}>{site.trust.eyebrow}</p>
-    <div class="logo-row">{site.trust.names.map((name, i) => <span class="client-wordmark" data-cms-path={p(["homepage", "trust", "names", i])}>{name}</span>)}</div>
+    <p id="trusted-heading" data-cms-path={p(["site", "homepage", "trust", "eyebrow"])}>{site.trust.eyebrow}</p>
+    <div class="logo-row">{site.trust.logos.map((item, i) => <img class="client-logo" src={withBase(item.image)} alt={item.imageAlt} loading="lazy" data-cms-paths={imagePaths(["site", "homepage", "trust", "logos", i])} />)}</div>
   </section>
 
   <section class="section categories" id="categories">
-    <header class="section-heading"><p class="eyebrow" data-cms-path={p(["homepage", "categoriesIntro", "eyebrow"])}>Featured products</p><h2 data-cms-path={p(["homepage", "categoriesIntro", "heading"])}>{site.categoriesIntro.heading}</h2><p data-cms-path={p(["homepage", "categoriesIntro", "body"])}>{site.categoriesIntro.body}</p></header>
-    <div class="category-grid">{site.categories.map((item, i) => <a class="category-card" href={withBase(`/products/${item.slug}/`)}><img src={withBase(item.image)} alt={item.imageAlt} loading="lazy" data-cms-paths={imagePaths(["homepage", "categories", i])} /><div><span data-cms-path={p(["homepage", "categories", i, "name"])}>{item.name}</span><h3 data-cms-path={p(["homepage", "categories", i, "title"])}>{item.title}</h3><p data-cms-path={p(["homepage", "categories", i, "body"])}>{item.body}</p><b>Explore category &rarr;</b></div></a>)}</div>
+    <header class="section-heading"><p class="eyebrow" data-cms-path={p(["site", "homepage", "categoriesIntro", "eyebrow"])}>Featured products</p><h2 data-cms-path={p(["site", "homepage", "categoriesIntro", "heading"])}>{site.categoriesIntro.heading}</h2><p data-cms-path={p(["site", "homepage", "categoriesIntro", "body"])}>{site.categoriesIntro.body}</p></header>
+    <div class="category-grid">{site.categories.map((item, i) => <a class="category-card" href={withBase(`/products/${item.slug}/`)}><img src={withBase(item.image)} alt={item.imageAlt} loading="lazy" data-cms-paths={imagePaths(["site", "homepage", "categories", i])} /><div><span data-cms-path={p(["site", "homepage", "categories", i, "name"])}>{item.name}</span><h3 data-cms-path={p(["site", "homepage", "categories", i, "title"])}>{item.title}</h3><p data-cms-path={p(["site", "homepage", "categories", i, "body"])}>{item.body}</p><b>Explore category &rarr;</b></div></a>)}</div>
     <p class="section-link"><a class="text-button" href={withBase("/products/")}>View all products and printing methods &rarr;</a></p>
   </section>
 
   <section class="section benefits" id="benefits">
-    <header class="section-heading light"><p class="eyebrow" data-cms-path={p(["homepage", "benefitsIntro", "eyebrow"])}>Why MySOS</p><h2 data-cms-path={p(["homepage", "benefitsIntro", "heading"])}>{site.benefitsIntro.heading}</h2><p>A preview of the five advantages behind our one-stop approach.</p></header>
-    <div class="benefit-list">{site.benefits.map((item, i) => <article><span data-cms-path={p(["homepage", "benefits", i, "number"])}>{item.number}</span><h3 data-cms-path={p(["homepage", "benefits", i, "title"])}>{item.title}</h3><p data-cms-path={p(["homepage", "benefits", i, "body"])}>{item.body}</p></article>)}</div>
+    <header class="section-heading light"><p class="eyebrow" data-cms-path={p(["site", "homepage", "benefitsIntro", "eyebrow"])}>Why MySOS</p><h2 data-cms-path={p(["site", "homepage", "benefitsIntro", "heading"])}>{site.benefitsIntro.heading}</h2><p>A preview of the five advantages behind our one-stop approach.</p></header>
+    <div class="benefit-list">{site.benefits.map((item, i) => <article><span data-cms-path={p(["site", "homepage", "benefits", i, "number"])}>{item.number}</span><h3 data-cms-path={p(["site", "homepage", "benefits", i, "title"])}>{item.title}</h3><p data-cms-path={p(["site", "homepage", "benefits", i, "body"])}>{item.body}</p></article>)}</div>
     <p class="section-link light-link"><a class="text-button" href={withBase("/why-mysos/")}>Why clients choose MySOS &rarr;</a></p>
   </section>
 
   <section class="section solutions" id="solutions">
-    <header class="section-heading"><p class="eyebrow" data-cms-path={p(["homepage", "solutionsIntro", "eyebrow"])}>{site.solutionsIntro.eyebrow}</p><h2 data-cms-path={p(["homepage", "solutionsIntro", "heading"])}>{site.solutionsIntro.heading}</h2><p>Recommended starting points for the groups we support most often.</p></header>
-    <div class="solution-grid">{site.solutions.map((item, i) => <a href={withBase(`/solutions/#${item.name.toLowerCase().replaceAll(" ", "-")}`)}><span>0{i + 1}</span><h3 data-cms-path={p(["homepage", "solutions", i, "name"])}>{item.name}</h3><p data-cms-path={p(["homepage", "solutions", i, "body"])}>{item.body}</p><b>See solution &rarr;</b></a>)}</div>
+    <header class="section-heading"><p class="eyebrow" data-cms-path={p(["site", "homepage", "solutionsIntro", "eyebrow"])}>{site.solutionsIntro.eyebrow}</p><h2 data-cms-path={p(["site", "homepage", "solutionsIntro", "heading"])}>{site.solutionsIntro.heading}</h2><p>Recommended starting points for the groups we support most often.</p></header>
+    <div class="solution-grid">{site.solutions.map((item, i) => <a href={withBase(`/solutions/${item.name.toLowerCase().replaceAll(" ", "-")}/`)}><span>0{i + 1}</span><h3 data-cms-path={p(["site", "homepage", "solutions", i, "name"])}>{item.name}</h3><p data-cms-path={p(["site", "homepage", "solutions", i, "body"])}>{item.body}</p><b>See solution &rarr;</b></a>)}</div>
   </section>
 
   <section class="section work" id="work">
-    <header class="section-heading"><p class="eyebrow" data-cms-path={p(["homepage", "workIntro", "eyebrow"])}>{site.workIntro.eyebrow}</p><h2 data-cms-path={p(["homepage", "workIntro", "heading"])}>{site.workIntro.heading}</h2><p>Featured case studies from teams, businesses and schools.</p></header>
-    <div class="work-grid">{site.caseStudies.map((item, i) => <a href={withBase(`/success-stories/${item.slug}/`)}><img src={withBase(item.image)} alt={item.imageAlt} loading="lazy" data-cms-paths={imagePaths(["homepage", "caseStudies", i])} /><div><span data-cms-path={p(["homepage", "caseStudies", i, "type"])}>{item.type}</span><h3 data-cms-path={p(["homepage", "caseStudies", i, "title"])}>{item.title}</h3><p data-cms-path={p(["homepage", "caseStudies", i, "result"])}>{item.result}</p><b>Read case study &rarr;</b></div></a>)}</div>
+    <header class="section-heading"><p class="eyebrow" data-cms-path={p(["site", "homepage", "workIntro", "eyebrow"])}>{site.workIntro.eyebrow}</p><h2 data-cms-path={p(["site", "homepage", "workIntro", "heading"])}>{site.workIntro.heading}</h2><p>Featured case studies from teams, businesses and schools.</p></header>
+    <div class="work-grid">{site.caseStudies.map((item, i) => <a href={withBase(`/success-stories/${item.slug}/`)}><img src={withBase(item.image)} alt={item.imageAlt} loading="lazy" data-cms-paths={imagePaths(["site", "homepage", "caseStudies", i])} /><div><span data-cms-path={p(["site", "homepage", "caseStudies", i, "type"])}>{item.type}</span><h3 data-cms-path={p(["site", "homepage", "caseStudies", i, "title"])}>{item.title}</h3><p data-cms-path={p(["site", "homepage", "caseStudies", i, "result"])}>{item.result}</p><b>Read case study &rarr;</b></div></a>)}</div>
     <p class="section-link"><a class="text-button" href={withBase("/success-stories/")}>View all success stories &rarr;</a></p>
   </section>
 
   <section class="section testimonials" id="testimonials">
-    <header class="section-heading light"><p class="eyebrow" data-cms-path={p(["homepage", "testimonialsIntro", "eyebrow"])}>{site.testimonialsIntro.eyebrow}</p><h2 data-cms-path={p(["homepage", "testimonialsIntro", "heading"])}>{site.testimonialsIntro.heading}</h2><p>Customer trust, in their own words.</p></header>
-    <div>{site.testimonials.map((item, i) => <figure><blockquote data-cms-path={p(["homepage", "testimonials", i, "quote"])}>&ldquo;{item.quote}&rdquo;</blockquote><figcaption data-cms-path={p(["homepage", "testimonials", i, "person"])}>&mdash; {item.person}</figcaption></figure>)}</div>
+    <header class="section-heading light"><p class="eyebrow" data-cms-path={p(["site", "homepage", "testimonialsIntro", "eyebrow"])}>{site.testimonialsIntro.eyebrow}</p><h2 data-cms-path={p(["site", "homepage", "testimonialsIntro", "heading"])}>{site.testimonialsIntro.heading}</h2><p>Customer trust, in their own words.</p></header>
+    <div>{site.testimonials.map((item, i) => <figure><blockquote data-cms-path={p(["site", "homepage", "testimonials", i, "quote"])}>&ldquo;{item.quote}&rdquo;</blockquote><figcaption data-cms-path={p(["site", "homepage", "testimonials", i, "person"])}>&mdash; {item.person}</figcaption></figure>)}</div>
   </section>
 
   <section class="quote" id="quote">
-    <div class="quote-visual"><img src={withBase(site.quote.image)} alt={site.quote.imageAlt} loading="lazy" data-cms-paths={imagePaths(["homepage", "quote"])} /></div>
-    <div class="quote-panel"><p class="eyebrow" data-cms-path={p(["homepage", "quote", "eyebrow"])}>{site.quote.eyebrow}</p><h2 data-cms-path={p(["homepage", "quote", "heading"])}>{site.quote.heading}</h2><p data-cms-path={p(["homepage", "quote", "body"])}>{site.quote.body}</p>
-      <form action={site.quote.formAction} method="post"><label>{site.quote.nameLabel}<input name="name" autocomplete="name" required /></label><label>{site.quote.phoneLabel}<input name="phone" autocomplete="tel" required /></label><label>{site.quote.emailLabel}<input type="email" name="email" autocomplete="email" required /></label><label>{site.quote.needLabel}<select name="need"><option>Apparel</option><option>Bags</option><option>Drinkware</option><option>Stationery</option><option>Corporate gifts</option><option>Event essentials</option><option>Something else</option></select></label><label class="full">{site.quote.messageLabel}<textarea name="message" rows="3"></textarea></label><button class="button full" type="submit" data-cms-path={p(["homepage", "quote", "submitLabel"])}>{site.quote.submitLabel} &nearr;</button></form>
+    <div class="quote-visual"><img src={withBase(site.quote.image)} alt={site.quote.imageAlt} loading="lazy" data-cms-paths={imagePaths(["site", "homepage", "quote"])} /></div>
+    <div class="quote-panel"><p class="eyebrow" data-cms-path={p(["site", "homepage", "quote", "eyebrow"])}>{site.quote.eyebrow}</p><h2 data-cms-path={p(["site", "homepage", "quote", "heading"])}>{site.quote.heading}</h2><p data-cms-path={p(["site", "homepage", "quote", "body"])}>{site.quote.body}</p>
+      <form action={site.quote.formAction} method="post"><label>{site.quote.nameLabel}<input name="name" autocomplete="name" required /></label><label>{site.quote.phoneLabel}<input name="phone" autocomplete="tel" required /></label><label>{site.quote.emailLabel}<input type="email" name="email" autocomplete="email" required /></label><label>{site.quote.needLabel}<select name="need"><option>Apparel</option><option>Bags</option><option>Drinkware</option><option>Stationery</option><option>Corporate gifts</option><option>Event essentials</option><option>Something else</option></select></label><label class="full">{site.quote.messageLabel}<textarea name="message" rows="3"></textarea></label><button class="button full" type="submit" data-cms-path={p(["site", "homepage", "quote", "submitLabel"])}>{site.quote.submitLabel} &nearr;</button></form>
       <p class="whatsapp-fallback">Prefer messaging? <a class="text-button" href={site.contact.whatsappUrl}>Chat on WhatsApp &rarr;</a></p>
     </div>
   </section>

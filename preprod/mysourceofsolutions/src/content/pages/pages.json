@@ -1,0 +1,391 @@
+{
+  "products": {
+    "seo": {
+      "title": "Custom Products | MySOS Singapore",
+      "description": "Explore custom apparel, bags, drinkware, stationery, corporate gifts and event essentials from MySOS."
+    },
+    "hero": {
+      "eyebrow": "Products",
+      "heading": "Made for your people, purpose and budget.",
+      "body": "Here is a quick overview of the products we can customise for schools, businesses, events, churches and sports teams. Start with a category, then tell us your quantity, deadline and design idea.",
+      "image": "/images/project-showcase.png",
+      "imageAlt": "A selection of customised merchandise supplied by MySOS"
+    },
+    "categories": [
+      {
+        "slug": "apparel",
+        "name": "Apparel",
+        "title": "T-shirts, polos, jerseys and jackets",
+        "description": "Comfortable, brand-ready apparel for teams, campaigns, uniforms and events.",
+        "image": "/images/project-showcase.png",
+        "imageAlt": "Custom apparel and team merchandise",
+        "intro": "Choose the fabric, fit and finish that suits how the garment will be worn. We can help balance comfort, durability, colour and budget.",
+        "bestFor": ["School and orientation shirts", "Corporate uniforms and campaign tees", "Church and community apparel", "Sports jerseys and teamwear"],
+        "products": [
+          {"name": "Classic cotton tee", "description": "An easy all-rounder for events, giveaways and everyday team wear."},
+          {"name": "Performance jersey", "description": "Lightweight, breathable fabric for sports and outdoor activities."},
+          {"name": "Corporate polo", "description": "A smarter uniform option with embroidery or printed branding."}
+        ],
+        "methods": ["Silkscreen", "DTF", "DTG", "Embroidery", "Sublimation"],
+        "relatedSolutions": ["schools", "businesses", "churches", "sports-teams"]
+      },
+      {
+        "slug": "bags",
+        "name": "Bags",
+        "title": "Totes, drawstring bags and backpacks",
+        "description": "Useful carriers that keep your brand visible long after the event is over.",
+        "image": "/images/tote-bag.png",
+        "imageAlt": "Custom printed MySOS tote bag",
+        "intro": "From lightweight event bags to durable work backpacks, we source options around capacity, material, use case and budget.",
+        "bestFor": ["Orientation and welcome packs", "Conference giveaways", "Retail and community events", "Staff and client kits"],
+        "products": [
+          {"name": "Canvas tote", "description": "A reusable favourite with a generous print area for bold artwork."},
+          {"name": "Drawstring bag", "description": "A lightweight, cost-effective choice for events and activity kits."},
+          {"name": "Everyday backpack", "description": "A higher-value option for staff, students and long-term campaigns."}
+        ],
+        "methods": ["Silkscreen", "DTF", "Embroidery"],
+        "relatedSolutions": ["schools", "businesses", "events"]
+      },
+      {
+        "slug": "drinkware",
+        "name": "Drinkware",
+        "title": "Bottles, tumblers and mugs",
+        "description": "Practical daily-use gifts in materials and finishes that fit your campaign.",
+        "image": "/images/custom-towel.png",
+        "imageAlt": "Custom branded merchandise arranged for a client",
+        "intro": "Select by capacity, insulation, lid style, material and branding area. We will recommend the right finish for your artwork and usage.",
+        "bestFor": ["Employee welcome kits", "Client appreciation gifts", "School camps and clubs", "Tournament and event packs"],
+        "products": [
+          {"name": "Sports bottle", "description": "Lightweight and practical for teams, schools and active events."},
+          {"name": "Insulated tumbler", "description": "A premium everyday gift that keeps drinks at temperature."},
+          {"name": "Ceramic mug", "description": "A familiar desk essential with a clear, durable branding area."}
+        ],
+        "methods": ["Silkscreen", "UV", "Sublimation"],
+        "relatedSolutions": ["businesses", "events", "sports-teams"]
+      },
+      {
+        "slug": "stationery",
+        "name": "Stationery",
+        "title": "Notebooks, pens and folders",
+        "description": "Polished essentials for meetings, onboarding, learning and events.",
+        "image": "/images/stationery.png",
+        "imageAlt": "Custom branded notebooks, pens and folders from MySOS",
+        "intro": "Build a coordinated stationery set or choose a single useful item. We can match colours, finishes and packaging across the range.",
+        "bestFor": ["Training and seminar packs", "Student and teacher gifts", "Corporate onboarding", "Conference registration kits"],
+        "products": [
+          {"name": "Hardcover notebook", "description": "A premium writing companion with cover and packaging options."},
+          {"name": "Branded pen", "description": "A simple, useful add-on available across many price points."},
+          {"name": "Document folder", "description": "Keeps event, school or sales materials organised and on-brand."}
+        ],
+        "methods": ["Silkscreen", "UV", "Sublimation"],
+        "relatedSolutions": ["schools", "businesses", "events"]
+      },
+      {
+        "slug": "corporate-gifts",
+        "name": "Corporate gifts",
+        "title": "Curated sets and premium keepsakes",
+        "description": "Thoughtful combinations for clients, staff, milestones and campaigns.",
+        "image": "/images/custom-towel.png",
+        "imageAlt": "A customised branded gift prepared by MySOS",
+        "intro": "Tell us who the gift is for and what you want it to communicate. We will shortlist items, coordinate branding and consolidate the final set.",
+        "bestFor": ["Client appreciation", "Employee milestones", "Festive gifting", "New-hire welcome kits"],
+        "products": [
+          {"name": "Welcome gift set", "description": "A coordinated mix of practical branded essentials for new joiners."},
+          {"name": "Executive set", "description": "Elevated materials and presentation for clients and senior teams."},
+          {"name": "Wellness kit", "description": "Useful lifestyle products assembled around care and wellbeing."}
+        ],
+        "methods": ["Silkscreen", "UV", "Embroidery", "Sublimation"],
+        "relatedSolutions": ["businesses", "events"]
+      },
+      {
+        "slug": "event-essentials",
+        "name": "Event essentials",
+        "title": "Lanyards, medals, banners and more",
+        "description": "The coordinated pieces you need to brand, organise and run an event.",
+        "image": "/images/smu-event.jpg",
+        "imageAlt": "A large branded university event supplied by MySOS",
+        "intro": "Bring us your event plan and we will help consolidate the visible details, participant items and recognition pieces into one order.",
+        "bestFor": ["Conferences and exhibitions", "School orientation", "Community celebrations", "Sports competitions"],
+        "products": [
+          {"name": "Custom lanyard", "description": "A practical identity and access item with full-colour options."},
+          {"name": "Medal and ribbon", "description": "Recognition pieces tailored to your event theme and categories."},
+          {"name": "Banner and signage", "description": "Large-format branding that helps people find and remember you."}
+        ],
+        "methods": ["Silkscreen", "Sublimation", "UV"],
+        "relatedSolutions": ["schools", "events", "churches", "sports-teams"]
+      }
+    ],
+    "printingIntro": {
+      "eyebrow": "Printing methods",
+      "heading": "The finish changes the feel.",
+      "body": "This gallery sits after the product categories so you can first choose what you need, then understand how the artwork can be applied. We will make the final recommendation based on fabric, artwork, quantity, durability and budget."
+    },
+    "printingMethods": [
+      {"name": "Silkscreen", "description": "Durable, cost-effective colour layers for larger runs and bold designs.", "bestFor": "Cotton tees, totes and flat surfaces", "image": "/images/project-showcase.png", "imageAlt": "Bold printed artwork on customised merchandise"},
+      {"name": "DTF", "description": "A versatile full-colour transfer with strong detail on many fabric types.", "bestFor": "Small runs, colourful artwork and mixed garments", "image": "/images/custom-towel.png", "imageAlt": "Detailed full-colour branding on a custom item"},
+      {"name": "DTG", "description": "Ink is printed directly into the garment for a soft, detailed result.", "bestFor": "Cotton apparel and artwork with gradients", "image": "/images/project-showcase.png", "imageAlt": "Detailed design printed on custom apparel"},
+      {"name": "Embroidery", "description": "Threaded branding with texture and a polished, long-lasting finish.", "bestFor": "Polos, caps, jackets and premium bags", "image": "/images/custom-towel.png", "imageAlt": "Premium textured branding on customised merchandise"},
+      {"name": "Sublimation", "description": "Dye becomes part of the material for edge-to-edge colour that will not crack.", "bestFor": "Sportswear, lanyards and coated drinkware", "image": "/images/smu-event.jpg", "imageAlt": "Bright full-colour merchandise at an organised event"},
+      {"name": "UV", "description": "UV-cured ink creates crisp colour on hard, non-porous surfaces.", "bestFor": "Bottles, acrylic, stationery and corporate gifts", "image": "/images/custom-towel.png", "imageAlt": "Crisp branding on a hard-surface custom product"}
+    ],
+    "faq": [
+      {"question": "What information do you need for a quote?", "answer": "Share the item or category, quantity, required date, artwork if available and an estimated budget. If you are unsure, start with the use case and we will shortlist options."},
+      {"question": "Can you help if I do not have final artwork?", "answer": "Yes. Send your logo, brand colours and idea. We can advise on artwork preparation and the print method most likely to reproduce it well."},
+      {"question": "Do you support small orders?", "answer": "Yes. Minimum quantities depend on the product and customisation method, so we will recommend options that work for your required volume."},
+      {"question": "Can one order include several product types?", "answer": "Yes. Consolidating apparel, gifts and event items through one brief is one of the main reasons clients work with MySOS."},
+      {"question": "How long does production take?", "answer": "Timing varies by product, quantity, artwork approval and delivery requirements. Tell us your event or launch date early so we can plan backwards."},
+      {"question": "Can I see a sample before full production?", "answer": "Sampling is available for suitable projects. We will explain the sample type, cost and timing during quotation."}
+    ]
+  },
+  "why": {
+    "seo": {"title": "Why MySOS | One Supplier, Endless Possibilities", "description": "See how MySOS simplifies sourcing, recommendations, sampling, production and delivery."},
+    "hero": {"eyebrow": "Why MySOS", "heading": "One supplier. Endless possibilities.", "body": "A single, responsive partner for sourcing, design support, customisation, quality checks and delivery.", "image": "/images/custom-towel.png", "imageAlt": "A custom branded item delivered by MySOS"},
+    "reasons": [
+      {"title": "One Supplier. Endless Possibilities.", "label": "One-stop sourcing", "body": "Bring apparel, gifts, event materials and packaging into one clear brief instead of coordinating multiple vendors."},
+      {"title": "Premium Quality Without Premium Pricing.", "label": "Better value", "body": "We match product, material and production method to the result you need, without paying for specifications that add no value."},
+      {"title": "Flexible Order Quantities.", "label": "Small and bulk orders", "body": "We source for focused team runs and large rollouts, then recommend the option that makes sense at your volume."},
+      {"title": "Expert Recommendations.", "label": "Consultative approach", "body": "You do not need to know every product or print term. Tell us the goal and constraints; we will turn them into a practical shortlist."},
+      {"title": "Tailored To Your Needs.", "label": "Industry-specific recommendations", "body": "Schools, businesses, events, churches and sports teams each work differently. Your recommendation should reflect that."}
+    ],
+    "process": [
+      {"number": "01", "title": "Enquiry", "body": "Share your audience, quantity, budget, artwork and deadline."},
+      {"number": "02", "title": "Recommendation", "body": "Receive a focused shortlist of products and customisation options."},
+      {"number": "03", "title": "Quotation", "body": "Review a clear scope, pricing and production timeline."},
+      {"number": "04", "title": "Sampling", "body": "Confirm the material, colour and finish when sampling is appropriate."},
+      {"number": "05", "title": "Production", "body": "We coordinate customisation and quality checks with trusted partners."},
+      {"number": "06", "title": "Delivery", "body": "Your completed order is consolidated and delivered around your schedule."}
+    ],
+    "pillars": [
+      {
+        "slug": "one-supplier",
+        "title": "One Supplier. Endless Possibilities.",
+        "subtitle": "From customised apparel and event merchandise to corporate gifts and promotional products, source everything you need through one trusted partner.",
+        "problemIntro": "Managing multiple suppliers often results in:",
+        "problemPoints": ["Inconsistent product quality", "Different lead times", "Higher shipping costs", "More time spent coordinating orders", "Communication across multiple vendors"],
+        "solutionIntro": "Instead of working with different suppliers for every product, MySOS helps you consolidate your sourcing into one seamless experience. We can help you source:",
+        "solutionPoints": ["Apparel", "Tote Bags", "Drinkware", "Stationery", "Corporate Gifts", "Event Merchandise", "Packaging", "Promotional Products"],
+        "expectPoints": ["One point of contact", "Consistent quality", "Easier project management", "Better branding consistency", "Less time coordinating suppliers"],
+        "recommendedProductsNote": "Display a variety of product categories that showcase MySOS as a one-stop sourcing partner.",
+        "recommendedProductSlugs": ["apparel", "bags", "corporate-gifts", "event-essentials"],
+        "storySlug": "ocbc-onboarding",
+        "faq": [
+          {"question": "Can I order multiple product categories together?", "answer": "Yes. Combining apparel, bags, drinkware and gifts into one order is one of the main reasons clients work with MySOS."},
+          {"question": "Can you source products not listed on your website?", "answer": "Yes. Our website shows popular categories, but we regularly source items outside this list. Tell us what you need."},
+          {"question": "Do I receive everything in one shipment?", "answer": "Where possible, yes. We consolidate production so your order can be delivered together on one schedule."}
+        ],
+        "ctaHeading": "Let's Build Your Next Project Together."
+      },
+      {
+        "slug": "premium-quality",
+        "title": "Premium Quality Without the Premium Price.",
+        "subtitle": "We carefully recommend products that deliver outstanding value, balancing quality, durability and affordability.",
+        "problemIntro": "Customers often struggle between:",
+        "problemPoints": ["Cheap products with disappointing quality", "Premium products that exceed their budget"],
+        "solutionIntro": "We focus on recommending products that provide the best value for your investment instead of simply offering the cheapest or most expensive options. Every recommendation considers:",
+        "solutionPoints": ["Quality", "Comfort", "Durability", "Print Results", "Budget"],
+        "expectPoints": ["Better product recommendations", "Products built to last", "Consistent print quality", "Greater value for your budget"],
+        "recommendedProductsNote": "Feature products that represent excellent value across different budgets.",
+        "recommendedProductSlugs": ["apparel", "drinkware", "stationery"],
+        "storySlug": "marina-sports-club",
+        "faq": [
+          {"question": "How do I choose between different shirt qualities?", "answer": "Tell us how the shirt will be worn and how often. We will recommend a fabric weight and finish that matches the use case and budget."},
+          {"question": "Can you recommend products based on my budget?", "answer": "Yes. Share a budget range and we will shortlist options that deliver the best result within it."},
+          {"question": "What materials do you recommend?", "answer": "It depends on the product and use case. We compare comfort, durability and print results before suggesting a material."}
+        ],
+        "ctaHeading": "Let's Find the Right Product for Your Budget."
+      },
+      {
+        "slug": "flexible-quantities",
+        "title": "Flexible Order Quantities.",
+        "subtitle": "Whether you need a few pieces or thousands, we offer flexible ordering options and recommend the most suitable solution for your project.",
+        "problemIntro": "Many suppliers only cater to bulk orders, making it difficult for smaller organisations or first-time buyers. Common frustrations include:",
+        "problemPoints": ["High minimum order quantities", "Limited options for smaller orders", "Expensive pricing for low quantities", "Difficulty finding suppliers willing to help"],
+        "solutionIntro": "At MySOS, every project matters regardless of its size. We recommend products and printing methods based on your order quantity so you receive the most suitable and cost-effective solution.",
+        "solutionPoints": [],
+        "expectPoints": ["Low minimum order quantities on selected products", "Small orders are welcome", "Competitive pricing for bulk orders", "Printing recommendations based on quantity", "Flexible solutions for different project sizes"],
+        "recommendedProductsNote": "Display products suitable for: Small Orders, Medium Orders, Bulk Orders.",
+        "recommendedProductSlugs": ["stationery", "bags", "event-essentials"],
+        "storySlug": "marina-sports-club",
+        "faq": [
+          {"question": "Is there a minimum order quantity?", "answer": "It depends on the product and customisation method. We will recommend options that work for your required volume."},
+          {"question": "Can I order just a few pieces?", "answer": "Yes, on selected products. Tell us what you need and we will confirm the smallest workable quantity."},
+          {"question": "Do prices change with quantity?", "answer": "Yes. Pricing generally improves at higher quantities, and we will show you where the best value sits for your project."}
+        ],
+        "ctaHeading": "Let's Find the Best Solution for Your Order."
+      },
+      {
+        "slug": "expert-recommendations",
+        "title": "New to Custom Merchandise? We Are Here to Help.",
+        "subtitle": "Whether it is your first time ordering event shirts, company uniforms or promotional merchandise, we will guide you through every step with confidence.",
+        "problemIntro": "Ordering customised products can feel overwhelming. Customers often wonder:",
+        "problemPoints": ["Which shirt should I choose?", "Which printing method is best?", "What fits my budget?", "Will my artwork print well?", "How long does production take?"],
+        "solutionIntro": "Our experienced team takes the time to understand your goals before recommending products, materials and printing methods that suit your needs.",
+        "solutionPoints": [],
+        "expectPoints": ["Personalised product recommendations", "Material guidance", "Printing method recommendations", "Artwork advice", "Budget planning", "Timeline planning"],
+        "recommendedProductsNote": "Cotton vs Dry Fit; Silkscreen vs DTF; Embroidery vs Printing; How to Prepare Artwork; Choosing the Right Shirt.",
+        "recommendedProductSlugs": ["apparel", "corporate-gifts"],
+        "storySlug": "temasek-orientation",
+        "faq": [
+          {"question": "Can you recommend products for me?", "answer": "Yes. Tell us your goal, audience and budget and we will turn it into a practical shortlist."},
+          {"question": "Can you check my artwork?", "answer": "Yes. Send your artwork and we will advise on how well it will reproduce with your chosen printing method."},
+          {"question": "I have never ordered customised shirts before. Can you help?", "answer": "Yes, this is one of the most common enquiries we receive. We will guide you through fabric, fit, printing and timeline."}
+        ],
+        "ctaHeading": "Not Sure Where to Start? Let's Chat."
+      },
+      {
+        "slug": "tailored-to-you",
+        "title": "Every Project Is Unique.",
+        "subtitle": "No two organisations are the same. Every recommendation we make is tailored to your goals, audience, branding, timeline and budget.",
+        "problemIntro": "Every customer has different objectives.",
+        "problemPoints": ["A school camp requires different products from a corporate event.", "A startup has different needs from a multinational company.", "Using the same recommendation for everyone rarely delivers the best results."],
+        "solutionIntro": "Instead of selling products, we build solutions around your specific project. We first understand your requirements before recommending the most suitable products and customisation options.",
+        "solutionPoints": [],
+        "expectPoints": ["Recommendations tailored to your industry", "Products matched to your objectives", "Solutions based on your timeline", "Budget-conscious recommendations", "Personalised sourcing support"],
+        "recommendedProductsNote": "Industry solutions: Schools, Businesses, Events, Sports Teams, Churches, Community Organisations. Recommended bundles: School Orientation Pack, Corporate Welcome Kit, Event Registration Pack, Volunteer Essentials, Sports Team Bundle. See the full list on the Solutions page.",
+        "recommendedProductSlugs": ["apparel", "bags", "event-essentials"],
+        "storySlug": "temasek-orientation",
+        "faq": [
+          {"question": "Can you recommend products for my event?", "answer": "Yes. Tell us your event type, audience and timeline and we will recommend a suitable product mix."},
+          {"question": "Can I customise a bundle?", "answer": "Yes. Every bundle on our Solutions page is a starting point that we adjust to your project."},
+          {"question": "Can you help if I am unsure what I need?", "answer": "Yes. This is exactly where we start most conversations. Tell us the outcome you want and we will shape the rest."}
+        ],
+        "ctaHeading": "Let's Build the Right Solution Together."
+      }
+    ]
+  },
+  "solutions": {
+    "seo": {"title": "Solutions for Teams and Organisations | MySOS", "description": "Custom product bundles and sourcing solutions for schools, businesses, events, churches and sports teams."},
+    "hero": {"eyebrow": "Solutions", "heading": "Solutions designed around your needs.", "body": "Start with the outcome you need. We will recommend the right bundle, products and production route for your audience, timeline and budget.", "image": "/images/smu-event.jpg", "imageAlt": "People gathered at a large branded event"},
+    "whyChoose": [
+      {"title": "Built around your group", "body": "Every recommendation starts with who the products are for, not a generic catalogue page."},
+      {"title": "One brief, multiple products", "body": "Apparel, bags, drinkware and signage can be sourced and delivered together."},
+      {"title": "Sized for your budget", "body": "From a small team run to a large rollout, the same solution scales with your quantity."},
+      {"title": "Backed by real projects", "body": "Every solution reflects patterns we have already delivered for similar organisations."}
+    ],
+    "industries": [
+      {"slug": "schools", "name": "Schools", "kicker": "Build belonging from orientation to graduation.", "problem": "School teams often need several coordinated items, different quantities and one immovable event date.", "bundle": ["Orientation tee or class shirt", "Drawstring bag", "Bottle", "Lanyard and event signage"], "outcome": "One coordinated student experience with fewer suppliers and clearer delivery planning.", "image": "/images/smu-event.jpg", "imageAlt": "Students at a branded university event", "storySlug": "temasek-orientation", "storyLabel": "Temasek Poly orientation",
+        "needsGrid": [
+          {"icon": "🎒", "title": "Coordinated events", "description": "Orientation, camps and graduation each need matching apparel and gear delivered on one date."},
+          {"icon": "📚", "title": "Student-friendly budgets", "description": "Recommendations that work across cohort sizes without stretching the activity budget."},
+          {"icon": "🤝", "title": "One committee contact", "description": "A single point of contact instead of juggling vendors across every student committee."}
+        ],
+        "recommendedSolutions": [
+          {"name": "Orientation Camp", "description": "A complete welcome-week kit that gives new students one shared identity from day one.", "products": ["Orientation tee", "Drawstring bag", "Lanyard", "Water bottle"]},
+          {"name": "Graduation", "description": "Keepsake pieces that mark the milestone and photograph well on stage.", "products": ["Graduation sash", "Commemorative tee", "Photo backdrop banner"]},
+          {"name": "CCA", "description": "Durable, recognisable kit for co-curricular groups that train and perform together.", "products": ["CCA polo", "Team bag", "Embroidered cap"]},
+          {"name": "Open House", "description": "Friendly, informative pieces that help visitors and student guides stand out.", "products": ["Guide lanyard", "Info folder", "Welcome tote"]}
+        ],
+        "faq": [
+          {"question": "Can you handle orientation timelines with a fixed start date?", "answer": "Yes. Tell us the date early and we will plan production and delivery backwards from it."},
+          {"question": "Do you offer bulk pricing for large cohorts?", "answer": "Yes, pricing improves with quantity and we will recommend the most cost-effective option for your cohort size."},
+          {"question": "Can different CCAs or classes order separate designs in one batch?", "answer": "Yes. We can coordinate multiple designs and quantities under a single school-wide order."}
+        ]},
+      {"slug": "businesses", "name": "Businesses", "kicker": "Make every employee and client touchpoint feel intentional.", "problem": "Onboarding, campaigns and client gifting can become fragmented across teams, items and delivery dates.", "bundle": ["Corporate polo or tee", "Notebook and pen", "Drinkware", "Curated gift packaging"], "outcome": "Consistent branding across a practical, ready-to-distribute set.", "image": "/images/custom-towel.png", "imageAlt": "A branded corporate gift prepared for delivery", "storySlug": "ocbc-onboarding", "storyLabel": "OCBC onboarding kits",
+        "needsGrid": [
+          {"icon": "🏢", "title": "Consistent branding", "description": "Every touchpoint, from onboarding to client gifting, carries the same look and quality."},
+          {"icon": "⏱", "title": "Reliable timelines", "description": "Coordinated production and delivery so HR, marketing and events teams hit their dates."},
+          {"icon": "🎁", "title": "Scalable gifting", "description": "From ten client gifts to five hundred welcome kits, the same process scales up."}
+        ],
+        "recommendedSolutions": [
+          {"name": "Staff Uniforms", "description": "Comfortable, durable uniforms that keep every location looking consistent.", "products": ["Corporate polo", "Name-embroidered shirt", "Branded apron"]},
+          {"name": "Welcome Kits", "description": "A coordinated new-hire set that makes onboarding feel considered.", "products": ["Welcome tee", "Notebook and pen", "Insulated tumbler"]},
+          {"name": "Corporate Gifts", "description": "Curated sets for clients and milestones that reflect your brand's quality.", "products": ["Executive gift set", "Wellness kit", "Branded packaging"]},
+          {"name": "Exhibitions", "description": "Booth-ready pieces that keep staff visible and visitors engaged.", "products": ["Staff polo", "Branded tote", "Lanyard and badge"]}
+        ],
+        "faq": [
+          {"question": "Can you match our existing brand guidelines?", "answer": "Yes. Share your brand colours, logo files and guidelines and we will keep every item consistent."},
+          {"question": "Can you deliver to multiple office locations?", "answer": "Yes. We can consolidate production and split delivery across your locations."},
+          {"question": "Do you support recurring orders, like quarterly gifting?", "answer": "Yes. Many clients set up a recurring schedule so gifting or uniform top-ups happen automatically."}
+        ]},
+      {"slug": "events", "name": "Events", "kicker": "One brief for the details people see and remember.", "problem": "Event organisers need participant items, venue branding and giveaways to arrive together and on time.", "bundle": ["Lanyards and passes", "Crew apparel", "Banners and signage", "Participant gifts"], "outcome": "A cohesive event kit with one point of contact from sourcing through delivery.", "image": "/images/smu-event.jpg", "imageAlt": "A coordinated branded event environment", "storySlug": "temasek-orientation", "storyLabel": "See an event bundle in action",
+        "needsGrid": [
+          {"icon": "🎪", "title": "One event identity", "description": "Apparel, signage and giveaways that all read as one coordinated event."},
+          {"icon": "🚚", "title": "On-time delivery", "description": "Production planned backwards from your event date, not forwards from ours."},
+          {"icon": "🧾", "title": "Simplified ordering", "description": "One brief covers crew wear, participant items and venue branding."}
+        ],
+        "recommendedSolutions": [
+          {"name": "Conference", "description": "Registration-ready kits and signage for delegates and speakers.", "products": ["Lanyard and badge", "Delegate tote", "Banner and signage"]},
+          {"name": "Charity Run", "description": "Participant and volunteer wear built to perform and photograph well.", "products": ["Performance tee", "Race bib holder", "Finisher medal"]},
+          {"name": "Festival", "description": "Bold, durable merchandise for crew, vendors and attendees.", "products": ["Crew tee", "Wristband", "Tote bag"]},
+          {"name": "Roadshow", "description": "Portable, brand-forward pieces for a team on the move.", "products": ["Staff polo", "Pop-up banner", "Giveaway drawstring bag"]}
+        ],
+        "faq": [
+          {"question": "Can you turn around an order quickly for a fixed event date?", "answer": "Yes, subject to product and quantity. Share your event date early so we can confirm a realistic timeline."},
+          {"question": "Can you supply both apparel and signage in one order?", "answer": "Yes. Consolidating apparel, signage and giveaways into one brief is one of our most common event requests."},
+          {"question": "What happens if attendee numbers change close to the event?", "answer": "Tell us as early as possible. We will advise on what quantity changes are still possible given the timeline."}
+        ]},
+      {"slug": "churches", "name": "Churches", "kicker": "Support community moments with useful, meaningful items.", "problem": "Ministries often need flexible quantities across camps, services, volunteer teams and seasonal programmes.", "bundle": ["Ministry apparel", "Camp bags", "Volunteer lanyards", "Welcome and appreciation gifts"], "outcome": "Approachable options tailored to the group, programme and available budget.", "image": "/images/project-showcase.png", "imageAlt": "Custom apparel and gifts suited to community groups", "storySlug": "temasek-orientation", "storyLabel": "See a multi-item community bundle",
+        "needsGrid": [
+          {"icon": "⛪", "title": "Ministry-wide consistency", "description": "Camps, services and outreach share one recognisable look across every team."},
+          {"icon": "🙏", "title": "Volunteer-friendly pricing", "description": "Flexible quantities that respect ministry and volunteer budgets."},
+          {"icon": "❤️", "title": "Meaningful keepsakes", "description": "Items that feel personal, not just promotional, for congregation moments."}
+        ],
+        "recommendedSolutions": [
+          {"name": "Church Camp", "description": "A shared camp identity across cabins, activities and worship sessions.", "products": ["Camp tee", "Drawstring bag", "Water bottle"]},
+          {"name": "Youth Ministry", "description": "Apparel that youth actually want to wear beyond the event.", "products": ["Youth hoodie", "Graphic tee", "Cap"]},
+          {"name": "Conference", "description": "Coordinated pieces for speakers, volunteers and attendees.", "products": ["Lanyard", "Tote bag", "Notebook"]},
+          {"name": "Outreach", "description": "Approachable, low-cost items for community outreach and giving.", "products": ["Outreach tee", "Tote bag", "Printed flyers and banner"]}
+        ],
+        "faq": [
+          {"question": "Do you offer special pricing for ministries and non-profits?", "answer": "We will always recommend the most cost-effective option for your budget and quantity."},
+          {"question": "Can you help design something meaningful, not just branded?", "answer": "Yes. Share the message or verse you want to feature and we can help bring it to life."},
+          {"question": "Can small volunteer teams order alongside a larger camp order?", "answer": "Yes. We can combine multiple team quantities into one coordinated order."}
+        ]},
+      {"slug": "sports-teams", "name": "Sports Teams", "kicker": "Kit the team, recognise the effort and show up together.", "problem": "Teams need performance-ready apparel, accurate sizing and event items that share one visual identity.", "bundle": ["Performance jersey", "Team bag", "Bottle and towel", "Medals and event banners"], "outcome": "A coordinated team package built for training, competition and presentation day.", "image": "/images/project-showcase.png", "imageAlt": "Custom sports apparel and team merchandise", "storySlug": "marina-sports-club", "storyLabel": "Marina Sports Club jerseys",
+        "needsGrid": [
+          {"icon": "🏆", "title": "Performance-ready kit", "description": "Fabric and fit chosen for training, competition and everyday wear."},
+          {"icon": "📏", "title": "Accurate team sizing", "description": "Consolidated size confirmation so every jersey fits before it ships."},
+          {"icon": "🎽", "title": "One visual identity", "description": "Jerseys, bags and event pieces that share one consistent design."}
+        ],
+        "recommendedSolutions": [
+          {"name": "Match Day", "description": "Sharp, sublimated jerseys built to perform under match conditions.", "products": ["Match jersey", "Match shorts", "Team bag"]},
+          {"name": "Training", "description": "Everyday practice wear that holds up to repeated washing and use.", "products": ["Training tee", "Training bib", "Sports bottle"]},
+          {"name": "Tournament", "description": "A complete kit plus recognition pieces for competition day.", "products": ["Tournament jersey", "Medal and ribbon", "Team banner"]},
+          {"name": "Supporter Merchandise", "description": "Fan-facing pieces that build team spirit on and off the field.", "products": ["Supporter tee", "Cap", "Scarf or towel"]}
+        ],
+        "faq": [
+          {"question": "Can you manage individual player sizing and names?", "answer": "Yes. We can consolidate size confirmation and name or number personalisation into one order."},
+          {"question": "How durable is the print on match jerseys?", "answer": "We recommend sublimation or embroidery for match wear so the design holds up to washing and match conditions."},
+          {"question": "Can you turn around jerseys quickly before a tournament?", "answer": "Yes, subject to quantity and design complexity. Share your tournament date early so we can confirm timing."}
+        ]},
+      {"slug": "community-organisations", "name": "Community Organisations", "kicker": "Turn a good cause into a visible, coordinated campaign.", "problem": "Community groups run on volunteer time and tight budgets, but still need a consistent look across events, campaigns and outreach.", "bundle": ["Community event tee", "Fundraiser tote bag", "Awareness campaign banner", "Volunteer lanyard"], "outcome": "A recognisable, affordable identity that carries across every event and campaign.", "image": "/images/project-showcase.png", "imageAlt": "Volunteers wearing custom merchandise at a community event", "storySlug": "temasek-orientation", "storyLabel": "See a multi-item community bundle",
+        "needsGrid": [
+          {"icon": "🌱", "title": "Consistent cause identity", "description": "The same recognisable look across every event, campaign and outreach."},
+          {"icon": "💸", "title": "Volunteer-friendly budgets", "description": "Options that respect tight, donor-funded budgets without looking cheap."},
+          {"icon": "📢", "title": "Ready for any turnout", "description": "Recommendations that flex from a small gathering to a large public campaign."}
+        ],
+        "recommendedSolutions": [
+          {"name": "Community Event", "description": "A simple, recognisable kit for gatherings and celebrations.", "products": ["Event tee", "Tote bag", "Signage"]},
+          {"name": "Fundraiser", "description": "Giveaway and thank-you pieces that support donor engagement.", "products": ["Fundraiser tote", "Wristband", "Thank-you card set"]},
+          {"name": "Awareness Campaign", "description": "High-visibility pieces that carry a message into public spaces.", "products": ["Campaign tee", "Banner", "Sticker and pin set"]},
+          {"name": "Volunteer Programme", "description": "Durable, identifiable wear for volunteers across every shift.", "products": ["Volunteer lanyard", "Volunteer tee", "Cap"]}
+        ],
+        "faq": [
+          {"question": "Do you offer pricing suited to non-profit and volunteer budgets?", "answer": "Yes. We will recommend options that balance visibility and cost for donor-funded budgets."},
+          {"question": "Can you support a campaign that runs across several small events?", "answer": "Yes. We can plan one order that covers multiple events or phase quantities as needed."},
+          {"question": "Can you help design something that reflects our cause?", "answer": "Yes. Share your campaign message and we will help translate it into the merchandise design."}
+        ]}
+    ]
+  },
+  "stories": {
+    "seo": {"title": "Success Stories | MySOS", "description": "See how MySOS turns complex merchandise and event briefs into coordinated, delivered results."},
+    "hero": {"eyebrow": "Success stories", "heading": "Real projects. Real results.", "body": "A closer look at the challenge, recommendation and outcome behind selected MySOS projects.", "image": "/images/project-showcase.png", "imageAlt": "A showcase of customised products delivered by MySOS"},
+    "items": [
+      {"slug": "marina-sports-club", "type": "Sports team", "title": "Marina Sports Club", "summary": "A fast, coordinated jersey run for a regional tournament.", "result": "200 jerseys delivered in 10 days for a regional tournament.", "image": "/images/project-showcase.png", "imageAlt": "Custom sports apparel created for a team project", "challenge": "The club needed a large set of tournament jerseys on a compressed schedule, with consistent colour and sizing across the team.", "solution": "MySOS recommended a performance fabric and sublimated finish, consolidated size confirmation and managed the production timeline through one contact.", "outcome": "The full jersey order was delivered ahead of the tournament and ready for team distribution.", "gallery": ["/images/project-showcase.png", "/images/custom-towel.png"], "testimonial": "Our jerseys arrived a week early and looked better than the mockups.", "person": "Coach, Marina Sports Club", "relatedProducts": ["apparel", "bags", "drinkware"], "relatedSolutions": ["sports-teams", "events"]},
+      {"slug": "ocbc-onboarding", "type": "Business", "title": "OCBC onboarding kits", "summary": "A consolidated gift set for a large intake of new hires.", "result": "A coordinated gift set for 500 new hires, delivered in one shipment.", "image": "/images/custom-towel.png", "imageAlt": "Custom branded corporate gift from an onboarding project", "challenge": "The onboarding team needed several useful items to feel like one coherent welcome experience while keeping ordering and delivery simple.", "solution": "MySOS shortlisted practical products, aligned the branding across each item and consolidated the complete set for one scheduled delivery.", "outcome": "The team received ready-to-distribute kits with consistent branding and one supplier to coordinate.", "gallery": ["/images/custom-towel.png", "/images/project-showcase.png"], "testimonial": "MySOS handled sourcing, design and delivery end-to-end. One point of contact, zero hassle.", "person": "Operations Lead, OCBC", "relatedProducts": ["corporate-gifts", "stationery", "drinkware"], "relatedSolutions": ["businesses"]},
+      {"slug": "temasek-orientation", "type": "School and event", "title": "Temasek Poly orientation", "summary": "A multi-product orientation bundle brought together under one brief.", "result": "A full orientation merchandise bundle across six product lines.", "image": "/images/smu-event.jpg", "imageAlt": "Students at a large orientation event with branded merchandise", "challenge": "The organising team needed multiple product types for a large student programme, all aligned to the same event identity and delivery date.", "solution": "MySOS combined apparel, bags, drinkware, stationery and event essentials into one recommendation and coordinated production as a single project.", "outcome": "The organisers had a complete, consistent set ready for orientation without managing separate vendors.", "gallery": ["/images/smu-event.jpg", "/images/project-showcase.png"], "testimonial": "Great pricing on a focused run - they never made us feel too small to matter.", "person": "Events Committee, Temasek Poly", "relatedProducts": ["apparel", "bags", "event-essentials"], "relatedSolutions": ["schools", "events"]}
+    ]
+  },
+  "blog": {
+    "seo": {"title": "Ideas and Buying Guides | MySOS Blog", "description": "Practical guides to custom printing, materials, merchandise planning and successful project delivery."},
+    "hero": {"eyebrow": "Ideas and guides", "heading": "Make the next merchandise decision easier.", "body": "Clear explanations, planning tips and behind-the-scenes guidance from sourcing through delivery.", "image": "/images/project-showcase.png", "imageAlt": "Custom products arranged as inspiration for a merchandise project"},
+    "categories": ["Printing", "Materials", "Corporate Gifts", "Design Tips", "Buying Guides", "Behind the Scenes", "Case Studies"],
+    "articles": [
+      {"slug": "choose-tshirt-printing-method", "title": "How to choose a T-shirt printing method", "category": "Printing", "summary": "A practical guide to silkscreen, DTF, DTG, embroidery and sublimation for common apparel briefs.", "date": "2026-08-12", "readTime": "6 min read", "image": "/images/project-showcase.png", "imageAlt": "Custom apparel showing a detailed printed design", "featured": true, "popular": true, "body": ["Start with the fabric, artwork, quantity and how the garment will be used. Those four details narrow the options more reliably than choosing a method by name.", "Silkscreen is often strong for bold designs and larger quantities. DTF supports colourful detail across many garments, while DTG suits detailed artwork on suitable cotton apparel. Embroidery adds texture and a premium feel. Sublimation is ideal when colour needs to become part of performance fabric.", "You do not need to decide alone. Share the garment, artwork and order size, and MySOS can recommend the practical route."], "relatedProductSlug": "apparel"},
+      {"slug": "plan-merchandise-order", "title": "What to prepare before requesting a merchandise quote", "category": "Buying Guides", "summary": "The five details that turn a broad idea into a useful, comparable recommendation.", "date": "2026-08-08", "readTime": "4 min read", "image": "/images/custom-towel.png", "imageAlt": "A custom product being prepared as part of an order", "featured": true, "popular": true, "body": ["A strong enquiry does not need exact product codes. It needs a clear audience, approximate quantity, required date, budget range and the action or feeling the item should support.", "Send your artwork if it exists, but do not delay the conversation if it does not. A logo, brand guide or even a reference image can be enough to begin.", "Mention whether items will be packed individually, distributed at an event or delivered to more than one location. Fulfilment details can affect the best recommendation."], "relatedProductSlug": "corporate-gifts"},
+      {"slug": "materials-that-last", "title": "Choosing materials people will keep using", "category": "Materials", "summary": "How use case, care, comfort and perceived value shape better product choices.", "date": "2026-08-03", "readTime": "5 min read", "image": "/images/custom-towel.png", "imageAlt": "Durable customised merchandise designed for regular use", "featured": false, "popular": true, "body": ["A useful item earns repeated visibility. Think about where it will be used, how often it will be handled and what care it needs before comparing finishes.", "For apparel, comfort and climate matter as much as weight. For bags, strap comfort and capacity shape real-world use. For drinkware, lid design and cleaning can matter more than an unusual shape.", "The best material is the one that supports the audience and purpose without adding cost they will never notice."], "relatedProductSlug": "drinkware"},
+      {"slug": "behind-a-multi-item-event-kit", "title": "Behind the scenes of a multi-item event kit", "category": "Behind the Scenes", "summary": "How one brief becomes a coordinated set of apparel, lanyards, signage and participant gifts.", "date": "2026-07-28", "readTime": "7 min read", "image": "/images/smu-event.jpg", "imageAlt": "A large event using coordinated branded materials", "featured": false, "popular": false, "body": ["Multi-item projects work best when the visual system, quantities and delivery milestones are agreed before individual products enter production.", "The process starts with the participant journey: what people wear, carry, receive and see. That creates a useful priority list and prevents low-impact items from consuming the budget.", "A consolidated schedule then connects artwork approval, sampling, production and delivery so every part is ready for the same event date."], "relatedProductSlug": "event-essentials"}
+    ],
+    "newsletter": {"heading": "Useful ideas, occasionally delivered.", "body": "Get practical guides on products, printing and project planning. No weekly noise.", "buttonLabel": "Subscribe by email"}
+  }
+}

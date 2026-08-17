@@ -22,7 +22,9 @@ test("all blueprint pages and detail routes are implemented", async () => {
     "src/pages/products/index.astro",
     "src/pages/products/[slug].astro",
     "src/pages/why-mysos.astro",
-    "src/pages/solutions.astro",
+    "src/pages/why-mysos/[slug].astro",
+    "src/pages/solutions/index.astro",
+    "src/pages/solutions/[slug].astro",
     "src/pages/success-stories/index.astro",
     "src/pages/success-stories/[slug].astro",
     "src/pages/blog/index.astro",
@@ -32,7 +34,7 @@ test("all blueprint pages and detail routes are implemented", async () => {
 });
 
 test("products page has six categories, six printing methods and FAQ without the deferred buying guide", async () => {
-  const content = JSON.parse(await read("src/assets/content/pages.json"));
+  const content = JSON.parse(await read("src/content/pages/pages.json"));
   assert.deepEqual(content.products.categories.map((item) => item.name), ["Apparel", "Bags", "Drinkware", "Stationery", "Corporate gifts", "Event essentials"]);
   assert.deepEqual(content.products.printingMethods.map((item) => item.name), ["Silkscreen", "DTF", "DTG", "Embroidery", "Sublimation", "UV"]);
   assert.ok(content.products.faq.length >= 5);
@@ -44,32 +46,83 @@ test("products page has six categories, six printing methods and FAQ without the
 });
 
 test("why, solutions, stories and blog match the requested section counts", async () => {
-  const content = JSON.parse(await read("src/assets/content/pages.json"));
+  const content = JSON.parse(await read("src/content/pages/pages.json"));
   assert.equal(content.why.reasons.length, 5);
   assert.deepEqual(content.why.process.map((step) => step.title), ["Enquiry", "Recommendation", "Quotation", "Sampling", "Production", "Delivery"]);
-  assert.deepEqual(content.solutions.industries.map((item) => item.name), ["Schools", "Businesses", "Events", "Churches", "Sports Teams"]);
+  assert.deepEqual(content.why.pillars.map((item) => item.slug), ["one-supplier", "premium-quality", "flexible-quantities", "expert-recommendations", "tailored-to-you"]);
+  for (const pillar of content.why.pillars) {
+    assert.ok(pillar.title && pillar.subtitle && pillar.problemIntro && pillar.solutionIntro);
+    assert.ok(pillar.problemPoints.length >= 2);
+    assert.ok(pillar.expectPoints.length >= 4);
+    assert.ok(pillar.faq.length >= 3);
+    assert.ok(pillar.storySlug && pillar.recommendedProductSlugs.length && pillar.ctaHeading);
+  }
+  assert.deepEqual(content.solutions.industries.map((item) => item.name), ["Schools", "Businesses", "Events", "Churches", "Sports Teams", "Community Organisations"]);
   for (const solution of content.solutions.industries) {
     assert.ok(solution.bundle.length >= 4);
     assert.ok(solution.problem && solution.outcome && solution.storySlug);
+    assert.equal(solution.needsGrid.length, 3, `${solution.name} needs a 3-item needs grid`);
+    assert.equal(solution.recommendedSolutions.length, 4, `${solution.name} needs four recommended solutions`);
+    for (const rec of solution.recommendedSolutions) assert.ok(rec.name && rec.description && rec.products.length >= 2);
+    assert.ok(solution.faq.length >= 3, `${solution.name} needs FAQ entries`);
   }
+  assert.ok(content.solutions.whyChoose.length >= 3);
   assert.ok(content.stories.items.length >= 3);
   for (const story of content.stories.items) {
     assert.ok(story.challenge && story.solution && story.outcome && story.testimonial);
     assert.ok(story.gallery.length >= 2);
     assert.ok(story.relatedProducts.length && story.relatedSolutions.length);
   }
-  assert.deepEqual(content.blog.categories, ["Printing", "Materials", "Design Tips", "Buying Guides", "Behind the Scenes", "Case Studies"]);
+  assert.deepEqual(content.blog.categories, ["Printing", "Materials", "Corporate Gifts", "Design Tips", "Buying Guides", "Behind the Scenes", "Case Studies"]);
   assert.ok(content.blog.articles.some((article) => article.featured));
   assert.ok(content.blog.articles.some((article) => article.popular));
   assert.ok(content.blog.newsletter.heading);
 });
 
+test("solutions landing and industry detail pages implement the full TRD section set", async () => {
+  const landing = await read("src/pages/solutions/index.astro");
+  for (const section of ["industries", "why-choose-a-solution", "featured-success-stories"]) {
+    assert.match(landing, new RegExp(`id=["']${section}["']`), `solutions landing is missing ${section}`);
+  }
+  assert.match(landing, /\/solutions\/\$\{industry\.slug\}\//);
+
+  const detail = await read("src/pages/solutions/[slug].astro");
+  for (const section of ["top", "understanding-your-needs", "recommended-solutions", "popular-products", "why-mysos", "success-stories", "faq"]) {
+    assert.match(detail, new RegExp(`id=["']${section}["']`), `solutions detail page is missing ${section}`);
+  }
+  assert.match(detail, /getStaticPaths/);
+  assert.match(detail, /industry\.needsGrid/);
+  assert.match(detail, /industry\.recommendedSolutions/);
+  assert.match(detail, /industry\.faq/);
+  assert.match(detail, /CallToAction/);
+
+  const products = await read("src/pages/products/[slug].astro");
+  const stories = await read("src/pages/success-stories/[slug].astro");
+  const home = await read("src/pages/index.astro");
+  for (const source of [products, stories, home]) assert.doesNotMatch(source, /solutions\/#/);
+});
+
+test("why-mysos pillar pages implement the full TRD section set and link from the landing page", async () => {
+  const detail = await read("src/pages/why-mysos/[slug].astro");
+  for (const section of ["top", "the-problem", "our-solution", "what-you-can-expect", "recommended-products", "faq"]) {
+    assert.match(detail, new RegExp(`id=["']${section}["']`), `why-mysos pillar page is missing ${section}`);
+  }
+  assert.match(detail, /getStaticPaths/);
+  assert.match(detail, /success-stories\//);
+  assert.match(detail, /See more success stories/);
+  assert.match(detail, /CallToAction/);
+
+  const landing = await read("src/pages/why-mysos.astro");
+  assert.match(landing, /\/why-mysos\/\$\{pages\.why\.pillars\[i\]\.slug\}\//);
+});
+
 test("all content imagery has useful alternative text and internal cards have real destinations", async () => {
-  const site = JSON.parse(await read("src/assets/content/site.json"));
-  const pages = JSON.parse(await read("src/assets/content/pages.json"));
+  const site = JSON.parse(await read("src/content/site/homepage.json"));
+  const pages = JSON.parse(await read("src/content/pages/pages.json"));
   const images = [
     site.brand,
     site.hero,
+    ...site.trust.logos,
     ...site.categories,
     ...site.caseStudies,
     pages.products.hero,
@@ -96,6 +149,38 @@ test("all content imagery has useful alternative text and internal cards have re
   assert.doesNotMatch(source, /href=["']#["']/);
 });
 
+test("content is served through Astro Content Collections with Zod validation, not raw JSON imports", async () => {
+  const config = await read("src/content.config.ts");
+  assert.match(config, /from "astro:content"/);
+  assert.match(config, /from "astro\/loaders"/);
+  assert.match(config, /z\.object/);
+  assert.match(config, /export const collections = \{ ?site, ?pages ?\}/);
+
+  const { readdir } = await import("node:fs/promises");
+  await assert.rejects(readdir(new URL("src/assets/content", root)), /ENOENT/, "old src/assets/content JSON directory should be removed");
+
+  const sourceFiles = [
+    "src/components/SiteHeader.astro",
+    "src/components/SiteFooter.astro",
+    "src/pages/index.astro",
+    "src/pages/products/index.astro",
+    "src/pages/products/[slug].astro",
+    "src/pages/solutions/index.astro",
+    "src/pages/solutions/[slug].astro",
+    "src/pages/why-mysos.astro",
+    "src/pages/why-mysos/[slug].astro",
+    "src/pages/success-stories/index.astro",
+    "src/pages/success-stories/[slug].astro",
+    "src/pages/blog/index.astro",
+    "src/pages/blog/[slug].astro"
+  ];
+  for (const file of sourceFiles) {
+    const source = await read(file);
+    assert.doesNotMatch(source, /assets\/content/, `${file} should no longer import raw JSON`);
+    assert.match(source, /astro:content/, `${file} should read content via astro:content`);
+  }
+});
+
 test("mobile styles keep the logo, navigation, wordmarks and content grids visible", async () => {
   const css = await read("src/styles/global.css");
   const header = await read("src/components/SiteHeader.astro");
@@ -108,6 +193,15 @@ test("mobile styles keep the logo, navigation, wordmarks and content grids visib
   assert.match(css, /input,select,textarea\{max-width:100%\}/);
   assert.match(header, /class="mobile-nav"/);
   assert.match(header, /aria-label="Mobile navigation"/);
+});
+
+test("trusted-by section renders real client logos, not plain text names", async () => {
+  const site = JSON.parse(await read("src/content/site/homepage.json"));
+  const page = await read("src/pages/index.astro");
+  assert.ok(Array.isArray(site.trust.logos) && site.trust.logos.length >= 8, "expected a real set of client logos");
+  assert.equal("names" in site.trust, false, "trust.names should be replaced by trust.logos");
+  assert.match(page, /site\.trust\.logos\.map/);
+  assert.match(page, /class="client-logo"/);
 });
 
 test("desktop header logo, menu and quote action share one alignment height", async () => {

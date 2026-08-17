@@ -1,6 +1,9 @@
 ---
-import site from "../assets/content/site.json";
+import { getEntry } from "astro:content";
 import { withBase } from "../lib/base.js";
+
+const siteEntry = await getEntry("site", "homepage");
+const site = siteEntry.data;
 
 const { current = "home" } = Astro.props;
 const p = (path) => JSON.stringify(path);
@@ -15,12 +18,12 @@ const links = [
 ---
 <header class="site-header">
   <a class="brand" href={withBase("/")} aria-label="MySOS home">
-    <img src={withBase(site.brand.image)} alt={site.brand.imageAlt} data-cms-paths={imagePaths(["homepage", "brand"])} />
+    <img src={withBase(site.brand.image)} alt={site.brand.imageAlt} data-cms-paths={imagePaths(["site", "homepage", "brand"])} />
   </a>
   <nav class="desktop-nav" aria-label="Primary navigation">
     {links.map((link) => <a href={withBase(link.href)} aria-current={current === link.key ? "page" : undefined}>{link.label}</a>)}
   </nav>
-  <a class="button button-small header-quote" href={withBase("/#quote")} data-cms-path={p(["homepage", "navigation", "quoteLabel"])}>{site.navigation.quoteLabel}</a>
+  <a class="button button-small header-quote" href={withBase("/#quote")} data-cms-path={p(["site", "homepage", "navigation", "quoteLabel"])}>{site.navigation.quoteLabel}</a>
   <details class="mobile-nav">
     <summary aria-label="Open navigation">Menu</summary>
     <nav aria-label="Mobile navigation">
