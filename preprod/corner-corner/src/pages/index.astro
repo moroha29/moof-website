@@ -1,0 +1,274 @@
+---
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+const ringRadii = [16, 32, 48, 64, 80, 96, 112];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Corner Corner (Coffee Concept)</title>
+    <meta name="description" content="A kissa-inspired coffee concept inside RPM by D.Bespoke, Duxton, Singapore. Filter coffee and cold brew, no espresso machine, by design." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Hanken+Grotesk:wght@100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #16130F;
+        --bg-elevated: #201B15;
+        --cream: #EDE6D6;
+        --brass: #A8863E;
+        --burgundy: #6B2430;
+        --space-2: 0.5rem;
+        --space-3: 0.75rem;
+        --space-4: 1rem;
+        --space-5: 1.5rem;
+        --space-6: 2rem;
+        --space-7: 3rem;
+        --space-8: 4rem;
+        --space-9: 6rem;
+        --space-10: 9rem;
+      }
+      * { box-sizing: border-box; }
+      html { font-size: 112.5%; }
+      body {
+        margin: 0; background: var(--bg); color: var(--cream);
+        font-family: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+        font-size: 1rem; line-height: 1.6;
+      }
+      h1, h2, h3 { font-family: "Bodoni Moda", Georgia, serif; margin: 0; color: var(--cream); font-optical-sizing: auto; }
+      a { color: var(--brass); }
+      .skip-link { position: absolute; left: -999px; top: 0; }
+      .skip-link:focus {
+        left: var(--space-5); top: var(--space-5); background: var(--brass); color: var(--bg);
+        padding: 0.5rem 1rem; border-radius: 4px; z-index: 20;
+      }
+      header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: var(--space-5) clamp(1.25rem, 5vw, 3.5rem);
+        border-bottom: 1px solid #2C261D;
+      }
+      .wordmark {
+        display: flex; align-items: center; gap: 0.6rem;
+        font-family: "Bodoni Moda", serif; font-weight: 500;
+        font-size: 1.15rem; color: var(--cream); text-decoration: none;
+      }
+      .wordmark img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; background: var(--cream); }
+      nav a {
+        color: var(--cream); text-decoration: none; margin-left: var(--space-5);
+        font-family: "Space Mono", monospace; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em;
+        font-size: 0.8125rem; position: relative; padding-bottom: 4px;
+      }
+      nav a::after {
+        content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 1px;
+        background: var(--brass); transform: scaleX(0); transform-origin: center;
+        transition: transform 0.2s ease-out;
+      }
+      nav a:hover::after, nav a:focus-visible::after { transform: scaleX(1); }
+      nav a:focus-visible { outline: 1px solid var(--brass); outline-offset: 2px; }
+      main { max-width: 1120px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 3.5rem); }
+      .hero { padding: var(--space-8) 0 var(--space-6); }
+      @media (min-width: 1024px) { .hero { padding-top: var(--space-10); } }
+      .eyebrow {
+        color: var(--brass); text-transform: uppercase; letter-spacing: 0.1em;
+        font-family: "Space Mono", monospace; font-weight: 400;
+        font-size: 0.8125rem; margin: 0 0 var(--space-4);
+      }
+      .hero h1 {
+        font-weight: 600; letter-spacing: -0.01em; line-height: 1.02;
+        font-size: clamp(2.75rem, 2rem + 4vw, 4.75rem);
+        margin: 0; max-width: 16ch;
+        opacity: 0; transform: translateY(12px);
+        animation: rise 0.5s ease-out 0.12s forwards;
+      }
+      @media (prefers-reduced-motion: reduce) { .hero h1 { opacity: 1; transform: none; animation: none; } }
+      @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+      .photo {
+        position: relative; overflow: hidden; border-radius: 4px;
+        border: 1px solid #2C261D; background: var(--bg-elevated);
+        opacity: 0; transform: translateY(12px);
+        animation: rise 0.5s ease-out forwards;
+      }
+      @media (prefers-reduced-motion: reduce) { .photo { opacity: 1; transform: none; animation: none; } }
+      .photo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+      .hero-photo { height: 440px; margin-top: var(--space-6); }
+
+      .ring-divider { position: relative; height: 180px; overflow: hidden; margin: var(--space-10) 0; display: flex; align-items: center; }
+      .ring-divider.right { justify-content: flex-end; }
+      .ring-divider svg { width: 320px; height: 320px; flex-shrink: 0; }
+      .ring-divider.right svg { transform: translateX(35%); }
+      .ring-divider.left svg { transform: translateX(-35%); }
+      .ring-divider circle { fill: none; }
+      .ring-divider .ring-brass { stroke: var(--brass); stroke-opacity: 0.28; stroke-width: 1; }
+      .ring-group { animation: spin 240s linear infinite; transform-origin: center; }
+      @media (prefers-reduced-motion: reduce) { .ring-group { animation: none; } }
+      @keyframes spin { to { transform: rotate(360deg); } }
+
+      section { padding: var(--space-8) 0; }
+      @media (min-width: 1024px) { section { padding: var(--space-9) 0; } }
+      .reveal { opacity: 0; transform: translateY(12px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
+      .reveal.is-visible { opacity: 1; transform: translateY(0); }
+      @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+      .kicker {
+        color: var(--brass); text-transform: uppercase; letter-spacing: 0.1em;
+        font-family: "Space Mono", monospace; font-weight: 400;
+        font-size: 0.8125rem; margin: 0 0 var(--space-4);
+      }
+      h2 { font-weight: 500; letter-spacing: -0.01em; font-size: clamp(1.75rem, 1.5rem + 1vw, 2.25rem); }
+      .about-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-6); align-items: center; }
+      .about p { max-width: 62ch; color: var(--cream); opacity: 0.9; margin: 0 0 var(--space-5); }
+      .pull-quote {
+        font-family: "Bodoni Moda", serif; font-style: italic; font-weight: 400;
+        font-size: 1.6875rem; line-height: 1.3; color: var(--brass); margin: var(--space-5) 0 0; max-width: 24ch;
+      }
+      .about-photo { height: 340px; }
+      .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-5); margin-top: var(--space-6); }
+      .menu-card { background: var(--bg-elevated); border: 1px solid #2C261D; border-radius: 6px; padding: var(--space-5); }
+      .menu-card .tag {
+        font-family: "Space Mono", monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em;
+        color: var(--brass); margin: 0 0 0.5rem;
+      }
+      .menu-card h3 { font-size: 1.25rem; font-weight: 500; margin: 0 0 0.35rem; }
+      .menu-card p { margin: 0; color: var(--cream); opacity: 0.7; font-size: 0.9375rem; transition: opacity 0.15s ease-out; }
+      .menu-card:hover p, .menu-card:focus-within p { opacity: 1; }
+      .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); margin-top: var(--space-4); }
+      .visit-grid h3 { font-family: "Bodoni Moda", serif; font-weight: 500; font-size: 1.0625rem; margin: 0 0 0.4rem; color: var(--brass); }
+      .visit-grid p { margin: 0; color: var(--cream); opacity: 0.85; }
+      footer {
+        padding: var(--space-6) clamp(1.25rem, 5vw, 3.5rem) var(--space-8);
+        color: var(--cream); opacity: 0.55; font-size: 0.85rem; text-align: center;
+        font-family: "Space Mono", monospace;
+      }
+      @media (max-width: 560px) {
+        .visit-grid { grid-template-columns: 1fr; }
+        .about-grid { grid-template-columns: 1fr; }
+        .ring-divider svg { width: 220px; height: 220px; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header>
+      <a class="wordmark" href={base}><img src={`${base}images/logo.png`} alt="" /> Corner Corner</a>
+      <nav aria-label="Primary">
+        <a href={base}>Home</a>
+        <a href={`${base}menu/`}>Menu</a>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-heading">
+        <p class="eyebrow">Coffee &amp; Musik &middot; Duxton, Singapore</p>
+        <h1 id="hero-heading">Not every coffee shop needs an espresso machine.</h1>
+        <div class="photo hero-photo">
+          <img src={`${base}images/etched-signage.png`} alt="Hand-etched brass plaque of the Corner Corner cat-with-turntable mascot, mounted on a raw stone wall" />
+        </div>
+      </section>
+
+      <div class="ring-divider right" aria-hidden="true">
+        <svg viewBox="0 0 240 240">
+          <g class="ring-group">
+            {ringRadii.map((r) => (
+              <circle class="ring-brass" cx="120" cy="120" r={r} />
+            ))}
+          </g>
+        </svg>
+      </div>
+
+      <section class="about reveal" aria-labelledby="about-heading">
+        <p class="kicker">About</p>
+        <h2 id="about-heading">A kissa-inspired coffee concept</h2>
+        <div class="about-grid">
+          <div>
+            <p>
+              We're Corner Corner, a kissa-inspired coffee concept tucked inside RPM by D.Bespoke during the day.
+              Inspired by Japan's listening cafes &mdash; Jazz Kissa &mdash; of the '70s, music is as much a part
+              of the experience as what's in the cup. We bring that spirit into our own corner, with a deep focus
+              on produce, origin, and the small details that make both coffee and music worth slowing down for.
+              That's why we serve only filter coffee and cold brews.
+            </p>
+            <p class="pull-quote">"Not about doing less. About doing one thing with intention."</p>
+          </div>
+          <div class="photo about-photo">
+            <img src={`${base}images/vinyl-coffee-shelf.png`} alt="Specialty coffee bean bags from partner roasters displayed on a dark wood shelf full of vinyl records" />
+          </div>
+        </div>
+      </section>
+
+      <div class="ring-divider left" aria-hidden="true">
+        <svg viewBox="0 0 240 240">
+          <g class="ring-group">
+            {ringRadii.map((r) => (
+              <circle class="ring-brass" cx="120" cy="120" r={r} />
+            ))}
+          </g>
+        </svg>
+      </div>
+
+      <section class="menu-preview reveal" aria-labelledby="menu-heading">
+        <p class="kicker">On the menu</p>
+        <h2 id="menu-heading">Filter coffee &amp; cold brew</h2>
+        <div class="menu-grid">
+          <div class="menu-card">
+            <p class="tag">Filter &mdash; Washed</p>
+            <h3>Bolivia Arcangel</h3>
+            <p>Balanced &amp; crisp</p>
+          </div>
+          <div class="menu-card">
+            <p class="tag">Filter &mdash; Yeast Washed</p>
+            <h3>Ecuador Vinka Sidra</h3>
+            <p>Funky &amp; complex</p>
+          </div>
+          <div class="menu-card">
+            <p class="tag">Filter &mdash; Natural</p>
+            <h3>Ethiopia Alo Peaberry</h3>
+            <p>Floral &amp; layered &mdash; raspberry, pineapple sorbet, orange marmalade</p>
+          </div>
+          <div class="menu-card">
+            <p class="tag">Reserve &mdash; Lab Process Geisha</p>
+            <h3>Panama Lost Origin</h3>
+            <p>Elegant &amp; refined &mdash; blueberry</p>
+          </div>
+        </div>
+        <p style="margin-top:1.5rem;"><a href={`${base}menu/`}>See the full menu &rarr;</a></p>
+      </section>
+
+      <section class="visit reveal" aria-labelledby="visit-heading" style="border-top: 1px solid #2C261D;">
+        <p class="kicker">Visit</p>
+        <h2 id="visit-heading">Find us inside RPM by D.Bespoke</h2>
+        <div class="visit-grid">
+          <div>
+            <h3>Address</h3>
+            <p>16 Duxton Rd<br />Singapore 089482</p>
+          </div>
+          <div>
+            <h3>Hours</h3>
+            <p>Tue&ndash;Fri 11am&ndash;5pm<br />Sat&ndash;Sun 10am&ndash;5pm<br />Closed Mondays &amp; Tuesdays</p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>CORNER CORNER &middot; DEMO PREVIEW, NOT A LIVE SITE</p>
+    </footer>
+    <script>
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.2 }
+        );
+        document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+      } else {
+        document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+      }
+    </script>
+  </body>
+</html>
