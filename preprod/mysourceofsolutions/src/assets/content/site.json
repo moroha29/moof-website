@@ -1,0 +1,40 @@
+{
+  "brand": {"image":"/images/mysos-logo.jpg","imageAlt":"MySOS Source of Solutions logo","name":"MySOS","tagline":"Source of Solutions"},
+  "seo": {"homeTitle":"MySOS — Your One-Stop Sourcing Solution","homeDescription":"Custom apparel, bags, drinkware, corporate gifts and event essentials sourced, designed and delivered in Singapore."},
+  "navigation": {"productsLabel":"What we print","whyLabel":"Why MySOS","solutionsLabel":"Solutions","workLabel":"Our work","quoteLabel":"Get a quote","whatsappLabel":"WhatsApp us"},
+  "hero": {"eyebrow":"Sourcing · Design · Printing · Delivery","headline":"Your one-stop sourcing solution.","supportingCopy":"No more chasing suppliers, designers or printers. MySOS sources, customises and delivers apparel, bags, drinkware and corporate gifts — so you can get back to running your event, team or business.","primaryLabel":"Get an instant quote","primaryUrl":"#quote","secondaryLabel":"Message us","secondaryUrl":"https://wa.me/6588547109","image":"/images/smu-event.jpg","imageAlt":"Large university event supplied with customised MySOS merchandise"},
+  "trust": {"eyebrow":"Trusted by teams across Singapore","names":["National University","Temasek Polytechnic","OCBC Bank","SG Youth Council","Marina Sports Club"]},
+  "categoriesIntro":{"eyebrow":"What we print","heading":"Six categories. Endless customisation.","body":"Can't find what you're looking for? Tell us what you need and we'll help source it."},
+  "categories": [
+    {"name":"Apparel","title":"T-shirts, polos & jackets","body":"Everyday wear, printed or embroidered to match your brand.","image":"/images/project-showcase.png","imageAlt":"Custom printed apparel prepared by MySOS"},
+    {"name":"Bags","title":"Totes, drawstring & backpacks","body":"Practical giveaways that keep your logo moving.","image":"/images/smu-event.jpg","imageAlt":"Branded event merchandise displayed at a university event"},
+    {"name":"Drinkware","title":"Bottles, tumblers & mugs","body":"Everyday essentials your recipients actually use.","image":"/images/custom-towel.png","imageAlt":"Collection of custom branded merchandise supplied by MySOS"},
+    {"name":"Stationery","title":"Notebooks, pens & folders","body":"Polished takeaways for onboarding kits and events.","image":"/images/project-showcase.png","imageAlt":"Custom corporate products arranged for delivery"},
+    {"name":"Corporate gifts","title":"Premium gift sets","body":"Curated bundles for clients, staff and milestones.","image":"/images/custom-towel.png","imageAlt":"Custom branded gift item produced for a client"},
+    {"name":"Event essentials","title":"Lanyards, medals & banners","body":"Everything to brand and run your next event.","image":"/images/smu-event.jpg","imageAlt":"Crowd at a branded university event supplied by MySOS"}
+  ],
+  "benefitsIntro":{"eyebrow":"Why MySOS","heading":"One brief. One partner. Everything handled."},
+  "benefits":[
+    {"number":"01","title":"One supplier. Endless possibilities.","body":"One-stop sourcing across every category and print method — no juggling vendors."},
+    {"number":"02","title":"Premium quality, sensible pricing.","body":"Factory-direct sourcing keeps costs down without cutting corners."},
+    {"number":"03","title":"Flexible order quantities.","body":"From a small team run to a bulk corporate rollout, we scale with you."},
+    {"number":"04","title":"Expert recommendations.","body":"We recommend the right material and print method for your budget and brand."},
+    {"number":"05","title":"Tailored to your needs.","body":"Every quote is built around your industry, timeline and use case."}
+  ],
+  "solutionsIntro":{"eyebrow":"Solutions","heading":"Built around the way your team works."},
+  "solutions":[{"name":"Schools","body":"Uniforms, class tees and graduation gifts."},{"name":"Businesses","body":"Onboarding kits and branded merchandise."},{"name":"Events","body":"Lanyards, banners and exhibition giveaways."},{"name":"Churches","body":"Ministry apparel and congregation gifts."},{"name":"Sports teams","body":"Jerseys, medals and complete team bundles."}],
+  "workIntro":{"eyebrow":"Success stories","heading":"Real projects. Real results."},
+  "caseStudies":[
+    {"type":"Sports team","title":"Marina Sports Club","result":"200 jerseys delivered in 10 days for a regional tournament.","image":"/images/project-showcase.png","imageAlt":"MySOS custom sports apparel project"},
+    {"type":"Corporate","title":"OCBC onboarding kits","result":"A consolidated gift set for 500 new hires, delivered in one shipment.","image":"/images/custom-towel.png","imageAlt":"Custom branded product from a corporate gift project"},
+    {"type":"University","title":"Temasek Poly orientation","result":"A full orientation merchandise bundle across six product lines.","image":"/images/smu-event.jpg","imageAlt":"University event featuring custom merchandise and branding"}
+  ],
+  "processIntro":{"eyebrow":"The SOS way","heading":"From idea to doorstep, without the runaround.","body":"A clear four-step process built around your needs, budget and deadline."},
+  "process":[{"number":"01","title":"Consultation","body":"Tell us what you need, your budget and timeline. We recommend the best route."},{"number":"02","title":"Fulfilment","body":"We source from trusted factories, support the design and oversee production."},{"number":"03","title":"Quality check","body":"Every item is hand-counted and inspected before it leaves us."},{"number":"04","title":"Delivery","body":"We consolidate shipments and deliver around your schedule."}],
+  "testimonialsIntro":{"eyebrow":"What clients say","heading":"The easiest item on their to-do list."},
+  "testimonials":[{"quote":"MySOS handled sourcing, design and delivery end-to-end. One point of contact, zero hassle.","person":"Operations Lead, OCBC"},{"quote":"Our jerseys arrived a week early and looked better than the mockups.","person":"Coach, Marina Sports Club"},{"quote":"Great pricing on a small run — they never made us feel too small to matter.","person":"Events Committee, Temasek Poly"}],
+  "quote":{"eyebrow":"Get a quote","heading":"Ready to simplify your sourcing?","body":"Tell us what you need and we'll take care of the rest.","nameLabel":"Your name","phoneLabel":"Phone number","emailLabel":"Email address","needLabel":"What do you need?","messageLabel":"Project details","submitLabel":"Send my request","formAction":"mailto:mysourceofsolutions@gmail.com","image":"/images/project-showcase.png","imageAlt":"MySOS team member presenting customised merchandise"},
+  "contact":{"phoneLabel":"+65 8854 7109","phoneUrl":"tel:+6588547109","emailLabel":"mysourceofsolutions@gmail.com","emailUrl":"mailto:mysourceofsolutions@gmail.com","whatsappLabel":"Chat on WhatsApp","whatsappUrl":"https://wa.me/6588547109"},
+  "footer":{"copyright":"© 2026 MySOS (Source Of Solutions).","registration":"Company Reg. No. 202322383G.","backToTopLabel":"Back to top"},
+  "appearance":{"overrides":[]}
+}

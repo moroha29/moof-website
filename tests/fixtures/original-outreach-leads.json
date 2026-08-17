@@ -111,6 +111,16 @@
       "otherContact": "",
       "remarks": "",
       "sampleWebsite": ""
+    },
+    "mysourceofsolutions": {
+      "rowNumber": 12,
+      "category": "Contact New Website",
+      "companyName": "MySOS (Source Of Solutions)",
+      "googleMapsUrl": "",
+      "emailOrWhatsapp": "+65 8854 7109",
+      "otherContact": "https://www.mysourceofsolutions.com/",
+      "remarks": "Owner-approved homepage redesign using existing website assets.",
+      "sampleWebsite": ""
     }
   }
 }
