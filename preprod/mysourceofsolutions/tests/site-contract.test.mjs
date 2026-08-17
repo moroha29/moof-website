@@ -95,3 +95,17 @@ test("all content imagery has useful alternative text and internal cards have re
   ])).join("\n");
   assert.doesNotMatch(source, /href=["']#["']/);
 });
+
+test("mobile styles keep the logo, navigation, wordmarks and content grids visible", async () => {
+  const css = await read("src/styles/global.css");
+  const header = await read("src/components/SiteHeader.astro");
+  assert.match(css, /\.brand img\{[^}]*object-fit:contain/);
+  assert.match(css, /\.brand\{[^}]*overflow:visible/);
+  assert.match(css, /\.mobile-nav nav\{[^}]*overflow-y:auto/);
+  assert.match(css, /\.trust \.logo-row\{[^}]*grid-template-columns:1fr 1fr/);
+  assert.match(css, /@media\(max-width:380px\)/);
+  assert.match(css, /\.portrait-grid[^}]*grid-template-columns:1fr/);
+  assert.match(css, /input,select,textarea\{max-width:100%\}/);
+  assert.match(header, /class="mobile-nav"/);
+  assert.match(header, /aria-label="Mobile navigation"/);
+});
