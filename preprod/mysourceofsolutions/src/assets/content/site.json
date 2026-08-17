@@ -3,13 +3,28 @@
   "seo": {"homeTitle":"MySOS — Your One-Stop Sourcing Solution","homeDescription":"Custom apparel, bags, drinkware, corporate gifts and event essentials sourced, designed and delivered in Singapore."},
   "navigation": {"productsLabel":"What we print","whyLabel":"Why MySOS","solutionsLabel":"Solutions","workLabel":"Our work","quoteLabel":"Get a quote","whatsappLabel":"WhatsApp us"},
   "hero": {"eyebrow":"Sourcing · Design · Printing · Delivery","headline":"Your one-stop sourcing solution.","supportingCopy":"No more chasing suppliers, designers or printers. MySOS sources, customises and delivers apparel, bags, drinkware and corporate gifts — so you can get back to running your event, team or business.","primaryLabel":"Get an instant quote","primaryUrl":"#quote","secondaryLabel":"Message us","secondaryUrl":"https://wa.me/6588547109","image":"/images/smu-event.jpg","imageAlt":"Large university event supplied with customised MySOS merchandise"},
-  "trust": {"eyebrow":"Trusted by teams across Singapore","names":["National University","Temasek Polytechnic","OCBC Bank","SG Youth Council","Marina Sports Club"]},
+  "trust": {"eyebrow":"Trusted by universities, schools and organisations across Singapore","logos":[
+    {"name":"Mediacorp","image":"/images/clients/mediacorp.png","imageAlt":"Mediacorp logo"},
+    {"name":"Tan Tock Seng Hospital","image":"/images/clients/tan-tock-seng-hospital.png","imageAlt":"Tan Tock Seng Hospital logo"},
+    {"name":"National University of Singapore","image":"/images/clients/nus.png","imageAlt":"National University of Singapore logo"},
+    {"name":"Singapore Management University","image":"/images/clients/smu.png","imageAlt":"Singapore Management University logo"},
+    {"name":"Nanyang Technological University","image":"/images/clients/ntu.png","imageAlt":"Nanyang Technological University logo"},
+    {"name":"Singapore University of Social Sciences","image":"/images/clients/suss.png","imageAlt":"Singapore University of Social Sciences logo"},
+    {"name":"Temasek Polytechnic","image":"/images/clients/temasek-polytechnic.png","imageAlt":"Temasek Polytechnic logo"},
+    {"name":"St. Andrew's Autism Centre","image":"/images/clients/st-andrews-autism-centre.png","imageAlt":"St. Andrew's Autism Centre logo"},
+    {"name":"Amity University","image":"/images/clients/amity-university.png","imageAlt":"Amity University logo"},
+    {"name":"SkilledMaid.com Services","image":"/images/clients/skilledmaid-services.png","imageAlt":"SkilledMaid.com Services logo"},
+    {"name":"Regent Secondary School","image":"/images/clients/regent-secondary-school.png","imageAlt":"Regent Secondary School logo"},
+    {"name":"Chung Cheng High School","image":"/images/clients/chung-cheng-high-school.png","imageAlt":"Chung Cheng High School logo"},
+    {"name":"Stories Joo Chiat","image":"/images/clients/stories-joo-chiat.png","imageAlt":"Stories Joo Chiat logo"},
+    {"name":"Healthcare Essentials","image":"/images/clients/healthcare-essentials.png","imageAlt":"Healthcare Essentials logo"}
+  ]},
   "categoriesIntro":{"eyebrow":"What we print","heading":"Six categories. Endless customisation.","body":"Can't find what you're looking for? Tell us what you need and we'll help source it."},
   "categories": [
     {"slug":"apparel","name":"Apparel","title":"T-shirts, polos & jackets","body":"Everyday wear, printed or embroidered to match your brand.","image":"/images/project-showcase.png","imageAlt":"Custom printed apparel prepared by MySOS"},
-    {"slug":"bags","name":"Bags","title":"Totes, drawstring & backpacks","body":"Practical giveaways that keep your logo moving.","image":"/images/smu-event.jpg","imageAlt":"Branded event merchandise displayed at a university event"},
+    {"slug":"bags","name":"Bags","title":"Totes, drawstring & backpacks","body":"Practical giveaways that keep your logo moving.","image":"/images/tote-bag.png","imageAlt":"Custom printed MySOS tote bag"},
     {"slug":"drinkware","name":"Drinkware","title":"Bottles, tumblers & mugs","body":"Everyday essentials your recipients actually use.","image":"/images/custom-towel.png","imageAlt":"Collection of custom branded merchandise supplied by MySOS"},
-    {"slug":"stationery","name":"Stationery","title":"Notebooks, pens & folders","body":"Polished takeaways for onboarding kits and events.","image":"/images/project-showcase.png","imageAlt":"Custom corporate products arranged for delivery"},
+    {"slug":"stationery","name":"Stationery","title":"Notebooks, pens & folders","body":"Polished takeaways for onboarding kits and events.","image":"/images/stationery.png","imageAlt":"Custom branded notebooks, pens and folders from MySOS"},
     {"slug":"corporate-gifts","name":"Corporate gifts","title":"Premium gift sets","body":"Curated bundles for clients, staff and milestones.","image":"/images/custom-towel.png","imageAlt":"Custom branded gift item produced for a client"},
     {"slug":"event-essentials","name":"Event essentials","title":"Lanyards, medals & banners","body":"Everything to brand and run your next event.","image":"/images/smu-event.jpg","imageAlt":"Crowd at a branded university event supplied by MySOS"}
   ],
@@ -22,15 +37,13 @@
     {"number":"05","title":"Tailored to your needs.","body":"Every quote is built around your industry, timeline and use case."}
   ],
   "solutionsIntro":{"eyebrow":"Solutions","heading":"Built around the way your team works."},
-  "solutions":[{"name":"Schools","body":"Uniforms, class tees and graduation gifts."},{"name":"Businesses","body":"Onboarding kits and branded merchandise."},{"name":"Events","body":"Lanyards, banners and exhibition giveaways."},{"name":"Churches","body":"Ministry apparel and congregation gifts."},{"name":"Sports teams","body":"Jerseys, medals and complete team bundles."}],
+  "solutions":[{"name":"Schools","body":"Uniforms, class tees and graduation gifts."},{"name":"Businesses","body":"Onboarding kits and branded merchandise."},{"name":"Events","body":"Lanyards, banners and exhibition giveaways."},{"name":"Churches","body":"Ministry apparel and congregation gifts."},{"name":"Sports teams","body":"Jerseys, medals and complete team bundles."},{"name":"Community organisations","body":"Fundraisers, campaigns and volunteer programmes."}],
   "workIntro":{"eyebrow":"Success stories","heading":"Real projects. Real results."},
   "caseStudies":[
     {"slug":"marina-sports-club","type":"Sports team","title":"Marina Sports Club","result":"200 jerseys delivered in 10 days for a regional tournament.","image":"/images/project-showcase.png","imageAlt":"MySOS custom sports apparel project"},
     {"slug":"ocbc-onboarding","type":"Corporate","title":"OCBC onboarding kits","result":"A consolidated gift set for 500 new hires, delivered in one shipment.","image":"/images/custom-towel.png","imageAlt":"Custom branded product from a corporate gift project"},
     {"slug":"temasek-orientation","type":"University","title":"Temasek Poly orientation","result":"A full orientation merchandise bundle across six product lines.","image":"/images/smu-event.jpg","imageAlt":"University event featuring custom merchandise and branding"}
   ],
-  "processIntro":{"eyebrow":"The SOS way","heading":"From idea to doorstep, without the runaround.","body":"A clear four-step process built around your needs, budget and deadline."},
-  "process":[{"number":"01","title":"Consultation","body":"Tell us what you need, your budget and timeline. We recommend the best route."},{"number":"02","title":"Fulfilment","body":"We source from trusted factories, support the design and oversee production."},{"number":"03","title":"Quality check","body":"Every item is hand-counted and inspected before it leaves us."},{"number":"04","title":"Delivery","body":"We consolidate shipments and deliver around your schedule."}],
   "testimonialsIntro":{"eyebrow":"What clients say","heading":"The easiest item on their to-do list."},
   "testimonials":[{"quote":"MySOS handled sourcing, design and delivery end-to-end. One point of contact, zero hassle.","person":"Operations Lead, OCBC"},{"quote":"Our jerseys arrived a week early and looked better than the mockups.","person":"Coach, Marina Sports Club"},{"quote":"Great pricing on a small run — they never made us feel too small to matter.","person":"Events Committee, Temasek Poly"}],
   "quote":{"eyebrow":"Get a quote","heading":"Ready to simplify your sourcing?","body":"Tell us what you need and we'll take care of the rest.","nameLabel":"Your name","phoneLabel":"Phone number","emailLabel":"Email address","needLabel":"What do you need?","messageLabel":"Project details","submitLabel":"Send my request","formAction":"mailto:mysourceofsolutions@gmail.com","image":"/images/project-showcase.png","imageAlt":"MySOS team member presenting customised merchandise"},

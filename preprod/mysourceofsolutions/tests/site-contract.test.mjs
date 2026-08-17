@@ -47,7 +47,7 @@ test("why, solutions, stories and blog match the requested section counts", asyn
   const content = JSON.parse(await read("src/assets/content/pages.json"));
   assert.equal(content.why.reasons.length, 5);
   assert.deepEqual(content.why.process.map((step) => step.title), ["Enquiry", "Recommendation", "Quotation", "Sampling", "Production", "Delivery"]);
-  assert.deepEqual(content.solutions.industries.map((item) => item.name), ["Schools", "Businesses", "Events", "Churches", "Sports Teams"]);
+  assert.deepEqual(content.solutions.industries.map((item) => item.name), ["Schools", "Businesses", "Events", "Churches", "Sports Teams", "Community Organisations"]);
   for (const solution of content.solutions.industries) {
     assert.ok(solution.bundle.length >= 4);
     assert.ok(solution.problem && solution.outcome && solution.storySlug);
@@ -58,7 +58,7 @@ test("why, solutions, stories and blog match the requested section counts", asyn
     assert.ok(story.gallery.length >= 2);
     assert.ok(story.relatedProducts.length && story.relatedSolutions.length);
   }
-  assert.deepEqual(content.blog.categories, ["Printing", "Materials", "Design Tips", "Buying Guides", "Behind the Scenes", "Case Studies"]);
+  assert.deepEqual(content.blog.categories, ["Printing", "Materials", "Corporate Gifts", "Design Tips", "Buying Guides", "Behind the Scenes", "Case Studies"]);
   assert.ok(content.blog.articles.some((article) => article.featured));
   assert.ok(content.blog.articles.some((article) => article.popular));
   assert.ok(content.blog.newsletter.heading);
@@ -70,6 +70,7 @@ test("all content imagery has useful alternative text and internal cards have re
   const images = [
     site.brand,
     site.hero,
+    ...site.trust.logos,
     ...site.categories,
     ...site.caseStudies,
     pages.products.hero,
@@ -108,6 +109,15 @@ test("mobile styles keep the logo, navigation, wordmarks and content grids visib
   assert.match(css, /input,select,textarea\{max-width:100%\}/);
   assert.match(header, /class="mobile-nav"/);
   assert.match(header, /aria-label="Mobile navigation"/);
+});
+
+test("trusted-by section renders real client logos, not plain text names", async () => {
+  const site = JSON.parse(await read("src/assets/content/site.json"));
+  const page = await read("src/pages/index.astro");
+  assert.ok(Array.isArray(site.trust.logos) && site.trust.logos.length >= 8, "expected a real set of client logos");
+  assert.equal("names" in site.trust, false, "trust.names should be replaced by trust.logos");
+  assert.match(page, /site\.trust\.logos\.map/);
+  assert.match(page, /class="client-logo"/);
 });
 
 test("desktop header logo, menu and quote action share one alignment height", async () => {
