@@ -23,7 +23,7 @@ body{min-width:320px}
 .site-footer strong{font:700 .72rem Manrope;text-transform:uppercase;letter-spacing:.12em;color:#9fb5ff}
 .site-footer p{margin:.7rem 0 0;font-size:.78rem;line-height:1.7;color:#bac7f5}
 .back-top{font-size:.85rem}
-.trust{display:block;overflow:hidden}.trust #trusted-heading{margin:0 0 1rem}.logo-row-viewport{overflow:hidden;width:100%;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}.trust .logo-row{display:flex;flex-wrap:nowrap;width:max-content;align-items:center;gap:3.5rem;animation:trust-marquee 32s linear infinite}.trust .logo-row:hover{animation-play-state:running}.client-logo{height:36px;width:auto;object-fit:contain;flex:0 0 auto}@keyframes trust-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}@media(prefers-reduced-motion:reduce){.trust .logo-row{animation:none;flex-wrap:wrap;width:auto}.logo-row-viewport{-webkit-mask-image:none;mask-image:none}.trust .logo-row img[aria-hidden="true"]{display:none}}
+.trust{display:block;overflow:hidden}.trust #trusted-heading{margin:0 0 1rem}.logo-row-viewport{overflow:hidden;width:100%;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}.trust .logo-row{display:flex;flex-wrap:nowrap;width:max-content;align-items:center;gap:4rem;animation:trust-marquee 32s linear infinite}.trust .logo-row:hover{animation-play-state:running}.client-logo{height:52px;width:auto;object-fit:contain;flex:0 0 auto}@keyframes trust-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}@media(prefers-reduced-motion:reduce){.trust .logo-row{animation:none;flex-wrap:wrap;width:auto}.logo-row-viewport{-webkit-mask-image:none;mask-image:none}.trust .logo-row img[aria-hidden="true"]{display:none}}
 .hero>*,.page-hero>*,.detail-hero>*,.story-hero>*,.section-heading>*,.category-grid>*,.portrait-grid>*,.method-gallery>*,.work-grid>*,.story-grid>*,.article-grid>*,.link-grid>*,.solution-grid>*{min-width:0}
 .hero h1,.page-hero h1,.detail-hero h1,.story-hero h1,.section-heading h2,.final-cta h2{overflow-wrap:anywhere}
 .button,.text-button,.site-header a,.mobile-nav summary{min-height:44px}
@@ -109,7 +109,7 @@ input,select,textarea{max-width:100%}
 }
 @media(max-width:900px){
   .mobile-nav nav{display:flex}.site-header{gap:.8rem}.site-header .header-quote{display:none}
-  .client-logo{height:30px}
+  .client-logo{height:44px}
   .site-footer{grid-template-columns:1fr 1fr}
   .page-hero,.detail-hero,.story-hero{grid-template-columns:1fr;min-height:auto;padding-top:3.5rem}.page-hero figure img,.detail-hero figure img,.story-hero figure img{height:500px}
   .portrait-grid,.method-gallery,.story-grid{grid-template-columns:1fr 1fr}
@@ -127,7 +127,7 @@ input,select,textarea{max-width:100%}
 }
 @media(max-width:600px){
   .site-header{height:68px;padding-inline:16px}.brand{flex-basis:112px;width:112px;height:var(--header-control-height)}.brand img{max-height:38px}.mobile-nav{margin-left:auto}.mobile-nav summary{height:var(--header-control-height);display:flex;align-items:center;padding:0 .75rem;font-size:.8rem}.mobile-nav nav{right:0;max-height:calc(100vh - 84px);overflow-y:auto}.anchor-nav,.category-pills{top:68px;justify-content:flex-start}
-  .trust{padding-inline:16px}.trust .logo-row{gap:2rem}.client-logo{height:24px}
+  .trust{padding-inline:16px}.trust .logo-row{gap:2.5rem}.client-logo{height:36px}
   .site-footer{grid-template-columns:1fr}.site-footer .back-top{margin-top:1rem}
   .page-hero,.detail-hero,.story-hero{padding-top:2.8rem;padding-bottom:4rem}.page-hero h1,.detail-hero h1,.story-hero h1,.article-page h1{font-size:clamp(3rem,14vw,4.4rem)}.page-hero figure img,.detail-hero figure img,.story-hero figure img{height:390px;border-radius:18px 70px 18px 18px}
   .portrait-grid,.method-gallery,.compact-printing .method-gallery,.story-grid,.article-grid,.mini-product-grid{grid-template-columns:1fr}.mini-product-grid article:last-child{grid-column:auto}.portrait-card img{height:320px}
