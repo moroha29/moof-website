@@ -24,7 +24,12 @@ const imagePaths = (base) => p([[...base, "image"], [...base, "imageAlt"]]);
 
   <section class="trust" aria-labelledby="trusted-heading">
     <p id="trusted-heading" data-cms-path={p(["site", "homepage", "trust", "eyebrow"])}>{site.trust.eyebrow}</p>
-    <div class="logo-row">{site.trust.logos.map((item, i) => <img class="client-logo" src={withBase(item.image)} alt={item.imageAlt} loading="lazy" data-cms-paths={imagePaths(["site", "homepage", "trust", "logos", i])} />)}</div>
+    <div class="logo-row-viewport">
+      <div class="logo-row">
+        {site.trust.logos.map((item, i) => <img class="client-logo" src={withBase(item.image)} alt={item.imageAlt} loading="eager" data-cms-paths={imagePaths(["site", "homepage", "trust", "logos", i])} />)}
+        {site.trust.logos.map((item) => <img class="client-logo" src={withBase(item.image)} alt="" aria-hidden="true" loading="lazy" />)}
+      </div>
+    </div>
   </section>
 
   <section class="section categories" id="categories">
