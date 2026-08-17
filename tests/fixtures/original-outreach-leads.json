@@ -92,8 +92,28 @@
       "remarks": "",
       "sampleWebsite": ""
     },
-    "mysourceofsolutions": {
+    "corner-corner": {
       "rowNumber": 10,
+      "category": "Contact New Website",
+      "companyName": "Corner Corner",
+      "googleMapsUrl": "https://share.google/JyFG28SBGknbGgWI5",
+      "emailOrWhatsapp": "https://www.instagram.com/corner___corner/?hl=en",
+      "otherContact": "",
+      "remarks": "",
+      "sampleWebsite": ""
+    },
+    "hideout-coffee-bar": {
+      "rowNumber": 11,
+      "category": "Contact New Website",
+      "companyName": "Hideout Coffee Bar",
+      "googleMapsUrl": "https://share.google/5OrLUF59GRUbED3Jp",
+      "emailOrWhatsapp": "https://www.instagram.com/hideout.coffeebar/?hl=en",
+      "otherContact": "",
+      "remarks": "",
+      "sampleWebsite": ""
+    },
+    "mysourceofsolutions": {
+      "rowNumber": 12,
       "category": "Contact New Website",
       "companyName": "MySOS (Source Of Solutions)",
       "googleMapsUrl": "",
