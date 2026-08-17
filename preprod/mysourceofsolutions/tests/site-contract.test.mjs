@@ -34,7 +34,7 @@ test("all blueprint pages and detail routes are implemented", async () => {
 });
 
 test("products page has six categories, six printing methods and FAQ without the deferred buying guide", async () => {
-  const content = JSON.parse(await read("src/assets/content/pages.json"));
+  const content = JSON.parse(await read("src/content/pages/pages.json"));
   assert.deepEqual(content.products.categories.map((item) => item.name), ["Apparel", "Bags", "Drinkware", "Stationery", "Corporate gifts", "Event essentials"]);
   assert.deepEqual(content.products.printingMethods.map((item) => item.name), ["Silkscreen", "DTF", "DTG", "Embroidery", "Sublimation", "UV"]);
   assert.ok(content.products.faq.length >= 5);
@@ -46,7 +46,7 @@ test("products page has six categories, six printing methods and FAQ without the
 });
 
 test("why, solutions, stories and blog match the requested section counts", async () => {
-  const content = JSON.parse(await read("src/assets/content/pages.json"));
+  const content = JSON.parse(await read("src/content/pages/pages.json"));
   assert.equal(content.why.reasons.length, 5);
   assert.deepEqual(content.why.process.map((step) => step.title), ["Enquiry", "Recommendation", "Quotation", "Sampling", "Production", "Delivery"]);
   assert.deepEqual(content.why.pillars.map((item) => item.slug), ["one-supplier", "premium-quality", "flexible-quantities", "expert-recommendations", "tailored-to-you"]);
@@ -117,8 +117,8 @@ test("why-mysos pillar pages implement the full TRD section set and link from th
 });
 
 test("all content imagery has useful alternative text and internal cards have real destinations", async () => {
-  const site = JSON.parse(await read("src/assets/content/site.json"));
-  const pages = JSON.parse(await read("src/assets/content/pages.json"));
+  const site = JSON.parse(await read("src/content/site/homepage.json"));
+  const pages = JSON.parse(await read("src/content/pages/pages.json"));
   const images = [
     site.brand,
     site.hero,
@@ -149,6 +149,38 @@ test("all content imagery has useful alternative text and internal cards have re
   assert.doesNotMatch(source, /href=["']#["']/);
 });
 
+test("content is served through Astro Content Collections with Zod validation, not raw JSON imports", async () => {
+  const config = await read("src/content.config.ts");
+  assert.match(config, /from "astro:content"/);
+  assert.match(config, /from "astro\/loaders"/);
+  assert.match(config, /z\.object/);
+  assert.match(config, /export const collections = \{ ?site, ?pages ?\}/);
+
+  const { readdir } = await import("node:fs/promises");
+  await assert.rejects(readdir(new URL("src/assets/content", root)), /ENOENT/, "old src/assets/content JSON directory should be removed");
+
+  const sourceFiles = [
+    "src/components/SiteHeader.astro",
+    "src/components/SiteFooter.astro",
+    "src/pages/index.astro",
+    "src/pages/products/index.astro",
+    "src/pages/products/[slug].astro",
+    "src/pages/solutions/index.astro",
+    "src/pages/solutions/[slug].astro",
+    "src/pages/why-mysos.astro",
+    "src/pages/why-mysos/[slug].astro",
+    "src/pages/success-stories/index.astro",
+    "src/pages/success-stories/[slug].astro",
+    "src/pages/blog/index.astro",
+    "src/pages/blog/[slug].astro"
+  ];
+  for (const file of sourceFiles) {
+    const source = await read(file);
+    assert.doesNotMatch(source, /assets\/content/, `${file} should no longer import raw JSON`);
+    assert.match(source, /astro:content/, `${file} should read content via astro:content`);
+  }
+});
+
 test("mobile styles keep the logo, navigation, wordmarks and content grids visible", async () => {
   const css = await read("src/styles/global.css");
   const header = await read("src/components/SiteHeader.astro");
@@ -164,7 +196,7 @@ test("mobile styles keep the logo, navigation, wordmarks and content grids visib
 });
 
 test("trusted-by section renders real client logos, not plain text names", async () => {
-  const site = JSON.parse(await read("src/assets/content/site.json"));
+  const site = JSON.parse(await read("src/content/site/homepage.json"));
   const page = await read("src/pages/index.astro");
   assert.ok(Array.isArray(site.trust.logos) && site.trust.logos.length >= 8, "expected a real set of client logos");
   assert.equal("names" in site.trust, false, "trust.names should be replaced by trust.logos");

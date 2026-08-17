@@ -1,15 +1,19 @@
 ---
-import pages from "../assets/content/pages.json";
-import site from "../assets/content/site.json";
+import { getEntry } from "astro:content";
 import CallToAction from "../components/CallToAction.astro";
 import PageHero from "../components/PageHero.astro";
 import SiteLayout from "../layouts/SiteLayout.astro";
 import { withBase } from "../lib/base.js";
 
+const pagesEntry = await getEntry("pages", "pages");
+const pages = pagesEntry.data;
+const siteEntry = await getEntry("site", "homepage");
+const site = siteEntry.data;
+
 const content = pages.why;
 ---
 <SiteLayout title={content.seo.title} description={content.seo.description} current="why">
-  <PageHero hero={content.hero} paths={["homepage", "pages", "why", "hero"]} />
+  <PageHero hero={content.hero} paths={["pages", "pages", "why", "hero"]} />
 
   <section class="section reasons" id="why-choose-mysos">
     <header class="section-heading"><p class="eyebrow">Why choose MySOS</p><h2>Less coordination. Better recommendations.</h2><p>Five practical advantages for projects that need to move from idea to delivered items.</p></header>

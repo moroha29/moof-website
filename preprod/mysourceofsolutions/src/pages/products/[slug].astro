@@ -1,14 +1,16 @@
 ---
-import pages from "../../assets/content/pages.json";
+import { getEntry } from "astro:content";
 import CallToAction from "../../components/CallToAction.astro";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 import { withBase } from "../../lib/base.js";
 
-export function getStaticPaths() {
-  return pages.products.categories.map((category) => ({ params: { slug: category.slug }, props: { category } }));
+export async function getStaticPaths() {
+  const pagesEntry = await getEntry("pages", "pages");
+  const pages = pagesEntry.data;
+  return pages.products.categories.map((category) => ({ params: { slug: category.slug }, props: { category, pages } }));
 }
 
-const { category } = Astro.props;
+const { category, pages } = Astro.props;
 const methods = pages.products.printingMethods.filter((method) => category.methods.includes(method.name));
 const solutions = pages.solutions.industries.filter((solution) => category.relatedSolutions.includes(solution.slug));
 const otherCategories = pages.products.categories.filter((item) => item.slug !== category.slug).slice(0, 3);

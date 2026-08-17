@@ -1,30 +1,33 @@
 ---
-import pages from "../../assets/content/pages.json";
+import { getEntry } from "astro:content";
 import CallToAction from "../../components/CallToAction.astro";
 import PageHero from "../../components/PageHero.astro";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 import { withBase } from "../../lib/base.js";
+
+const pagesEntry = await getEntry("pages", "pages");
+const pages = pagesEntry.data;
 
 const content = pages.solutions;
 const p = (path) => JSON.stringify(path);
 const featuredStories = pages.stories.items.slice(0, 3);
 ---
 <SiteLayout title={content.seo.title} description={content.seo.description} current="solutions">
-  <PageHero hero={content.hero} paths={["homepage", "pages", "solutions", "hero"]} />
+  <PageHero hero={content.hero} paths={["pages", "pages", "solutions", "hero"]} />
 
   <section class="section" id="industries">
     <header class="section-heading"><p class="eyebrow">Browse by industry</p><h2>Find the group you recognise.</h2><p>Each industry page covers the needs we see most, recommended solutions, popular products, and answers to common questions.</p></header>
     <div class="portrait-grid">
       {content.industries.map((industry, i) => <a class="portrait-card" href={withBase(`/solutions/${industry.slug}/`)}>
-        <img src={withBase(industry.image)} alt={industry.imageAlt} loading="lazy" data-cms-paths={p([["homepage", "pages", "solutions", "industries", i, "image"], ["homepage", "pages", "solutions", "industries", i, "imageAlt"]])} />
-        <div><span>0{i + 1}</span><h2 data-cms-path={p(["homepage", "pages", "solutions", "industries", i, "name"])}>{industry.name}</h2><p data-cms-path={p(["homepage", "pages", "solutions", "industries", i, "kicker"])}>{industry.kicker}</p><b>View solution &rarr;</b></div>
+        <img src={withBase(industry.image)} alt={industry.imageAlt} loading="lazy" data-cms-paths={p([["pages", "pages", "solutions", "industries", i, "image"], ["pages", "pages", "solutions", "industries", i, "imageAlt"]])} />
+        <div><span>0{i + 1}</span><h2 data-cms-path={p(["pages", "pages", "solutions", "industries", i, "name"])}>{industry.name}</h2><p data-cms-path={p(["pages", "pages", "solutions", "industries", i, "kicker"])}>{industry.kicker}</p><b>View solution &rarr;</b></div>
       </a>)}
     </div>
   </section>
 
   <section class="section why-choose" id="why-choose-a-solution">
     <header class="section-heading"><p class="eyebrow">Why choose a solution</p><h2>Start from the outcome, not a product code.</h2><p>A solution page groups the right products, quantities and printing methods around your specific audience and event.</p></header>
-    <div class="why-choose-grid">{content.whyChoose.map((item, i) => <article><span>0{i + 1}</span><h3 data-cms-path={p(["homepage", "pages", "solutions", "whyChoose", i, "title"])}>{item.title}</h3><p data-cms-path={p(["homepage", "pages", "solutions", "whyChoose", i, "body"])}>{item.body}</p></article>)}</div>
+    <div class="why-choose-grid">{content.whyChoose.map((item, i) => <article><span>0{i + 1}</span><h3 data-cms-path={p(["pages", "pages", "solutions", "whyChoose", i, "title"])}>{item.title}</h3><p data-cms-path={p(["pages", "pages", "solutions", "whyChoose", i, "body"])}>{item.body}</p></article>)}</div>
   </section>
 
   <section class="section story-index" id="featured-success-stories">

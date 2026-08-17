@@ -1,6 +1,9 @@
 ---
-import site from "../assets/content/site.json";
+import { getEntry } from "astro:content";
 import { withBase } from "../lib/base.js";
+
+const siteEntry = await getEntry("site", "homepage");
+const site = siteEntry.data;
 ---
 <footer class="site-footer">
   <div>

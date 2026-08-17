@@ -1,17 +1,19 @@
 ---
-import pages from "../../assets/content/pages.json";
+import { getEntry } from "astro:content";
 import CallToAction from "../../components/CallToAction.astro";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 import { withBase } from "../../lib/base.js";
 
-export function getStaticPaths() {
-  return pages.why.pillars.map((pillar) => ({ params: { slug: pillar.slug }, props: { pillar } }));
+export async function getStaticPaths() {
+  const pagesEntry = await getEntry("pages", "pages");
+  const pages = pagesEntry.data;
+  return pages.why.pillars.map((pillar) => ({ params: { slug: pillar.slug }, props: { pillar, pages } }));
 }
 
-const { pillar } = Astro.props;
+const { pillar, pages } = Astro.props;
 const pillarIndex = pages.why.pillars.findIndex((item) => item.slug === pillar.slug);
 const p = (path) => JSON.stringify(path);
-const base = ["homepage", "pages", "why", "pillars", pillarIndex];
+const base = ["pages", "pages", "why", "pillars", pillarIndex];
 
 const pillarImages = ["/images/custom-towel.png", "/images/project-showcase.png", "/images/tote-bag.png", "/images/stationery.png", "/images/smu-event.jpg"];
 const heroImage = pillarImages[pillarIndex % pillarImages.length];
