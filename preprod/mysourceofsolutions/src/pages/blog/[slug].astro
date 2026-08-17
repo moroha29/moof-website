@@ -1,0 +1,24 @@
+---
+import pages from "../../assets/content/pages.json";
+import CallToAction from "../../components/CallToAction.astro";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { withBase } from "../../lib/base.js";
+
+export function getStaticPaths() {
+  return pages.blog.articles.map((article) => ({ params: { slug: article.slug }, props: { article } }));
+}
+
+const { article } = Astro.props;
+const relatedProduct = pages.products.categories.find((product) => product.slug === article.relatedProductSlug);
+const relatedArticles = pages.blog.articles.filter((item) => item.slug !== article.slug).slice(0, 2);
+---
+<SiteLayout title={`${article.title} | MySOS Blog`} description={article.summary} current="blog">
+  <article class="article-page" id="top">
+    <header><p class="eyebrow">{article.category} / {article.readTime}</p><h1>{article.title}</h1><p class="lede">{article.summary}</p><small>Published {article.date}</small></header>
+    <figure><img src={withBase(article.image)} alt={article.imageAlt} /></figure>
+    <div class="article-body">{article.body.map((paragraph) => <p>{paragraph}</p>)}</div>
+  </article>
+  <section class="article-product"><div><p class="eyebrow">Related product guide</p><h2>{relatedProduct.name}</h2><p>{relatedProduct.description}</p></div><a class="button" href={withBase(`/products/${relatedProduct.slug}/`)}>Explore {relatedProduct.name.toLowerCase()} &nearr;</a></section>
+  <section class="section related-articles"><header class="section-heading"><p class="eyebrow">Keep reading</p><h2>More useful guides.</h2></header><div class="link-grid">{relatedArticles.map((item) => <a href={withBase(`/blog/${item.slug}/`)}><span>{item.category}</span><b>{item.title}</b><em>Read article &rarr;</em></a>)}</div></section>
+  <CallToAction eyebrow="Need a recommendation for your brief?" heading="Turn the guide into a practical shortlist." />
+</SiteLayout>

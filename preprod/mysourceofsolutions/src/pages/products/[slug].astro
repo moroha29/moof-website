@@ -1,0 +1,40 @@
+---
+import pages from "../../assets/content/pages.json";
+import CallToAction from "../../components/CallToAction.astro";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { withBase } from "../../lib/base.js";
+
+export function getStaticPaths() {
+  return pages.products.categories.map((category) => ({ params: { slug: category.slug }, props: { category } }));
+}
+
+const { category } = Astro.props;
+const methods = pages.products.printingMethods.filter((method) => category.methods.includes(method.name));
+const solutions = pages.solutions.industries.filter((solution) => category.relatedSolutions.includes(solution.slug));
+const otherCategories = pages.products.categories.filter((item) => item.slug !== category.slug).slice(0, 3);
+---
+<SiteLayout title={`${category.name} | Custom Products by MySOS`} description={category.description} current="products">
+  <section class="detail-hero" id="top">
+    <div><p class="eyebrow">Products / {category.name}</p><h1>{category.title}</h1><p class="lede">{category.intro}</p><div class="actions"><a class="button" href={withBase("/#quote")}>Request options &nearr;</a><a class="text-button" href={withBase("/products/")}>All products &rarr;</a></div></div>
+    <figure><img src={withBase(category.image)} alt={category.imageAlt} /></figure>
+  </section>
+
+  <section class="section product-picks">
+    <header class="section-heading"><p class="eyebrow">Popular picks</p><h2>Three ways to start.</h2><p>These product cards show a useful starting range. We can source beyond them when your brief needs something different.</p></header>
+    <div class="mini-product-grid">{category.products.map((product, i) => <article><span>0{i + 1}</span><div class="product-card-art" aria-hidden="true"></div><h3>{product.name}</h3><p>{product.description}</p><a href={withBase("/#quote")}>Ask about this item &rarr;</a></article>)}</div>
+  </section>
+
+  <section class="split-section">
+    <div><p class="eyebrow">Best for</p><h2>Where {category.name.toLowerCase()} works well.</h2></div>
+    <ul class="check-list">{category.bestFor.map((item) => <li>{item}</li>)}</ul>
+  </section>
+
+  <section class="section printing compact-printing">
+    <header class="section-heading"><p class="eyebrow">Recommended customisation</p><h2>Methods suited to this category.</h2><p>The final recommendation depends on the exact item, artwork, quantity and budget.</p></header>
+    <div class="method-gallery">{methods.map((method) => <article><img src={withBase(method.image)} alt={method.imageAlt} loading="lazy" /><div><h3>{method.name}</h3><p>{method.description}</p><small>Best for: {method.bestFor}</small></div></article>)}</div>
+  </section>
+
+  <section class="section related-links"><header class="section-heading"><p class="eyebrow">Related solutions</p><h2>See it in context.</h2><p>Explore bundles designed around teams and organisations.</p></header><div class="link-grid">{solutions.map((solution) => <a href={withBase(`/solutions/#${solution.slug}`)}><span>{solution.name}</span><b>{solution.kicker}</b><em>View solution &rarr;</em></a>)}</div></section>
+  <section class="section also-explore"><header class="section-heading"><p class="eyebrow">Also explore</p><h2>Build a complete set.</h2></header><div class="link-grid">{otherCategories.map((item) => <a href={withBase(`/products/${item.slug}/`)}><span>{item.name}</span><b>{item.title}</b><em>View category &rarr;</em></a>)}</div></section>
+  <CallToAction heading={`Need custom ${category.name.toLowerCase()}?`} body="Share your quantity, artwork, deadline and budget. We will recommend the best-fit product and finish." />
+</SiteLayout>

@@ -1,0 +1,38 @@
+---
+import pages from "../../assets/content/pages.json";
+import CallToAction from "../../components/CallToAction.astro";
+import PageHero from "../../components/PageHero.astro";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { withBase } from "../../lib/base.js";
+
+const content = pages.products;
+const p = (path) => JSON.stringify(path);
+const imagePaths = (base) => p([[...base, "image"], [...base, "imageAlt"]]);
+---
+<SiteLayout title={content.seo.title} description={content.seo.description} current="products">
+  <PageHero hero={content.hero} paths={["homepage", "pages", "products", "hero"]} />
+
+  <section class="section" id="product-categories">
+    <header class="section-heading"><p class="eyebrow">Product categories</p><h2>Start with what you need.</h2><p>Each portrait card opens a focused category page with popular products, ideal use cases and recommended printing methods.</p></header>
+    <div class="portrait-grid">
+      {content.categories.map((category, i) => <a class="portrait-card" href={withBase(`/products/${category.slug}/`)}>
+        <img src={withBase(category.image)} alt={category.imageAlt} loading="lazy" data-cms-paths={imagePaths(["homepage", "pages", "products", "categories", i])} />
+        <div><span>0{i + 1}</span><h2 data-cms-path={p(["homepage", "pages", "products", "categories", i, "name"])}>{category.name}</h2><p data-cms-path={p(["homepage", "pages", "products", "categories", i, "description"])}>{category.description}</p><b>View products &rarr;</b></div>
+      </a>)}
+    </div>
+  </section>
+
+  <section class="section printing" id="printing-methods">
+    <header class="section-heading"><p class="eyebrow">{content.printingIntro.eyebrow}</p><h2>{content.printingIntro.heading}</h2><p>{content.printingIntro.body}</p></header>
+    <div class="method-gallery">{content.printingMethods.map((method, i) => <article>
+      <img src={withBase(method.image)} alt={method.imageAlt} loading="lazy" data-cms-paths={imagePaths(["homepage", "pages", "products", "printingMethods", i])} />
+      <div><span>0{i + 1}</span><h3>{method.name}</h3><p>{method.description}</p><small>Best for: {method.bestFor}</small></div>
+    </article>)}</div>
+  </section>
+
+  <section class="section faq" id="faq">
+    <header class="section-heading"><p class="eyebrow">FAQ</p><h2>Common product questions.</h2><p>Quick answers before you send a brief.</p></header>
+    <div class="faq-list">{content.faq.map((item) => <details><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>
+  </section>
+  <CallToAction eyebrow="Need help choosing?" heading="Start with the outcome, not a product code." body="Tell us who it is for, how many you need and when you need it. We will build the shortlist." />
+</SiteLayout>
