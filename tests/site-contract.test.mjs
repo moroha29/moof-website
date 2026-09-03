@@ -26,3 +26,16 @@ test("the site publishes at the repository root, not under a variant folder",asy
   assert.doesNotMatch(config,/\/f`|\/f"|\/f'/, "base must not append a variant segment");
   assert.match(config,/base(?!\w)/);
 });
+
+// A missing favicon is invisible in the build but shows up as a 404 on every
+// page load, so both pages must declare one and the files must ship.
+test("both pages declare a favicon that exists in public/",async()=>{
+  for (const page of ["../src/pages/index.astro","../src/pages/menu/index.astro"]) {
+    const html=await read(page);
+    assert.match(html,/rel="icon"/,`${page} declares a favicon`);
+    assert.match(html,/rel="apple-touch-icon"/,`${page} declares a touch icon`);
+  }
+  for (const icon of ["favicon-32.png","favicon-180.png"]) {
+    await access(new URL(`../public/${icon}`,import.meta.url));
+  }
+});
