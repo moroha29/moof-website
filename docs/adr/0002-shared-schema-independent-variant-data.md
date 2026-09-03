@@ -1,5 +1,12 @@
 # Shared Content Schema, Independent Variant Data
 
+> **Status: superseded (2026-09-03).** The client picked design F. The repo now holds one
+> Astro project at the root, so the per-variant isolation this ADR protects no longer
+> applies. The field names and shapes it defines are still canonical — they are what the
+> admin portal reads and writes. See `CONTEXT-MAP.md` and
+> `docs/ai-knowledge-base/google-form-field-map.md` for the live paths.
+
+
 We're running a client bake-off with multiple design variants of the Moof site (`a/`, `b/`, `c/`, `d/`), and the client may ask for features to be combined across variants rather than picking one outright. This creates two competing pressures: variants need a compatible content shape so a section can move from one variant to another cheaply, but a content edit made while iterating on one variant must never silently change another variant the client hasn't approved yet.
 
 We resolve this by keeping the *schema* shared and the *data* independent:

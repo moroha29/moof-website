@@ -10,8 +10,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Prevent accidental root npm lockfiles; variant lockfiles stay tracked.
-/package-lock.json
 
 # Local environment files
 .env

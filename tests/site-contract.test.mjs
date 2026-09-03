@@ -1,0 +1,28 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { readFile, access } from "node:fs/promises";
+
+const read=(path)=>readFile(new URL(path,import.meta.url),"utf8");
+test("The Moof site uses independent CMS content and base-aware images",async()=>{const [home,menuPage,siteRaw,menuRaw]=await Promise.all([read("../src/pages/index.astro"),read("../src/pages/menu/index.astro"),read("../src/assets/content/site.json"),read("../src/assets/content/menu.json")]);const site=JSON.parse(siteRaw),menu=JSON.parse(menuRaw);assert.notEqual(site.brand.headerWordmark,site.brand.footerWordmark);assert.ok(home.includes("data-cms-path"));assert.ok(home.includes("data-cms-paths"));assert.ok(home.includes("withBase(site.hero.image)"));assert.ok(menuPage.includes("menuGroups"));assert.ok(menu.coreMenu.every(i=>i.imageAlt&&i.id));assert.ok(menu.seasonalMenu.every(i=>i.isSeasonal));assert.ok(Array.isArray(menu.additionalCategories));});
+test("blank layout containers are not editable",async()=>{const home=await read("../src/pages/index.astro");assert.doesNotMatch(home,/hero-shade[^>]+data-cms/);assert.doesNotMatch(home,/drink-track[^>]+data-cms/);});
+
+// Every image referenced by content must ship in public/, or the deployed page
+// renders a broken drink card that no build step would have caught.
+test("every referenced image exists in public/",async()=>{
+  const [siteRaw,menuRaw]=await Promise.all([read("../src/assets/content/site.json"),read("../src/assets/content/menu.json")]);
+  const site=JSON.parse(siteRaw),menu=JSON.parse(menuRaw);
+  const referenced=[
+    site.brand.logoImage,site.hero.image,site.about.image,site.events.image,
+    ...[...menu.coreMenu,...menu.seasonalMenu].map((item)=>item.image),
+  ];
+  for (const ref of referenced) {
+    assert.ok(ref?.startsWith("/"),`${ref} is a root-relative public path`);
+    await access(new URL(`../public${ref}`,import.meta.url));
+  }
+});
+
+test("the site publishes at the repository root, not under a variant folder",async()=>{
+  const config=await read("../astro.config.mjs");
+  assert.doesNotMatch(config,/\/f`|\/f"|\/f'/, "base must not append a variant segment");
+  assert.match(config,/base(?!\w)/);
+});

@@ -37,7 +37,7 @@ The first CloudFront deployment can take several minutes. The stack output and `
 
 ## Optional base path
 
-AWS deploys at the root by default, so the designs are available at `/a/` through `/e/`. If the distribution must serve beneath a path, create an `AWS_BASE_PATH` repository variable such as `/moof-website` before building.
+AWS deploys at the root by default, so the site is served from `/` and the menu from `/menu/`. If the distribution must serve beneath a path, create an `AWS_BASE_PATH` repository variable such as `/moof-website` before building.
 
 ## Custom domain
 
