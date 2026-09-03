@@ -4,13 +4,13 @@ This knowledge base is for AI agents maintaining the Moof static website. It is 
 
 ## Moof In One Paragraph
 
-Moof is a specialty matcha and hojicha bar at 70 Shenton Way, #01-15, Eon Shenton, Singapore CBD, built around hand-whisked drinks and two exclusive Japanese matcha ingredients, Mori and Shiran. See `CONTEXT.md` (per design variant) for the full business glossary.
+Moof is a specialty matcha and hojicha bar at 70 Shenton Way, #01-15, Eon Shenton, Singapore CBD, built around hand-whisked drinks and two exclusive Japanese matcha ingredients, Mori and Shiran.
 
-## Multiple Design Variants
+## One Site
 
-This repo holds several parallel design variants of the same site (`a/`, `b/`, `c/`, `d/`, ...) as part of a client bake-off — see `CONTEXT-MAP.md` at repo root for the current list. Each variant is an independent Astro project with its own `package.json`, content files, and images; editing one variant's content never changes another's. Each variant has its own `docs/superpowers/specs/` delta spec covering its creative direction and a `docs/ai-knowledge-base/` note for anything variant-specific (e.g. carousel behavior, custom interactive sections) that this shared knowledge base doesn't cover.
-
-Routine content maintenance (see below) must be applied to whichever variant(s) the request targets — an update is not automatically shared across variants.
+This repo holds a single Astro project at the repository root, published at
+`https://moroha29.github.io/moof-website/`. It was chosen from a six-way client bake-off
+(design F); see `CONTEXT-MAP.md` for what changed and where the design history lives.
 
 ## Routine Maintenance
 
@@ -20,28 +20,28 @@ Routine maintenance does not include redesigns, new page types, checkout, orderi
 
 ## Canonical Content Model
 
-The target content model for every variant is Astro Content Collections with Zod schema validation (see `docs/adr/0002-shared-schema-independent-variant-data.md`). Variants not yet migrated to this model still follow the same field names and shapes where practical, to keep future migration and cross-variant feature reuse cheap.
+Content lives in two JSON files read directly by the pages (see
+`docs/adr/0002-shared-schema-independent-variant-data.md` for the field names and shapes).
+These are the same files the admin portal writes, so keep their keys stable.
 
-## Safe Files (per variant)
+## Safe Files
 
-Agents may edit these during routine maintenance, inside the target variant's folder:
+Agents may edit these during routine maintenance:
 
-- `<variant>/src/content/site/homepage.json`
-- `<variant>/src/content/menu/core.json`
-- `<variant>/src/content/menu/seasonal.json`
-- files in `docs/ai-knowledge-base/` (shared) or `<variant>/docs/ai-knowledge-base/` (variant-specific) when the content schema or workflow changes
+- `src/assets/content/site.json` — brand, SEO, homepage sections, location, hours, menu-page headings
+- `src/assets/content/menu.json` — `coreMenu`, `seasonalMenu`, `additionalCategories`
+- files in `docs/ai-knowledge-base/` when the content schema or workflow changes
 
 ## Avoid During Content-Only Updates
 
 Do not edit these for routine content updates unless the user explicitly asks for a design or structure change:
 
-- `<variant>/src/components/`
-- `<variant>/src/layouts/`
-- `<variant>/src/pages/`
-- `<variant>/src/styles/`
-- `<variant>/astro.config.mjs`
-- `<variant>/package.json`
+- `src/pages/`
+- `src/lib/`
+- `public/styles.css`
+- `astro.config.mjs`
+- `package.json`
 
 ## Required Validation
 
-After editing content, run `npm run build` inside the target variant's folder. Then show a page preview to the owner or user. If the preview is wrong, the owner should revise the form response or provide corrected instructions.
+After editing content, run `npm test` and `npm run build` at the repository root. Then show a page preview to the owner or user. If the preview is wrong, the owner should revise the form response or provide corrected instructions.
