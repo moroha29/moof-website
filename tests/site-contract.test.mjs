@@ -39,3 +39,26 @@ test("both pages declare a favicon that exists in public/",async()=>{
     await access(new URL(`../public/${icon}`,import.meta.url));
   }
 });
+
+// The image test above only covers content JSON. A background referenced from
+// CSS would break just as loudly and nothing else would catch it.
+test("every url() in the stylesheet resolves to a file in public/",async()=>{
+  const css=await read("../public/styles.css");
+  const urls=[...css.matchAll(/url\(\s*['"]?([^'"()]+?)['"]?\s*\)/g)].map((m)=>m[1].trim());
+  assert.ok(urls.length>0,"the stylesheet references at least one asset");
+  for (const ref of urls) {
+    if (/^(https?:|data:)/.test(ref)) continue;
+    assert.ok(!ref.startsWith("/"),`${ref} must be relative so the deploy base path applies`);
+    await access(new URL(`../public/${ref}`,import.meta.url));
+  }
+});
+
+// The map must point at Moof's own coordinates. A text-search embed renders a
+// results map full of neighbouring cafes instead of one pin on the shop.
+test("the map embeds a single pin at Moof's coordinates",async()=>{
+  const site=JSON.parse(await read("../src/assets/content/site.json"));
+  for (const field of ["mapUrl","mapEmbedUrl"]) {
+    assert.match(site.visit[field],/1\.27\d+(%2C|,)103\.84\d+/,`visit.${field} targets Moof's coordinates`);
+  }
+  assert.match(site.visit.mapEmbedUrl,/output=embed/);
+});
