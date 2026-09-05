@@ -121,6 +121,16 @@
       "otherContact": "https://www.mysourceofsolutions.com/",
       "remarks": "Owner-approved homepage redesign using existing website assets.",
       "sampleWebsite": ""
+    },
+    "jkm2": {
+      "rowNumber": 13,
+      "category": "Internal — studio's own site",
+      "companyName": "JKM (studio, not a prospect)",
+      "googleMapsUrl": "",
+      "emailOrWhatsapp": "",
+      "otherContact": "",
+      "remarks": "Not an outreach lead — excluded from the lead pipeline. Kept here only to reuse the preprod build/deploy mechanism.",
+      "sampleWebsite": ""
     }
   }
 }
