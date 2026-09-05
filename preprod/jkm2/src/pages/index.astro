@@ -1,0 +1,1070 @@
+---
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith("/") ? rawBase : rawBase + "/";
+
+const cases = [
+  {
+    unit: "01",
+    name: "RexSG",
+    tagline: "HDB Match: a live map for one of Singapore's biggest decisions.",
+    type: "Product · Geospatial · PostGIS",
+    href: "https://www.rexsg.com",
+    hrefLabel: "rexsg.com",
+    repo: null,
+    image: "images/rexsg-live.jpg",
+    imageAlt: "RexSG live map interface showing HDB resale listings across Singapore with price and match filters",
+    caption: "Captured from the live product, September 2026.",
+    facts: [
+      ["3", "property modes (resale, BTO, private)"],
+      ["4", "weighted match factors"],
+      ["1", "live product at rexsg.com"],
+    ],
+    brief: "Turn fragmented housing data into a decision people can understand and defend.",
+    move: "We didn't ask buyers to trust a black-box score. Drag the weight between commute, lifestyle, value, and lease, and the shortlist reorders live, on the same PostGIS-backed data underneath the whole time, so the trade-off is felt, not just reported.",
+    stack: "FastAPI · React · PostGIS · Leaflet",
+    story: [
+      ["Challenge", "Property search shows inventory. Buyers need judgement.", "Price, lease, schools, transit, household needs, and future risk sit across different sources. Comparing them by hand is slow and hard to defend to a spouse, a parent, or a bank."],
+      ["Approach", "One map, weights the buyer controls.", "A deterministic geospatial engine (resale medians, accessibility scoring, commute and appreciation models) sits under a live map. The buyer sets what matters; the map re-sorts in front of them."],
+      ["Outcome", "A live, public product, not a prototype.", "Real resale listings, real filters, and a shortlist a buyer can defend, because every number traces back to the same evidence underneath."],
+    ],
+  },
+  {
+    unit: "02",
+    name: "Moof",
+    tagline: "An editorial site and content system for a Shenton Way matcha bar.",
+    type: "Brand · Web · Content system",
+    href: "https://moroha29.github.io/moof-website/e/",
+    hrefLabel: "the shipped direction",
+    repo: "https://github.com/moroha29/moof-website",
+    image: "images/moof-live.png",
+    imageAlt: "Moof editorial website with large serif typography and café photography",
+    caption: "Captured from the shipped build.",
+    facts: [
+      ["5", "complete design directions built"],
+      ["1", "shared publishing model"],
+      ["0", "runtime framework overhead"],
+    ],
+    brief: "Build a distinctive hospitality site without locking a young brand into one expression.",
+    move: "Instead of polishing one safe concept, we built five complete directions against the same real content and photography. That made taste discussable with the owners, and left a system flexible enough to evolve without rebuilding the brand from zero.",
+    stack: "Astro · Structured content · Art direction",
+    story: [
+      ["Challenge", "New brands need conviction and optionality at the same time.", "The site had to feel considered, local, and tactile, while keeping menus, hours, and photography straightforward for a small team to update themselves."],
+      ["Approach", "Editorial restraint over café clichés.", "Large type, real counter photography, warm negative space, and a deliberately small map of pages let the atmosphere do the selling."],
+      ["Outcome", "One content model, five finished directions.", "The chosen direction ships as a fast static build; the other four remain real evidence of range, not throwaway sketches."],
+    ],
+  },
+  {
+    unit: "03",
+    name: "mySOS",
+    tagline: "One catalogue running a public storefront and an internal quoting engine.",
+    type: "Platform · Commerce · Pricing logic",
+    href: "https://moroha29.github.io/mySOS/",
+    hrefLabel: "moroha29.github.io/mySOS",
+    repo: "https://github.com/moroha29/mySOS",
+    image: "images/mysos-live.jpg",
+    imageAlt: "MySOS public website homepage for custom merchandise sourcing and printing",
+    caption: "Captured from the live product, September 2026.",
+    facts: [
+      ["2", "systems sharing one dataset"],
+      ["4", "printing methods: DTF/DTG, silkscreen, embroidery, sublimation"],
+      ["1", "public price never equals internal cost"],
+    ],
+    brief: "Give a sales team a quoting tool fast enough for a live call, without the public site and the sales floor ever showing the same number.",
+    move: "We kept the public “from” price and the internal quotation cost as two separate fields on the same product record. A salesperson can quote fast and correctly; the public catalogue never has to leak, or lie about, a real cost.",
+    stack: "React · Vite · Structured product data",
+    story: [
+      ["Challenge", "One catalogue, two audiences with opposite needs.", "Customers need a simple public price. An internal sales team needs exact costs, printing methods, tiered quantities, and margin, for the same products."],
+      ["Approach", "One schema, two views of it.", "Every product carries a public display price and a private quotation cost as distinct fields, with printing methods, add-ons, and quantity tiers modelled as their own pure pricing logic."],
+      ["Outcome", "A public storefront and a live quoting tool, from one source of truth.", "Change a cost once and both the public catalogue and the sales team's quotes stay correct, and never accidentally swap places."],
+    ],
+  },
+  {
+    unit: "04",
+    name: "Website Manager",
+    tagline: "Making publishing feel safe enough to hand over, and powerful enough to keep.",
+    type: "Platform · Workflow · Operations",
+    href: null,
+    hrefLabel: null,
+    repo: null,
+    repoNote: "Private client codebase; no public repository.",
+    image: null,
+    imageAlt: "",
+    caption: "Interface reconstruction: production screens are authenticated and not publicly viewable.",
+    facts: [
+      ["5", "managed site directions"],
+      ["2×", "before / after review on every change"],
+      ["24/7", "resumable publish queue"],
+    ],
+    brief: "Let non-developers update live sites without turning deployment into a leap of faith.",
+    move: "We treated publishing as a durable, reviewable job, not a button that fires and hopes. Every change maps to real content, every release shows its exact before-and-after, and every deployment can resume after an interruption.",
+    stack: "Node.js · SQLite · GitHub Apps · Docker",
+    story: [
+      ["Challenge", "Visual editing is easy. Trustworthy publishing is not.", "Repeated text, simultaneous editors, image ownership, and failed deployments all create ways for a “simple CMS” to quietly publish the wrong thing."],
+      ["Approach", "Make state and consequence visible.", "Sandboxed previews bind rendered blocks to canonical content paths. Immutable drafts, field-level merges, role-based access, and GitHub pull requests protect the path to production."],
+      ["Outcome", "A compact operations layer with serious foundations.", "Encrypted recovery, audit history, deployment health, and retries live behind an interface built for everyday, non-technical use."],
+    ],
+  },
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1B4D3E" />
+    <meta name="description" content="JKM is a three-person Singapore digital studio that ships real, named systems for real clients: a live geospatial home-buying product, a merchandise quoting engine, a hospitality brand, and the publishing platform that runs it." />
+    <meta property="og:title" content="JKM — Ideas, made useful." />
+    <meta property="og:description" content="A three-person Singapore digital studio. Four real, named builds. No theatre." />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+    <script is:inline>document.documentElement.classList.add("js");</script>
+    <title>JKM — Ideas, made useful.</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" data-header>
+      <a class="brand" href="#top" aria-label="JKM, back to top">
+        <span class="brand__plate">JKM</span>
+      </a>
+      <div class="availability" aria-label="Availability">
+        <span class="availability__dot"></span> Taking on select projects
+      </div>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-toggle>
+        <span>Directory</span><i></i><i></i>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="#work">Work</a>
+        <a href="#why">Studio</a>
+        <a href="#people">People</a>
+        <a class="site-nav__cta" href="mailto:junhong.tan@gmail.com">Email us</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero__frame">
+          <p class="hero__meta">Independent digital studio &middot; Singapore</p>
+          <h1 id="hero-title" class="hero__headline">
+            <span class="hero__crop">REAL WORK.</span>
+            <span class="hero__line2">Real clients. No theatre.</span>
+          </h1>
+          <p class="hero__sub">JKM is a three-person studio that ships the working system — a live product, a real client, a traceable result — before we ever ask you to trust a pitch deck.</p>
+          <div class="hero__actions">
+            <a class="cta cta--primary" href="mailto:junhong.tan@gmail.com">Email us <span aria-hidden="true">&rarr;</span></a>
+            <a class="cta cta--ghost" href="#work">See the directory</a>
+          </div>
+        </div>
+        <p class="hero__clock"><span>SGT</span><strong data-singapore-time>00:00</strong></p>
+      </section>
+
+      <section class="directory-strip" aria-labelledby="directory-strip-title">
+        <h2 id="directory-strip-title" class="sr-only">The studio directory</h2>
+        <table class="directory-table">
+          <thead>
+            <tr>
+              <th scope="col">Unit</th>
+              <th scope="col">Client / build</th>
+              <th scope="col">System</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cases.map((item) => (
+              <tr>
+                <td class="directory-table__unit">{item.unit}</td>
+                <td class="directory-table__name"><a href={`#${item.name.toLowerCase().replace(/\s+/g, "-")}`}>{item.name}</a></td>
+                <td class="directory-table__type">{item.type}</td>
+                <td class="directory-table__status">
+                  {item.href ? <span class="status status--live">Live</span> : <span class="status status--private">Private</span>}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+
+      <section class="manifesto" aria-labelledby="manifesto-title">
+        <h2 id="manifesto-title">Good digital work should feel <em>obvious</em> when you use it — and anything but obvious when you look at what it took to make.</h2>
+        <div class="manifesto__aside">
+          <p>We work across the seams most teams split apart: the idea and its interface, the interface and its code, the launch and everything that happens after.</p>
+          <p>Small by design. Senior by default. Close enough to the work to sign our name to it.</p>
+        </div>
+      </section>
+
+      <section class="work" id="work" aria-labelledby="work-title">
+        <header class="work__head">
+          <h2 id="work-title">The directory.</h2>
+          <p>Four real, named builds. Every claim below traces to a live link, a public repository, or is labelled otherwise.</p>
+        </header>
+
+        {cases.map((item) => (
+          <article class="case" id={item.name.toLowerCase().replace(/\s+/g, "-")} data-reveal>
+            <div class="case__header">
+              <p class="case__unit">Unit {item.unit}</p>
+              <div class="case__title">
+                <h3>{item.name}</h3>
+                <p class="case__type">{item.type}</p>
+              </div>
+              <p class="case__tagline">{item.tagline}</p>
+            </div>
+
+            {item.image && (
+              <figure class="case__visual">
+                <img src={`${base}${item.image}`} alt={item.imageAlt} loading="lazy" width="1568" height="774" />
+                <figcaption>{item.caption}</figcaption>
+              </figure>
+            )}
+            {!item.image && (
+              <figure class="case__visual case__visual--reconstruction" aria-hidden="false">
+                <div class="manager-ui">
+                  <header><b>moof / manager</b><span>All systems normal</span><i>JK</i></header>
+                  <aside>
+                    <p>Websites</p>
+                    <a class="active"><span>E</span><b>Editorial</b></a>
+                    <a><span>A</span><b>Original</b></a>
+                    <a><span>B</span><b>Minimal</b></a>
+                  </aside>
+                  <main>
+                    <div class="manager-ui__toolbar"><p><b>Homepage</b><span>Draft saved just now</span></p><button>Review &amp; publish</button></div>
+                    <div class="manager-ui__preview">
+                      <div><small>SHENTON WAY &middot; SINGAPORE</small><strong>Matcha and hojicha,<br />made slowly.</strong></div>
+                    </div>
+                  </main>
+                  <section>
+                    <p>Selected block</p>
+                    <label>Headline<textarea readonly>Matcha and hojicha, made slowly.</textarea></label>
+                    <div class="manager-ui__status"><i></i><p><b>1 change ready</b><span>Exact revision protected</span></p></div>
+                  </section>
+                </div>
+                <figcaption>{item.caption}</figcaption>
+              </figure>
+            )}
+
+            <div class="case__facts">
+              {item.facts.map(([n, label]) => (
+                <div class="fact">
+                  <dt class="fact__number">{n}</dt>
+                  <dd class="fact__label">{label}</dd>
+                </div>
+              ))}
+            </div>
+
+            <dl class="case__plate">
+              <div class="case__plate-row">
+                <dt>Brief</dt>
+                <dd>{item.brief}</dd>
+              </div>
+              <div class="case__plate-row">
+                <dt>Move</dt>
+                <dd>{item.move}</dd>
+              </div>
+            </dl>
+
+            <details class="case__story">
+              <summary><span>Read the build story</span><i aria-hidden="true"></i></summary>
+              <div class="case__story-grid">
+                {item.story.map(([label, headline, body]) => (
+                  <section>
+                    <p class="case__story-label">{label}</p>
+                    <h4>{headline}</h4>
+                    <p>{body}</p>
+                  </section>
+                ))}
+              </div>
+            </details>
+
+            <div class="case__links">
+              {item.href && (
+                <a class="case__link" href={item.href} target="_blank" rel="noreferrer">Visit {item.hrefLabel} <span aria-hidden="true">&#8599;</span></a>
+              )}
+              {item.repo && (
+                <a class="case__link" href={item.repo} target="_blank" rel="noreferrer">View repository <span aria-hidden="true">&#8599;</span></a>
+              )}
+              {item.repoNote && <p class="case__repo-note">{item.repoNote}</p>}
+              <p class="case__stack">{item.stack}</p>
+            </div>
+            {item.name === "Moof" && <p class="case__credit">Project photography: Zawani Abdul Ghani / HungryGoWhere.</p>}
+          </article>
+        ))}
+      </section>
+
+      <section class="why" id="why" aria-labelledby="why-title">
+        <h2 id="why-title">Less handoff. <em>More ownership.</em></h2>
+        <p class="why__sub">You work with the people making the decisions, and those same people stay close from first sketch to production.</p>
+        <ol class="why__list">
+          <li><h3>Three minds, one room.</h3><p>Strategy, design, and engineering develop together, so good ideas survive implementation.</p></li>
+          <li><h3>Proof before theatre.</h3><p>We'd rather hand you a working link than a deck. In August 2026 alone we shipped complete concept builds for a dozen Singapore businesses before any of them said yes.</p></li>
+          <li><h3>We own the boring parts.</h3><p>Security, content models, recovery, deployment, and accessibility are part of the product, not someone else's problem.</p></li>
+          <li><h3>Built to keep moving.</h3><p>We favour clear systems your team can operate, extend, and move between platforms.</p></li>
+        </ol>
+      </section>
+
+      <section class="capabilities" aria-labelledby="capabilities-title">
+        <h2 id="capabilities-title">From the first <em>why</em> to the last mile.</h2>
+        <div class="capabilities__list">
+          <div class="capability"><span class="capability__level">Level 1</span><h3>Shape</h3><p>Product strategy, research synthesis, experience definition, technical direction.</p></div>
+          <div class="capability"><span class="capability__level">Level 2</span><h3>Express</h3><p>Brand systems, art direction, interface design, content architecture.</p></div>
+          <div class="capability"><span class="capability__level">Level 3</span><h3>Build</h3><p>Web applications, AI experiences, data platforms, creative development.</p></div>
+          <div class="capability"><span class="capability__level">Level 4</span><h3>Run</h3><p>Cloud deployment, publishing systems, performance &amp; access, operational tooling.</p></div>
+        </div>
+      </section>
+
+      <section class="people" id="people" aria-labelledby="people-title">
+        <h2 id="people-title">Small enough to know <em>who did the work.</em></h2>
+        <p class="people__sub">The founders' names, roles, and portraits will be engraved here when they're ready.</p>
+        <div class="people__grid">
+          <article class="person"><div class="person__plate"><span>01</span></div><p>Nameplate reserved</p></article>
+          <article class="person"><div class="person__plate"><span>02</span></div><p>Nameplate reserved</p></article>
+          <article class="person"><div class="person__plate"><span>03</span></div><p>Nameplate reserved</p></article>
+        </div>
+      </section>
+
+      <section class="contact" id="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title">Let's make it <em>useful.</em></h2>
+        <p>Have a difficult idea, a product that needs clarity, or a system that has outgrown its first version?</p>
+        <a class="cta cta--primary cta--large" href="mailto:junhong.tan@gmail.com">Email us <span aria-hidden="true">&rarr;</span></a>
+        <a class="contact__secondary" href="https://github.com/moroha29" target="_blank" rel="noreferrer">Find JKM on GitHub &#8599;</a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="brand brand--footer" href="#top"><span class="brand__plate">JKM</span></a>
+      <p>Independent digital studio &middot; Singapore &middot; <span data-year>2026</span></p>
+      <div class="site-footer__links"><a href="#work">Work</a><a href="#people">People</a><a href="#top">Back to top &uarr;</a></div>
+    </footer>
+
+    <script is:inline>
+      (function () {
+        var toggle = document.querySelector("[data-menu-toggle]");
+        var nav = document.getElementById("site-nav");
+        if (toggle && nav) {
+          toggle.addEventListener("click", function () {
+            var open = toggle.getAttribute("aria-expanded") === "true";
+            toggle.setAttribute("aria-expanded", String(!open));
+            nav.classList.toggle("is-open", !open);
+          });
+        }
+
+        var yearEl = document.querySelector("[data-year]");
+        if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+        function paintSingaporeTime() {
+          var el = document.querySelector("[data-singapore-time]");
+          if (!el) return;
+          var formatter = new Intl.DateTimeFormat("en-GB", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+            timeZone: "Asia/Singapore",
+          });
+          el.textContent = formatter.format(new Date());
+        }
+        paintSingaporeTime();
+        setInterval(paintSingaporeTime, 30000);
+
+        var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        var revealEls = document.querySelectorAll("[data-reveal]");
+        if (!reduceMotion && "IntersectionObserver" in window && revealEls.length) {
+          var revealObserver = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("is-in");
+                  revealObserver.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.05, rootMargin: "0px 0px -10% 0px" }
+          );
+          revealEls.forEach(function (el) { revealObserver.observe(el); });
+        } else {
+          revealEls.forEach(function (el) { el.classList.add("is-in"); });
+        }
+      })();
+    </script>
+
+    <style>
+      :root {
+        --forest: #1b4d3e;
+        --forest-deep: #123329;
+        --navy: #16233b;
+        --cream: #efebdd;
+        --cream-deep: #e6e1cf;
+        --ink: #171a14;
+        --amber: #f2a71b;
+        --amber-ink: #3a2404;
+        --lettering: #f7f5ee;
+        --hairline-dark: rgba(247, 245, 238, 0.2);
+        --hairline-light: rgba(23, 26, 20, 0.16);
+        --muted-dark: rgba(247, 245, 238, 0.68);
+        --muted-light: rgba(23, 26, 20, 0.62);
+        --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+        --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+        color-scheme: light;
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+      }
+
+      body {
+        margin: 0;
+        background: var(--cream);
+        color: var(--ink);
+        font-family: var(--font-display);
+        font-size: 16px;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      ::selection { background: var(--amber); color: var(--amber-ink); }
+
+      a { color: inherit; }
+      :focus-visible {
+        outline: 3px solid var(--amber);
+        outline-offset: 2px;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px; height: 1px;
+        padding: 0; margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .skip-link {
+        position: absolute;
+        left: -999px;
+        top: 0;
+        background: var(--amber);
+        color: var(--amber-ink);
+        padding: 0.75rem 1.25rem;
+        font-weight: 700;
+        z-index: 200;
+      }
+      .skip-link:focus { left: 0.75rem; top: 0.75rem; }
+
+      h1, h2, h3, h4 {
+        font-family: var(--font-display);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin: 0;
+        line-height: 1.05;
+      }
+      em { font-style: normal; color: var(--forest); }
+      .hero em, .contact em, .why em { color: var(--amber); }
+
+      p { margin: 0; }
+
+      [data-reveal] {
+        opacity: 1;
+        transform: none;
+      }
+      .js [data-reveal] {
+        transform: translateY(14px);
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .js [data-reveal].is-in {
+        transform: none;
+      }
+
+      /* ---------- Header ---------- */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 0.9rem clamp(1rem, 4vw, 2.5rem);
+        background: var(--cream);
+        border-bottom: 1px solid var(--hairline-light);
+      }
+      .brand__plate {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--forest);
+        color: var(--lettering);
+        font-weight: 900;
+        letter-spacing: 0.02em;
+        font-size: 1.1rem;
+        padding: 0.35rem 0.6rem;
+        border-radius: 3px;
+      }
+      .brand { text-decoration: none; flex-shrink: 0; }
+      .availability {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted-light);
+        margin-right: auto;
+      }
+      .availability__dot {
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: var(--amber);
+        box-shadow: 0 0 0 3px rgba(242, 167, 27, 0.25);
+      }
+      .site-nav {
+        display: flex;
+        align-items: center;
+        gap: clamp(1rem, 2vw, 1.75rem);
+      }
+      .site-nav a {
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        padding: 0.3rem 0.1rem;
+        border-bottom: 2px solid transparent;
+        transition: border-color 0.2s ease, transform 0.2s ease;
+      }
+      .site-nav a:hover, .site-nav a:focus-visible {
+        border-color: var(--forest);
+        transform: perspective(200px) rotateX(6deg);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .site-nav a:hover, .site-nav a:focus-visible { transform: none; }
+      }
+      .site-nav__cta {
+        background: var(--amber);
+        color: var(--amber-ink) !important;
+        padding: 0.5rem 1rem !important;
+        border-radius: 3px;
+        border-bottom: none !important;
+      }
+      .menu-toggle {
+        display: none;
+        align-items: center;
+        gap: 0.5rem;
+        background: none;
+        border: 1px solid var(--hairline-light);
+        border-radius: 3px;
+        padding: 0.5rem 0.75rem;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--ink);
+        cursor: pointer;
+      }
+      .menu-toggle i {
+        display: block;
+        width: 16px; height: 2px;
+        background: var(--ink);
+      }
+
+      /* ---------- Hero ---------- */
+      .hero {
+        background: var(--forest);
+        background-image: linear-gradient(160deg, var(--forest) 0%, var(--forest-deep) 100%);
+        color: var(--lettering);
+        padding: clamp(3rem, 10vw, 7rem) clamp(1rem, 6vw, 3rem) clamp(2.5rem, 6vw, 4rem);
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+      .hero__frame { max-width: 62rem; }
+      .hero__meta {
+        font-family: var(--font-mono);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-size: 0.82rem;
+        color: var(--muted-dark);
+        margin-bottom: 1.25rem;
+      }
+      .hero__headline { margin-bottom: 1.5rem; }
+      .hero__crop {
+        display: block;
+        font-size: clamp(3.2rem, 12vw, 8rem);
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        line-height: 0.92;
+        color: var(--amber);
+        margin-left: -0.05em;
+      }
+      .hero__line2 {
+        display: block;
+        font-size: clamp(1.6rem, 4.5vw, 2.75rem);
+        font-weight: 700;
+        color: var(--lettering);
+        margin-top: 0.3rem;
+      }
+      .hero__sub {
+        max-width: 40rem;
+        font-size: clamp(1rem, 1.6vw, 1.2rem);
+        color: var(--muted-dark);
+        line-height: 1.6;
+      }
+      .hero__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 700;
+        font-size: 1rem;
+        padding: 0.85rem 1.5rem;
+        border-radius: 3px;
+        text-decoration: none;
+        transition: transform 0.2s ease;
+      }
+      .cta:hover { transform: translateY(-2px); }
+      @media (prefers-reduced-motion: reduce) { .cta:hover { transform: none; } }
+      .cta--primary { background: var(--amber); color: var(--amber-ink); }
+      .cta--ghost {
+        border: 1.5px solid var(--hairline-dark);
+        color: var(--lettering);
+      }
+      .cta--large { font-size: 1.15rem; padding: 1.1rem 2rem; margin-top: 1.5rem; }
+      .hero__clock {
+        align-self: flex-end;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--muted-dark);
+        display: flex;
+        gap: 0.5rem;
+      }
+      .hero__clock strong { color: var(--lettering); font-variant-numeric: tabular-nums; }
+
+      /* ---------- Directory strip ---------- */
+      .directory-strip {
+        background: var(--navy);
+        padding: clamp(1rem, 3vw, 1.5rem) clamp(1rem, 6vw, 3rem) clamp(2rem, 4vw, 3rem);
+        overflow-x: auto;
+      }
+      .directory-table {
+        width: 100%;
+        min-width: 560px;
+        border-collapse: collapse;
+        font-family: var(--font-mono);
+      }
+      .directory-table thead th {
+        text-align: left;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.7rem;
+        color: var(--muted-dark);
+        font-weight: 500;
+        padding: 0.6rem 0.75rem;
+        border-bottom: 1px solid var(--hairline-dark);
+      }
+      .directory-table tbody td {
+        padding: 0.85rem 0.75rem;
+        border-bottom: 1px solid var(--hairline-dark);
+        color: var(--lettering);
+        font-size: 0.92rem;
+      }
+      .directory-table tbody tr:last-child td { border-bottom: none; }
+      .directory-table__unit { font-variant-numeric: tabular-nums; color: var(--amber); font-weight: 700; }
+      .directory-table__name a {
+        text-decoration: none;
+        font-weight: 700;
+        font-family: var(--font-display);
+        font-size: 1rem;
+        border-bottom: 1px solid transparent;
+      }
+      .directory-table__name a:hover { border-color: var(--amber); }
+      .directory-table__type { color: var(--muted-dark); }
+      .status {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        padding: 0.2rem 0.55rem;
+        border-radius: 2px;
+        border: 1px solid currentColor;
+      }
+      .status--live { color: #8fe3b0; }
+      .status--private { color: rgba(247, 245, 238, 0.55); }
+
+      /* ---------- Manifesto ---------- */
+      .manifesto {
+        padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 6vw, 3rem);
+        display: grid;
+        grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr);
+        gap: 2.5rem;
+        border-bottom: 1px solid var(--hairline-light);
+      }
+      .manifesto h2 {
+        font-size: clamp(1.75rem, 4.2vw, 3.1rem);
+        font-weight: 700;
+      }
+      .manifesto__aside { display: flex; flex-direction: column; gap: 1.1rem; align-self: end; }
+      .manifesto__aside p { color: var(--muted-light); font-size: 1rem; line-height: 1.6; }
+      @media (max-width: 780px) {
+        .manifesto { grid-template-columns: 1fr; }
+      }
+
+      /* ---------- Work / directory entries ---------- */
+      .work { padding: clamp(2rem, 6vw, 4rem) 0 0; }
+      .work__head {
+        padding: 0 clamp(1rem, 6vw, 3rem) clamp(2rem, 5vw, 3rem);
+        max-width: 46rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .work__head h2 { font-size: clamp(2rem, 5vw, 3.2rem); }
+      .work__head p { color: var(--muted-light); font-size: 1.05rem; }
+
+      .case {
+        border-top: 1px solid var(--hairline-light);
+        padding: clamp(2rem, 5vw, 3.5rem) clamp(1rem, 6vw, 3rem);
+        display: flex;
+        flex-direction: column;
+        gap: 1.75rem;
+      }
+      .case:nth-of-type(even) { background: var(--cream-deep); }
+
+      .case__header {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .case__unit {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--forest);
+        font-weight: 700;
+      }
+      .case__title { display: flex; align-items: baseline; gap: 0.9rem; flex-wrap: wrap; }
+      .case__title h3 { font-size: clamp(1.75rem, 4vw, 2.6rem); }
+      .case__type {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted-light);
+      }
+      .case__tagline { font-size: 1.1rem; max-width: 44rem; color: var(--ink); }
+
+      .case__visual {
+        margin: 0;
+        border: 1px solid var(--hairline-light);
+        background: var(--forest-deep);
+      }
+      .case__visual img { display: block; width: 100%; height: auto; }
+      .case__visual figcaption {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--muted-light);
+        padding: 0.6rem 0.9rem;
+        background: var(--cream);
+        border-top: 1px solid var(--hairline-light);
+      }
+
+      .manager-ui {
+        display: grid;
+        grid-template-columns: 160px 1fr 220px;
+        grid-template-rows: auto 1fr;
+        background: #0f1a14;
+        color: #f2f0e6;
+        font-size: 0.78rem;
+        min-height: 320px;
+      }
+      .manager-ui header {
+        grid-column: 1 / -1;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.6rem 0.9rem;
+        border-bottom: 1px solid rgba(247,245,238,0.14);
+        font-family: var(--font-mono);
+      }
+      .manager-ui header b { font-weight: 700; }
+      .manager-ui header span { color: rgba(247,245,238,0.5); margin-left: auto; }
+      .manager-ui header i { width: 22px; height: 22px; border-radius: 50%; background: var(--amber); color: #3a2404; display: flex; align-items: center; justify-content: center; font-style: normal; font-weight: 700; font-size: 0.65rem; }
+      .manager-ui aside { padding: 0.9rem; border-right: 1px solid rgba(247,245,238,0.14); display: flex; flex-direction: column; gap: 0.4rem; }
+      .manager-ui aside p { text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.65rem; color: rgba(247,245,238,0.45); margin-bottom: 0.3rem; }
+      .manager-ui aside a { display: flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.5rem; border-radius: 3px; text-decoration: none; color: rgba(247,245,238,0.7); }
+      .manager-ui aside a.active { background: rgba(242,167,27,0.16); color: var(--lettering); }
+      .manager-ui aside a span { width: 18px; height: 18px; border-radius: 3px; background: rgba(247,245,238,0.12); display: flex; align-items: center; justify-content: center; font-size: 0.6rem; }
+      .manager-ui main { padding: 0.9rem; display: flex; flex-direction: column; gap: 0.75rem; }
+      .manager-ui__toolbar { display: flex; align-items: center; gap: 0.75rem; }
+      .manager-ui__toolbar p { display: flex; flex-direction: column; }
+      .manager-ui__toolbar span { color: rgba(247,245,238,0.5); font-size: 0.68rem; }
+      .manager-ui__toolbar button { margin-left: auto; background: var(--amber); color: #3a2404; border: none; border-radius: 3px; padding: 0.4rem 0.7rem; font-weight: 700; font-size: 0.7rem; }
+      .manager-ui__preview { flex: 1; background: linear-gradient(160deg, #1b4d3e, #0f1a14); border-radius: 4px; padding: 1.2rem; display: flex; align-items: flex-end; }
+      .manager-ui__preview small { display: block; letter-spacing: 0.08em; color: rgba(247,245,238,0.6); font-size: 0.6rem; }
+      .manager-ui__preview strong { font-size: 1.1rem; line-height: 1.2; }
+      .manager-ui section { padding: 0.9rem; border-left: 1px solid rgba(247,245,238,0.14); display: flex; flex-direction: column; gap: 0.6rem; }
+      .manager-ui section > p { text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.65rem; color: rgba(247,245,238,0.45); }
+      .manager-ui section label { display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.7rem; color: rgba(247,245,238,0.6); }
+      .manager-ui section textarea { resize: none; background: rgba(247,245,238,0.08); border: 1px solid rgba(247,245,238,0.14); border-radius: 3px; color: #f2f0e6; padding: 0.4rem; font-family: var(--font-display); font-size: 0.75rem; }
+      .manager-ui__status { display: flex; align-items: center; gap: 0.5rem; margin-top: auto; }
+      .manager-ui__status i { width: 8px; height: 8px; border-radius: 50%; background: #8fe3b0; }
+      .manager-ui__status p { display: flex; flex-direction: column; }
+      .manager-ui__status span { color: rgba(247,245,238,0.5); font-size: 0.65rem; }
+      @media (max-width: 640px) {
+        .manager-ui { grid-template-columns: 1fr; grid-template-rows: auto auto auto auto; }
+        .manager-ui aside, .manager-ui section { border: none; border-top: 1px solid rgba(247,245,238,0.14); }
+      }
+
+      .case__facts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: clamp(1.5rem, 4vw, 3rem);
+        padding: 1.25rem 0;
+        border-top: 1px solid var(--hairline-light);
+        border-bottom: 1px solid var(--hairline-light);
+      }
+      .fact { display: flex; flex-direction: column; gap: 0.2rem; }
+      .fact__number {
+        font-family: var(--font-mono);
+        font-size: clamp(2rem, 4vw, 2.6rem);
+        font-weight: 700;
+        color: var(--forest);
+        font-variant-numeric: tabular-nums;
+        margin: 0;
+      }
+      .fact__label { max-width: 16rem; font-size: 0.85rem; color: var(--muted-light); margin: 0; }
+
+      .case__plate { margin: 0; display: flex; flex-direction: column; gap: 1.1rem; }
+      .case__plate-row {
+        display: grid;
+        grid-template-columns: 6.5rem 1fr;
+        gap: 1rem;
+        align-items: baseline;
+      }
+      .case__plate-row dt {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--forest);
+        font-weight: 700;
+      }
+      .case__plate-row dd {
+        margin: 0;
+        font-size: 1.05rem;
+        line-height: 1.55;
+        max-width: 46rem;
+      }
+      @media (max-width: 560px) {
+        .case__plate-row { grid-template-columns: 1fr; gap: 0.3rem; }
+      }
+
+      .case__story { border-top: 1px solid var(--hairline-light); padding-top: 1rem; }
+      .case__story summary {
+        cursor: pointer;
+        list-style: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-weight: 700;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--forest);
+      }
+      .case__story summary::-webkit-details-marker { display: none; }
+      .case__story summary i {
+        width: 8px; height: 8px;
+        border-right: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+        transform: rotate(-45deg);
+        transition: transform 0.2s ease;
+      }
+      .case__story[open] summary i { transform: rotate(45deg); }
+      .case__story-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.75rem;
+        margin-top: 1.25rem;
+      }
+      .case__story-grid h4 { font-size: 1.05rem; margin: 0.35rem 0 0.5rem; }
+      .case__story-grid p { font-size: 0.92rem; color: var(--muted-light); line-height: 1.55; }
+      .case__story-label {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted-light);
+      }
+      @media (max-width: 780px) {
+        .case__story-grid { grid-template-columns: 1fr; }
+      }
+
+      .case__links { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; }
+      .case__link { font-weight: 700; text-decoration: none; border-bottom: 1.5px solid var(--forest); padding-bottom: 0.1rem; }
+      .case__stack, .case__repo-note, .case__credit {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        color: var(--muted-light);
+        margin: 0;
+      }
+      .case__credit { padding-top: 0.5rem; }
+
+      /* ---------- Why ---------- */
+      .why {
+        background: var(--forest);
+        background-image: linear-gradient(160deg, var(--forest) 0%, var(--forest-deep) 100%);
+        color: var(--lettering);
+        padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 6vw, 3rem);
+      }
+      .why h2 { font-size: clamp(2rem, 5vw, 3.2rem); max-width: 40rem; }
+      .why__sub { color: var(--muted-dark); max-width: 34rem; margin-top: 1rem; font-size: 1.05rem; }
+      .why__list {
+        list-style: none;
+        margin: clamp(2rem, 5vw, 3.5rem) 0 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2rem 3rem;
+        counter-reset: why;
+      }
+      .why__list li {
+        counter-increment: why;
+        border-top: 1px solid var(--hairline-dark);
+        padding-top: 1.1rem;
+        position: relative;
+      }
+      .why__list li::before {
+        content: counter(why, decimal-leading-zero);
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        color: var(--amber);
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+      .why__list h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+      .why__list p { color: var(--muted-dark); font-size: 0.95rem; line-height: 1.6; }
+      @media (max-width: 700px) {
+        .why__list { grid-template-columns: 1fr; }
+      }
+
+      /* ---------- Capabilities ---------- */
+      .capabilities { padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 6vw, 3rem); }
+      .capabilities h2 { font-size: clamp(1.9rem, 4.5vw, 2.9rem); max-width: 34rem; margin-bottom: clamp(2rem, 5vw, 3rem); }
+      .capabilities__list { display: flex; flex-direction: column; }
+      .capability {
+        display: grid;
+        grid-template-columns: 8rem 10rem 1fr;
+        gap: 1.5rem;
+        align-items: baseline;
+        padding: 1.3rem 0;
+        border-top: 1px solid var(--hairline-light);
+      }
+      .capabilities__list .capability:last-child { border-bottom: 1px solid var(--hairline-light); }
+      .capability__level {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--forest);
+      }
+      .capability h3 { font-size: 1.3rem; }
+      .capability p { color: var(--muted-light); font-size: 0.95rem; max-width: 34rem; }
+      @media (max-width: 720px) {
+        .capability { grid-template-columns: 1fr; gap: 0.3rem; }
+      }
+
+      /* ---------- People ---------- */
+      .people { padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 6vw, 3rem); border-top: 1px solid var(--hairline-light); }
+      .people h2 { font-size: clamp(1.9rem, 4.5vw, 2.9rem); max-width: 32rem; }
+      .people__sub { color: var(--muted-light); margin-top: 0.75rem; max-width: 30rem; }
+      .people__grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.5rem;
+        margin-top: clamp(2rem, 5vw, 3rem);
+      }
+      .person { display: flex; flex-direction: column; gap: 0.75rem; align-items: center; text-align: center; }
+      .person__plate {
+        width: 100%;
+        aspect-ratio: 1;
+        border: 1.5px dashed var(--hairline-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-mono);
+        color: var(--muted-light);
+      }
+      .person p { font-family: var(--font-mono); font-size: 0.85rem; color: var(--muted-light); }
+      @media (max-width: 640px) {
+        .people__grid { grid-template-columns: 1fr; max-width: 16rem; margin-left: auto; margin-right: auto; }
+      }
+
+      /* ---------- Contact ---------- */
+      .contact {
+        background: var(--navy);
+        color: var(--lettering);
+        padding: clamp(3.5rem, 10vw, 7rem) clamp(1rem, 6vw, 3rem);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+      .contact h2 { font-size: clamp(2.2rem, 6vw, 3.6rem); }
+      .contact p { max-width: 30rem; color: var(--muted-dark); font-size: 1.05rem; }
+      .contact__secondary { margin-top: 0.5rem; font-family: var(--font-mono); font-size: 0.85rem; color: var(--muted-dark); text-decoration: underline; text-underline-offset: 0.2em; }
+
+      /* ---------- Footer ---------- */
+      .site-footer {
+        background: var(--cream);
+        padding: 2rem clamp(1rem, 6vw, 3rem);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1.25rem;
+        border-top: 1px solid var(--hairline-light);
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--muted-light);
+      }
+      .brand--footer { margin-right: auto; }
+      .site-footer__links { display: flex; gap: 1.25rem; }
+      .site-footer__links a { text-decoration: none; color: var(--muted-light); }
+      .site-footer__links a:hover { color: var(--ink); }
+
+      /* ---------- Mobile nav ---------- */
+      @media (max-width: 780px) {
+        .menu-toggle { display: inline-flex; }
+        .site-nav {
+          position: fixed;
+          inset: 4.2rem 0 auto 0;
+          background: var(--cream);
+          border-bottom: 1px solid var(--hairline-light);
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0;
+          padding: 0.5rem 1.25rem 1rem;
+          transform: translateY(-8px);
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        .site-nav.is-open {
+          transform: none;
+          opacity: 1;
+          pointer-events: auto;
+        }
+        .site-nav a { width: 100%; padding: 0.85rem 0; border-bottom: 1px solid var(--hairline-light) !important; }
+        .site-nav__cta { margin-top: 0.5rem; text-align: center; }
+      }
+    </style>
+  </body>
+</html>

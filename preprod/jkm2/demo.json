@@ -1,0 +1,15 @@
+{
+  "businessName": "JKM",
+  "designBrief": "Not a client lead. This is JKM's own studio site, rebuilt here to reuse the existing preprod Astro build pattern rather than a separate repo.",
+  "createdDate": "2026-09-05",
+  "lead": {
+    "rowNumber": 13,
+    "category": "Internal — studio's own site",
+    "companyName": "JKM (studio, not a prospect)",
+    "googleMapsUrl": "",
+    "emailOrWhatsapp": "",
+    "otherContact": "",
+    "remarks": "Not an outreach lead — excluded from the lead pipeline. Kept here only to reuse the preprod build/deploy mechanism.",
+    "sampleWebsite": ""
+  }
+}
