@@ -10,8 +10,7 @@ const cases = [
     type: "Product · Geospatial · PostGIS",
     href: "https://www.rexsg.com",
     hrefLabel: "rexsg.com",
-    repo: null,
-    image: "images/rexsg-live.jpg",
+    image: "images/rexsg-live.png",
     imageAlt: "RexSG live map interface showing HDB resale listings across Singapore with price and match filters",
     caption: "Captured from the live product, September 2026.",
     facts: [
@@ -33,12 +32,11 @@ const cases = [
     name: "Moof",
     tagline: "An editorial site and content system for a Shenton Way matcha bar.",
     type: "Brand · Web · Content system",
-    href: "https://moroha29.github.io/moof-website/e/",
-    hrefLabel: "the shipped direction",
-    repo: "https://github.com/moroha29/moof-website",
-    image: "images/moof-live.png",
-    imageAlt: "Moof editorial website with large serif typography and café photography",
-    caption: "Captured from the shipped build.",
+    href: "https://moroha29.github.io/moof-website/",
+    hrefLabel: "moof's site",
+    image: "images/moof-live.jpg",
+    imageAlt: "Moof homepage with large display type reading “Whisked the bright way” over café counter photography",
+    caption: "Captured from the live site, September 2026.",
     facts: [
       ["5", "complete design directions built"],
       ["1", "shared publishing model"],
@@ -60,7 +58,6 @@ const cases = [
     type: "Platform · Commerce · Pricing logic",
     href: "https://moroha29.github.io/mySOS/",
     hrefLabel: "moroha29.github.io/mySOS",
-    repo: "https://github.com/moroha29/mySOS",
     image: "images/mysos-live.jpg",
     imageAlt: "MySOS public website homepage for custom merchandise sourcing and printing",
     caption: "Captured from the live product, September 2026.",
@@ -85,8 +82,7 @@ const cases = [
     type: "Platform · Workflow · Operations",
     href: null,
     hrefLabel: null,
-    repo: null,
-    repoNote: "Private client codebase; no public repository.",
+    repoNote: "A private, client-only system — not publicly viewable.",
     image: null,
     imageAlt: "",
     caption: "Interface reconstruction: production screens are authenticated and not publicly viewable.",
@@ -281,9 +277,6 @@ const cases = [
               {item.href && (
                 <a class="case__link" href={item.href} target="_blank" rel="noreferrer">Visit {item.hrefLabel} <span aria-hidden="true">&#8599;</span></a>
               )}
-              {item.repo && (
-                <a class="case__link" href={item.repo} target="_blank" rel="noreferrer">View repository <span aria-hidden="true">&#8599;</span></a>
-              )}
               {item.repoNote && <p class="case__repo-note">{item.repoNote}</p>}
               <p class="case__stack">{item.stack}</p>
             </div>
@@ -327,7 +320,6 @@ const cases = [
         <h2 id="contact-title">Let's make it <em>useful.</em></h2>
         <p>Have a difficult idea, a product that needs clarity, or a system that has outgrown its first version?</p>
         <a class="cta cta--primary cta--large" href="mailto:junhong.tan@gmail.com">Email us <span aria-hidden="true">&rarr;</span></a>
-        <a class="contact__secondary" href="https://github.com/moroha29" target="_blank" rel="noreferrer">Find JKM on GitHub &#8599;</a>
       </section>
     </main>
 
