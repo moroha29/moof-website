@@ -2,6 +2,7 @@
 import site from "../assets/content/site.json";
 import menu from "../assets/content/menu.json";
 import { withBase } from "../lib/base.js";
+import TextStyles from "../components/TextStyles.astro";
 const drinks = [...menu.coreMenu, ...menu.seasonalMenu].filter((item) => item.active);
 const p = (path) => JSON.stringify(path);
 ---
@@ -45,4 +46,5 @@ const p = (path) => JSON.stringify(path);
   </main>
   <footer><strong data-cms-path={p(["homepage","brand","footerWordmark"])}>{site.brand.footerWordmark}</strong><span data-cms-path={p(["homepage","footer","copyright"])}>{site.footer.copyright}</span><a href="#top" data-cms-path={p(["homepage","footer","backToTopLabel"])}>{site.footer.backToTopLabel} ↑</a></footer>
   <script is:inline>const toggle=document.querySelector('.menu-toggle'),nav=document.querySelector('#side-nav');const setMenu=open=>{toggle.setAttribute('aria-expanded',String(open));nav.classList.toggle('open',open);nav.setAttribute('aria-hidden',String(!open));nav.toggleAttribute('inert',!open);document.body.classList.toggle('menu-open',open)};toggle?.addEventListener('click',()=>setMenu(toggle.getAttribute('aria-expanded')!=='true'));nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));document.addEventListener('keydown',event=>{if(event.key==='Escape'&&toggle?.getAttribute('aria-expanded')==='true'){setMenu(false);toggle.focus()}});const track=document.querySelector('.drink-track');document.querySelector('[data-next]')?.addEventListener('click',()=>track.scrollBy({left:track.clientWidth*.72,behavior:'smooth'}));document.querySelector('[data-prev]')?.addEventListener('click',()=>track.scrollBy({left:-track.clientWidth*.72,behavior:'smooth'}));</script>
+  <TextStyles page="homepage" />
 </body></html>

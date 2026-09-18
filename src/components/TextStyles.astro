@@ -1,0 +1,59 @@
+---
+/*
+ * Text styles chosen in the website manager: a size, a font or a colour on one
+ * piece of text.
+ *
+ * The manager publishes them into site.json as appearance.overrides, each
+ * naming the page it is on and the element it styles. Nothing read them, so a
+ * style showed in the manager's preview and never on the live site. This
+ * applies them the way the preview does, so what was chosen is what goes live.
+ *
+ * An element is named by its content path ([data-cms-path='…']) when it has
+ * one, or by its position from <body>. Inside the manager's own preview the
+ * manager applies the draft's styles itself, so this stands back there
+ * (data-manager-preview) and the manager undoes anything it already did.
+ */
+import site from "../assets/content/site.json";
+interface Props { page: string }
+const { page } = Astro.props;
+const overrides = (site.appearance?.overrides || []).filter((item) => item && item.page === page && typeof item.selector === "string");
+---
+{overrides.length > 0 && <script is:inline define:vars={{ overrides }}>
+(() => {
+  const families = new Set(['Arial, sans-serif', 'Georgia, serif', '"Trebuchet MS", sans-serif', '"Courier New", monospace']);
+  const scales = new Set([0.9, 1.1, 1.25, 1.5]);
+  const targets = (selector) => {
+    const all = () => { try { return [...document.querySelectorAll(selector)]; } catch { return []; } };
+    if (!selector.startsWith('body > ')) return all();
+    let nodes = [document.body];
+    for (const part of selector.slice('body > '.length).split(' > ')) {
+      const match = part.match(/^([a-z][a-z0-9-]*)(?::nth-of-type\((\d+)\))?$/i);
+      if (!match) return all();
+      nodes = nodes.flatMap((parent) => {
+        const same = [...parent.children].filter((child) => child.tagName.toLowerCase() === match[1].toLowerCase());
+        return match[2] ? same.slice(Number(match[2]) - 1, Number(match[2])) : same;
+      });
+    }
+    return nodes;
+  };
+  const apply = () => {
+    if (document.documentElement.hasAttribute('data-manager-preview')) return;
+    document.querySelectorAll('[data-text-style]').forEach((node) => {
+      const original = node.getAttribute('data-text-style');
+      if (original) node.setAttribute('style', original); else node.removeAttribute('style');
+      node.removeAttribute('data-text-style');
+    });
+    overrides.forEach((item) => targets(item.selector).filter((node) => !node.hasAttribute('data-text-style')).forEach((node) => {
+      node.setAttribute('data-text-style', node.getAttribute('style') || '');
+      const base = parseFloat(getComputedStyle(node).fontSize) || 16;
+      if (/^#[0-9a-f]{6}$/i.test(item.color || '')) node.style.setProperty('color', item.color, 'important');
+      if (scales.has(Number(item.fontScale))) node.style.setProperty('font-size', `${Math.round(base * Number(item.fontScale) * 100) / 100}px`, 'important');
+      if (families.has(item.fontFamily)) node.style.setProperty('font-family', item.fontFamily, 'important');
+    }));
+  };
+  let timer = 0;
+  apply();
+  // A heading's own size depends on the width, so it is measured again from the site's size.
+  addEventListener('resize', () => { clearTimeout(timer); timer = setTimeout(apply, 150); });
+})();
+</script>}
