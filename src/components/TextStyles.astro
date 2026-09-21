@@ -21,7 +21,8 @@ const overrides = (site.appearance?.overrides || []).filter((item) => item && it
 {overrides.length > 0 && <script is:inline define:vars={{ overrides }}>
 (() => {
   const families = new Set(['Arial, sans-serif', 'Georgia, serif', '"Trebuchet MS", sans-serif', '"Courier New", monospace']);
-  const scales = new Set([0.9, 1.1, 1.25, 1.5]);
+  // The manager's size slider: from half to three times the design's own size.
+  const scales = { has: (value) => Number.isFinite(value) && value >= 0.5 && value <= 3 && value !== 1 };
   const targets = (selector) => {
     const all = () => { try { return [...document.querySelectorAll(selector)]; } catch { return []; } };
     if (!selector.startsWith('body > ')) return all();
