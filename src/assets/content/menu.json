@@ -9,9 +9,17 @@
       "imageAlt": "Iced classic matcha latte layered over milk in a clear cup",
       "active": true,
       "isSeasonal": false,
-      "temperatureOptions": ["Hot", "Iced"],
-      "milkOptions": ["Fresh milk", "Oat milk"],
-      "tags": ["House favourite"]
+      "temperatureOptions": [
+        "Hot",
+        "Iced"
+      ],
+      "milkOptions": [
+        "Fresh milk",
+        "Oat milk"
+      ],
+      "tags": [
+        "House favourite"
+      ]
     },
     {
       "id": "specialty-matcha-latte",
@@ -22,8 +30,14 @@
       "imageAlt": "Iced specialty matcha latte with a deep green band above milk",
       "active": true,
       "isSeasonal": false,
-      "temperatureOptions": ["Hot", "Iced"],
-      "milkOptions": ["Fresh milk", "Oat milk"],
+      "temperatureOptions": [
+        "Hot",
+        "Iced"
+      ],
+      "milkOptions": [
+        "Fresh milk",
+        "Oat milk"
+      ],
       "tags": []
     },
     {
@@ -35,7 +49,9 @@
       "imageAlt": "Iced usucha, straight matcha with no milk, in a clear cup",
       "active": true,
       "isSeasonal": false,
-      "temperatureOptions": ["Iced"],
+      "temperatureOptions": [
+        "Iced"
+      ],
       "milkOptions": [],
       "tags": []
     },
@@ -48,8 +64,14 @@
       "imageAlt": "Iced hojicha latte with roasted tea layered over milk",
       "active": true,
       "isSeasonal": false,
-      "temperatureOptions": ["Hot", "Iced"],
-      "milkOptions": ["Fresh milk", "Oat milk"],
+      "temperatureOptions": [
+        "Hot",
+        "Iced"
+      ],
+      "milkOptions": [
+        "Fresh milk",
+        "Oat milk"
+      ],
       "tags": []
     }
   ],
@@ -63,9 +85,16 @@
       "imageAlt": "Layered strawberry, milk pudding and matcha in a clear cup",
       "active": true,
       "isSeasonal": true,
-      "temperatureOptions": ["Iced"],
-      "milkOptions": ["Fresh milk", "Oat milk"],
-      "tags": ["Seasonal"]
+      "temperatureOptions": [
+        "Iced"
+      ],
+      "milkOptions": [
+        "Fresh milk",
+        "Oat milk"
+      ],
+      "tags": [
+        "Seasonal"
+      ]
     },
     {
       "id": "black-sesame",
@@ -76,9 +105,16 @@
       "imageAlt": "Black sesame matcha with dark sesame swirled through milk",
       "active": true,
       "isSeasonal": true,
-      "temperatureOptions": ["Iced"],
-      "milkOptions": ["Fresh milk", "Oat milk"],
-      "tags": ["Seasonal"]
+      "temperatureOptions": [
+        "Iced"
+      ],
+      "milkOptions": [
+        "Fresh milk",
+        "Oat milk"
+      ],
+      "tags": [
+        "Seasonal"
+      ]
     },
     {
       "id": "pickled-ume-plum",
@@ -89,9 +125,13 @@
       "imageAlt": "Amber ume and plum iced tea with fruit settled at the base",
       "active": true,
       "isSeasonal": true,
-      "temperatureOptions": ["Iced"],
+      "temperatureOptions": [
+        "Iced"
+      ],
       "milkOptions": [],
-      "tags": ["Seasonal"]
+      "tags": [
+        "Seasonal"
+      ]
     }
   ],
   "additionalCategories": []
