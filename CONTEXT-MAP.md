@@ -28,5 +28,6 @@ Earlier variants remain in git history if their content is ever needed.
 
 ## Not part of the client site
 
-`preprod/` holds unconverted demo sites for prospective clients. They build independently
-and deploy under `/preprod/`; a failed preprod build never blocks the Moof deploy.
+Nothing else. The preprod demo sites for prospective clients moved to their own private
+repo, `kingsmil/preprod` (published at `moethu.com/preprod/`), so this repo's Pages site, and
+the domain Moof points at it, serves only the Moof site.
