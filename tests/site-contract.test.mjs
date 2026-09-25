@@ -6,6 +6,15 @@ const read=(path)=>readFile(new URL(path,import.meta.url),"utf8");
 test("The Moof site uses independent CMS content and base-aware images",async()=>{const [home,menuPage,siteRaw,menuRaw]=await Promise.all([read("../src/pages/index.astro"),read("../src/pages/menu/index.astro"),read("../src/assets/content/site.json"),read("../src/assets/content/menu.json")]);const site=JSON.parse(siteRaw),menu=JSON.parse(menuRaw);assert.notEqual(site.brand.headerWordmark,site.brand.footerWordmark);assert.ok(home.includes("data-cms-path"));assert.ok(home.includes("data-cms-paths"));assert.ok(home.includes("withBase(site.hero.image)"));assert.ok(menuPage.includes("menuGroups"));assert.ok(menu.coreMenu.every(i=>i.imageAlt&&i.id));assert.ok(menu.seasonalMenu.every(i=>i.isSeasonal));assert.ok(Array.isArray(menu.additionalCategories));});
 test("blank layout containers are not editable",async()=>{const home=await read("../src/pages/index.astro");assert.doesNotMatch(home,/hero-shade[^>]+data-cms/);assert.doesNotMatch(home,/drink-track[^>]+data-cms/);});
 
+// The hero shade is a full-size layer over the hero photo. If it takes clicks,
+// the website manager can't select the photo on desktop (mobile hides the shade).
+test("the hero shade lets clicks through to the photo",async()=>{
+  const css=await read("../public/styles.css");
+  const rule=css.match(/\.hero-shade\{position:absolute[^}]*\}/)?.[0];
+  assert.ok(rule,"the desktop hero shade rule exists");
+  assert.match(rule,/pointer-events:none/);
+});
+
 // Every image referenced by content must ship in public/, or the deployed page
 // renders a broken drink card that no build step would have caught.
 test("every referenced image exists in public/",async()=>{
