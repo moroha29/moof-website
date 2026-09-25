@@ -71,3 +71,20 @@ test("the map embeds a single pin at Moof's coordinates",async()=>{
   }
   assert.match(site.visit.mapEmbedUrl,/output=embed/);
 });
+
+// With a custom domain, GitHub Pages reports an empty base path. `||` treated
+// that as missing and built for /moof-website/ anyway, so every page and asset
+// would 404 on the domain. An empty base must mean the domain root.
+test("an empty Pages base path builds for the domain root",async()=>{
+  const config=await read("../astro.config.mjs");
+  assert.match(config,/GITHUB_PAGES_BASE \?\?/,"the base falls back only when unset, not when empty");
+  assert.doesNotMatch(config,/GITHUB_PAGES_BASE \|\|/);
+});
+
+// Preprod demos moved to their own repo so the Moof domain serves only Moof.
+test("the Moof deploy ships no preprod demos",async()=>{
+  const workflow=await read("../.github/workflows/deploy.yml");
+  assert.doesNotMatch(workflow,/preprod\/\*|generate-preprod-index/,"the workflow builds no preprod demos");
+  assert.match(workflow,/test ! -e site\/preprod/,"the deploy checks nothing lands under /preprod/");
+  await assert.rejects(access(new URL("../preprod",import.meta.url)),"no preprod folder in this repo");
+});

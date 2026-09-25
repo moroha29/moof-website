@@ -98,31 +98,13 @@ jobs:
           npm run build
           cp -r dist/. site/
 
-          # Not-yet-converted demo sites. Isolated from the client build above:
-          # a failed preprod build is skipped, never aborts the client deploy.
-          if [ -d "preprod" ]; then
-            for dir in preprod/*/; do
-              dir="${dir%/}"
-              if [ -f "$dir/package.json" ]; then
-                echo "Building preprod demo $dir"
-                if npm --prefix "$dir" ci && npm --prefix "$dir" run build; then
-                  mkdir -p "site/$dir"
-                  cp -r "$dir/dist/." "site/$dir/"
-                else
-                  echo "::warning::Skipping preprod demo $dir - build failed"
-                fi
-              fi
-            done
-          fi
-
-      - name: Generate preprod index
-        run: node scripts/generate-preprod-index.mjs
-
       - name: Verify site artifact
         shell: bash
         run: |
           test -f site/index.html
           test -f site/menu/index.html
+          # Preprod demos live in their own repo now; nothing else ships here.
+          test ! -e site/preprod
 
       - name: Upload GitHub Pages artifact
         if: steps.target.outputs.deploy_target == 'github-pages'
