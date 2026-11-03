@@ -1,9 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile, access } from "node:fs/promises";
+import { existsSync } from "node:fs";
+import { problems } from "./owner-content.mjs";
 
 const read=(path)=>readFile(new URL(path,import.meta.url),"utf8");
-test("The Moof site uses independent CMS content and base-aware images",async()=>{const [home,menuPage,siteRaw,menuRaw]=await Promise.all([read("../src/pages/index.astro"),read("../src/pages/menu/index.astro"),read("../src/assets/content/site.json"),read("../src/assets/content/menu.json")]);const site=JSON.parse(siteRaw),menu=JSON.parse(menuRaw);assert.notEqual(site.brand.headerWordmark,site.brand.footerWordmark);assert.ok(home.includes("data-cms-path"));assert.ok(home.includes("data-cms-paths"));assert.ok(home.includes("withBase(site.hero.image)"));assert.ok(menuPage.includes("menuGroups"));assert.ok(menu.coreMenu.every(i=>i.imageAlt&&i.id));assert.ok(menu.seasonalMenu.every(i=>i.isSeasonal));assert.ok(Array.isArray(menu.additionalCategories));});
+const shipped=(path)=>existsSync(new URL(`../public${path}`,import.meta.url));
+test("The Moof site uses independent CMS content and base-aware images",async()=>{const [home,menuPage,siteRaw,menuRaw]=await Promise.all([read("../src/pages/index.astro"),read("../src/pages/menu/index.astro"),read("../src/assets/content/site.json"),read("../src/assets/content/menu.json")]);const site=JSON.parse(siteRaw),menu=JSON.parse(menuRaw);assert.ok(site.brand.headerWordmark&&site.brand.footerWordmark);assert.ok(home.includes("data-cms-path"));assert.ok(home.includes("data-cms-paths"));assert.ok(home.includes("picture(site.hero.image)"));assert.ok(menuPage.includes("menuGroups"));assert.ok(Array.isArray(menu.coreMenu)&&Array.isArray(menu.seasonalMenu));assert.ok(Array.isArray(menu.additionalCategories));});
 test("blank layout containers are not editable",async()=>{const home=await read("../src/pages/index.astro");assert.doesNotMatch(home,/hero-shade[^>]+data-cms/);assert.doesNotMatch(home,/drink-track[^>]+data-cms/);});
 
 // The hero shade is a full-size layer over the hero photo. If it takes clicks,
@@ -14,20 +17,23 @@ test("the hero shade lets clicks through to the photo",async()=>{
   assert.ok(rule,"the desktop hero shade rule exists");
   assert.match(rule,/pointer-events:none/);
 });
-
-// Every image referenced by content must ship in public/, or the deployed page
-// renders a broken drink card that no build step would have caught.
-test("every referenced image exists in public/",async()=>{
-  const [siteRaw,menuRaw]=await Promise.all([read("../src/assets/content/site.json"),read("../src/assets/content/menu.json")]);
-  const site=JSON.parse(siteRaw),menu=JSON.parse(menuRaw);
-  const referenced=[
-    site.brand.logoImage,site.hero.image,site.about.image,site.events.image,
-    ...[...menu.coreMenu,...menu.seasonalMenu].map((item)=>item.image),
-  ];
-  for (const ref of referenced) {
-    assert.ok(ref?.startsWith("/"),`${ref} is a root-relative public path`);
-    await access(new URL(`../public${ref}`,import.meta.url));
+// Every picture is editable in the website manager, so no <img> may take a
+// content path straight from the JSON: an owner who removes a picture would
+// otherwise ship src="" and a broken-image icon. See src/lib/picture.js.
+test("every picture on a page goes through the stand-in helper",async()=>{
+  for (const page of ["../src/pages/index.astro","../src/pages/menu/index.astro"]) {
+    const html=await read(page);
+    assert.doesNotMatch(html,/src=\{withBase\((?:site|item|menu)\./,`${page} must not pass content straight to withBase`);
+    assert.match(html,/import \{ picture, pictureAlt \}/,`${page} imports the stand-in helper`);
   }
+});
+
+// What the owner publishes has to pass these rules, so what is already live
+// has to pass them too, or the repository ships content the website manager
+// could never publish again. tests/owner-content.mjs holds the rules.
+test("the published content passes the owner's gate",async()=>{
+  const [siteRaw,menuRaw]=await Promise.all([read("../src/assets/content/site.json"),read("../src/assets/content/menu.json")]);
+  assert.deepEqual(problems(JSON.parse(siteRaw),JSON.parse(menuRaw),shipped),[]);
 });
 
 test("the site publishes at the repository root, not under a variant folder",async()=>{
@@ -61,17 +67,6 @@ test("every url() in the stylesheet resolves to a file in public/",async()=>{
     await access(new URL(`../public/${ref}`,import.meta.url));
   }
 });
-
-// The map must point at Moof's own coordinates. A text-search embed renders a
-// results map full of neighbouring cafes instead of one pin on the shop.
-test("the map embeds a single pin at Moof's coordinates",async()=>{
-  const site=JSON.parse(await read("../src/assets/content/site.json"));
-  for (const field of ["mapUrl","mapEmbedUrl"]) {
-    assert.match(site.visit[field],/1\.27\d+(%2C|,)103\.84\d+/,`visit.${field} targets Moof's coordinates`);
-  }
-  assert.match(site.visit.mapEmbedUrl,/output=embed/);
-});
-
 // With a custom domain, GitHub Pages reports an empty base path. `||` treated
 // that as missing and built for /moof-website/ anyway, so every page and asset
 // would 404 on the domain. An empty base must mean the domain root.
